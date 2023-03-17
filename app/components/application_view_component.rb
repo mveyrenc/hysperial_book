@@ -1,0 +1,14 @@
+class ApplicationViewComponent < ViewComponentContrib::Base
+  extend Dry::Initializer
+
+  include ViewComponentContrib::TranslationHelper
+
+  def identifier
+    @identifier ||= self.class.name.sub("::Component", "").underscore.split("/").join("--")
+  end
+
+  # We also add an ability to build a class from a different component
+  def class_for(name, from: identifier)
+    "c-#{from}-#{name}"
+  end
+end

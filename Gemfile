@@ -31,7 +31,7 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
+gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -49,7 +49,24 @@ gem "bootsnap", require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
+
+# forms
+gem "simple_form"
+
+# view_component
+gem "view_component"
+gem "view_component-contrib"
+gem "polaris_view_components"
+gem "motion"
+
+# dry
+gem "dry-validation"
+gem "dry-schema"
+gem "dry-types"
+
+# markdown
+gem "redcarpet"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -65,6 +82,9 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # https://js-from-routes.netlify.app/guide/
+  gem "js_from_routes"
 end
 
 group :test do
@@ -73,3 +93,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "dry-initializer", "~> 3.1"
