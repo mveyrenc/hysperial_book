@@ -1,0 +1,8 @@
+fr:
+  books:
+    create:
+      success: Livre créé!
+    update:
+      success: Livre modifié!
+    destroy:
+      success: Livre supprimé!

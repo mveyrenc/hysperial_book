@@ -1,0 +1,52 @@
+/*.form-vertical {*/
+/*  @apply w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4*/
+/*}*/
+
+/*.form-group {*/
+/*  @apply mb-4*/
+/*}*/
+
+.form-vertical .label-text {
+  @apply block text-gray-700 text-sm font-bold mb-2
+}
+
+.form-vertical .label-text abbr {
+  @apply text-red-600 no-underline
+}
+
+/*.form-input, .form-textarea, .form-select, .form-multiselect {*/
+/*  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;*/
+/*  !*focus:outline-none focus:shadow-outline*!*/
+/*}*/
+
+/*.form-invalid-feedback {*/
+/*  @apply text-red-600*/
+/*}*/
+
+/*.form-input-error {*/
+/*  @apply border-red-600;*/
+/*}*/
+
+/*.form-input-error:focus {*/
+/*  outline: 2px solid hsl(var(--su));*/
+/*}*/
+
+/*.form-input-success {*/
+/*  @apply border-green-600;*/
+/*}*/
+
+/*.form-input-success:focus {*/
+/*  outline: 2px solid hsl(var(--su));*/
+/*}*/
+
+/*.form-hint {*/
+/*  @apply mt-2 text-sm text-gray-500 dark:text-gray-400*/
+/*}*/
+
+/*.form-markdown {*/
+/*  @apply form-textarea*/
+/*}*/
+
+/*.btn-group-submit {*/
+/*  @apply flex items-center justify-between*/
+/*}*/

@@ -1,0 +1,14 @@
+<%= render Shared::Header::Component.new do |c| %>
+  <% c.title do %>
+    New tutorial
+  <% end %>
+<% end %>
+<%= render Shared::MainContent::Component.new do %>
+  <%= simple_form_for object do |form| %>
+    <%= form.input :title, required: true %>
+    <%= form.input :headline, as: :text %>
+    <%= form.input :text, as: :text %>
+    <%= form.input :thumbnail %>
+    <%= form.button :submit %>
+  <% end %>
+<% end %>

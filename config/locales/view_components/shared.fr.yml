@@ -1,0 +1,9 @@
+fr:
+  view_components:
+    navigation_menu:
+      application_menu:
+        contents: Contenus
+        books: Livres
+      user_menu:
+        my_profile: Mon profil
+        sign_out: Déconnexion

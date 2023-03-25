@@ -1,0 +1,13 @@
+<%= render Shared::Header::Component.new do |c| %>
+  <% c.title do %>
+    <%= t('.title') %>
+  <% end %>
+<% end %>
+<%= render Shared::MainContent::Component.new do %>
+  <%= render Books::NewButton::Component.new %>
+  <div class="min-w-full">
+    <div class="grid grid-cols-1 md:grid-cols-4 lg::grid-cols-6 gap-4">
+      <%= render Books::Card::Component.with_collection(objects) %>
+    </div>
+  </div>
+<% end %>

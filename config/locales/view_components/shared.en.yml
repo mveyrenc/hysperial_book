@@ -1,0 +1,9 @@
+en:
+  view_components:
+    navigation_menu:
+      application_menu:
+        contents: Contents
+        books: Books
+      user_menu:
+        my_profile: My profile
+        sign_out: Sign out

@@ -1,0 +1,17 @@
+fr:
+  view_components:
+    content_tutorials:
+      new_button:
+        name: Nouveau tutoriel
+      edit_button:
+        name: Modifier
+      delete_button:
+        name: Supprimer
+        destroy_confirmation: Êtes-vous sûr ?
+      index_view:
+        title: Tutoriels
+      new_view:
+        title: Nouveau tutoriel
+      edit_view:
+        title: Modifier le tutoriel
+

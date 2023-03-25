@@ -1,0 +1,17 @@
+fr:
+  view_components:
+    books:
+      new_button:
+        name: Nouveau livre
+      edit_button:
+        name: Modifier
+      delete_button:
+        name: Supprimer
+        destroy_confirmation: Êtes-vous sûr ?
+      index_view:
+        title: Livres
+      new_view:
+        title: Nouveau livre
+      edit_view:
+        title: Modifier le livre
+

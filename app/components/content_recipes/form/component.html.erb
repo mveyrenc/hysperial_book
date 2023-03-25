@@ -1,0 +1,11 @@
+<%= simple_form_for object do |form| %>
+  <%= form.input :title, required: true %>
+  <%= form.association :book, as: :select, collection: Book.sorted, value_method: :id, to_label: :name %>
+  <%= form.association :book, as: :radio_buttons, collection: Book.sorted, value_method: :id, to_label: :name %>
+  <%= form.association :book, as: :check_boxes, collection: Book.sorted, value_method: :id, to_label: :name %>
+  <%= form.input :short_description, as: :rich_text_area %>
+  <%= form.input :body, as: :rich_text_area %>
+  <%= form.input :thumbnail %>
+  <%= image_tag object.thumbnail if object.persisted? and object.thumbnail.attached? %>
+  <%= form.button :submit %>
+<% end %>

@@ -24,7 +24,7 @@ COPY --chown=docker:docker . /app
 RUN bundle install
 
 ENTRYPOINT ["entrypoint.sh"]
-# Start the main process.
+# Start the main_content process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
 EXPOSE 3000

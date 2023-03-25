@@ -1,0 +1,10 @@
+<%= render Shared::Header::Component.new do |c| %>
+  <% c.title do %>
+    <span class="badge badge-primary badge-lg"><%= object.class.model_name.human %></span> <%= object %>
+  <% end %>
+  <% c.actions do %>
+    <%= render ContentRecipes::EditButton::Component.new(object: object) %>
+    <%= render ContentRecipes::DeleteButton::Component.new(object: object) %>
+  <% end %>
+<% end %>
+<%= render Contents::Shared::ShowContent::Component.new(object: object) %>

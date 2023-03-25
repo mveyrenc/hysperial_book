@@ -1,0 +1,2 @@
+module ContentArticlesHelper
+end

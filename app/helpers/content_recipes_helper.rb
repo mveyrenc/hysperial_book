@@ -1,0 +1,2 @@
+module ContentRecipesHelper
+end

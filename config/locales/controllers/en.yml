@@ -1,0 +1,8 @@
+en:
+  books:
+    create:
+      success: Book created!
+    update:
+      success: Book updated!
+    destroy:
+      success: Book destroyed!

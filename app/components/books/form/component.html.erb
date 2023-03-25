@@ -1,0 +1,10 @@
+<%= simple_form_for object do |form| %>
+  <%= form.input :name %>
+  <%= form.input :color %>
+  <%= form.input :icon %>
+  <%= form.input :short_description, as: :rich_text_area %>
+  <%= form.input :description, as: :rich_text_area  %>
+  <div class="btn-group btn-group-submit">
+    <%= form.button :submit %>
+  </div>
+<% end %>

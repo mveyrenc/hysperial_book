@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="fantasy">
   <head>
     <title>HysperialBook</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "polaris_view_components" %>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+
     <%= javascript_importmap_tags %>
   </head>
 
-  <body style="<%= polaris_body_styles %>">
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="h-full">
+  <div class="min-h-full">
+    <%= render Shared::NavigationMenu::Component.new %>
+    <%= yield %>
+    <%= turbo_frame_tag :flash do %>
+      <%= render Shared::Flash::Component.new %>
+    <% end %>
+  </div>
+  <!-- Make sure all modals are rendered in this frame -->
+  <%= turbo_frame_tag :modal %>
   </body>
 </html>

@@ -1,0 +1,8 @@
+<%= render Shared::Header::Component.new do |c| %>
+  <% c.title do %>
+    <%= t('.title') %>
+  <% end %>
+<% end %>
+<%= render Shared::MainContent::Component.new do %>
+  <%= render Books::Form::Component.new(object) %>
+<% end %>

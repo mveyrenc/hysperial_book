@@ -1,0 +1,2 @@
+module ContentTutorialsHelper
+end

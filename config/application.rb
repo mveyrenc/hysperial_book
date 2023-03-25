@@ -8,8 +8,7 @@ Bundler.require(*Rails.groups)
 
 module HysperialBook
   class Application < Rails::Application
-    config.autoload_paths << Rails.root.join("app", "components")
-    config.view_component.preview_paths << Rails.root.join("app", "components")
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
@@ -20,5 +19,13 @@ module HysperialBook
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.autoload_paths << Rails.root.join("app", "components")
+    config.autoload_paths << Rails.root.join("app", "inputs")
+
+    config.view_component.preview_paths << Rails.root.join("app", "components")
+
+    config.view_component.generate.locale = true
+    config.view_component.generate.distinct_locale_files = true
   end
 end

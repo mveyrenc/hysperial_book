@@ -1,0 +1,17 @@
+fr:
+  view_components:
+    contents:
+      new_button:
+        name: Nouveau contenu
+      edit_button:
+        name: Modifier
+      delete_button:
+        name: Supprimer
+        destroy_confirmation: Êtes-vous sûr ?
+      index_view:
+        title: Contenus
+      new_view:
+        title: Nouveau contenu
+      edit_view:
+        title: Modifier le contenu
+

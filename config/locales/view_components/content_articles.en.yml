@@ -1,0 +1,17 @@
+en:
+  view_components:
+    content_articles:
+      new_button:
+        name: New article
+      edit_button:
+        name: Edit
+      delete_button:
+        name: Delete
+        destroy_confirmation: Are you sure?
+      index_view:
+        title: Articles
+      new_view:
+        title: New article
+      edit_view:
+        title: Edit article
+

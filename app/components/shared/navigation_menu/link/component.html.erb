@@ -1,0 +1,6 @@
+<%= link_to @path, class: "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" do %>
+  <%= @label %>
+<% end if @active %>
+<%= link_to @path, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" do %>
+  <%= @label %>
+<% end unless @active %>

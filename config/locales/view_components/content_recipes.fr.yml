@@ -1,0 +1,17 @@
+fr:
+  view_components:
+    content_recipes:
+      new_button:
+        name: Nouvelle recette
+      edit_button:
+        name: Modifier
+      delete_button:
+        name: Supprimer
+        destroy_confirmation: Êtes-vous sûr ?
+      index_view:
+        title: Recettes
+      new_view:
+        title: Nouvelle recette
+      edit_view:
+        title: Modifier la recette
+

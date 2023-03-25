@@ -1,0 +1,17 @@
+en:
+  view_components:
+    content_recipes:
+      new_button:
+        name: New recipe
+      edit_button:
+        name: Edit
+      delete_button:
+        name: Delete
+        destroy_confirmation: Are you sure?
+      index_view:
+        title: Recipes
+      new_view:
+        title: New recipe
+      edit_view:
+        title: Edit recipe
+

@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.3"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main_content"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
@@ -24,8 +24,11 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
-# Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
-gem "tailwindcss-rails"
+# CSS Bundling for Rails [https://github.com/rails/cssbundling-rails]
+gem "cssbundling-rails"
+
+# # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
+# gem "tailwindcss-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -65,7 +68,7 @@ gem "dry-validation"
 gem "dry-schema"
 gem "dry-types"
 
-# markdown
+# markdown_field
 gem "redcarpet"
 
 group :development, :test do
@@ -85,6 +88,9 @@ group :development do
 
   # https://js-from-routes.netlify.app/guide/
   gem "js_from_routes"
+
+  # https://github.com/ctran/annotate_models
+  gem "annotate"
 end
 
 group :test do

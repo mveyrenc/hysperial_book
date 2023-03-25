@@ -1,0 +1,11 @@
+<nav class="navbar bg-primary text-primary-content">
+  <div class="navbar-start">
+    <a class="normal-case text-xl">HysperialBook</a>
+  </div>
+  <div class="navbar-center">
+    <%= render Shared::NavigationMenu::ApplicationMenu::Component.new %>
+  </div>
+  <div class="navbar-end">
+    <%= render Shared::NavigationMenu::UserMenu::Component.new %>
+  </div>
+</nav>
