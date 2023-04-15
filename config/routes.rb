@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :content_tutorials, path: "tutorials", except: :index
     resources :content_articles, path: "articles", except: :index
     resources :content_recipes, path: "recipes", except: :index
+    resources :content_soap_recipes, path: "soap-recipes", except: :index
   end
 
   # Defines the root path route ("/")

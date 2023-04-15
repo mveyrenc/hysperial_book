@@ -133,7 +133,7 @@ class AppFormBuilder < ActionView::Helpers::FormBuilder
   def collection_input(method, options, &block)
     form_group(method, options) do
       safe_join [
-                  label(method, options[:label]),
+                  field_label(method, options),
                   block.call,
                 ]
     end
@@ -142,48 +142,46 @@ class AppFormBuilder < ActionView::Helpers::FormBuilder
   def select_input(method, options = {})
     value_method = options[:value_method] || :to_s
     text_method = options[:text_method] || :to_s
-    input_options = options[:input_html] || {}
-
-    multiple = input_options[:multiple]
 
     collection_input(method, options) do
-      collection_select(method, options[:collection], value_method, text_method, options, merge_input_options({ class: "#{"custom-select" unless multiple} form-control #{"input-error" if has_error?(method)}" }, options[:input_html]))
+      collection_select(method, options[:collection], value_method, text_method, options, merge_input_options({ class: "select select-bordered #{"select-error" if has_error?(method)}" }, options[:input_html]))
     end
   end
 
   def grouped_select_input(method, options = {})
     # We probably need to go back later and adjust this for more customization
     collection_input(method, options) do
-      grouped_collection_select(method, options[:collection], :last, :first, :to_s, :to_s, options, merge_input_options({ class: "custom-select form-control #{"input-error" if has_error?(method)}" }, options[:input_html]))
+      grouped_collection_select(method, options[:collection], :last, :first, :to_s, :to_s, options, merge_input_options({ class: "select select-bordered #{"select-error" if has_error?(method)}" }, options[:input_html]))
     end
   end
 
   def file_input(method, options = {})
     form_group(method, options) do
       safe_join [
-                  (label(method, options[:label]) unless options[:label] == false),
+                  field_label(method, options),
                   custom_file_field(method, options),
                 ]
     end
   end
 
   def collection_of(input_type, method, options = {})
-    form_builder_method, custom_class, input_builder_method = case input_type
-                                                              when :radio_buttons then [:collection_radio_buttons, "custom-radio", :radio_button]
-                                                              when :check_boxes then [:collection_check_boxes, "custom-checkbox", :check_box]
-                                                              else raise "Invalid input_type for collection_of, valid input_types are \":radio_buttons\", \":check_boxes\""
-                                                              end
+    form_builder_method, data_input_class, input_builder_method = case input_type
+                                                                  when :radio_buttons then [:collection_radio_buttons, 'radio', :radio_button]
+                                                                  when :check_boxes then [:collection_check_boxes, 'checkbox', :check_box]
+                                                                  else raise "Invalid input_type for collection_of, valid input_types are \":radio_buttons\", \":check_boxes\""
+                                                                  end
 
     form_group(method, options) do
       safe_join [
-                  label(method, options[:label]),
-                  tag.br,
+                  field_label(method, options),
                   (send(form_builder_method, method, options[:collection], options[:value_method], options[:text_method]) do |b|
-                    tag.div(class: "custom-control #{custom_class}") {
-                      safe_join [
-                                  b.send(input_builder_method, class: "custom-control-input"),
-                                  b.label(class: "custom-control-label"),
-                                ]
+                    tag.div(class: "form-control") {
+                      b.label(class: "label justify-start cursor-pointer") do
+                        safe_join [
+                                    b.send(input_builder_method, class: "#{data_input_class} mr-2"),
+                                    tag.span(class: "label-text") { b.text },
+                                  ]
+                      end
                     }
                   end),
                 ]
@@ -228,18 +226,21 @@ class AppFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def custom_file_field(method, options = {})
-    tag.div(class: "input-group") {
+    join = []
+    if @object.persisted? and @object.has_attribute?(method) and object.attribute(method).attached?
+      join << tag.div(class: "input-group-prepend") {
+        tag.span("Upload", class: "input-group-text")
+      }
+    end
+
+    join << tag.div(class: "custom-file") {
       safe_join [
-                  tag.div(class: "input-group-prepend") {
-                    tag.span("Upload", class: "input-group-text")
-                  },
-                  tag.div(class: "custom-file") {
-                    safe_join [
-                                file_field(method, options.merge(class: "custom-file-input", data: { controller: "file-input" })),
-                                label(method, "Choose file...", class: "custom-file-label"),
-                              ]
-                  },
+                  file_field(method, options.merge(class: "file-input", data: { controller: "file-input" })),
                 ]
+    }
+
+    tag.div(class: "input-group") {
+      safe_join join
     }
   end
 

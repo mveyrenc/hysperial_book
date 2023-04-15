@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-class ContentRecipesController < ApplicationController
+class ContentSoapRecipesController < ApplicationController
 
   include ControllerForContentObject
 
   private
 
   def content_model_class
-    "ContentRecipe"
+    "ContentSoapRecipe"
   end
 
   def content_component_module
-    "ContentRecipes"
+    "ContentSoapRecipes"
   end
 
   def content_params

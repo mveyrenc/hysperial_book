@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ContentTutorials::NewView
+module ContentArticles::Form
 
   class Component < ApplicationViewComponent
 

@@ -6,16 +6,16 @@ class ContentTutorialsController < ApplicationController
 
   private
 
-  def index_path
-    content_tutorials_path
-  end
-
   def content_model_class
     "ContentTutorial"
   end
 
   def content_component_module
     "ContentTutorials"
+  end
+
+  def content_params
+    super
   end
 
 end

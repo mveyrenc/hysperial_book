@@ -15,6 +15,8 @@ module Shared::EditButton
         path = edit_content_article_path(object)
       when ContentRecipe.name
         path = edit_content_recipe_path(object)
+      when ContentSoapRecipe.name
+        path = edit_content_soap_recipe_path(object)
       when ContentTutorial.name
         path = edit_content_tutorial_path(object)
       else

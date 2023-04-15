@@ -21,7 +21,7 @@ module ControllerForContentObject
   end
 
   def create
-    @object = content_model_class.constantize.new(book_params)
+    @object = content_model_class.constantize.new(content_params)
 
     if @object.save
       redirect_to index_path, notice: t('.success')
@@ -31,7 +31,7 @@ module ControllerForContentObject
   end
 
   def update
-    if @object.update(book_params)
+    if @object.update(content_params)
       redirect_to index_path, notice: t('.success')
     else
       render "#{content_component_module}::EditView::Component".constantize.new(@object), status: :unprocessable_entity
@@ -52,7 +52,7 @@ module ControllerForContentObject
   end
 
   def index_path
-    raise NotImplementedError
+    root_path
   end
 
   def content_model_class
@@ -61,5 +61,9 @@ module ControllerForContentObject
 
   def content_component_module
     raise NotImplementedError
+  end
+
+  def content_params
+    params.require(content_model_class.underscore.to_sym).permit(:test, :book_id, :short_description, :body, :thumbnail)
   end
 end

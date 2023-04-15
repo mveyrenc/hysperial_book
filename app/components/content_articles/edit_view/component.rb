@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
-module ContentTutorials::NewView
+module ContentArticles::EditView
 
   class Component < ApplicationViewComponent
 
-    param :object
+    attr_reader :object
 
+    def initialize(object:)
+      @object = object
+    end
   end
 
   class ComponentPreview < ApplicationViewComponentPreview

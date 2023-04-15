@@ -10,6 +10,11 @@ en:
     shared:
       new_button:
         name: New
+        book: New book
+        content_soap_recipe: New soap recipe
+        content_recipe: New recipe
+        content_tutorial: New tutorial
+        content_article: New article
       edit_button:
         name: Edit
       delete_button:

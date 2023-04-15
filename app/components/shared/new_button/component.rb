@@ -15,12 +15,15 @@ module Shared::NewButton
         path = new_content_article_path
       when ContentRecipe.name
         path = new_content_recipe_path
+      when ContentSoapRecipe.name
+        path = new_content_soap_recipe_path
       when ContentTutorial.name
         path = new_content_tutorial_path
       else
         puts object.class
       end
-      link_to I18n.t(virtual_path + '.name'), path, class: "btn btn-md btn-secondary" unless path.nil?
+
+      link_to I18n.t("#{virtual_path}.#{type.name.underscore}"), path, class: "btn btn-md btn-secondary" unless path.nil?
     end
   end
 
