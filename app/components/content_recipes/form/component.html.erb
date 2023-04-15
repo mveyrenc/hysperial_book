@@ -1,10 +1,5 @@
 <%= app_form_with model: object do |form| %>
-  <%= form.input :title, required: true %>
-  <%= form.input :book_id, as: :radio_buttons, collection: Book.sorted, value_method: :id, text_method: :name, required: true %>
-  <%= form.input :short_description, as: :rich_text_area %>
-  <%= form.input :body, as: :rich_text_area %>
-  <%= form.input :thumbnail, as: :file %>
-  <%= image_tag object.thumbnail if object.persisted? and object.thumbnail.attached? %>
+  <%= render Contents::Form::Component.new(form) %>
 
   <%= form.button_group do %>
     <%= form.submit :submit %>

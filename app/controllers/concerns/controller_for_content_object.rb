@@ -64,6 +64,6 @@ module ControllerForContentObject
   end
 
   def content_params
-    params.require(content_model_class.underscore.to_sym).permit(:test, :book_id, :short_description, :body, :thumbnail)
+    params.require(content_model_class.underscore.to_sym).permit(:title, :book_id, :short_description, :body, :thumbnail)
   end
 end

@@ -1,0 +1,10 @@
+fr:
+  view_components:
+    content_soap_recipes:
+      index_view:
+        title: Recettes de savon
+      new_view:
+        title: Nouvelle recette de savon
+      edit_view:
+        title: Modifier la recette de savon
+

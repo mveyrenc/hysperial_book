@@ -7,7 +7,6 @@ module Shared::NewButton
     param :type
 
     def call
-      path = nil
       case type.name
       when Book.name
         path = new_book_path
@@ -20,7 +19,7 @@ module Shared::NewButton
       when ContentTutorial.name
         path = new_content_tutorial_path
       else
-        puts object.class
+        path = nil
       end
 
       link_to I18n.t("#{virtual_path}.#{type.name.underscore}"), path, class: "btn btn-md btn-secondary" unless path.nil?

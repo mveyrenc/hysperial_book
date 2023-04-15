@@ -1,0 +1,10 @@
+en:
+  view_components:
+    content_soap_recipes:
+      index_view:
+        title: Soap recipes
+      new_view:
+        title: New soap recipe
+      edit_view:
+        title: Edit soap recipe
+

@@ -5,8 +5,4 @@ module Books
   class BookViewComponent < ApplicationViewComponent
   end
 
-  class BookViewComponentPreview < ApplicationViewComponentPreview
-
-  end
-
 end

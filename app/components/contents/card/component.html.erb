@@ -1,0 +1,21 @@
+<article class="py-2">
+  <div class="card card-compact card-bordered bg-base-100 shadow-xl">
+    <div class="card-body">
+
+      <%= image_tag object.thumbnail if object.persisted? and object.thumbnail.attached? %>
+      <h1 class="card-title" style="color: <%= title_color %>">
+        <% unless object.book.icon.blank? %>
+          <%= render Shared::Icon::Component.new(object.book.icon, :outlined) %>
+        <% end %>
+        <%= object.title %>
+      </h1>
+      <% unless object.short_description.blank? %>
+        <div class="prose"><%= object.short_description %></div>
+      <% end %>
+      <div class="card-actions justify-end">
+        <%= render Shared::EditButton::Component.new(object) %>
+        <%= render Shared::DeleteButton::Component.new(object) %>
+      </div>
+    </div>
+  </div>
+</article>

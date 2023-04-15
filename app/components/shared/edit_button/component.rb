@@ -7,7 +7,6 @@ module Shared::EditButton
     param :object
 
     def call
-      path = nil
       case object.class.name
       when Book.name
         path = edit_book_path(object)
@@ -20,7 +19,7 @@ module Shared::EditButton
       when ContentTutorial.name
         path = edit_content_tutorial_path(object)
       else
-        puts object.class
+        path = nil
       end
       link_to I18n.t(virtual_path + '.name'), path, class: "btn btn-xs btn-secondary" unless path.nil?
     end

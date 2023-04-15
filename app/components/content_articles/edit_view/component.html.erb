@@ -1,14 +1,8 @@
 <%= render Shared::Header::Component.new do |c| %>
   <% c.title do %>
-    <%= object %>
+    <%= t('.title') %>
   <% end %>
 <% end %>
 <%= render Shared::MainContent::Component.new do %>
-  <%= app_form_with model: object do |form| %>
-    <%= form.input :title, required: true %>
-    <%= form.input :headline, as: :markdown %>
-    <%= form.input :text, as: :ckeditor %>
-    <%= form.input :thumbnail %>
-    <%= form.button :submit %>
-  <% end %>
+  <%= render ContentArticles::Form::Component.new(object) %>
 <% end %>

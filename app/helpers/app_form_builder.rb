@@ -21,6 +21,7 @@ class AppFormBuilder < ActionView::Helpers::FormBuilder
                             :select
                           end
 
+    options.delete(:as)
     send("#{override_input_type || input_type}_input", method, options)
   end
 
@@ -164,6 +165,15 @@ class AppFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def image_input(method, options = {})
+    form_group(method, options) do
+      safe_join [
+                  field_label(method, options),
+                  custom_image_field(method, options),
+                ]
+    end
+  end
+
   def collection_of(input_type, method, options = {})
     form_builder_method, data_input_class, input_builder_method = case input_type
                                                                   when :radio_buttons then [:collection_radio_buttons, 'radio', :radio_button]
@@ -233,13 +243,27 @@ class AppFormBuilder < ActionView::Helpers::FormBuilder
       }
     end
 
-    join << tag.div(class: "custom-file") {
-      safe_join [
-                  file_field(method, options.merge(class: "file-input", data: { controller: "file-input" })),
-                ]
-    }
+    join << file_field(method, options.merge(class: "file-input"))
 
-    tag.div(class: "input-group") {
+    tag.div(class: "flex") {
+      safe_join join
+    }
+  end
+
+  def custom_image_field(method, options = {})
+    join = []
+
+    if @object.persisted? and @object.respond_to?(method) and object.public_send(method).attached?
+      join << tag.div(class: "mr-4") {
+        tag.div(class: "w-64 rounded") {
+          @template.image_tag @object.public_send(method)
+        }
+      }
+    end
+
+    join << file_field(method, options.merge(class: "file-input", data: { controller: "file-input" }))
+
+    tag.div(class: "flex") {
       safe_join join
     }
   end

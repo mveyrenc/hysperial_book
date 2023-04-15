@@ -14,7 +14,6 @@ module ApplicationHelper
   def app_form_with(model: nil, scope: nil, url: nil, format: nil, **options, &block)
     options = options.reverse_merge(builder: AppFormBuilder)
     options[:html] = prepend_option(options[:html], :class, "container mx-auto")
-    puts options.inspect
     form_with(model: model, scope: scope, url: url, format: format, **options, &block)
   end
 

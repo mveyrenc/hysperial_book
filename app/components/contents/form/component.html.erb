@@ -1,0 +1,5 @@
+<%= form.input :title, required: true %>
+<%= form.input :book_id, as: :radio_buttons, collection: Book.sorted, value_method: :id, text_method: :name, required: true %>
+<%= form.input :short_description, as: :rich_text_area %>
+<%= form.input :thumbnail, as: :image %>
+<%= form.input :body, as: :rich_text_area %>
