@@ -3,8 +3,8 @@
     <span class="badge badge-primary badge-lg"><%= object.class.model_name.human %></span> <%= object %>
   <% end %>
   <% c.actions do %>
-    <%= render ContentTutorials::EditButton::Component.new(object: object) %>
-    <%= render ContentTutorials::DeleteButton::Component.new(object: object) %>
+    <%= render Shared::EditButton::Component.new(object: object) %>
+    <%= render Shared::DeleteButton::Component.new(object: object) %>
   <% end %>
 <% end %>
 <%= render Contents::Shared::ShowContent::Component.new(object: object) %>

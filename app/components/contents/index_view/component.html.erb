@@ -6,13 +6,13 @@
 <%= render Shared::MainContent::Component.new do %>
   <div class="flex flex-row gap-4">
     <div class="basis-1/3">
-      <%= render ContentRecipes::NewButton::Component.new %>
+      <%= render Shared::NewButton::Component.new(ContentRecipe) %>
     </div>
     <div class="basis-1/3">
-      <%= render ContentArticles::NewButton::Component.new %>
+      <%= render Shared::NewButton::Component.new(ContentTutorial) %>
     </div>
     <div class="basis-1/3">
-      <%= render ContentTutorials::NewButton::Component.new %>
+      <%= render Shared::NewButton::Component.new(ContentArticle) %>
     </div>
   </div>
   <div class="min-w-full">

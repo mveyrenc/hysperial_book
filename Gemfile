@@ -54,14 +54,13 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
-# forms
-gem "simple_form"
-
 # view_component
 gem "view_component"
 gem "view_component-contrib"
-gem "polaris_view_components"
 gem "motion"
+group :development do
+  gem "lookbook"
+end
 
 # dry
 gem "dry-validation"

@@ -7,3 +7,11 @@ fr:
       user_menu:
         my_profile: Mon profil
         sign_out: Déconnexion
+    shared:
+      new_button:
+        name: Créer
+      edit_button:
+        name: Modifier
+      delete_button:
+        name: Supprimer
+        destroy_confirmation: Êtes-vous sûr ?

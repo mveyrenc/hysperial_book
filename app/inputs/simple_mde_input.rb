@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SimpleMDEInput < SimpleForm::Inputs::TextInput
+class SimpleMDEInput < Formtastic::Inputs::StringInput
       def input_html_classes
         super.push('no-spinner')
       end

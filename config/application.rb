@@ -27,5 +27,9 @@ module HysperialBook
 
     config.view_component.generate.locale = true
     config.view_component.generate.distinct_locale_files = true
+
+    # Set the default layout to app/views/layouts/component_preview.html.erb
+    config.view_component.default_preview_layout = "component_preview"
+
   end
 end

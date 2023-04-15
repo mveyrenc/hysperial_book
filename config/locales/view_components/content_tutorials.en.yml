@@ -1,13 +1,6 @@
 en:
   view_components:
     content_tutorials:
-      new_button:
-        name: New tutorial
-      edit_button:
-        name: Edit
-      delete_button:
-        name: Delete
-        destroy_confirmation: Are you sure?
       index_view:
         title: Tutorials
       new_view:

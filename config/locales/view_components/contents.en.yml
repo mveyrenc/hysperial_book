@@ -1,13 +1,6 @@
 en:
   view_components:
     contents:
-      new_button:
-        name: New content
-      edit_button:
-        name: Edit
-      delete_button:
-        name: Delete
-        destroy_confirmation: Are you sure?
       index_view:
         title: Contents
       new_view:

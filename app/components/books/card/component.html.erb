@@ -1,14 +1,21 @@
 <article class="py-2">
-  <!--    <div class="w-full flex bg-white dark:bg-gray-800 rounded-lg border border-gray-400 p-3">-->
   <div class="card card-compact card-bordered bg-base-100 shadow-xl">
     <div class="card-body">
-      <div class="card-title">
-        <h1><%= object.name %></h1>
-        <%= object.short_description %>
-      </div>
+      <h1 class="card-title" style="color: <%= title_color %>">
+        <% unless object.icon.blank? %>
+          <%= render Shared::Icon::Component.new(object.icon, :outlined) %>
+        <% end %>
+        <%= object.name %>
+      </h1>
+      <% unless object.short_description.blank? %>
+        <div class="prose"><%= object.short_description %></div>
+      <% end %>
+      <% unless object.description.blank? %>
+        <%= object.description %>
+      <% end %>
       <div class="card-actions justify-end">
-        <%= render Books::EditButton::Component.new(object) %>
-        <%= render Books::DeleteButton::Component.new(object) %>
+        <%= render Shared::EditButton::Component.new(object) %>
+        <%= render Shared::DeleteButton::Component.new(object) %>
       </div>
     </div>
   </div>

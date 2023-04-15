@@ -20,14 +20,14 @@ class ViewComponentGenerator < Rails::Generators::NamedBase
   def create_test_file
     return if options[:skip_test]
 
-    template "component_test.rb", File.join("test/components", class_path, "#{file_name}_test.rb")
+    template "component_test.rb", File.join("test/components", class_path, file_name, "component_test.rb")
   end
 
-  # def create_preview_file
-  #   return if options[:skip_preview]
-  #
-  #   template "preview.rb", File.join("app/components", class_path, file_name, "preview.rb")
-  # end
+  def create_preview_file
+    return if options[:skip_preview]
+
+    template "component_preview.rb", File.join("app/components", class_path, file_name, "component_preview.rb")
+  end
 
   private
 

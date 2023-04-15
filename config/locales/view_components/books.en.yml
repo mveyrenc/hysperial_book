@@ -1,13 +1,6 @@
 en:
   view_components:
     books:
-      new_button:
-        name: New book
-      edit_button:
-        name: Edit
-      delete_button:
-        name: Delete
-        destroy_confirmation: Are you sure?
       index_view:
         title: Books
       new_view:

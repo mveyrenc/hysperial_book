@@ -6,7 +6,7 @@ module Books::Form
     param :object
   end
 
-  class Preview < Books::BookViewComponentPreview
+  class ComponentPreview < Books::BookViewComponentPreview
     # You can specify the container class for the default template
     # self.container_class = "w-1/2 border border-gray-300"
 

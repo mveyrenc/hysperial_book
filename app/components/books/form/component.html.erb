@@ -1,10 +1,14 @@
-<%= simple_form_for object do |form| %>
-  <%= form.input :name %>
+<%= app_form_with model: object do |form| %>
+
+  <%= form.input :name, required: true %>
   <%= form.input :color %>
+  <p>Choose a color in <a class="link link-accent" href="https://tailwindcss.com/docs/customizing-colors" target="_blank">tailwind pallet</a>.</p>
   <%= form.input :icon %>
+  <p>Choose an icon in <a class="link link-accent" href="https://fonts.google.com/icons" target="_blank">Material symbols</a>.</p>
   <%= form.input :short_description, as: :rich_text_area %>
-  <%= form.input :description, as: :rich_text_area  %>
-  <div class="btn-group btn-group-submit">
-    <%= form.button :submit %>
-  </div>
+  <%= form.input :description, as: :rich_text_area %>
+
+  <%= form.button_group do %>
+    <%= form.submit :submit %>
+  <% end %>
 <% end %>

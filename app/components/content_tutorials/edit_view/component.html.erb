@@ -4,7 +4,7 @@
   <% end %>
 <% end %>
 <%= render Shared::MainContent::Component.new do %>
-  <%= simple_form_for object do |form| %>
+  <%= app_form_with model: object do |form| %>
     <%= form.input :title, required: true %>
     <%= form.input :headline, as: :markdown %>
     <%= form.input :text, as: :ckeditor %>

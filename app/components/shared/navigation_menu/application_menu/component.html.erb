@@ -7,7 +7,7 @@
     ) %>
     <%= render Shared::NavigationMenu::Link::Component.new(
       label: t('.books'),
-      path: books_path,
+      path: books_path(I18n.locale),
       active: controller_name == "books")
     %>
   </li>

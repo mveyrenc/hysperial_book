@@ -1,0 +1,11 @@
+<%%= app_form_with @<%= singular_name %> do |f| %>
+  <%%= f.inputs do %>
+  <%- attributes.each do |attribute| -%>
+    <%%= f.input :<%= attribute.name %> %>
+  <%- end -%>
+  <%% end %>
+
+  <%%= f.actions do %>
+    <%%= f.action :submit, :as => :input %>
+  <%% end %>
+<%% end %>

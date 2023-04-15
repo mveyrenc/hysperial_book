@@ -4,10 +4,31 @@ module Shared::HtmlContentField
 
   class Component < ApplicationViewComponent
 
-    def initialize(text:, color: 'gray', wrapper_class: nil)
+    COLOR_DEFAULT = :gray
+    COLOR_MAPPINGS = {
+      :gray => "prose-gray",
+      :slate => "prose-slate",
+      :zinc => "prose-zinc",
+      :neutral => "prose-neutral",
+      :stone => "prose-stone"
+    }
+    COLOR_OPTIONS = COLOR_MAPPINGS.keys
+
+    def initialize(
+      text:,
+      color: 'gray',
+      **system_arguments
+    )
       @text = text
       @color = color
-      @wrapper_class = wrapper_class
+
+      @system_arguments = system_arguments
+      @system_arguments[:classes] = class_names(
+        @system_arguments[:classes],
+        "prose",
+        COLOR_MAPPINGS[fetch_or_fallback(COLOR_OPTIONS, color, COLOR_DEFAULT)],
+        "max-w-none"
+      )
     end
 
     def render?
@@ -15,9 +36,7 @@ module Shared::HtmlContentField
     end
 
     def call
-      content_tag :article, class: "#{prose_color} max-w-none #{wrapper_class}" do
-        raw(text)
-      end
+      render Shared::Base::Component.new(tag: :article, **@system_arguments).with_content(raw(text))
     end
 
     private
@@ -31,14 +50,6 @@ module Shared::HtmlContentField
       else
         "prose-#{@color}"
       end
-    end
-  end
-
-  class Preview < ApplicationViewComponentPreview
-    # You can specify the container class for the default template
-    # self.container_class = "w-1/2 border border-gray-300"
-
-    def default
     end
   end
 

@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+module <%= class_name %>
+
+  class ComponentPreview < <%= preview_parent_class %>
+
+    def default
+    end
+
+  end
+
+end

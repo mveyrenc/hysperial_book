@@ -11,7 +11,7 @@ module ContentTutorials::ShowView
     end
   end
 
-  class Preview < ApplicationViewComponentPreview
+  class ComponentPreview < ApplicationViewComponentPreview
     # You can specify the container class for the default template
     # self.container_class = "w-1/2 border border-gray-300"
 
