@@ -1,0 +1,60 @@
+version: '3.1'
+services:
+  db:
+    image: postgres
+    volumes:
+      - hysperial_book_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=hysperial_book_development
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.1
+    environment:
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - hysperial_book_index:/usr/share/elasticsearch/data
+
+  redis:
+    image: "redis:alpine"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      - RAILS_ENV=development
+      - APP_DATABASE_NAME=hysperial_book_development
+      - APP_DATABASE_USERNAME=docker
+      - APP_DATABASE_PASSWORD=docker
+    volumes:
+      - .:/app
+      - hysperial_book_yarn_cache:/root/.yarn-cache
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - elastic
+      - redis
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "3001:8080"
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+
+volumes:
+  hysperial_book_data: ~
+  hysperial_book_index: ~
+  hysperial_book_yarn_cache: ~

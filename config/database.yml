@@ -20,10 +20,13 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: db
+  username: <%= ENV['APP_DATABASE_USERNAME'] %>
+  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
 
 development:
   <<: *default
-  database: hysperial_book_development
+  database: <%= ENV['APP_DATABASE_NAME'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -81,6 +84,3 @@ test:
 #
 production:
   <<: *default
-  database: hysperial_book_production
-  username: hysperial_book
-  password: <%= ENV["HYSPERIAL_BOOK_DATABASE_PASSWORD"] %>
