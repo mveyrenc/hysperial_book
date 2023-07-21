@@ -14,25 +14,33 @@
 
           <div class="field">
             <%= f.label :email, class: 'label' %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input' %>
+            <div class="control">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input' %>
+            </div>
           </div>
 
           <div class="field">
             <%= f.label :password, class: 'label' %>
-            <%= f.password_field :password, autocomplete: "current-password", class: 'input' %>
+            <div class="control">
+              <%= f.password_field :password, autocomplete: "current-password", class: 'input' %>
+            </div>
           </div>
 
           <% if devise_mapping.rememberable? %>
             <div class="field">
               <%= f.label :remember_me, class: 'checkbox' do %>
-                <%= f.check_box :remember_me %>
-                <%= resource.class.human_attribute_name('remember_me') %>
+                <div class="control">
+                  <%= f.check_box :remember_me %>
+                  <%= resource.class.human_attribute_name('remember_me') %>
               <% end %>
+              </div>
             </div>
           <% end %>
 
           <div class="field">
-            <%= f.submit t('.sign_in'), class: 'button is-primary is-fullwidth' %>
+            <div class="control">
+              <%= f.submit t('.sign_in'), class: 'button is-primary is-fullwidth' %>
+            </div>
           </div>
         <% end %>
       </div>

@@ -1,0 +1,117 @@
+@startuml
+
+    abstract Content {
+        title: string
+        book: Book
+        description: string
+        ..
+        content_blocks: ContentBlock[]
+    }
+
+     class CookingRecipe {
+        {field} Available for books: [CookingBook]
+        ..
+        main_ingredients: Tag[]
+        seasons: Tag[]
+        special_occasions: Tag[]
+        dish_type: Tag[]
+        world_region: Tag[]
+        special_diets: Tag[]
+        sources: Tag[]
+        chefs: Tag[]
+        meals: Tag[]
+        courses: Tag[]
+     }
+     class Menu {
+        {field} Available for books: [CookingBook]
+        main_ingredients: Tag[]
+        seasons: Tag[]
+        special_occasions: Tag[]
+        world_region: Tag[]
+        special_diets: Tag[]
+        sources: Tag[]
+        chefs: Tag[]
+        meals: Tag[]
+        courses: Tag[]
+     }
+     class SoapRecipe {
+        {field} Available for books: [HealthWellnessRecipe,HouseCareBook]
+        main_ingredients: Tag[]
+        sources: Tag[]
+        authors: Tag[]
+     }
+    class HealthWellnessRecipe {
+        {field} Available for books: [HealthWellnessBook]
+        seasons: Tag[]
+        special_occasions: Tag[]
+        sources: Tag[]
+        authors: Tag[]
+    }
+    class HouseCareRecipe {
+        {field} Available for books: [HouseCareBook]
+        sources: Tag[]
+        authors: Tag[]
+    }
+    class Tutorial {
+        {field} Available for books: [CookingBook, HealthWellnessRecipe, HouseCareBook]
+        main_ingredients: Tag[]
+        sources: Tag[]
+        authors: Tag[]
+    }
+    class ThematicFile {
+        {field} Available for books: [CookingBook, HealthWellnessRecipe, HouseCareBook]
+        main_ingredients: Tag[]
+        sources: Tag[]
+        authors: Tag[]
+    }
+    class Article {
+        {field} Available for books: [CookingBook, HealthWellnessRecipe, HouseCareBook]
+        sources: Tag[]
+        authors: Tag[]
+    }
+
+ Content <|-- CookingRecipe
+ Content <|-- Menu
+ Content <|-- SoapRecipe
+ Content <|-- HealthWellnessRecipe
+ Content <|-- HouseCareRecipe
+ Content <|-- Tutorial
+ Content <|-- ThematicFile
+ Content <|-- Article
+
+ abstract ContentBlock
+
+ Content *-- ContentBlock : composed by >
+
+ class Book
+
+ Book *-- Content : contains >
+
+ entity CookingBook
+ entity HealthWellnessBook
+ entity HouseCareBook
+
+ Book -- CookingBook
+ Book -- HealthWellnessBook
+ Book -- HouseCareBook
+
+ class Tag {
+    book : Book
+    tag_type : TagType
+ }
+
+ enum TagType {
+    main_ingredients: Ingrédients principaux (légumes, viande, poisson, tomate, poulet, etc.)
+    seasons: Saisons (printemps, été, automne, hiver, janvier, février, etc.)
+    special_occasions: Occasions spéciales (Noël, Pâques, etc.)
+    dish_type: Type de plat (gratin, soupe, etc.)
+    world_region: Région du monde (Asie, Europe, France, Lyon, etc.)
+    special_diets: Régimes spéciaux (végétarien, végétalien, sans gluten, allergies, etc.)
+    sources: Sources (livres, sites web, etc.)
+    chefs: Chefs (Paul Bocuse, etc.)
+    authors: Auteurs (Marie Kondo, etc.)
+    meals: Repas (petit-déjeuner, déjeuner, dîner, etc.)
+    courses: Plats (entrée, plat principal, dessert, etc.)
+ }
+
+@enduml

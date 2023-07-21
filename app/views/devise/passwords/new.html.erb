@@ -14,11 +14,15 @@
 
           <div class="field">
             <%= f.label :email, class: 'label' %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input' %>
+            <div class="control">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input' %>
+            </div>
           </div>
 
           <div class="field">
-            <%= f.submit t('.send_me_reset_password_instructions'), class: 'button is-primary is-fullwidth' %>
+            <div class="control">
+              <%= f.submit t('.send_me_reset_password_instructions'), class: 'button is-primary is-fullwidth' %>
+            </div>
           </div>
         <% end %>
       </div>

@@ -7,11 +7,15 @@
 
   <div class="field">
     <%= f.label :email, class: 'label' %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'input' %>
+    <div class="control">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'input' %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.submit t('.resend_confirmation_instructions'), class: 'button is-primary' %>
+    <div class="control">
+      <%= f.submit t('.resend_confirmation_instructions'), class: 'button is-primary' %>
+    </div>
   </div>
 <% end %>
 

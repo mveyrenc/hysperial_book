@@ -74,4 +74,7 @@ group :test do
   gem "webdrivers"
 end
 
+# https://github.com/heartcombo/devise
 gem "devise", "~> 4.9"
+
+gem "pundit", "~> 2.3"

@@ -11,12 +11,22 @@
 </head>
 
 <body>
-
-<%= render 'layouts/shared/navbar-menu' %>
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-<%= yield %>
+<section class="mb-4">
+  <%= render 'layouts/shared/navbar-menu' %>
+</section>
+<section class="mb-4">
+  <div class="container">
+    <%= render 'layouts/shared/flash' %>
+  </div>
+</section>
+<section class="mb-4">
+  <div class="container">
+    <%= render 'layouts/shared/breadcrumb' %></div>
+</section>
+<section class="mb-4">
+  <div class="container">
+    <%= yield %></div>
+</section>
+</div>
 </body>
 </html>

@@ -8,19 +8,25 @@
 
   <div class="field">
     <%= f.label :password, t('.new_password'), class: 'label' %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'input' %>
-    <% if @minimum_password_length %>
-      <p class="help has-text-dark"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></p>
-    <% end %>
+    <div class="control">
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'input' %>
+      <% if @minimum_password_length %>
+        <p class="help"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></p>
+      <% end %>
+    </div>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation, t('.confirm_new_password'), class: 'label' %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'input' %>
+    <div class="control">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'input' %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.submit t('.change_my_password'), class: 'button is-primary' %>
+    <div class="control">
+      <%= f.submit t('.change_my_password'), class: 'button is-primary' %>
+    </div>
   </div>
 <% end %>
 
