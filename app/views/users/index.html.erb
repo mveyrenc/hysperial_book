@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <div class="box">
+    <h1 class="title"><%= t('.title') %></h1>
+    <% if @users.blank? %>
+      <%= t('application.no_entry') %>
+    <% else %>
+      <div class="columns is-multiline">
+        <% @users.each do |user| %>
+          <div class="column is-one-fifth-desktop is-half-desktop is-full-mobile">
+            <%= render user %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    </div>
+</div>

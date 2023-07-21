@@ -1,9 +1,7 @@
-<div class="columns is-flex is-flex-direction-column box">
-
-  <div class="column">
+<div class="container-fluid">
+  <div class="box">
     <h1 class="title"><%= t('.title', resource: resource_name.to_s.humanize) %></h1>
-  </div>
-  <div class="column">
+
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
       <%= devise_error_messages! %>
@@ -44,14 +42,14 @@
         </div>
       </div>
 
-<!--      <div class="field">-->
-        <%#= f.label :current_password, class: 'label' %>
-<!--        <div class="control">-->
-          <%#= f.password_field :current_password, autocomplete: "current-password", class: 'input' %>
-<!--          <p class="help"><%#= t('.we_need_your_current_password_to_confirm_your_changes') %>-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
+      <!--      <div class="field">-->
+      <%#= f.label :current_password, class: 'label' %>
+      <!--        <div class="control">-->
+      <%#= f.password_field :current_password, autocomplete: "current-password", class: 'input' %>
+      <!--          <p class="help"><%#= t('.we_need_your_current_password_to_confirm_your_changes') %>-->
+      <!--          </p>-->
+      <!--        </div>-->
+      <!--      </div>-->
 
       <div class="field">
         <div class="control">
@@ -59,9 +57,7 @@
         </div>
       </div>
     <% end %>
-  </div>
 
-  <div class="column">
     <h2 class="subtitle"><%= t('.unhappy') %></h2>
 
     <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete, class: 'button is-danger is-light' %>

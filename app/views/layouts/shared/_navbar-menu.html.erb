@@ -32,9 +32,7 @@
                 Categories
               </a>
               <hr class="navbar-divider">
-              <a class="navbar-item">
-                <%= t('.users') %>
-              </a>
+              <%= link_to t('.users'), users_path, class: "navbar-item" %>
             </div>
           </div>
         </div>
@@ -43,8 +41,8 @@
       <div class="navbar-item">
         <div class="buttons">
           <% if user_signed_in? %>
-            <%= link_to current_user, edit_user_registration_path, method: :delete, class: "button is-white" %>
-            <%= button_to t('.log_out'), destroy_user_session_path, method: :delete, class: "button is-primary" %>
+            <%= link_to current_user, edit_user_registration_path, class: "button is-white" %>
+            <%= button_to t('.log_out'), destroy_user_session_path, method: :delete, data: { "turbo-method": :delete } , class: "button is-primary" %>
           <% end %>
         </div>
       </div>

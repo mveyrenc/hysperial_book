@@ -1,0 +1,44 @@
+<%= form_with(model: user) do |f| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, class: 'label' %>
+    <div class="control">
+      <%= f.text_field :name, autofocus: true, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, class: 'label' %>
+    <div class="control">
+      <%= f.email_field :email, autocomplete: "email", class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :role, class: 'label' %>
+    <div class="control">
+      <div class="select">
+        <%= f.select :role, options_for_select(f.object.class.translated_roles.map { |translation, k, _v| [translation, k] }, user.role) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= f.submit t('application.submit'), class: 'button is-primary' %>
+      <%= link_to t('application.cancel'), :back, class: "button" %>
+    </div>
+  </div>
+
+<% end %>

@@ -77,4 +77,8 @@ end
 # https://github.com/heartcombo/devise
 gem "devise", "~> 4.9"
 
+# https://github.com/varvet/pundit
 gem "pundit", "~> 2.3"
+
+# https://github.com/shlima/translate_enum
+gem "translate_enum", "~> 0.2.0", require: 'translate_enum/active_record'
