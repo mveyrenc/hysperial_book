@@ -76,6 +76,9 @@ group :development do
 
   # https://github.com/rubocop/rubocop-capybara
   gem 'rubocop-capybara', '~> 2.18'
+
+  # https://github.com/flyerhzm/rails_best_practices
+  gem 'rails_best_practices', '~> 1.23'
 end
 
 group :test do
