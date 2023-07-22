@@ -79,6 +79,10 @@ group :development do
 
   # https://github.com/flyerhzm/rails_best_practices
   gem 'rails_best_practices', '~> 1.23'
+
+  # https://github.com/BetterErrors/better_errors
+  gem 'better_errors', '~> 2.10'
+  gem 'binding_of_caller', '~> 1.0'
 end
 
 group :test do
