@@ -103,4 +103,3 @@ gem 'translate_enum', '~> 0.2.0', require: 'translate_enum/active_record'
 
 # https://github.com/deivid-rodriguez/byebug
 gem 'byebug', '~> 11.1', groups: %i[development test]
-

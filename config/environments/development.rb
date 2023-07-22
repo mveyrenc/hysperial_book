@@ -2,6 +2,7 @@
 
 require 'active_support/core_ext/integer/time'
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -71,4 +72,8 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # Allow connections to local server.
+  config.web_console.whitelisted_ips = ['172.16.0.0/12', '192.168.0.0/16']
 end
+# rubocop:enable Metrics/BlockLength
