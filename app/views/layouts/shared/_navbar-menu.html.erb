@@ -42,7 +42,7 @@
         <div class="buttons">
           <% if user_signed_in? %>
             <%= link_to current_user, edit_user_registration_path, class: "button is-white" %>
-            <%= button_to t('.log_out'), destroy_user_session_path, method: :delete, data: { "turbo-method": :delete } , class: "button is-primary" %>
+            <%= button_to t('.log_out'), destroy_user_session_path, method: :delete, data: { "turbo-method": :delete }, class: "button is-primary" %>
           <% end %>
         </div>
       </div>
