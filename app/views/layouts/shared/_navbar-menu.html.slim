@@ -1,0 +1,33 @@
+nav.navbar.is-light[role="navigation" aria-label="main navigation"]
+  .navbar-brand
+    a.navbar-item[href="/"]
+      = image_tag "logo.png"
+      |  HysperiaBook
+
+    a.navbar-burger.burger[role="button" aria-label="menu" aria-expanded="false" data-target="main-navigation-menu"]
+      span[aria-hidden="true"]
+      span[aria-hidden="true"]
+      span[aria-hidden="true"]
+
+  - if user_signed_in?
+    .navbar-menu id="main-navigation-menu"
+      .navbar-start
+        a.navbar-item[href="/"]
+          = t('.home')
+        .navbar-item.has-dropdown.is-hoverable
+          a.navbar-link
+            = t('.more')
+          .navbar-dropdown
+            a.navbar-item
+              |  Books
+            a.navbar-item
+              |  Categories
+            hr.navbar-divider
+            = link_to t('.users'), users_path, class: "navbar-item"
+
+      .navbar-end
+        .navbar-item
+          .buttons
+            - if user_signed_in?
+              = link_to current_user, edit_user_registration_path, class: "button is-white"
+              = button_to t('.log_out'), destroy_user_session_path, method: :delete, data: { "turbo-method": :delete }, class: "button is-primary"

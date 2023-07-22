@@ -1,0 +1,37 @@
+.container-fluid
+  .box
+    h1.title
+      = t('.title', resource: resource_name.to_s.humanize)
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+      = devise_error_messages!
+      .field
+        = f.label :name, class: 'label'
+        .control
+          = f.text_field :name, autofocus: true, class: 'input'
+      .field
+        = f.label :email, class: 'label'
+        .control
+          = f.email_field :email, autocomplete: "email", class: 'input'
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        = t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email)
+      .field
+        = f.label :password, class: 'label'
+        .control
+          = f.password_field :password, autocomplete: "new-password", class: 'input'
+      p.help
+        = t('.leave_blank_if_you_don_t_want_to_change_it')
+      - if @minimum_password_length
+        p.help
+          = t('devise.shared.minimum_password_length', count: @minimum_password_length)
+.field
+  = f.label :password_confirmation, class: 'label'
+  .control
+    = f.password_field :password_confirmation, autocomplete: "new-password", class: 'input'
+- #= f.label :current_password, class: 'label'
+- #= f.password_field :current_password, autocomplete: "current-password", class: 'input'
+.field
+  .control
+    = f.submit t('.update'), class: 'button is-primary'
+h2.subtitle
+  = t('.unhappy')
+= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete, class: 'button is-danger is-light'

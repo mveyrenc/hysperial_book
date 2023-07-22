@@ -1,0 +1,11 @@
+.container-fluid
+  .box
+    h1.title
+      = t('.title')
+    - if @users.blank?
+      = t('application.no_entry')
+    - else
+      .columns.is-multiline
+        - @users.each do |user|
+          .column.is-one-quarter-desktop.is-half-desktop.is-full-mobile
+            = render user

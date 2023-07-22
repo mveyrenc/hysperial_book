@@ -1,0 +1,19 @@
+.card id= dom_id(user)
+  .card-content
+    p.card-header-title
+      = user
+    .field
+      label.label
+        = User.human_attribute_name(:name)
+      = user.name
+    .field
+      label.label
+        = User.human_attribute_name(:role)
+      = user.roles.first.title if user.roles.any?
+  footer.card-footer
+    - if policy(user).update?
+      .card-footer-item
+        = link_to t(".edit"), edit_user_path(user), class: "button is-primary is-small"
+    - if policy(user).destroy?
+      .card-footer-item
+        = button_to t(".delete"), user_path(user), method: :delete, data: { "turbo-method": :delete }, class: "button is-danger is-small"

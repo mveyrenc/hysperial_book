@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title
+      | HysperialBook
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+  body
+    section.mb-4
+      = render 'layouts/shared/navbar-menu'
+    section.mb-4
+      .container
+        = render 'layouts/shared/flash'
+    section.mb-4
+      .container
+        = render 'layouts/shared/breadcrumb'
+    section.mb-4
+      .container
+        = yield

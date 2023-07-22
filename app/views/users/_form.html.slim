@@ -1,0 +1,32 @@
+= form_with(model: user) do |f|
+  - if user.errors.any?
+    div[style="color: red"]
+      h2
+        = pluralize(user.errors.count, "error")
+        |  prohibited this user from being saved:
+      ul
+        - user.errors.each do |error|
+          li
+            = error.full_message
+  .field
+    = f.label :name, class: 'label'
+  .control
+    = f.text_field :name, autofocus: true, class: 'input'
+  .field
+    = f.label :email, class: 'label'
+  .control
+    = f.email_field :email, autocomplete: "email", class: 'input'
+  .field
+    = f.label :role, class: 'label'
+  .control
+
+  .select
+    - if user.roles.any?
+      = f.select :role, options_from_collection_for_select(Role.all, :name, :title, user.roles.first.name), include_blank: true
+    - else
+      = f.select :role, options_from_collection_for_select(Role.all, :name, :title), include_blank: true
+  .field
+
+  .control
+    = f.submit t('application.submit'), class: 'button is-primary'
+    = link_to t('application.cancel'), :back, class: "button"

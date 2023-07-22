@@ -75,5 +75,8 @@ Rails.application.configure do
 
   # Allow connections to local server.
   config.web_console.whitelisted_ips = ['172.16.0.0/12', '192.168.0.0/16']
+
+  # Indent html for pretty debugging and do not sort attributes
+  Slim::Engine.set_options pretty: true, sort_attrs: false
 end
 # rubocop:enable Metrics/BlockLength
