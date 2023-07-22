@@ -68,6 +68,9 @@ group :development do
 
   # https://github.com/ctran/annotate_models
   gem "annotate", "~> 3.2"
+
+  # https://github.com/rubocop/rubocop-rails
+  gem 'rubocop-rails', require: false
 end
 
 group :test do

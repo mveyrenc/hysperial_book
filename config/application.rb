@@ -16,7 +16,12 @@ module HysperialBook
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = "Europe/Paris"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.generators.after_generate do |files|
+      parsable_files = files.filter { |file| file.end_with?('.rb') }
+      system("bundle exec rubocop -A --fail-level=E #{parsable_files.shelljoin}", exception: true)
+    end
   end
 end
