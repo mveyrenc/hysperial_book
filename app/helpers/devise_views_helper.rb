@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Devise views helper
 module DeviseViewsHelper
   def devise_error_messages!
     return '' if resource.errors.empty?
@@ -19,6 +20,8 @@ module DeviseViewsHelper
         </div>
     HTML
 
+    # rubocop:disable Rails/OutputSafety
     html.html_safe
+    # rubocop:enable Rails/OutputSafety
   end
 end

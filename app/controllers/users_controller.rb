@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Users controller
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy]
 
