@@ -56,6 +56,15 @@ gem 'bootsnap', require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+
+  # https://thoughtbot.github.io/factory_bot/summary.html
+  gem 'factory_bot_rails', '~> 6.2'
+
+  # https://github.com/faker-ruby/faker
+  gem 'faker', '~> 3.2'
+
+  # https://github.com/thoughtbot/shoulda-matchers
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do
@@ -75,7 +84,13 @@ group :development do
   gem 'rubocop-rails', require: false
 
   # https://github.com/rubocop/rubocop-capybara
-  gem 'rubocop-capybara', '~> 2.18'
+  gem 'rubocop-capybara', '~> 2.18', require: false
+
+  # https://github.com/rubocop/rubocop-rspec
+  gem 'rubocop-rspec', '~> 2.22', require: false
+
+  # https://github.com/rubocop/rubocop-factory_bot
+  gem 'rubocop-factory_bot', '~> 2.23', require: false
 
   # https://github.com/flyerhzm/rails_best_practices
   gem 'rails_best_practices', '~> 1.23'
@@ -90,6 +105,9 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+
+  # https://github.com/rspec/rspec-rails
+  gem 'rspec-rails', '~> 6.0'
 end
 
 # https://github.com/heartcombo/devise
@@ -112,3 +130,7 @@ gem 'rolify', '~> 6.0'
 
 # https://github.com/slim-template/slim-rails
 gem 'slim-rails', '~> 3.6'
+
+# https://github.com/collectiveidea/interactor
+# https://github.com/collectiveidea/interactor-rails
+gem 'interactor-rails', '~> 2.2'

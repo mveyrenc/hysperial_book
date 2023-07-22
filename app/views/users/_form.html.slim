@@ -22,7 +22,7 @@
 
   .select
     - if user.roles.any?
-      = f.select :role, options_from_collection_for_select(Role.all, :name, :title, user.roles.first.name), include_blank: true
+      = f.select :role, options_from_collection_for_select(Role.all, :name, :title, user.role), include_blank: true
     - else
       = f.select :role, options_from_collection_for_select(Role.all, :name, :title), include_blank: true
   .field

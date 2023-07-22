@@ -27,12 +27,14 @@
 class User < ApplicationRecord
   rolify
 
-  default_scope { order(:email) }
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
+
+  def role
+    roles.any? ? roles.first.name : nil
+  end
 
   def has_role?(role)
     case role

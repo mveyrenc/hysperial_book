@@ -2,57 +2,40 @@
 
 # Users controller
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update destroy]
-
   # GET /users or /users.json
   def index
-    @users = User.all
+    result = Users::ListUsersInteractor.call(params)
+    @users = result.list
   end
 
   # GET /users/1/edit
-  def edit; end
+  def edit
+    result = Users::GetUserInteractor.call(id: params[:id])
+    @user = result.user
+  end
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    new_role = params[:user][:role]
-    current_role = @user.roles.any? ? @user.roles.first.name : nil
-    params[:user].delete(:role)
-    user_update = @user.update(user_params)
-    if user_update && new_role != current_role
-      @user.remove_role @user.roles.first.name unless current_role.nil?
-      @user.add_role new_role unless new_role.nil? || new_role.blank?
-      @user.save
-    end
-    respond_to do |format|
-      if user_update
-        format.html { redirect_to users_url, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    attributes = params.require(:user).permit(:name, :email)
+    role = params.require(:user).permit(:role)
+    result = Users::UpdateUserInteractor.call(id: params[:id], attributes:, role:)
+    @user = result.user
+
+    if result.success?
+      redirect_to users_url, notice: 'User was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    @user.destroy
+    result = Users::DestroyUserInteractor.call(id: params[:id])
 
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+    if result.success?
+      redirect_to users_url, notice: 'User was successfully destroyed.'
+    else
+      render users_url, status: :unprocessable_entity
     end
-  end
-
-  private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_user
-    @user = User.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def user_params
-    params.require(:user).permit(:name, :email, :role)
   end
 end

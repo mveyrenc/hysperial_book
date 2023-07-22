@@ -13,9 +13,9 @@ Role.create!(name: :admin, title: 'Admin')
 Role.create!(name: :contributor, title: 'Contributor')
 reader_r = Role.create!(name: :reader, title: 'Reader')
 
-super_admin_u = User.create!(name: 'Hysperia', email: 'hysperia@gmail.com', password: 'password')
-User.create!(name: 'John Doe', email: 'john@doe.com', password: 'password')
-reader_u = User.create!(name: 'Marmion Francoeur', email: 'MarmionFrancoeur@armyspy.com', password: 'password')
+super_admin_u = Users.create!(name: 'Hysperia', email: 'hysperia@gmail.com', password: 'password')
+Users.create!(name: 'John Doe', email: 'john@doe.com', password: 'password')
+reader_u = Users.create!(name: 'Marmion Francoeur', email: 'MarmionFrancoeur@armyspy.com', password: 'password')
 
 UsersRole.create!(user: super_admin_u, role: super_admin_r)
 UsersRole.create!(user: reader_u, role: reader_r)
