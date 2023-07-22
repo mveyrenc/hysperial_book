@@ -15,7 +15,6 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  role                   :integer
 #  sign_in_count          :integer          default(0), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -26,9 +25,7 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
-  enum role: { 'noob' => 0, 'reader' => 1, 'contributor' => 2, 'admin' => 3, 'super_admin' => 4 }
-  after_initialize :set_default_role, if: :new_record?
-  translate_enum :role
+  rolify
 
   default_scope { order(:email) }
 
@@ -37,28 +34,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
-  def noob?
-    role == 'noob'
-  end
-
-  def reader?
-    role == 'reader'
-  end
-
-  def contributor?
-    role == 'contributor'
-  end
-
-  def admin?
-    role == 'admin'
-  end
-
-  def super_admin?
-    role == 'super_admin'
-  end
-
-  def set_default_role
-    self.role ||= 'noob'
+  def has_role?(role)
+    case role
+    when :admin
+      super(role) || super(:super_admin)
+    when :contributor
+      super(role) || super(:admin) || super(:super_admin)
+    when :reader
+      super(role) || super(:contributor) || super(:admin) || super(:super_admin)
+    else
+      super
+    end
   end
 
   def to_s

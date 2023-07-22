@@ -106,3 +106,6 @@ gem 'byebug', '~> 11.1', groups: %i[development test]
 
 # https://github.com/janko/image_processing
 gem 'image_processing', '~> 1.12'
+
+# https://github.com/RolifyCommunity/rolify
+gem 'rolify', '~> 6.0'

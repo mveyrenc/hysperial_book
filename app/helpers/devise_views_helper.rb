@@ -2,6 +2,8 @@
 
 # Devise views helper
 module DeviseViewsHelper
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def devise_error_messages!
     return '' if resource.errors.empty?
 
@@ -24,4 +26,6 @@ module DeviseViewsHelper
     html.html_safe
     # rubocop:enable Rails/OutputSafety
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 end

@@ -14,8 +14,17 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    new_role = params[:user][:role]
+    current_role = @user.roles.any? ? @user.roles.first.name : nil
+    params[:user].delete(:role)
+    user_update = @user.update(user_params)
+    if user_update && new_role != current_role
+      @user.remove_role @user.roles.first.name unless current_role.nil?
+      @user.add_role new_role unless new_role.nil? || new_role.blank?
+      @user.save
+    end
     respond_to do |format|
-      if @user.update(user_params)
+      if user_update
         format.html { redirect_to users_url, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else

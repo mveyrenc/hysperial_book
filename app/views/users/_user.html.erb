@@ -7,7 +7,7 @@
       <label class="label"><%= User.human_attribute_name(:name) %></label><%= user.name %>
     </div>
     <div class="field">
-      <label class="label"><%= User.human_attribute_name(:role) %></label><%= user.translated_role %>
+      <label class="label"><%= User.human_attribute_name(:role) %></label><%= user.roles.first.title if user.roles.any? %>
     </div>
   </div>
   <footer class="card-footer">

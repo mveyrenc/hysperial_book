@@ -29,7 +29,11 @@
     <%= f.label :role, class: 'label' %>
     <div class="control">
       <div class="select">
-        <%= f.select :role, options_for_select(f.object.class.translated_roles.map { |translation, k, _v| [translation, k] }, user.role) %>
+        <% if user.roles.any? %>
+          <%= f.select :role, options_from_collection_for_select(Role.all, :name, :title, user.roles.first.name), include_blank: true %>
+        <% else %>
+          <%= f.select :role, options_from_collection_for_select(Role.all, :name, :title), include_blank: true %>
+        <% end %>
       </div>
     </div>
   </div>

@@ -3,6 +3,8 @@
 # Add name in users table
 class AddNameToUsers < ActiveRecord::Migration[7.0]
   def change
-    add_column :users, :name, :string
+    change_table :users do |t|
+      t.string :name
+    end
   end
 end

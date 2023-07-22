@@ -3,14 +3,14 @@
 # User policy
 class UserPolicy < ApplicationPolicy
   def index?
-    user.admin?
+    user.has_role? :admin
   end
 
   def update?
-    user.admin?
+    user.has_role? :admin
   end
 
   def destroy?
-    user.super_admin? and !record.super_admin?
+    user.has_role? :super_admin and !record.has_role? :super_admin
   end
 end
