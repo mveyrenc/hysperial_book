@@ -1,5 +1,6 @@
-class UserPolicy < ApplicationPolicy
+# frozen_string_literal: true
 
+class UserPolicy < ApplicationPolicy
   def index?
     user.admin?
   end
@@ -11,5 +12,4 @@ class UserPolicy < ApplicationPolicy
   def destroy?
     user.super_admin? and !record.super_admin?
   end
-
 end

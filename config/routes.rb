@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Route Map
 #
 
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
 
   devise_for :users,
              controllers: {
-               registrations: 'registrations',
+               registrations: 'registrations'
              },
              path: 'auth',
              path_names: {
@@ -20,8 +22,8 @@ Rails.application.routes.draw do
                sign_up: 'sign-up'
              }
 
-  resources :users, except: [:show, :new, :create]
+  resources :users, except: %i[show new create]
 
   # Defines the root path route ("/")
-  root to: "home#index"
+  root to: 'home#index'
 end

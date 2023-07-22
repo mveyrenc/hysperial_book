@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -19,9 +21,8 @@
 #  name                   :string
 #
 class User < ApplicationRecord
-
-  enum role: %w[noob reader contributor admin super_admin]
-  after_initialize :set_default_role, :if => :new_record?
+  enum role: { 'noob' => 0, 'reader' => 1, 'contributor' => 2, 'admin' => 3, 'super_admin' => 4 }
+  after_initialize :set_default_role, if: :new_record?
   translate_enum :role
 
   default_scope { order(:email) }
