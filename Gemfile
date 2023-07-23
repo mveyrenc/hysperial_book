@@ -57,6 +57,9 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
+  # https://github.com/deivid-rodriguez/byebug
+  gem 'byebug', '~> 11.1'
+
   # https://thoughtbot.github.io/factory_bot/summary.html
   gem 'factory_bot_rails', '~> 6.2'
 
@@ -115,12 +118,6 @@ gem 'devise', '~> 4.9'
 
 # https://github.com/varvet/pundit
 gem 'pundit', '~> 2.3'
-
-# https://github.com/shlima/translate_enum
-gem 'translate_enum', '~> 0.2.0', require: 'translate_enum/active_record'
-
-# https://github.com/deivid-rodriguez/byebug
-gem 'byebug', '~> 11.1', groups: %i[development test]
 
 # https://github.com/janko/image_processing
 gem 'image_processing', '~> 1.12'
