@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 module Users
-  class DestroyUserInteractor
+  # Destroy a user
+  class DestroyInteractor
     include Interactor
-
-    include SetUser
 
     def call
       context.user.destroy

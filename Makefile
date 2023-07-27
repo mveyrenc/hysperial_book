@@ -13,9 +13,13 @@ docker_stop:
 web_logs:
 	docker compose logs web
 
-web_bundle_install:
+bundle_install:
+	bundle install
 	docker compose exec web bundle install
 
-web_db_migrate:
+db_migrate:
 	docker compose exec web rails db:migrate
+
+rspec:
+	docker compose exec web rspec
 

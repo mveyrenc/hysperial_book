@@ -3,21 +3,23 @@
 require 'rails_helper'
 
 module Users
-  RSpec.describe ListUsersInteractor, type: :interactor do
+  RSpec.describe DestroyInteractor, type: :interactor do
     describe '.call' do
       let(:user_to_test) { create(:user) }
 
-      subject(:context) { described_class.call }
+      subject(:context) { described_class.call(user: user_to_test) }
 
       context 'when the user exists' do
-        before { allow(User).to receive(:all).and_call_original }
+        before do
+          allow(user_to_test).to receive(:destroy).and_return(true)
+        end
 
         it 'succeeds' do
           expect(context).to be_a_success
         end
 
         it 'provides the user' do
-          expect(context.list).to include(user_to_test)
+          expect(context.user).to eq(user_to_test)
         end
       end
     end

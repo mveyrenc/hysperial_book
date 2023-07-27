@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module Users
-  RSpec.describe UpdateUserInteractor, type: :interactor do
+  RSpec.describe UpdateInteractor, type: :interactor do
     describe '.call' do
       let(:current_role) { create(:role) }
       let(:user_to_test) { create(:user_with_role, role: current_role) }
@@ -12,16 +12,16 @@ module Users
       let(:valid_attributes) do
         {
           name: Faker::Name.name,
-          email: Faker::Internet.email
+          email: Faker::Internet.email,
+          role: new_role.id
         }
       end
 
       subject(:context) do
-        described_class.call(id: user_to_test.id, attributes: valid_attributes, role: { role: new_role.id })
+        described_class.call(user: user_to_test, params: valid_attributes)
       end
 
       context 'when the user exists' do
-        before { allow(User).to receive(:find).with(context.id).and_return(user_to_test) }
 
         it 'succeeds' do
           expect(context).to be_a_success

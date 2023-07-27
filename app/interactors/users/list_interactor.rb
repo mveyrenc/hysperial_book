@@ -2,7 +2,7 @@
 
 module Users
   # List users in the admin panel
-  class ListUsersInteractor
+  class ListInteractor
     include Interactor
 
     def call
