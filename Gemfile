@@ -131,3 +131,8 @@ gem 'slim-rails', '~> 3.6'
 # https://github.com/collectiveidea/interactor
 # https://github.com/collectiveidea/interactor-rails
 gem 'interactor-rails', '~> 2.2'
+
+# https://viewcomponent.org/guide/getting-started.html
+gem 'view_component', '~> 3.5'
+# https://github.com/unabridged/motion
+gem 'motion', '~> 0.7.1'

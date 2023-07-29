@@ -4,6 +4,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.3.0",
+    "@unabridged/motion": "^0.7.1",
     "bulma": "^0.9.4",
     "esbuild": "^0.18.15",
     "sass": "^1.63.6"

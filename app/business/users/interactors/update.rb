@@ -4,7 +4,6 @@ module Users
   module Interactors
     # Update a user and his role
     class Update < ApplicationInteractor
-
       def call
         split_params
         update_attributes
