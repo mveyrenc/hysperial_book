@@ -17,12 +17,13 @@
               = f.password_field :password, autocomplete: "current-password", class: 'input'
           - if devise_mapping.rememberable?
             .field
-              = f.label :remember_me, class: 'checkbox' do
-                .control
+              .control
+                = f.label :remember_me, class: 'checkbox' do
                   = f.check_box :remember_me
+                  | &nbsp;
                   = resource.class.human_attribute_name(:remember_me)
-      .field
-        .control
-          = f.submit t('.sign_in'), class: 'button is-primary is-fullwidth'
-    .column
-      = render "devise/shared/links"
+          .field
+            .control
+              = f.submit t('.sign_in'), class: 'button is-primary is-fullwidth'
+      .column
+        = render "devise/shared/links"
