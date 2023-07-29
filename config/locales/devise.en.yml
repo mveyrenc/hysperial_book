@@ -153,6 +153,7 @@ en:
         sign_in: ""
         sign_up: ""
         log_out: ""
+        books: ""
   users:
     index:
       title: ""

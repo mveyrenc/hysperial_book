@@ -51,7 +51,7 @@ gem 'bootsnap', require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -119,9 +119,6 @@ gem 'devise', '~> 4.9'
 # https://github.com/varvet/pundit
 gem 'pundit', '~> 2.3'
 
-# https://github.com/janko/image_processing
-gem 'image_processing', '~> 1.12'
-
 # https://github.com/RolifyCommunity/rolify
 gem 'rolify', '~> 6.0'
 
@@ -136,3 +133,9 @@ gem 'interactor-rails', '~> 2.2'
 gem 'view_component', '~> 3.5'
 # https://github.com/unabridged/motion
 gem 'motion', '~> 0.7.1'
+
+# https://github.com/brendon/acts_as_list
+gem 'acts_as_list', '~> 1.1'
+
+# https://github.com/norman/friendly_id
+gem 'friendly_id', '~> 5.5'

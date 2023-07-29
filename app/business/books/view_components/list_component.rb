@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-module Users
+module Books
   module ViewComponents
-    # Users list component
+    # Books list component
     class ListComponent < ApplicationComponent
-      attr_reader :users
+      attr_reader :books
 
-      # @param [User] users
-      def initialize(users:)
-        @users = users
+      # @param [Book] books
+      def initialize(books:)
+        @books = books
 
         super
       end

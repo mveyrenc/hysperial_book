@@ -1,0 +1,10 @@
+.box
+  h1.title
+    = t('.title')
+  - if @books.blank?
+    = t('application.no_entry')
+  - else
+    .columns.is-multiline
+      - @books.each do |book|
+        .column
+          = render Books::Components::CardComponent.new(book: book)

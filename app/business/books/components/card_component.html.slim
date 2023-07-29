@@ -1,0 +1,10 @@
+.box id= dom_id(book)
+  = render FieldDisplayComponent.new(label: Book.human_attribute_name(:title), value: book.title)
+  = render FieldDisplayComponent.new(label: Book.human_attribute_name(:subtitle), value: book.subtitle)
+  = render TrixFieldDisplayComponent.new(label: Book.human_attribute_name(:short_description), value: book.short_description)
+  = render TrixFieldDisplayComponent.new(label: Book.human_attribute_name(:description), value: book.description)
+
+  .field.is-grouped.is-grouped-centered
+    - if policy(Book).update?
+      .control
+        = link_to t(".edit"), edit_book_path(book), class: "button is-primary is-small"

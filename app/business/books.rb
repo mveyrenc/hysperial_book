@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-# Manage users
-module Users
-  # Components for users
+# Manage books
+module Books
+  # Components for books
   module Components
   end
 
-  # Business logic for users
+  # Business logic for books
   module Interactors
   end
 
-  # Views for users
+  # Views for books
   module ViewComponents
   end
 end

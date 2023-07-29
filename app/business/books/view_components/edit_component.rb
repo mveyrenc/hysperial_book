@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-module Users
+module Books
   module ViewComponents
-    # Users edit component
+    # Books edit component
     class EditComponent < ApplicationComponent
-      attr_reader :user
+      attr_reader :book
 
-      def initialize(user:)
-        @user = user
+      def initialize(book:)
+        @book = book
 
         super
       end

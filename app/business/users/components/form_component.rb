@@ -3,9 +3,7 @@
 module Users
   module Components
     # Users card component
-    class FormComponent < ViewComponent::Base
-      delegate :current_user, :policy, to: :helpers
-
+    class FormComponent < ApplicationComponent
       attr_reader :user
 
       def initialize(user:)

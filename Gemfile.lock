@@ -66,6 +66,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    acts_as_list (1.1.0)
+      activerecord (>= 4.2)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
     annotate (3.2.0)
@@ -121,6 +123,8 @@ GEM
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
+    friendly_id (5.5.0)
+      activerecord (>= 4.0.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.14.1)
@@ -345,6 +349,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  acts_as_list (~> 1.1)
   annotate (~> 3.2)
   better_errors (~> 2.10)
   binding_of_caller (~> 1.0)
@@ -356,7 +361,8 @@ DEPENDENCIES
   devise (~> 4.9)
   factory_bot_rails (~> 6.2)
   faker (~> 3.2)
-  image_processing (~> 1.12)
+  friendly_id (~> 5.5)
+  image_processing (~> 1.2)
   interactor-rails (~> 2.2)
   jbuilder
   jsbundling-rails

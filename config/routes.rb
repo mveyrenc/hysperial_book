@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   resources :users, except: %i[show new create], controller: 'users/users'
 
+  resources :books, except: %i[show new create destroy], controller: 'books/books'
+
   # Defines the root path route ("/")
   root to: 'home#index'
 end

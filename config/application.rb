@@ -26,5 +26,9 @@ module HysperialBook
       parsable_files = files.filter { |file| file.end_with?('.rb') }
       system("bundle exec rubocop -A --fail-level=E #{parsable_files.shelljoin}", exception: true)
     end
+
+    # To avoid conflicts between ViewComponent and other gems that also monkey patch the render method, it’s possible to
+    # configure ViewComponent to not include the render monkey patch:
+    config.view_component.render_monkey_patch_enabled = false # defaults to true
   end
 end

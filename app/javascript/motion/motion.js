@@ -1,5 +1,5 @@
 import { createClient } from '@unabridged/motion'
-import consumer from './channels/consumer'
+import consumer from '../channels/consumer'
 
 export default createClient({
 
@@ -11,7 +11,8 @@ export default createClient({
   // Motion can log information about the lifecycle of components to the
   // browser's console. It is recommended to turn this feature off outside of
   // development.
-  logging: process.env.RAILS_ENV === 'development'
+  // logging: process.env.RAILS_ENV === 'development'
+  logging: true
 
   // This function will be called for every motion, and the return value will be
   // made available at `Motion::Event#extra_data`:

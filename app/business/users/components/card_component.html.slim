@@ -1,20 +1,12 @@
 .box id= dom_id(user)
-  .field
-    label.label
-      = User.human_attribute_name(:email)
-    = user.email
-  .field
-    label.label
-      = User.human_attribute_name(:name)
-    = user.name
-  .field
-    label.label
-      = User.human_attribute_name(:role)
-    = user.roles.first.title if user.roles.any?
+  = render FieldDisplayComponent.new(label: User.human_attribute_name(:email), value: book.email)
+  = render FieldDisplayComponent.new(label: User.human_attribute_name(:name), value: book.name)
+  = render FieldDisplayComponent.new(label: User.human_attribute_name(:role), value: user.role)
+
   .field.is-grouped.is-grouped-centered
-    - if policy(user).update?
+    - if policy(User).update?
       .control
         = link_to t(".edit"), edit_user_path(user), class: "button is-primary is-small"
-    - if policy(user).destroy?
+    - if policy(User).destroy?
       .control
         = button_to t(".delete"), user_path(user), method: :delete, data: { "turbo-method": :delete }, class: "button is-danger is-small"

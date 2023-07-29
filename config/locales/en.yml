@@ -49,6 +49,7 @@ en:
         sign_in: "Sign in"
         sign_up: "Sign up"
         log_out: "Log out"
+        books: "Books"
   application:
     no_entry: "No entry"
     submit: "Submit"

@@ -26,6 +26,9 @@
 #
 class User < ApplicationRecord
   rolify
+  # rubocop:disable Rails/HasAndBelongsToMany
+  has_and_belongs_to_many :users
+  # rubocop:enable Rails/HasAndBelongsToMany
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
