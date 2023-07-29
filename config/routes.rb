@@ -23,7 +23,7 @@ Rails.application.routes.draw do
                sign_up: 'sign-up'
              }
 
-  resources :users, except: %i[show new create]
+  resources :users, except: %i[show new create], controller: 'users/users'
 
   # Defines the root path route ("/")
   root to: 'home#index'

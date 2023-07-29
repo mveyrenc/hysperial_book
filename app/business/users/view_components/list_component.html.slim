@@ -7,4 +7,4 @@
     .columns.is-multiline
       - @users.each do |user|
         .column
-          = render user
+          = render Users::Components::CardComponent.new(user: user)

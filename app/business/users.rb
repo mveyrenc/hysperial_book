@@ -2,4 +2,7 @@
 
 # Manage users
 module Users
+  # Business logic for users
+  module Components
+  end
 end

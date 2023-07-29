@@ -49,14 +49,6 @@ en:
         sign_in: "Sign in"
         sign_up: "Sign up"
         log_out: "Log out"
-  users:
-    index:
-      title: "Users"
-    user:
-      edit: "Edit"
-      delete: "Delete"
-    edit:
-      edit: "Edit user"
   application:
     no_entry: "No entry"
     submit: "Submit"

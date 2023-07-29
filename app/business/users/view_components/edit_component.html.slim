@@ -1,0 +1,5 @@
+.container-fluid
+  .box
+    h1.title
+      = t('.edit')
+    = render Users::Components::FormComponent.new(user: @user)
