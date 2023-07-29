@@ -2,12 +2,11 @@
 
 # Users controller
 class UsersController < ApplicationController
-
   before_action :set_user, only: %i[edit update destroy]
 
   # GET /users or /users.json
   def index
-    result = Users::ListInteractor.call(params)
+    result = Users::Interactors::List.call(params)
     @users = result.list
   end
 
@@ -16,7 +15,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    result = Users::UpdateInteractor.call(user: @user, params: strong_params[:user].to_h)
+    result = Users::Interactors::Update.call(user: @user, params: strong_params[:user].to_h)
 
     if result.success?
       redirect_to users_url, notice: 'User was successfully updated.'
@@ -27,7 +26,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    result = Users::DestroyInteractor.call(user: @user)
+    result = Users::Interactors::Destroy.call(user: @user)
 
     if result.success?
       redirect_to users_url, notice: 'User was successfully destroyed.'

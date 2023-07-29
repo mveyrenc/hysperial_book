@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module Users
-  RSpec.describe UpdateInteractor, type: :interactor do
+  RSpec.describe Users::Interactors::Update, type: :interactor do
     describe '.call' do
       let(:current_role) { create(:role) }
       let(:user_to_test) { create(:user_with_role, role: current_role) }
