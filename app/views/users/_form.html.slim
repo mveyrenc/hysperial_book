@@ -21,7 +21,7 @@
   .control
 
   .select
-    - if user.roles.any?
+    - if user.role.present?
       = f.select :role, options_from_collection_for_select(Role.all, :name, :title, user.role), include_blank: true
     - else
       = f.select :role, options_from_collection_for_select(Role.all, :name, :title), include_blank: true

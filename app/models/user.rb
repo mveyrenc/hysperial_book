@@ -38,12 +38,14 @@ class User < ApplicationRecord
 
   def has_role?(role)
     case role
+    when :super_admin
+      self.role == role.to_s
     when :admin
-      super(role) || super(:super_admin)
+      self.role == role.to_s || has_role?(:super_admin)
     when :contributor
-      super(role) || super(:admin) || super(:super_admin)
+      self.role == role.to_s || has_role?(:admin)
     when :reader
-      super(role) || super(:contributor) || super(:admin) || super(:super_admin)
+      self.role == role.to_s || has_role?(:contributor)
     else
       super
     end

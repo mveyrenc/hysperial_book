@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    result = Users::Interactors::Update.call(user: @user, params: strong_params[:user].to_h)
+    result = Users::Interactors::Update.call(user: @user, params: strong_params.to_h)
 
     if result.success?
       redirect_to users_url, notice: 'User was successfully updated.'
