@@ -5,7 +5,7 @@
 # Table name: contents
 #
 #  id            :uuid             not null, primary key
-#  kind          :string           not null
+#  kind          :enum             not null
 #  slug          :string           not null
 #  source_url    :string
 #  subtitle      :string
@@ -22,6 +22,7 @@
 #
 #  index_contents_on_book_id        (book_id)
 #  index_contents_on_created_by_id  (created_by_id)
+#  index_contents_on_kind           (kind)
 #  index_contents_on_slug           (slug) UNIQUE
 #  index_contents_on_thumbnail_id   (thumbnail_id)
 #  index_contents_on_updated_by_id  (updated_by_id)
@@ -36,17 +37,18 @@
 class CreateContents < ActiveRecord::Migration[7.0]
   def change
     create_table :contents, id: :uuid do |t|
-      t.string :kind, null: false
-      t.references :book, null: false, foreign_key: true, type: :uuid
-
       t.string :title, null: false
       t.string :subtitle
+      t.string :slug, null: false, index: { unique: true }
+
+      t.column :kind, :content_kind, null: false, index: true
+      t.references :book, null: false, foreign_key: true, type: :uuid
+
       t.string :version
       t.string :source_url
 
-      t.string :slug, null: false, index: { unique: true }
-
       t.references :thumbnail, null: false, foreign_key: { to_table: :media, on_delete: :cascade }, type: :uuid
+
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
 

@@ -5,7 +5,7 @@
 # Table name: content_media
 #
 #  id               :uuid             not null, primary key
-#  kind             :string
+#  kind             :enum             not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  content_block_id :uuid             not null
@@ -17,6 +17,7 @@
 #
 #  index_content_media_on_content_block_id  (content_block_id)
 #  index_content_media_on_created_by_id     (created_by_id)
+#  index_content_media_on_kind              (kind)
 #  index_content_media_on_medium_id         (medium_id)
 #  index_content_media_on_updated_by_id     (updated_by_id)
 #
@@ -30,9 +31,11 @@
 class CreateContentMedia < ActiveRecord::Migration[7.0]
   def change
     create_table :content_media, id: :uuid do |t|
-      t.string :kind
+      t.column :kind, :content_medium_kind, null: false, index: true
+
       t.references :content_block, null: false, foreign_key: true, type: :uuid
       t.references :medium, null: false, foreign_key: true, type: :uuid
+
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
 

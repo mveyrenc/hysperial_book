@@ -15,6 +15,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "akin_tag_kind", ["direct", "followable", "computed"]
+  create_enum "book_kind", ["cooking", "care", "fabric_art"]
+  create_enum "content_block_kind", ["rich_text", "yield", "divisions_summary", "division", "equipment", "ingredients_summary", "ingredients", "ingredient", "supplies", "tools", "times", "how_to_section", "step", "direction", "nutrition", "notes", "comment"]
+  create_enum "content_kind", ["article", "tutorial", "ingredient", "recipe", "menu", "pattern"]
+  create_enum "content_medium_kind", ["document", "scanned_document", "before_picture", "during_picture", "after_picture"]
+
   create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -56,7 +64,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
   create_table "akin_tags", id: false, force: :cascade do |t|
     t.uuid "relater_id", null: false
     t.uuid "related_id", null: false
-    t.string "kind", null: false
+    t.enum "kind", null: false, enum_type: "akin_tag_kind"
+    t.index ["kind"], name: "index_akin_tags_on_kind"
     t.index ["related_id"], name: "index_akin_tags_on_related_id"
     t.index ["relater_id"], name: "index_akin_tags_on_relater_id"
   end
@@ -64,17 +73,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
   create_table "books", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.string "subtitle"
-    t.string "kind", null: false
+    t.string "slug", null: false
+    t.enum "kind", null: false, enum_type: "book_kind"
+    t.integer "position"
     t.jsonb "settings", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "position"
-    t.string "slug"
+    t.index ["kind"], name: "index_books_on_kind"
     t.index ["slug"], name: "index_books_on_slug", unique: true
   end
 
   create_table "content_blocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "kind", null: false
+    t.enum "kind", null: false, enum_type: "content_block_kind"
     t.uuid "content_id", null: false
     t.jsonb "raw_data", default: {}, null: false
     t.jsonb "settings", default: {}, null: false
@@ -87,11 +97,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_content_blocks_on_content_id"
     t.index ["created_by_id"], name: "index_content_blocks_on_created_by_id"
+    t.index ["kind"], name: "index_content_blocks_on_kind"
     t.index ["updated_by_id"], name: "index_content_blocks_on_updated_by_id"
   end
 
   create_table "content_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "kind"
+    t.enum "kind", null: false, enum_type: "content_medium_kind"
     t.uuid "content_block_id", null: false
     t.uuid "medium_id", null: false
     t.uuid "created_by_id", null: false
@@ -100,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
     t.datetime "updated_at", null: false
     t.index ["content_block_id"], name: "index_content_media_on_content_block_id"
     t.index ["created_by_id"], name: "index_content_media_on_created_by_id"
+    t.index ["kind"], name: "index_content_media_on_kind"
     t.index ["medium_id"], name: "index_content_media_on_medium_id"
     t.index ["updated_by_id"], name: "index_content_media_on_updated_by_id"
   end
@@ -121,13 +133,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
   end
 
   create_table "contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "kind", null: false
-    t.uuid "book_id", null: false
     t.string "title", null: false
     t.string "subtitle"
+    t.string "slug", null: false
+    t.enum "kind", null: false, enum_type: "content_kind"
+    t.uuid "book_id", null: false
     t.string "version"
     t.string "source_url"
-    t.string "slug", null: false
     t.uuid "thumbnail_id", null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
@@ -135,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_contents_on_book_id"
     t.index ["created_by_id"], name: "index_contents_on_created_by_id"
+    t.index ["kind"], name: "index_contents_on_kind"
     t.index ["slug"], name: "index_contents_on_slug", unique: true
     t.index ["thumbnail_id"], name: "index_contents_on_thumbnail_id"
     t.index ["updated_by_id"], name: "index_contents_on_updated_by_id"
@@ -160,12 +173,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
 
   create_table "media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "type", null: false
-    t.string "kind", null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_media_on_created_by_id"
+    t.index ["type"], name: "index_media_on_type"
     t.index ["updated_by_id"], name: "index_media_on_updated_by_id"
   end
 
@@ -181,9 +194,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
   end
 
   create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "kind", null: false
+    t.integer "kind", default: 0
     t.uuid "book_id", null: false
-    t.string "slug"
+    t.string "slug", null: false
     t.string "value"
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
@@ -191,6 +204,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_tags_on_book_id"
     t.index ["created_by_id"], name: "index_tags_on_created_by_id"
+    t.index ["slug"], name: "index_tags_on_slug", unique: true
     t.index ["updated_by_id"], name: "index_tags_on_updated_by_id"
   end
 

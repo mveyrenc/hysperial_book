@@ -5,7 +5,7 @@
 # Table name: content_blocks
 #
 #  id             :uuid             not null, primary key
-#  kind           :string           not null
+#  kind           :enum             not null
 #  processed_data :jsonb            not null
 #  raw_data       :jsonb            not null
 #  settings       :jsonb            not null
@@ -21,6 +21,7 @@
 #
 #  index_content_blocks_on_content_id     (content_id)
 #  index_content_blocks_on_created_by_id  (created_by_id)
+#  index_content_blocks_on_kind           (kind)
 #  index_content_blocks_on_updated_by_id  (updated_by_id)
 #
 # Foreign Keys
@@ -36,6 +37,25 @@ class ContentBlock < ApplicationRecord
 
   has_one :content_node, dependent: :destroy
   has_many :content_media, dependent: :destroy
+
+  enum :kind,
+       { rich_text: 'rich_text',
+         yield: 'yield',
+         divisions_summary: 'divisions_summary',
+         division: 'division',
+         equipment: 'equipment',
+         ingredients_summary: 'ingredients_summary',
+         ingredients: 'ingredients',
+         ingredient: 'ingredient',
+         supplies: 'supplies',
+         tools: 'tools',
+         times: 'times',
+         how_to_section: 'how_to_section',
+         step: 'step',
+         direction: 'direction',
+         nutrition: 'nutrition',
+         notes: 'notes',
+         comment: 'comment' }, suffix: true
 
   has_rich_text :rich_text
 end

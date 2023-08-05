@@ -5,8 +5,8 @@
 # Table name: tags
 #
 #  id            :uuid             not null, primary key
-#  kind          :string           not null
-#  slug          :string
+#  kind          :integer          default(0)
+#  slug          :string           not null
 #  value         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -18,6 +18,7 @@
 #
 #  index_tags_on_book_id        (book_id)
 #  index_tags_on_created_by_id  (created_by_id)
+#  index_tags_on_slug           (slug) UNIQUE
 #  index_tags_on_updated_by_id  (updated_by_id)
 #
 # Foreign Keys
@@ -50,5 +51,4 @@ class Tag < ApplicationRecord
            source: :related
 
   has_many :contents, dependent: :restrict_with_error
-
 end

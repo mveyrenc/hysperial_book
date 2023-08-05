@@ -5,7 +5,6 @@
 # Table name: media
 #
 #  id            :uuid             not null, primary key
-#  kind          :string           not null
 #  type          :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -15,6 +14,7 @@
 # Indexes
 #
 #  index_media_on_created_by_id  (created_by_id)
+#  index_media_on_type           (type)
 #  index_media_on_updated_by_id  (updated_by_id)
 #
 # Foreign Keys
@@ -26,7 +26,6 @@ class Medium < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  validates :kind, presence: true
   validates :type, presence: true
   validates :file, presence: true
   validates :created_by, presence: true

@@ -5,7 +5,7 @@
 # Table name: contents
 #
 #  id            :uuid             not null, primary key
-#  kind          :string           not null
+#  kind          :enum             not null
 #  slug          :string           not null
 #  source_url    :string
 #  subtitle      :string
@@ -22,6 +22,7 @@
 #
 #  index_contents_on_book_id        (book_id)
 #  index_contents_on_created_by_id  (created_by_id)
+#  index_contents_on_kind           (kind)
 #  index_contents_on_slug           (slug) UNIQUE
 #  index_contents_on_thumbnail_id   (thumbnail_id)
 #  index_contents_on_updated_by_id  (updated_by_id)
@@ -45,6 +46,14 @@ class Content < ApplicationRecord
   has_one :content_node, dependent: :destroy
 
   has_many :tags, dependent: :restrict_with_error
+
+  enum :kind,
+       { article: 'article',
+         tutorial: 'tutorial',
+         ingredient: 'ingredient',
+         recipe: 'recipe',
+         menu: 'menu',
+         pattern: 'pattern' }, suffix: true
 
   has_rich_text :short_description
   has_rich_text :description

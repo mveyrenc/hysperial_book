@@ -30,12 +30,13 @@
 #
 # Table name: akin_tags
 #
-#  kind       :string           not null
+#  kind       :enum             not null
 #  related_id :uuid             not null
 #  relater_id :uuid             not null
 #
 # Indexes
 #
+#  index_akin_tags_on_kind        (kind)
 #  index_akin_tags_on_related_id  (related_id)
 #  index_akin_tags_on_relater_id  (relater_id)
 #
@@ -47,9 +48,9 @@
 class CreateTags < ActiveRecord::Migration[7.0]
   def change
     create_table :tags, id: :uuid do |t|
-      t.string :kind, null: false
+      t.integer :kind, default: 0
       t.references :book, null: false, foreign_key: true, type: :uuid
-      t.string :slug
+      t.string :slug, null: false, index: { unique: true }
       t.string :value
 
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
@@ -62,7 +63,7 @@ class CreateTags < ActiveRecord::Migration[7.0]
       t.references :relater, null: false, foreign_key: { to_table: :tags, on_delete: :cascade }, type: :uuid
       t.references :related, null: false, foreign_key: { to_table: :tags, on_delete: :cascade }, type: :uuid
 
-      t.string :kind, null: false
+      t.column :kind, :akin_tag_kind, null: false, index: true
     end
 
     create_table :contents_tags, id: false do |t|

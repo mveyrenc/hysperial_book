@@ -16,7 +16,7 @@ u.roles << [Role::READER]
 User.where(email: 'john@doe.com').first_or_create!(name: 'John Doe', password: 'password')
 
 # Books
-Book.where(kind: 'cooking').first_or_create(title: 'Cooking', position: 1)
-Book.where(kind: 'health_wellness').first_or_create(title: 'Health & wellness', position: 2)
-Book.where(kind: 'house_care').first_or_create(title: 'House care', position: 3)
-Book.where(kind: 'fabric_art').first_or_create(title: 'Fabric art', position: 4)
+Book.where(title: 'Cooking').first_or_create(kind: :cooking, position: 1)
+Book.where(title: 'Health & wellness').first_or_create(kind: :care, position: 2)
+Book.where(title: 'House care').first_or_create(kind: :care, position: 3)
+Book.where(title: 'Fabric art').first_or_create(kind: :fabric_art, position: 4)
