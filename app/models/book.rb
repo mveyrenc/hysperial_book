@@ -20,20 +20,25 @@
 #  index_books_on_slug  (slug) UNIQUE
 #
 class Book < ApplicationRecord
+  ## FriendlyId
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  ## Enumerables
   enum kind: BookKind.kinds, _suffix: true
 
+  def kind_name
+    BookKind.human_attribute_name(kind)
+  end
+
+  ## RichText
   has_rich_text :short_description
   has_rich_text :description
 
+  ## Act as
   acts_as_list
 
+  ## Validations
   validates :title, presence: true
   validates :kind, presence: true
-
-  def kind_name
-    BookKind::human_attribute_name(kind)
-  end
 end

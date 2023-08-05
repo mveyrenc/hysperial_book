@@ -37,7 +37,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   def role_name
-    UserRole::human_attribute_name(role)
+    UserRole.human_attribute_name(role)
   end
 
   def to_s

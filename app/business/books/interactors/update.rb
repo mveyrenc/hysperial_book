@@ -2,7 +2,7 @@
 
 module Books
   module Interactors
-    # Update a book and his role
+    # Update a book
     class Update < ApplicationInteractor
       def call
         update_attributes

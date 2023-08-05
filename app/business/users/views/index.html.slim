@@ -1,10 +1,10 @@
 .box
   h1.title
     = t('.title')
-  - if @users.blank?
+  - if @users.list.blank?
     = t('application.no_entry')
   - else
     .columns.is-multiline
-      - @users.each do |user|
+      - @users.list.each do |user|
         .column
           = render Users::Components::CardComponent.new(user: user)

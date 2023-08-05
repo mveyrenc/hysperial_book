@@ -1,7 +1,7 @@
 .box id= dom_id(user)
   = render FieldDisplayComponent.new(label: User.human_attribute_name(:email), value: user.email)
   = render FieldDisplayComponent.new(label: User.human_attribute_name(:name), value: user.name)
-  = render FieldDisplayComponent.new(label: User.human_attribute_name(:role), value: user.role)
+  = render FieldDisplayComponent.new(label: User.human_attribute_name(:role), value: UserRole.human_attribute_name(user.role))
 
   .field.is-grouped.is-grouped-centered
     - if policy(user).update?

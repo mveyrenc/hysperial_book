@@ -22,6 +22,10 @@ module HysperialBook
     config.time_zone = 'Europe/Paris'
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # Add translations files from business
+    config.i18n.load_path += Dir[Rails.root.join('app/business/*/locales/*.{rb,yml}')]
+
+    # Don't generate system test files.
     config.generators.after_generate do |files|
       parsable_files = files.filter { |file| file.end_with?('.rb') }
       system("bundle exec rubocop -A --fail-level=E #{parsable_files.shelljoin}", exception: true)

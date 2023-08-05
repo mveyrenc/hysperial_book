@@ -10,7 +10,8 @@
 
 # Users and roles
 User.where(email: 'hysperia@gmail.com').first_or_create!(name: 'Hysperia', password: 'password', role: :super_admin)
-User.where(email: 'MarmionFrancoeur@armyspy.com').first_or_create!(name: 'Marmion Francoeur', password: 'password', role: :reader)
+User.where(email: 'MarmionFrancoeur@armyspy.com').first_or_create!(name: 'Marmion Francoeur', password: 'password',
+                                                                   role: :reader)
 User.where(email: 'john@doe.com').first_or_create!(name: 'John Doe', password: 'password')
 
 # Books

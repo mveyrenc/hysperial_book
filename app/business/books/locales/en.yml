@@ -1,0 +1,7 @@
+en:
+  books:
+    views:
+      edit:
+        title: "Edit book"
+      index:
+        title: "Books"

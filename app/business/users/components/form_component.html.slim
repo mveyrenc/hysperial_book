@@ -13,10 +13,8 @@
   .control
 
   .select
-    - if user.role.present?
-      = f.select :role, options_from_collection_for_select(Role.all, :name, :title, user.role), include_blank: true
-    - else
-      = f.select :role, options_from_collection_for_select(Role.all, :name, :title), include_blank: true
+    = f.select :role, options_for_select(UserRole.roles.map { |key, value| [UserRole.human_attribute_name(key), value] }, user.role)
+
   .field
 
   .control

@@ -8,15 +8,14 @@ module Books
 
     # GET /books
     def index
-      result = Books::Interactors::List.call(params)
+      @books = Books::Interactors::List.call(params)
 
-      render Books::ViewComponents::ListComponent.new(books: result.list), content_type: 'text/html'
+      render template: template_path, content_type: 'text/html'
     end
 
     # GET /books/:id/edit
     def edit
-      @book.validate
-      render Books::ViewComponents::EditComponent.new(book: @book), content_type: 'text/html'
+      render template: template_path, content_type: 'text/html'
     end
 
     # PATCH/PUT /books/:id
@@ -26,7 +25,7 @@ module Books
       if result.success?
         redirect_to books_url, notice: t('.successfully_updated')
       else
-        redirect_to edit_book_url(@book), status: :unprocessable_entity
+        render template: template_path(:edit), content_type: 'text/html', status: :unprocessable_entity
       end
     end
 

@@ -27,6 +27,12 @@ Rails.application.routes.draw do
 
   resources :books, except: %i[show new create destroy], controller: 'books/books'
 
+  namespace :media do
+    resources :pictures, except: %i[show], controller: 'pictures'
+    resources :scans, except: %i[show], controller: 'scans'
+    resources :documents, except: %i[show], controller: 'documents'
+  end
+
   # Defines the root path route ("/")
   root to: 'home#index'
 end

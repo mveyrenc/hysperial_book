@@ -8,15 +8,14 @@ module Users
 
     # GET /users
     def index
-      result = Users::Interactors::List.call(params)
+      @users = Users::Interactors::List.call(params)
 
-      render Users::ViewComponents::ListComponent.new(users: result.list), content_type: 'text/html'
+      render template: template_path, content_type: 'text/html'
     end
 
     # GET /users/:id/edit
     def edit
-      @user.validate
-      render Users::ViewComponents::EditComponent.new(user: @user), content_type: 'text/html'
+      render template: template_path, content_type: 'text/html'
     end
 
     # PATCH/PUT /users/:id
@@ -26,7 +25,7 @@ module Users
       if result.success?
         redirect_to users_url, notice: t('.successfully_updated')
       else
-        redirect_to edit_user_url(@user), status: :unprocessable_entity
+        render template: template_path(:edit), content_type: 'text/html', status: :unprocessable_entity
       end
     end
 
