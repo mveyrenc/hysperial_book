@@ -6,19 +6,19 @@ module Users
   class UsersController < ApplicationController
     before_action :set_user, only: %i[edit update destroy]
 
-    # GET /users or /users.json
+    # GET /users
     def index
       result = Users::Interactors::List.call(params)
 
       render Users::ViewComponents::ListComponent.new(users: result.list), content_type: 'text/html'
     end
 
-    # GET /users/1/edit
+    # GET /users/:id/edit
     def edit
       render Users::ViewComponents::EditComponent.new(user: @user), content_type: 'text/html'
     end
 
-    # PATCH/PUT /users/1 or /users/1.json
+    # PATCH/PUT /users/:id
     def update
       result = Users::Interactors::Update.call(user: @user, params: strong_params.to_h)
 
@@ -29,7 +29,7 @@ module Users
       end
     end
 
-    # DELETE /users/1 or /users/1.json
+    # DELETE /users/:id
     def destroy
       result = Users::Interactors::Destroy.call(user: @user)
 

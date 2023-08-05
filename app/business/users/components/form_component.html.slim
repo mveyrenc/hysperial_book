@@ -1,13 +1,5 @@
 = form_with(model: user) do |f|
-  - if user.errors.any?
-    div[style="color: red"]
-      h2
-        = pluralize(user.errors.count, "error")
-        |  prohibited this user from being saved:
-      ul
-        - user.errors.each do |error|
-          li
-            = error.full_message
+  = render FormErrorsComponent.new(errors: user.errors)
   .field
     = f.label :name, class: 'label'
   .control
