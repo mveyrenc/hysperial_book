@@ -1,6 +1,7 @@
 .box id= dom_id(book)
   = render FieldDisplayComponent.new(label: Book.human_attribute_name(:title), value: book.title)
   = render FieldDisplayComponent.new(label: Book.human_attribute_name(:subtitle), value: book.subtitle)
+  = render FieldDisplayComponent.new(label: Book.human_attribute_name(:kind), value: BookKind.human_attribute_name(book.kind))
   = render TrixFieldDisplayComponent.new(label: Book.human_attribute_name(:short_description), value: book.short_description)
   = render TrixFieldDisplayComponent.new(label: Book.human_attribute_name(:description), value: book.description)
 

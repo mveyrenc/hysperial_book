@@ -1,0 +1,6 @@
+.notification.is-danger.is-light
+  .content
+    .ul
+      - errors.each do |error|
+        li.list-item
+          = error.full_message

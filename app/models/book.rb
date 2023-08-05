@@ -23,14 +23,13 @@ class Book < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  enum :kind, {
-    cooking: 'cooking',
-    care: 'care',
-    fabric_art: 'fabric_art'
-  }, suffix: true
+  enum :kind, BookKind.kinds, suffix: true
 
   has_rich_text :short_description
   has_rich_text :description
 
   acts_as_list
+
+  validates :title, presence: true
+  validates :kind, presence: true
 end

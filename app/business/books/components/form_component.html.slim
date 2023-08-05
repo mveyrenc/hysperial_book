@@ -1,13 +1,5 @@
 = form_with(model: book) do |f|
-  - if book.errors.any?
-    div[style="color: red"]
-      h2
-        = pluralize(book.errors.count, "error")
-        |  prohibited this book from being saved:
-      ul
-        - book.errors.each do |error|
-          li
-            = error.full_message
+  = render FormErrorsComponent.new(errors: book.errors)
   .field
     = f.label :title, class: 'label'
     .control
@@ -16,6 +8,11 @@
     = f.label :subtitle, class: 'label'
     .control
       = f.text_field :subtitle, class: 'input'
+  .field
+    = f.label :kind, class: 'label'
+    .control
+      .select
+        = f.select :kind, options_for_select(BookKind.kinds.map { |key, value| [BookKind.human_attribute_name(key), value] }, book.kind)
   .field
     = f.label :short_description, class: 'label'
     .control
