@@ -47,13 +47,13 @@ class Content < ApplicationRecord
 
   has_many :tags, dependent: :restrict_with_error
 
-  enum :kind,
+  enum kind:
        { article: 'article',
          tutorial: 'tutorial',
          ingredient: 'ingredient',
          recipe: 'recipe',
          menu: 'menu',
-         pattern: 'pattern' }, suffix: true
+         pattern: 'pattern' }, _suffix: true
 
   has_rich_text :short_description
   has_rich_text :description

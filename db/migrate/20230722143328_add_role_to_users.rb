@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+#
 # == Schema Information
 #
 # Table name: users
@@ -26,27 +26,26 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_role                  (role)
 #
-class User < ApplicationRecord
-  after_initialize :set_defaults
+class AddRoleToUsers < ActiveRecord::Migration[7.0]
+  def up
+    execute <<-SQL
+      CREATE TYPE user_role AS ENUM (
+          'super_admin',
+          'admin',
+          'contributor',
+          'reader',
+          'noob'
+          )
+    SQL
 
-  enum role: UserRole.roles, _suffix: true
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable
-
-  def role_name
-    UserRole::human_attribute_name(role)
+    add_column :users, :role, :user_role
+    add_index :users, :role
   end
 
-  def to_s
-    email
-  end
-
-  protected
-
-  def set_defaults
-    self.role ||= :noob
+  def down
+    remove_column :users, :role
+    execute <<-SQL
+      DROP TYPE user_role;
+    SQL
   end
 end

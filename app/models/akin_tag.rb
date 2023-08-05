@@ -23,8 +23,8 @@ class AkinTag < ApplicationRecord
   belongs_to :relater, class_name: 'Tag'
   belongs_to :related, class_name: 'Tag'
 
-  enum :kind,
+  enum kind:
        { direct: 'direct',
          followable: 'followable',
-         computed: 'computed' }, suffix: true
+         computed: 'computed' }, _suffix: true
 end

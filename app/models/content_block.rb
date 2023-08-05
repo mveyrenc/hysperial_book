@@ -38,7 +38,7 @@ class ContentBlock < ApplicationRecord
   has_one :content_node, dependent: :destroy
   has_many :content_media, dependent: :destroy
 
-  enum :kind,
+  enum kind:
        { rich_text: 'rich_text',
          yield: 'yield',
          divisions_summary: 'divisions_summary',
@@ -55,7 +55,7 @@ class ContentBlock < ApplicationRecord
          direction: 'direction',
          nutrition: 'nutrition',
          notes: 'notes',
-         comment: 'comment' }, suffix: true
+         comment: 'comment' }, _suffix: true
 
   has_rich_text :rich_text
 end

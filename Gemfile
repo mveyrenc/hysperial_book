@@ -119,9 +119,6 @@ gem 'devise', '~> 4.9'
 # https://github.com/varvet/pundit
 gem 'pundit', '~> 2.3'
 
-# https://github.com/RolifyCommunity/rolify
-gem 'rolify', '~> 6.0'
-
 # https://github.com/slim-template/slim-rails
 gem 'slim-rails', '~> 3.6'
 

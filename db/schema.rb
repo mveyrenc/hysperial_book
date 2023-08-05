@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
   create_enum "content_block_kind", ["rich_text", "yield", "divisions_summary", "division", "equipment", "ingredients_summary", "ingredients", "ingredient", "supplies", "tools", "times", "how_to_section", "step", "direction", "nutrition", "notes", "comment"]
   create_enum "content_kind", ["article", "tutorial", "ingredient", "recipe", "menu", "pattern"]
   create_enum "content_medium_kind", ["document", "scanned_document", "before_picture", "during_picture", "after_picture"]
+  create_enum "user_role", ["super_admin", "admin", "contributor", "reader", "noob"]
 
   create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -182,17 +183,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
     t.index ["updated_by_id"], name: "index_media_on_updated_by_id"
   end
 
-  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.bigint "resource_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "title"
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
-    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
-  end
-
   create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "kind", default: 0
     t.uuid "book_id", null: false
@@ -222,13 +212,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.enum "role", enum_type: "user_role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "users_roles", id: false, force: :cascade do |t|
-    t.uuid "user_id", null: false
-    t.uuid "role_id", null: false
+    t.index ["role"], name: "index_users_on_role"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -257,6 +244,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_075921) do
   add_foreign_key "tags", "books"
   add_foreign_key "tags", "users", column: "created_by_id", on_delete: :restrict
   add_foreign_key "tags", "users", column: "updated_by_id", on_delete: :restrict
-  add_foreign_key "users_roles", "roles", on_delete: :cascade
-  add_foreign_key "users_roles", "users", on_delete: :cascade
 end

@@ -23,7 +23,7 @@ class Book < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  enum :kind, BookKind.kinds, suffix: true
+  enum kind: BookKind.kinds, _suffix: true
 
   has_rich_text :short_description
   has_rich_text :description
@@ -32,4 +32,8 @@ class Book < ApplicationRecord
 
   validates :title, presence: true
   validates :kind, presence: true
+
+  def kind_name
+    BookKind::human_attribute_name(kind)
+  end
 end

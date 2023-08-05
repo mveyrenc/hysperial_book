@@ -9,10 +9,8 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # Users and roles
-u = User.where(email: 'hysperia@gmail.com').first_or_create!(name: 'Hysperia', password: 'password')
-u.roles << [Role::SUPER_ADMIN]
-u = User.where(email: 'MarmionFrancoeur@armyspy.com').first_or_create!(name: 'Marmion Francoeur', password: 'password')
-u.roles << [Role::READER]
+User.where(email: 'hysperia@gmail.com').first_or_create!(name: 'Hysperia', password: 'password', role: :super_admin)
+User.where(email: 'MarmionFrancoeur@armyspy.com').first_or_create!(name: 'Marmion Francoeur', password: 'password', role: :reader)
 User.where(email: 'john@doe.com').first_or_create!(name: 'John Doe', password: 'password')
 
 # Books

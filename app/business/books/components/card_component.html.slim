@@ -6,6 +6,6 @@
   = render TrixFieldDisplayComponent.new(label: Book.human_attribute_name(:description), value: book.description)
 
   .field.is-grouped.is-grouped-centered
-    - if policy(Book).update?
+    - if policy(book).update?
       .control
         = link_to t(".edit"), edit_book_path(book), class: "button is-primary is-small"

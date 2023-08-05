@@ -3,10 +3,10 @@
 # Book policy
 class BookPolicy < ApplicationPolicy
   def index?
-    user.has_role? :admin
+    user.admin_role? || user.super_admin_role?
   end
 
   def update?
-    user.has_role? :admin
+    user.admin_role? || user.super_admin_role?
   end
 end

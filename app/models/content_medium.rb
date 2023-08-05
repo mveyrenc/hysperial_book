@@ -34,10 +34,10 @@ class ContentMedium < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  enum :kind,
+  enum kind:
        { document: 'document',
          scanned_document: 'scanned_document',
          before_picture: 'before_picture',
          during_picture: 'during_picture',
-         after_picture: 'after_picture' }, suffix: true
+         after_picture: 'after_picture' }, _suffix: true
 end
