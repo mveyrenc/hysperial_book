@@ -27,7 +27,7 @@
 class User < ApplicationRecord
   rolify
   # rubocop:disable Rails/HasAndBelongsToMany
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :roles, join_table: 'users_roles'
   # rubocop:enable Rails/HasAndBelongsToMany
 
   # Include default devise modules. Others available are:

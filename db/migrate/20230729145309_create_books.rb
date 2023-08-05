@@ -1,6 +1,21 @@
 # frozen_string_literal: true
 
-# Create book model
+# == Schema Information
+#
+# Table name: books
+#
+#  id         :uuid             not null, primary key
+#  kind       :string           not null
+#  settings   :jsonb            not null
+#  subtitle   :string
+#  title      :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_books_on_slug  (slug) UNIQUE
+#
 class CreateBooks < ActiveRecord::Migration[7.0]
   def change
     create_table :books, id: :uuid do |t|
@@ -11,7 +26,5 @@ class CreateBooks < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
-    add_index :books, :kind, unique: true
   end
 end
