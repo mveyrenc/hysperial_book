@@ -15,6 +15,7 @@ module Users
 
     # GET /users/:id/edit
     def edit
+      @user.validate
       render Users::ViewComponents::EditComponent.new(user: @user), content_type: 'text/html'
     end
 
@@ -23,9 +24,9 @@ module Users
       result = Users::Interactors::Update.call(user: @user, params: strong_params.to_h)
 
       if result.success?
-        redirect_to users_url, notice: 'User was successfully updated.'
+        redirect_to users_url, notice: t('.successfully_updated')
       else
-        render :edit, status: :unprocessable_entity
+        redirect_to edit_user_url(@user), status: :unprocessable_entity
       end
     end
 
@@ -34,7 +35,7 @@ module Users
       result = Users::Interactors::Destroy.call(user: @user)
 
       if result.success?
-        redirect_to users_url, notice: 'User was successfully destroyed.'
+        redirect_to users_url, notice: t('.successfully_destroyed')
       else
         render users_url, status: :unprocessable_entity
       end

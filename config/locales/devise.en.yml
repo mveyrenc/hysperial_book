@@ -144,26 +144,3 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
-  layouts:
-    shared:
-      navbar-menu:
-        home: ""
-        more: ""
-        users: ""
-        sign_in: ""
-        sign_up: ""
-        log_out: ""
-        books: ""
-  users:
-    index:
-      title: ""
-      new_user: ""
-    user:
-      edit_user: ""
-      delete: ""
-    new:
-      new: ""
-  application:
-    no_entry: ""
-    submit: ""
-    cancel: ""

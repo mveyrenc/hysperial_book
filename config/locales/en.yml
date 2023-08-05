@@ -54,3 +54,13 @@ en:
     no_entry: "No entry"
     submit: "Submit"
     cancel: "Cancel"
+  users:
+    users:
+      successfully_created: "User was successfully created"
+      successfully_updated: "User was successfully updated"
+      successfully_destroyed: "User was successfully destroyed"
+  books:
+    books:
+      successfully_created: "Book was successfully created"
+      successfully_updated: "Book was successfully updated"
+      successfully_destroyed: "Book was successfully destroyed"

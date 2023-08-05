@@ -24,7 +24,7 @@ module Books
       result = Books::Interactors::Update.call(book: @book, params: strong_params.to_h)
 
       if result.success?
-        redirect_to books_url, notice: 'Book was successfully updated.'
+        redirect_to books_url, notice: t('.successfully_updated')
       else
         redirect_to edit_book_url(@book), status: :unprocessable_entity
       end
