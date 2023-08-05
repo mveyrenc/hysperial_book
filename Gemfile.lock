@@ -70,6 +70,8 @@ GEM
       activerecord (>= 4.2)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
+    ancestry (4.3.3)
+      activerecord (>= 5.2.6)
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
@@ -350,6 +352,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list (~> 1.1)
+  ancestry (~> 4.3)
   annotate (~> 3.2)
   better_errors (~> 2.10)
   binding_of_caller (~> 1.0)

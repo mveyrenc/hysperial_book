@@ -139,3 +139,6 @@ gem 'acts_as_list', '~> 1.1'
 
 # https://github.com/norman/friendly_id
 gem 'friendly_id', '~> 5.5'
+
+# https://github.com/stefankroes/ancestry
+gem 'ancestry', '~> 4.3'
