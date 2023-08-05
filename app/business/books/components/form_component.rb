@@ -4,7 +4,7 @@ module Books
   module Components
     # Books card component
     class FormComponent < ApplicationComponent
-      delegate :rich_text_area_tag, to: :helpers
+      delegate :kind, to: :book, prefix: true
 
       attr_reader :book
 

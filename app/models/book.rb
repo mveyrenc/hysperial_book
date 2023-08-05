@@ -31,10 +31,6 @@ class Book < ApplicationRecord
     BookKind.human_attribute_name(kind)
   end
 
-  ## RichText
-  has_rich_text :short_description
-  has_rich_text :description
-
   ## Act as
   acts_as_list
 

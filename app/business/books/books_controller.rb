@@ -10,12 +10,36 @@ module Books
     def index
       @books = Books::Interactors::List.call(params)
 
-      render template: template_path, content_type: 'text/html'
+      render template: template_path
+    end
+
+    # GET /books/new
+    def new
+      @book = Book.new
+      respond_to do |format|
+        format.html { render template: template_path }
+      end
     end
 
     # GET /books/:id/edit
     def edit
-      render template: template_path, content_type: 'text/html'
+      respond_to do |format|
+        format.html { render template: template_path }
+      end
+    end
+
+    # POST /books
+    def create
+      result = Books::Interactors::Create.call(params: strong_params.to_h)
+      @book = result.book
+      if result.success?
+        respond_to do |format|
+          format.html { redirect_to books_url, notice: t('.successfully_created') }
+          format.turbo_stream { render template: template_path }
+        end
+      else
+        render template: template_path(:new), status: :unprocessable_entity
+      end
     end
 
     # PATCH/PUT /books/:id
@@ -23,9 +47,22 @@ module Books
       result = Books::Interactors::Update.call(book: @book, params: strong_params.to_h)
 
       if result.success?
-        redirect_to books_url, notice: t('.successfully_updated')
+        respond_to do |format|
+          format.html { redirect_to books_url, notice: t('.successfully_updated') }
+          format.turbo_stream { render template: template_path }
+        end
       else
-        render template: template_path(:edit), content_type: 'text/html', status: :unprocessable_entity
+        render template: template_path(:edit), status: :unprocessable_entity
+      end
+    end
+
+    # DELETE /books/:id
+    def destroy
+      Books::Interactors::Destroy.call(book: @book)
+
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: t('.successfully_destroyed') }
+        format.turbo_stream { render template: template_path }
       end
     end
 
@@ -36,7 +73,7 @@ module Books
     end
 
     def strong_params
-      params.require(:book).permit(:title, :subtitle, :kind, :short_description, :description)
+      params.require(:book).permit(:title, :subtitle, :kind)
     end
   end
 end

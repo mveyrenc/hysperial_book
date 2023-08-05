@@ -1,28 +1,11 @@
-= form_with(model: book) do |f|
-  = render FormErrorsComponent.new(errors: book.errors)
-  .field
-    = f.label :title, class: 'label'
-    .control
-      = f.text_field :title, autofocus: true, class: 'input'
-  .field
-    = f.label :subtitle, class: 'label'
-    .control
-      = f.text_field :subtitle, class: 'input'
-  .field
-    = f.label :kind, class: 'label'
-    .control
-      .select
-        = f.select :kind, options_for_select(BookKind.kinds.map { |key, value| [BookKind.human_attribute_name(key), value] }, book.kind)
-  .field
-    = f.label :short_description, class: 'label'
-    .control
-      = f.rich_text_area :short_description
-  .field
-    = f.label :description, class: 'label'
-    .control
-      = f.rich_text_area :description
+.box
+  = form_for(book, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
+    = render FormErrorsComponent.new(errors: book.errors)
+    = f.text_field :title, autofocus: true, class: 'input'
+    = f.text_field :subtitle, class: 'input'
+    = f.select :kind, options_for_select(BookKind.kinds.map { |key, value| [BookKind.human_attribute_name(key), value] }, book_kind)
 
-  .field
-    .control
-      = f.submit t('application.submit'), class: 'button is-primary'
-      = link_to t('application.cancel'), :back, class: "button"
+    .field
+      .buttons
+        = f.submit t('application.submit'), class: 'button is-primary'
+        = link_to t('application.cancel'), :back, class: 'button'

@@ -6,6 +6,8 @@ module Books
     class CardComponent < ApplicationComponent
       attr_reader :book
 
+      delegate :title, :subtitle, :kind, to: :book, prefix: true
+
       def initialize(book:)
         @book = book
 

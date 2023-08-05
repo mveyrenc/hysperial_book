@@ -2,10 +2,11 @@
 
 # Application controller
 class ApplicationController < ActionController::Base
-  respond_to :html
+  protect_from_forgery with: :exception
 
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :configure_view_path
 
   include Pundit::Authorization
 
@@ -14,5 +15,9 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+  end
+
+  def template_path(action = nil)
+    "#{controller_name}/views/#{action || action_name}"
   end
 end

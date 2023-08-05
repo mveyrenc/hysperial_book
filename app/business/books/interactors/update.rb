@@ -5,10 +5,10 @@ module Books
     # Update a book
     class Update < ApplicationInteractor
       def call
-        update_attributes
+        update_from_params
       end
 
-      def update_attributes
+      def update_from_params
         context.fail!(message: 'update_book.failure') unless context.book.update(context.params)
       end
     end

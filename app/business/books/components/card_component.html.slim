@@ -1,11 +1,18 @@
-.box id= dom_id(book)
-  = render FieldDisplayComponent.new(label: Book.human_attribute_name(:title), value: book.title)
-  = render FieldDisplayComponent.new(label: Book.human_attribute_name(:subtitle), value: book.subtitle)
-  = render FieldDisplayComponent.new(label: Book.human_attribute_name(:kind), value: BookKind.human_attribute_name(book.kind))
-  = render TrixFieldDisplayComponent.new(label: Book.human_attribute_name(:short_description), value: book.short_description)
-  = render TrixFieldDisplayComponent.new(label: Book.human_attribute_name(:description), value: book.description)
+.box
+  = render FieldDisplayComponent.new(label: Book.human_attribute_name(:title), value: book_title)
+  = render FieldDisplayComponent.new(label: Book.human_attribute_name(:subtitle), value: book_subtitle)
+  = render FieldDisplayComponent.new(label: Book.human_attribute_name(:kind), value: BookKind.human_attribute_name(book_kind))
 
   .field.is-grouped.is-grouped-centered
     - if policy(book).update?
       .control
-        = link_to t(".edit"), edit_book_path(book), class: "button is-primary is-small"
+        = link_to t("application.edit"),
+                edit_book_path(book),
+                class: "button is-primary is-small"
+    - if policy(book).destroy?
+      .control
+        = button_to t("application.delete"),
+                book_path(book),
+                method: :delete,
+                data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure")  },
+                class: "button is-danger is-small"

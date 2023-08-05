@@ -5,3 +5,9 @@ en:
         title: "Edit book"
       index:
         title: "Books"
+      new:
+        title: "New book"
+    books:
+      successfully_created: "Book was successfully created"
+      successfully_updated: "Book was successfully updated"
+      successfully_destroyed: "Book was successfully destroyed"
