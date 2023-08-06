@@ -1,0 +1,11 @@
+en:
+  users:
+    views:
+      edit:
+        title: "Edit user"
+      index:
+        title: "Users"
+    users:
+      successfully_created: "User was successfully created"
+      successfully_updated: "User was successfully updated"
+      successfully_destroyed: "User was successfully destroyed"

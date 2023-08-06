@@ -8,6 +8,7 @@ module Books
 
     # GET /books
     def index
+      authorize Book
       @books = Books::Interactors::List.call(params)
 
       render template: template_path
@@ -16,6 +17,8 @@ module Books
     # GET /books/new
     def new
       @book = Book.new
+      authorize @book
+
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -23,6 +26,8 @@ module Books
 
     # GET /books/:id/edit
     def edit
+      authorize @book
+
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -30,8 +35,10 @@ module Books
 
     # POST /books
     def create
-      result = Books::Interactors::Create.call(params: strong_params.to_h)
-      @book = result.book
+      @book = Book.new
+      authorize @book
+
+      result = Books::Interactors::Create.call(book: @book, params: strong_params.to_h)
       if result.success?
         respond_to do |format|
           format.html { redirect_to books_url, notice: t('.successfully_created') }
@@ -44,6 +51,7 @@ module Books
 
     # PATCH/PUT /books/:id
     def update
+      authorize @book
       result = Books::Interactors::Update.call(book: @book, params: strong_params.to_h)
 
       if result.success?
@@ -58,6 +66,7 @@ module Books
 
     # DELETE /books/:id
     def destroy
+      authorize @book
       Books::Interactors::Destroy.call(book: @book)
 
       respond_to do |format|

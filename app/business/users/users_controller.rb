@@ -8,6 +8,7 @@ module Users
 
     # GET /users
     def index
+      authorize User
       @users = Users::Interactors::List.call(params)
 
       render template: template_path
@@ -15,6 +16,8 @@ module Users
 
     # GET /users/:id/edit
     def edit
+      authorize @user
+
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -22,6 +25,7 @@ module Users
 
     # PATCH/PUT /users/:id
     def update
+      authorize @user
       result = Users::Interactors::Update.call(user: @user, params: strong_params.to_h)
 
       if result.success?
@@ -36,6 +40,7 @@ module Users
 
     # DELETE /users/:id
     def destroy
+      authorize @user
       Users::Interactors::Destroy.call(user: @user)
 
       respond_to do |format|

@@ -9,7 +9,7 @@ module Books
       end
 
       def create_from_params
-        context.book = Book.new(context.params)
+        context.book.attributes = context.params
 
         if context.book.save
           context.success!
