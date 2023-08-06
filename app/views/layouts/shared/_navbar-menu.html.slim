@@ -23,6 +23,13 @@ nav.navbar.is-light[role="navigation" aria-label="main navigation"]
             a.navbar-item
               |  Categories
             hr.navbar-divider
+            - if policy(Document).index?
+              = link_to t('.documents'), media_documents_path, class: "navbar-item"
+            - if policy(Picture).index?
+              = link_to t('.pictures'), media_pictures_path, class: "navbar-item"
+            - if policy(Scan).index?
+              = link_to t('.scans'), media_scans_path, class: "navbar-item"
+            hr.navbar-divider
             - if policy(User).index?
               = link_to t('.users'), users_path, class: "navbar-item"
 

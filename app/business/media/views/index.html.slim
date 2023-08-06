@@ -1,0 +1,7 @@
+h1.title
+  = t('.title')
+.block
+  = turbo_frame_tag "media", class: "columns is-multiline" do
+    - @media.list.each do |medium|
+      = turbo_frame_tag medium, class: "column is-half-tablet is-one-third-desktop" do
+        = render Media::Components::CardComponent.new(medium: medium)

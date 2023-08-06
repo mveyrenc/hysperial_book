@@ -1,0 +1,11 @@
+en:
+  media:
+    views:
+      edit:
+        title: "Edit media"
+      index:
+        title: "Media"
+    media:
+      successfully_created: "Media was successfully created"
+      successfully_updated: "Media was successfully updated"
+      successfully_destroyed: "Media was successfully destroyed"

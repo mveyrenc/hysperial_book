@@ -22,11 +22,8 @@
 #  fk_rails_...  (created_by_id => users.id) ON DELETE => restrict
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
-class Medium < ApplicationRecord
-  belongs_to :created_by, class_name: 'User'
-  belongs_to :updated_by, class_name: 'User'
+class Scan < Medium
+  validates :file, presence: true
 
-  validates :type, presence: true
-  validates :created_by, presence: true
-  validates :updated_by, presence: true
+  has_one_attached :file
 end
