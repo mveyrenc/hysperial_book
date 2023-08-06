@@ -1,7 +1,0 @@
-en:
-  books:
-    views:
-      edit:
-        title: "Edit user"
-      index:
-        title: "Users"

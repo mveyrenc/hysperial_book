@@ -10,12 +10,14 @@ module Users
     def index
       @users = Users::Interactors::List.call(params)
 
-      render template: template_path, content_type: 'text/html'
+      render template: template_path
     end
 
     # GET /users/:id/edit
     def edit
-      render template: template_path, content_type: 'text/html'
+      respond_to do |format|
+        format.html { render template: template_path }
+      end
     end
 
     # PATCH/PUT /users/:id
@@ -23,20 +25,22 @@ module Users
       result = Users::Interactors::Update.call(user: @user, params: strong_params.to_h)
 
       if result.success?
-        redirect_to users_url, notice: t('.successfully_updated')
+        respond_to do |format|
+          format.html { redirect_to users_url, notice: t('.successfully_updated') }
+          format.turbo_stream { render template: template_path }
+        end
       else
-        render template: template_path(:edit), content_type: 'text/html', status: :unprocessable_entity
+        render template: template_path(:edit), status: :unprocessable_entity
       end
     end
 
     # DELETE /users/:id
     def destroy
-      result = Users::Interactors::Destroy.call(user: @user)
+      Users::Interactors::Destroy.call(user: @user)
 
-      if result.success?
-        redirect_to users_url, notice: t('.successfully_destroyed')
-      else
-        render users_url, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: t('.successfully_destroyed') }
+        format.turbo_stream { render template: template_path }
       end
     end
 

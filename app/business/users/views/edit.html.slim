@@ -1,5 +1,5 @@
 .container-fluid
-  .box
-    h1.title
-      = t('.title')
+  h1.title
+    = t('.title')
+  = turbo_frame_tag @user do
     = render Users::Components::FormComponent.new(user: @user)

@@ -4,9 +4,9 @@ module Users
   module Components
     # Users card component
     class CardComponent < ApplicationComponent
-      delegate :current_user, :policy, to: :helpers
-
       attr_reader :user
+
+      delegate :email, :name, :role, to: :user, prefix: true
 
       def initialize(user:)
         @user = user

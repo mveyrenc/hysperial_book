@@ -1,10 +1,7 @@
-.box
-  h1.title
-    = t('.title')
-  - if @users.list.blank?
-    = t('application.no_entry')
-  - else
-    .columns.is-multiline
-      - @users.list.each do |user|
-        .column
-          = render Users::Components::CardComponent.new(user: user)
+h1.title
+  = t('.title')
+.block
+  = turbo_frame_tag "users", class: "columns is-multiline" do
+    - @users.list.each do |user|
+      = turbo_frame_tag user, class: "column is-half-tablet is-one-third-desktop" do
+        = render Users::Components::CardComponent.new(user: user)

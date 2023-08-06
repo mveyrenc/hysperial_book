@@ -1,22 +1,11 @@
-= form_with(model: user) do |f|
-  = render FormErrorsComponent.new(errors: user.errors)
-  .field
-    = f.label :name, class: 'label'
-  .control
+.box
+  = form_for(user, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
+    = render FormErrorsComponent.new(errors: user.errors)
     = f.text_field :name, autofocus: true, class: 'input'
-  .field
-    = f.label :email, class: 'label'
-  .control
     = f.email_field :email, autocomplete: "email", class: 'input'
-  .field
-    = f.label :role, class: 'label'
-  .control
-
-  .select
     = f.select :role, options_for_select(UserRole.roles.map { |key, value| [UserRole.human_attribute_name(key), value] }, user.role)
 
-  .field
-
-  .control
-    = f.submit t('application.submit'), class: 'button is-primary'
-    = link_to t('application.cancel'), :back, class: "button"
+    .field
+      .buttons
+        = f.submit t('application.submit'), class: 'button is-primary'
+        = link_to t('application.cancel'), :back, class: 'button'
