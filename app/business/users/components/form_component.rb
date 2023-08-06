@@ -4,10 +4,12 @@ module Users
   module Components
     # Users card component
     class FormComponent < ApplicationComponent
-      attr_reader :user
+      attr_reader :record
 
-      def initialize(user:)
-        @user = user
+      delegate :role, to: :record, prefix: true
+
+      def initialize(record:)
+        @record = record
 
         super
       end

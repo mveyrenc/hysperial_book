@@ -12,7 +12,7 @@ module AppFormBuilder
           form_field_builder(name, options) do
             classes = [options[:class]]
             classes <<= 'input'
-            classes <<= 'is-danger' if error?(name)
+            # classes <<= 'is-danger' if error?(name) TODO undefined method `error?'
             options[:class] = classes.compact.join(' ')
 
             time_field_without_bulma(name, options)

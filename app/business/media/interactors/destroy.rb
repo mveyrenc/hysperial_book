@@ -5,7 +5,7 @@ module Media
     # Destroy a user
     class Destroy < ApplicationInteractor
       def call
-        context.medium.destroy
+        context.record.destroy
       end
     end
   end

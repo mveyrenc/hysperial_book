@@ -9,7 +9,7 @@ module Books
       end
 
       def update_from_params
-        context.fail!(message: 'update_book.failure') unless context.book.update(context.params)
+        context.fail!(message: 'update_record.failure') unless context.record.update(context.params)
       end
     end
   end

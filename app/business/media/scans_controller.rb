@@ -10,8 +10,8 @@ module Media
       media_scans_url
     end
 
-    def set_medium
-      @medium = Scan.find(params[:id])
+    def set_record
+      @record = Scan.find(params[:id])
     end
 
     def strong_params

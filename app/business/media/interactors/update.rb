@@ -9,7 +9,7 @@ module Media
       end
 
       def update_from_params
-        context.fail!(message: 'update_medium.failure') unless context.medium.update(attributes)
+        context.fail!(message: 'update_record.failure') unless context.record.update(attributes)
       end
     end
   end

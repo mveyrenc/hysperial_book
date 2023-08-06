@@ -5,7 +5,7 @@ module Users
     # List users in the admin panel
     class List < ApplicationInteractor
       def call
-        context.list = User.all.order(:email)
+        context.records = User.all.order(:email)
       end
     end
   end

@@ -35,8 +35,8 @@ class ContentBlock < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  has_one :content_node, dependent: :destroy
-  has_many :content_media, dependent: :destroy
+  has_one :content_node
+  has_many :content_media
 
   enum kind:
        { rich_text: 'rich_text',

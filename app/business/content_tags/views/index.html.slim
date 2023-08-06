@@ -1,0 +1,10 @@
+h1.title
+  = t('.title')
+.block
+  = turbo_frame_tag ContentTag.new do
+    = render ContentTags::Components::NewTagButtonComponent.new
+.block
+  = turbo_frame_tag "records", class: "columns is-multiline" do
+    - @records.records.each do |record|
+      = turbo_frame_tag record, class: "column is-half-tablet is-one-third-desktop" do
+        = render ContentTags::Components::CardComponent.new(record: record)

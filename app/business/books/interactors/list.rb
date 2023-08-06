@@ -5,7 +5,7 @@ module Books
     # List books in the admin panel
     class List < ApplicationInteractor
       def call
-        context.list = Book.all.order(position: :asc)
+        context.records = Book.all.order(position: :asc)
       end
     end
   end

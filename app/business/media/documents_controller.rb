@@ -10,8 +10,8 @@ module Media
       media_documents_url
     end
 
-    def set_medium
-      @medium = Document.find(params[:id])
+    def set_record
+      @record = Document.find(params[:id])
     end
 
     def strong_params

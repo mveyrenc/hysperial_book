@@ -37,4 +37,8 @@ class Book < ApplicationRecord
   ## Validations
   validates :title, presence: true
   validates :kind, presence: true
+
+  def to_s
+    title
+  end
 end

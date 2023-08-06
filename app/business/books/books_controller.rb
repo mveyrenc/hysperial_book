@@ -4,20 +4,20 @@
 module Books
   # Books controller
   class BooksController < ApplicationController
-    before_action :set_book, only: %i[edit update destroy]
+    before_action :set_record, only: %i[edit update destroy]
 
     # GET /books
     def index
       authorize Book
-      @books = Books::Interactors::List.call(params)
+      @records = Books::Interactors::List.call(params)
 
       render template: template_path
     end
 
     # GET /books/new
     def new
-      @book = Book.new
-      authorize @book
+      @record = Book.new
+      authorize @record
 
       respond_to do |format|
         format.html { render template: template_path }
@@ -26,7 +26,7 @@ module Books
 
     # GET /books/:id/edit
     def edit
-      authorize @book
+      authorize @record
 
       respond_to do |format|
         format.html { render template: template_path }
@@ -35,10 +35,10 @@ module Books
 
     # POST /books
     def create
-      @book = Book.new
-      authorize @book
+      @record = Book.new
+      authorize @record
 
-      result = Books::Interactors::Create.call(book: @book, params: strong_params.to_h)
+      result = Books::Interactors::Create.call(record: @record, params: strong_params.to_h)
       if result.success?
         respond_to do |format|
           format.html { redirect_to books_url, notice: t('.successfully_created') }
@@ -51,8 +51,8 @@ module Books
 
     # PATCH/PUT /books/:id
     def update
-      authorize @book
-      result = Books::Interactors::Update.call(book: @book, params: strong_params.to_h)
+      authorize @record
+      result = Books::Interactors::Update.call(record: @record, params: strong_params.to_h)
 
       if result.success?
         respond_to do |format|
@@ -66,8 +66,8 @@ module Books
 
     # DELETE /books/:id
     def destroy
-      authorize @book
-      Books::Interactors::Destroy.call(book: @book)
+      authorize @record
+      Books::Interactors::Destroy.call(record: @record)
 
       respond_to do |format|
         format.html { redirect_to books_url, notice: t('.successfully_destroyed') }
@@ -77,12 +77,12 @@ module Books
 
     private
 
-    def set_book
-      @book = Book.friendly.find(params[:id])
+    def set_record
+      @record = Book.friendly.find(params[:id])
     end
 
     def strong_params
-      params.require(:book).permit(:title, :subtitle, :kind)
+      params.require(:book).permit(:title, :subtitle, :kind, :position)
     end
   end
 end

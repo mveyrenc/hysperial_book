@@ -5,7 +5,7 @@ module Media
     # List media in the admin panel
     class List < ApplicationInteractor
       def call
-        context.list = Medium.all
+        context.records = Medium.all
       end
     end
   end

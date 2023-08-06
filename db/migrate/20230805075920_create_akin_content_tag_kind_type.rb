@@ -4,10 +4,10 @@
 #
 # Type name: akin_tag_kind
 #
-class CreateAkinTagKindType < ActiveRecord::Migration[7.0]
+class CreateAkinContentTagKindType < ActiveRecord::Migration[7.0]
   def up
     execute <<-SQL
-      CREATE TYPE akin_tag_kind AS ENUM (
+      CREATE TYPE akin_content_tag_kind AS ENUM (
           'direct',
           'followable',
           'computed'
@@ -17,7 +17,7 @@ class CreateAkinTagKindType < ActiveRecord::Migration[7.0]
 
   def down
     execute <<-SQL
-      DROP TYPE akin_tag_kind;
+      DROP TYPE akin_content_tag_kind;
     SQL
   end
 end

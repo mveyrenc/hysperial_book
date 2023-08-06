@@ -2,6 +2,6 @@ h1.title
   = t('.title')
 .block
   = turbo_frame_tag "users", class: "columns is-multiline" do
-    - @users.list.each do |user|
-      = turbo_frame_tag user, class: "column is-half-tablet is-one-third-desktop" do
-        = render Users::Components::CardComponent.new(user: user)
+    - @records.records.each do |record|
+      = turbo_frame_tag record, class: "column is-half-tablet is-one-third-desktop" do
+        = render Users::Components::CardComponent.new(record: record)

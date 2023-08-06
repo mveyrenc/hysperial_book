@@ -21,12 +21,13 @@ module AppFormBuilder
       content_tag(:div, class: 'control', &block)
     end
 
-    def field_help(name, options)
+    def field_help(_name, options)
       # if error?(name)
       #   content_tag(:p, error_messages_for(name), class: 'help is-danger')
-      # elsif options[:help].present?
-      #   content_tag(:p, options[:help], class: 'help')
       # end TODO undefined method `error?'
+      return if options[:help].blank?
+
+      content_tag(:p, options[:help], class: 'help')
     end
 
     def field_label(name, options)

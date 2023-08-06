@@ -1,5 +1,5 @@
 .container-fluid
   h1.title
     = t('.title')
-  = turbo_frame_tag @book do
-    = render Books::Components::FormComponent.new(book: @book)
+  = turbo_frame_tag @record do
+    = render Books::Components::FormComponent.new(record: @record)

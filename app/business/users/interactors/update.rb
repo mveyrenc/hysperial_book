@@ -9,7 +9,7 @@ module Users
       end
 
       def update_attributes
-        context.fail!(message: 'update_user.failure') unless context.user.update(context.params)
+        context.fail!(message: 'update_record.failure') unless context.record.update(context.params)
       end
     end
   end

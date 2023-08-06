@@ -10,8 +10,8 @@ module Media
       media_pictures_url
     end
 
-    def set_medium
-      @medium = Picture.find(params[:id])
+    def set_record
+      @record = Picture.find(params[:id])
     end
 
     def strong_params

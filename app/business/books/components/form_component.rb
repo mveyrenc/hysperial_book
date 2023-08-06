@@ -4,12 +4,12 @@ module Books
   module Components
     # Books card component
     class FormComponent < ApplicationComponent
-      delegate :kind, to: :book, prefix: true
+      delegate :kind, to: :record, prefix: true
 
-      attr_reader :book
+      attr_reader :record
 
-      def initialize(book:)
-        @book = book
+      def initialize(record:)
+        @record = record
 
         super
       end

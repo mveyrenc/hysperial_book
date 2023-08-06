@@ -43,9 +43,9 @@ class Content < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  has_one :content_node, dependent: :destroy
+  has_one :content_node
 
-  has_many :tags, dependent: :restrict_with_error
+  has_and_belongs_to_many :content_tags
 
   enum kind:
        { article: 'article',

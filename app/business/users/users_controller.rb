@@ -4,19 +4,19 @@
 module Users
   # Users controller
   class UsersController < ApplicationController
-    before_action :set_user, only: %i[edit update destroy]
+    before_action :set_record, only: %i[edit update destroy]
 
     # GET /users
     def index
       authorize User
-      @users = Users::Interactors::List.call(params)
+      @records = Users::Interactors::List.call(params)
 
       render template: template_path
     end
 
     # GET /users/:id/edit
     def edit
-      authorize @user
+      authorize @record
 
       respond_to do |format|
         format.html { render template: template_path }
@@ -25,8 +25,8 @@ module Users
 
     # PATCH/PUT /users/:id
     def update
-      authorize @user
-      result = Users::Interactors::Update.call(user: @user, params: strong_params.to_h)
+      authorize @record
+      result = Users::Interactors::Update.call(user: @record, params: strong_params.to_h)
 
       if result.success?
         respond_to do |format|
@@ -40,8 +40,8 @@ module Users
 
     # DELETE /users/:id
     def destroy
-      authorize @user
-      Users::Interactors::Destroy.call(user: @user)
+      authorize @record
+      Users::Interactors::Destroy.call(user: @record)
 
       respond_to do |format|
         format.html { redirect_to users_url, notice: t('.successfully_destroyed') }
@@ -51,8 +51,8 @@ module Users
 
     private
 
-    def set_user
-      @user = User.find(params[:id])
+    def set_record
+      @record = User.find(params[:id])
     end
 
     def strong_params

@@ -27,18 +27,20 @@
 #  index_users_on_role                  (role)
 #
 class User < ApplicationRecord
+  ## Callbacks
   after_initialize :set_defaults
 
+  ## Enumerables
   enum role: UserRole.roles, _suffix: true
+
+  def role_name
+    UserRole.human_attribute_name(role)
+  end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
-
-  def role_name
-    UserRole.human_attribute_name(role)
-  end
 
   def to_s
     email

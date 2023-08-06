@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   resources :books, except: %i[show], controller: 'books/books'
 
+  resources :content_tags, except: %i[show], controller: 'content_tags/content_tags'
+
   namespace :media do
     resources :pictures, except: %i[show], controller: 'pictures'
     resources :scans, except: %i[show], controller: 'scans'

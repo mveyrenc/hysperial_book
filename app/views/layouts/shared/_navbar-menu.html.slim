@@ -20,8 +20,8 @@ nav.navbar.is-light[role="navigation" aria-label="main navigation"]
           .navbar-dropdown
             - if policy(Book).index?
               = link_to t('.books'), books_path, class: "navbar-item"
-            a.navbar-item
-              |  Categories
+            - if policy(ContentTag).index?
+              = link_to t('.tags'), content_tags_path, class: "navbar-item"
             hr.navbar-divider
             - if policy(Document).index?
               = link_to t('.documents'), media_documents_path, class: "navbar-item"

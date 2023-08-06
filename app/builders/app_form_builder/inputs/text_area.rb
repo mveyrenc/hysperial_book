@@ -11,7 +11,7 @@ module AppFormBuilder
           form_field_builder(name, options) do
             classes = [options[:class]]
             classes <<= 'textarea'
-            classes <<= 'is-danger' if error?(name)
+            # classes <<= 'is-danger' if @object.error?(name) TODO undefined method `error?'
             options[:class] = classes.compact.join(' ')
 
             text_area_without_bulma(name, options)

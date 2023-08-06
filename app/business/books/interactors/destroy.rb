@@ -5,7 +5,7 @@ module Books
     # Destroy a user
     class Destroy < ApplicationInteractor
       def call
-        context.book.destroy
+        context.record.destroy
       end
     end
   end

@@ -5,6 +5,6 @@ h1.title
     = render Books::Components::NewBookButtonComponent.new
 .block
   = turbo_frame_tag "books", class: "columns is-multiline" do
-    - @books.list.each do |book|
-      = turbo_frame_tag book, class: "column is-half-tablet is-one-third-desktop" do
-        = render Books::Components::CardComponent.new(book: book)
+    - @records.records.each do |record|
+      = turbo_frame_tag record, class: "column is-half-tablet is-one-third-desktop" do
+        = render Books::Components::CardComponent.new(record: record)

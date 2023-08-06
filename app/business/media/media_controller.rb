@@ -4,19 +4,19 @@
 module Media
   # Media controller
   class MediaController < ApplicationController
-    before_action :set_medium, only: %i[edit update destroy]
+    before_action :set_record, only: %i[edit update destroy]
 
     # GET /media
     def index
       authorize Medium
-      @media = Media::Interactors::List.call(params)
+      @records = Media::Interactors::List.call(params)
 
       render template: template_path
     end
 
     # GET /media/:id/edit
     def edit
-      authorize @medium
+      authorize @record
 
       respond_to do |format|
         format.html { render template: template_path }
@@ -25,8 +25,8 @@ module Media
 
     # PATCH/PUT /media/:id
     def update
-      authorize @medium
-      result = Media::Interactors::Update.call(medium: @medium, params: strong_params.to_h)
+      authorize @record
+      result = Media::Interactors::Update.call(medium: @record, params: strong_params.to_h)
 
       if result.success?
         respond_to do |format|
@@ -40,8 +40,8 @@ module Media
 
     # DELETE /media/:id
     def destroy
-      authorize @medium
-      Media::Interactors::Destroy.call(medium: @medium)
+      authorize @record
+      Media::Interactors::Destroy.call(medium: @record)
 
       respond_to do |format|
         format.html { redirect_to media_media_url, notice: t('.successfully_destroyed') }
@@ -59,7 +59,7 @@ module Media
       raise NotImplementedError
     end
 
-    def set_medium
+    def set_record
       raise NotImplementedError
     end
 

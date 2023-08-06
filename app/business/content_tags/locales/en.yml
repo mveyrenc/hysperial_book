@@ -1,0 +1,13 @@
+en:
+  content_tags:
+    views:
+      edit:
+        title: "Edit content tag"
+      index:
+        title: "Content tags"
+      new:
+        title: "New content tags"
+    content_tags:
+      successfully_created: "Content tag was successfully created"
+      successfully_updated: "Content tag was successfully updated"
+      successfully_destroyed: "Content tag was successfully destroyed"

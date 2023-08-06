@@ -1,5 +1,5 @@
 .container-fluid
   h1.title
     = t('.title')
-  = turbo_frame_tag @medium do
-    = render Media::Components::FormComponent.new(medium: @medium)
+  = turbo_frame_tag @record do
+    = render Media::Components::FormComponent.new(medium: @record)
