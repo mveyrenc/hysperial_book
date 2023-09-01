@@ -13,7 +13,7 @@ module AppFormBuilder
                                                  html_options) do |b|
               content_tag(:label, class: 'checkbox') do
                 concat b.check_box
-                concat content_tag(:span, class: 'control-label') { b.text }
+                concat content_tag(:span, class: 'control-label mx-1') { b.text }
               end
             end
           end
