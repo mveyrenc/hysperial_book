@@ -35,27 +35,27 @@ class ContentBlock < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  has_one :content_node
-  has_many :content_media
+  has_one :content_node, dependent: :destroy
+  has_many :content_media, dependent: :destroy
 
   enum kind:
-       { rich_text: 'rich_text',
-         yield: 'yield',
-         divisions_summary: 'divisions_summary',
-         division: 'division',
-         equipment: 'equipment',
-         ingredients_summary: 'ingredients_summary',
-         ingredients: 'ingredients',
-         ingredient: 'ingredient',
-         supplies: 'supplies',
-         tools: 'tools',
-         times: 'times',
-         how_to_section: 'how_to_section',
-         step: 'step',
-         direction: 'direction',
-         nutrition: 'nutrition',
-         notes: 'notes',
-         comment: 'comment' }, _suffix: true
+         { rich_text: 'rich_text',
+           yield: 'yield',
+           divisions_summary: 'divisions_summary',
+           division: 'division',
+           equipment: 'equipment',
+           ingredients_summary: 'ingredients_summary',
+           ingredients: 'ingredients',
+           ingredient: 'ingredient',
+           supplies: 'supplies',
+           tools: 'tools',
+           times: 'times',
+           how_to_section: 'how_to_section',
+           step: 'step',
+           direction: 'direction',
+           nutrition: 'nutrition',
+           notes: 'notes',
+           comment: 'comment' }, _suffix: true
 
   has_rich_text :rich_text
 end

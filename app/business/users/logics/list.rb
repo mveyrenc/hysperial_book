@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Users
-  module Interactors
+  module Logics
     # List users in the admin panel
     class List < ApplicationInteractor
       def call

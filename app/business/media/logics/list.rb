@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Media
-  module Interactors
+  module Logics
     # List media in the admin panel
     class List < ApplicationInteractor
       def call

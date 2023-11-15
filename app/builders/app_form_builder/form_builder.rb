@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AppFormBuilder
+  # FormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
     attr_reader :layout
 

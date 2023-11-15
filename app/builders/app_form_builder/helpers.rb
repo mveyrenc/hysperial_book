@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AppFormBuilder
+  # Helpers
   module Helpers
     def alert_message(options = {})
       title = options[:title] || I18n.t('errors.messages.alert')

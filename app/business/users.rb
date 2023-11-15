@@ -7,7 +7,7 @@ module Users
   end
 
   # Business logic for users
-  module Interactors
+  module Logics
   end
 
   # Views for users

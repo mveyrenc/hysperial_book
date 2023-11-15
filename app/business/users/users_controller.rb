@@ -9,7 +9,7 @@ module Users
     # GET /users
     def index
       authorize User
-      @records = Users::Interactors::List.call(params)
+      @records = Users::Logics::List.call(params)
 
       render template: template_path
     end
@@ -26,7 +26,7 @@ module Users
     # PATCH/PUT /users/:id
     def update
       authorize @record
-      result = Users::Interactors::Update.call(user: @record, params: strong_params.to_h)
+      result = Users::Logics::Update.call(user: @record, params: strong_params.to_h)
 
       if result.success?
         respond_to do |format|
@@ -41,7 +41,7 @@ module Users
     # DELETE /users/:id
     def destroy
       authorize @record
-      Users::Interactors::Destroy.call(user: @record)
+      Users::Logics::Destroy.call(user: @record)
 
       respond_to do |format|
         format.html { redirect_to users_url, notice: t('.successfully_destroyed') }

@@ -48,6 +48,7 @@
 #  fk_rails_...  (relater_id => tags.id) ON DELETE => cascade
 #
 class CreateContentTags < ActiveRecord::Migration[7.0]
+  # rubocop:disable Metrics/MethodLength
   def change
     create_table :content_tags, id: :uuid do |t|
       t.column :kind, :content_tag_kind, null: false, index: true
@@ -60,7 +61,7 @@ class CreateContentTags < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
+    # rubocop:enable Metrics/MethodLength
     create_table :akin_content_tags, id: false do |t|
       t.references :relater, null: false, foreign_key: { to_table: :content_tags, on_delete: :cascade }, type: :uuid
       t.references :related, null: false, foreign_key: { to_table: :content_tags, on_delete: :cascade }, type: :uuid

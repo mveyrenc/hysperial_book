@@ -28,6 +28,7 @@
 #  index_users_on_role                  (role)
 #
 class AddRoleToUsers < ActiveRecord::Migration[7.0]
+  # rubocop:disable Metrics/MethodLength
   def up
     execute <<-SQL
       CREATE TYPE user_role AS ENUM (
@@ -42,6 +43,7 @@ class AddRoleToUsers < ActiveRecord::Migration[7.0]
     add_column :users, :role, :user_role
     add_index :users, :role
   end
+  # rubocop:enable Metrics/MethodLength
 
   def down
     remove_column :users, :role

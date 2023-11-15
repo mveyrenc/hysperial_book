@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Users
-  module Interactors
+  module Logics
     # Update a user and his role
     class Update < ApplicationInteractor
       def call

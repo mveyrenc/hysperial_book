@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CreateContentTagKindType < ActiveRecord::Migration[7.0]
+  # rubocop:disable Metrics/MethodLength
   def up
     execute <<-SQL
       CREATE TYPE content_tag_kind AS ENUM (
@@ -19,6 +20,7 @@ class CreateContentTagKindType < ActiveRecord::Migration[7.0]
           )
     SQL
   end
+  # rubocop:enable Metrics/MethodLength
 
   def down
     execute <<-SQL

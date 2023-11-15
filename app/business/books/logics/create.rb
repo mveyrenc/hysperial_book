@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Records
-  module Interactors
+module Books
+  module Logics
     # Update a record
     class Create < ApplicationInteractor
       def call

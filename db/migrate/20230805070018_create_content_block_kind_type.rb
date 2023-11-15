@@ -5,6 +5,7 @@
 # Type name: content_block_kind
 #
 class CreateContentBlockKindType < ActiveRecord::Migration[7.0]
+  # rubocop:disable Metrics/MethodLength
   def up
     execute <<-SQL
       CREATE TYPE content_block_kind AS ENUM (
@@ -27,6 +28,7 @@ class CreateContentBlockKindType < ActiveRecord::Migration[7.0]
           'comment')
     SQL
   end
+  # rubocop:enable Metrics/MethodLength
 
   def down
     execute <<-SQL

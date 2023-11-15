@@ -3,6 +3,7 @@
 # == Route Map
 #
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   resources :test2s
   resources :tests
@@ -40,3 +41,4 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: 'home#index'
 end
+# rubocop:enable Metrics/BlockLength

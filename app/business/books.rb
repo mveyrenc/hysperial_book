@@ -7,7 +7,7 @@ module Books
   end
 
   # Business logic for books
-  module Interactors
+  module Logics
   end
 
   # Views for books

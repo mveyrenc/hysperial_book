@@ -31,6 +31,7 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class CreateContentBlocks < ActiveRecord::Migration[7.0]
+  # rubocop:disable Metrics/MethodLength
   def change
     create_table :content_blocks, id: :uuid do |t|
       t.column :kind, :content_block_kind, null: false, index: true
@@ -49,4 +50,5 @@ class CreateContentBlocks < ActiveRecord::Migration[7.0]
       t.timestamps
     end
   end
+  # rubocop:enable Metrics/MethodLength
 end

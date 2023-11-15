@@ -9,7 +9,7 @@ module Media
     # GET /media
     def index
       authorize Medium
-      @records = Media::Interactors::List.call(params)
+      @records = Media::Logics::List.call(params)
 
       render template: template_path
     end
@@ -26,7 +26,7 @@ module Media
     # PATCH/PUT /media/:id
     def update
       authorize @record
-      result = Media::Interactors::Update.call(medium: @record, params: strong_params.to_h)
+      result = Media::Logics::Update.call(medium: @record, params: strong_params.to_h)
 
       if result.success?
         respond_to do |format|
@@ -41,7 +41,7 @@ module Media
     # DELETE /media/:id
     def destroy
       authorize @record
-      Media::Interactors::Destroy.call(medium: @record)
+      Media::Logics::Destroy.call(medium: @record)
 
       respond_to do |format|
         format.html { redirect_to media_media_url, notice: t('.successfully_destroyed') }

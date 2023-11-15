@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AppFormBuilder
+  # FormBuilder
   module FormField
     extend ActiveSupport::Concern
 

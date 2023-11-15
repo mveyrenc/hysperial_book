@@ -16,11 +16,12 @@
 #
 # Indexes
 #
-#  index_content_tags_on_book_id        (book_id)
-#  index_content_tags_on_created_by_id  (created_by_id)
-#  index_content_tags_on_kind           (kind)
-#  index_content_tags_on_slug           (slug) UNIQUE
-#  index_content_tags_on_updated_by_id  (updated_by_id)
+#  index_content_tags_on_book_id                     (book_id)
+#  index_content_tags_on_created_by_id               (created_by_id)
+#  index_content_tags_on_kind                        (kind)
+#  index_content_tags_on_slug                        (slug) UNIQUE
+#  index_content_tags_on_updated_by_id               (updated_by_id)
+#  index_content_tags_on_value_and_kind_and_book_id  (value,kind,book_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -55,20 +56,23 @@ class ContentTag < ApplicationRecord
   has_many :relater_akin_content_tags,
            class_name: 'AkinContentTag',
            foreign_key: :relater_id,
-           inverse_of: :relater
+           inverse_of: :relater,
+           dependent: :destroy
   has_many :relater_content_tags,
            through: :relater_akin_content_tags,
-           source: :relater
-
+           source: :relater,
+           dependent: :destroy
   has_many :related_akin_content_tags,
            class_name: 'AkinContentTag',
            foreign_key: :related_id,
-           inverse_of: :related
+           inverse_of: :related,
+           dependent: :destroy
   has_many :related_content_tags,
            through: :related_akin_content_tags,
            source: :related
 
-  has_and_belongs_to_many :contents
+  has_many :content_taggings, dependent: :destroy
+  has_many :contents, through: :content_taggings, dependent: :nullify
 
   ## Validations
   validates :kind, presence: true

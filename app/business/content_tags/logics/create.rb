@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ContentTags
-  module Interactors
+  module Logics
     # Update a tag
     class Create < ApplicationInteractor
       def call

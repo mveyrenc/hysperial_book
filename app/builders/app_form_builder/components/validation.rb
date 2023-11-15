@@ -2,6 +2,7 @@
 
 module AppFormBuilder
   module Components
+    # Validation
     module Validation
       extend ActiveSupport::Concern
 

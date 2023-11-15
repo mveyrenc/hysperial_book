@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ContentTags
-  module Interactors
+  module Logics
     # List tags in the admin panel
     class List < ApplicationInteractor
       def call

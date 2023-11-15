@@ -9,7 +9,7 @@ module Books
     # GET /books
     def index
       authorize Book
-      @records = Books::Interactors::List.call(params)
+      @records = Books::Logics::List.call(params)
 
       render template: template_path
     end
@@ -38,7 +38,7 @@ module Books
       @record = Book.new
       authorize @record
 
-      result = Books::Interactors::Create.call(record: @record, params: strong_params.to_h)
+      result = Books::Logics::Create.call(record: @record, params: strong_params.to_h)
       if result.success?
         respond_to do |format|
           format.html { redirect_to books_url, notice: t('.successfully_created') }
@@ -52,7 +52,7 @@ module Books
     # PATCH/PUT /books/:id
     def update
       authorize @record
-      result = Books::Interactors::Update.call(record: @record, params: strong_params.to_h)
+      result = Books::Logics::Update.call(record: @record, params: strong_params.to_h)
 
       if result.success?
         respond_to do |format|
@@ -67,7 +67,7 @@ module Books
     # DELETE /books/:id
     def destroy
       authorize @record
-      Books::Interactors::Destroy.call(record: @record)
+      Books::Logics::Destroy.call(record: @record)
 
       respond_to do |format|
         format.html { redirect_to books_url, notice: t('.successfully_destroyed') }

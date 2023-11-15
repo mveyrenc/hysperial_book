@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Users
-  module Interactors
+  module Logics
     # Destroy a user
     class Destroy < ApplicationInteractor
       def call

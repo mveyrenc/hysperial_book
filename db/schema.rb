@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_06_142408) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_15_084034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -134,6 +134,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_142408) do
     t.index ["updated_by_id"], name: "index_content_nodes_on_updated_by_id"
   end
 
+  create_table "content_taggings", id: false, force: :cascade do |t|
+    t.uuid "content_id", null: false
+    t.uuid "content_tag_id", null: false
+    t.index ["content_id"], name: "index_content_taggings_on_content_id"
+    t.index ["content_tag_id"], name: "index_content_taggings_on_content_tag_id"
+  end
+
   create_table "content_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.enum "kind", null: false, enum_type: "content_tag_kind"
     t.uuid "book_id", null: false
@@ -148,13 +155,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_142408) do
     t.index ["kind"], name: "index_content_tags_on_kind"
     t.index ["slug"], name: "index_content_tags_on_slug", unique: true
     t.index ["updated_by_id"], name: "index_content_tags_on_updated_by_id"
-  end
-
-  create_table "content_tags_contents", id: false, force: :cascade do |t|
-    t.uuid "content_id", null: false
-    t.uuid "content_tag_id", null: false
-    t.index ["content_id"], name: "index_content_tags_contents_on_content_id"
-    t.index ["content_tag_id"], name: "index_content_tags_contents_on_content_tag_id"
+    t.index ["value", "kind", "book_id"], name: "index_content_tags_on_value_and_kind_and_book_id", unique: true
   end
 
   create_table "contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -235,11 +236,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_142408) do
   add_foreign_key "content_nodes", "contents"
   add_foreign_key "content_nodes", "users", column: "created_by_id", on_delete: :restrict
   add_foreign_key "content_nodes", "users", column: "updated_by_id", on_delete: :restrict
+  add_foreign_key "content_taggings", "content_tags", on_delete: :cascade
+  add_foreign_key "content_taggings", "contents", on_delete: :cascade
   add_foreign_key "content_tags", "books"
   add_foreign_key "content_tags", "users", column: "created_by_id", on_delete: :restrict
   add_foreign_key "content_tags", "users", column: "updated_by_id", on_delete: :restrict
-  add_foreign_key "content_tags_contents", "content_tags", on_delete: :cascade
-  add_foreign_key "content_tags_contents", "contents", on_delete: :cascade
   add_foreign_key "contents", "books"
   add_foreign_key "contents", "media", column: "thumbnail_id", on_delete: :cascade
   add_foreign_key "contents", "users", column: "created_by_id", on_delete: :restrict

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Books
-  module Interactors
+  module Logics
     # List books in the admin panel
     class List < ApplicationInteractor
       def call

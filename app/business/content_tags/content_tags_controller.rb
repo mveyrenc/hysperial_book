@@ -9,7 +9,7 @@ module ContentTags
     # GET /tags
     def index
       authorize ContentTag
-      @records = ContentTags::Interactors::List.call(params)
+      @records = ContentTags::Logics::List.call(params)
 
       render template: template_path
     end
@@ -38,7 +38,7 @@ module ContentTags
       @record = ContentTag.new
       authorize @record
 
-      result = ContentTags::Interactors::Create.call(
+      result = ContentTags::Logics::Create.call(
         record: @record,
         params: strong_params.to_h,
         current_user:
@@ -57,7 +57,7 @@ module ContentTags
     # PATCH/PUT /tags/:id
     def update
       authorize @record
-      result = ContentTags::Interactors::Update.call(
+      result = ContentTags::Logics::Update.call(
         record: @record,
         params: strong_params.to_h,
         current_user:
@@ -76,7 +76,7 @@ module ContentTags
     # DELETE /tags/:id
     def destroy
       authorize @record
-      ContentTags::Interactors::Destroy.call(record: @record)
+      ContentTags::Logics::Destroy.call(record: @record)
 
       respond_to do |format|
         format.html { redirect_to records_url, notice: t('.successfully_destroyed') }
