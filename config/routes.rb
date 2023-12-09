@@ -5,6 +5,7 @@
 
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  resource :example, constraints: -> { Rails.env.development? }
   resources :test2s
   resources :tests
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
