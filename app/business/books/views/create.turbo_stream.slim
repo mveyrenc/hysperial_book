@@ -1,5 +1,5 @@
 = turbo_stream.prepend "books" do
   = turbo_frame_tag @record, class: "column is-one-third" do
     = render(Books::Components::Card::Component.new(record: @record))
-= turbo_stream.update Book.new, render(Books::Components::NewButton::ComponentComponent.new)
+= turbo_stream.update Book.new, render(Books::Components::NewButton::Component.new)
 

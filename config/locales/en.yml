@@ -59,6 +59,7 @@ en:
         log_out: "Log out"
   application:
     no_entry: "No entry"
+    read: "Read"
     submit: "Submit"
     cancel: "Cancel"
     edit: "Edit"

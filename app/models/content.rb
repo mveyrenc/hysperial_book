@@ -40,8 +40,8 @@ class Content < ApplicationRecord
 
   belongs_to :book
 
-  belongs_to :thumbnail, class_name: 'Picture'
-  accepts_nested_attributes_for :thumbnail
+  belongs_to :thumbnail, class_name: 'Picture', dependent: :destroy
+  accepts_nested_attributes_for :thumbnail, reject_if: :reject_thumbnail
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
@@ -53,6 +53,16 @@ class Content < ApplicationRecord
 
   has_rich_text :short_description
   has_rich_text :description
+
+  def thumbnail
+    super || build_thumbnail
+  end
+
+  def reject_thumbnail(attributes)
+    puts "**************"
+    puts attributes.inspect
+    attributes['file'].blank?
+  end
 
   ## Enumerables
   enum kind: ContentKind.kinds, _suffix: true

@@ -38,7 +38,6 @@ module Contents
     def create
       @record = Content.new
       authorize @record
-      @record.build_thumbnail
 
       result = Contents::Logics::Create.call(
         record: @record,

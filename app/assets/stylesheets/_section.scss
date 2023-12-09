@@ -3,5 +3,7 @@ section.section.is-flash-section {
 }
 
 section.section.is-main-section {
+  @extend .container;
+  @extend .is-fullhd;
   padding: $default-padding;
 }

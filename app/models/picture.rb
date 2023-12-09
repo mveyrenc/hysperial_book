@@ -23,7 +23,5 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class Picture < Medium
-  validates :file, presence: true
-
   has_one_attached :file
 end

@@ -9,11 +9,9 @@ module Contents
       end
 
       def create_from_params
-        # if context.params.key? :thumbnail
-        #   context.record.thumbnail = Picture.new(context.params[:thumbnail])
-        #   # context.fail!(message: 'create_record.failure') unless context.record.thumbnail.save
-        #   context.params.delete(:thumbnail)
-        # end
+        # context.record.build_thumbnail
+
+        context.record.thumbnail = nil unless context.params.key? :thumbnail_attributes
         context.record.attributes = context.params
         context.record.created_by = context.current_user
         context.record.updated_by = context.current_user

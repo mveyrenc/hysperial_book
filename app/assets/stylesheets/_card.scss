@@ -1,3 +1,10 @@
+.is-card-in-column {
+  @extend .column;
+  @extend .is-half-tablet;
+  @extend .is-one-third-desktop;
+  @extend .is-one-quarter-widescreen;
+}
+
 .card:not(:last-child) {
   margin-bottom: $default-padding;
 }

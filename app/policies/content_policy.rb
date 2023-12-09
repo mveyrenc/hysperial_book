@@ -6,6 +6,10 @@ class ContentPolicy < ApplicationPolicy
     grant_to_reader
   end
 
+  def show?
+    grant_to_reader
+  end
+
   def create?
     grant_to_contributor
   end

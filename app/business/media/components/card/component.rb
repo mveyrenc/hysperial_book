@@ -16,12 +16,16 @@ module Media
         end
 
         def render_document
-          if record_type == 'Document'
-            link_to record_file
-          else
-            content_tag :figure, class: 'image is-128x128' do
-              image_tag record_file.variant(resize_to_limit: [128, 128])
+          if record_file.attached?
+            if record_type == 'Document'
+              link_to record_file
+            else
+              content_tag :figure, class: 'image is-128x128 m-auto' do
+                image_tag record_file.variant(resize_to_limit: [128, 128])
+              end
             end
+          else
+            render NoRecord::Component.new
           end
         end
 

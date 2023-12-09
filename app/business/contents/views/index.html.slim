@@ -8,7 +8,7 @@
     = turbo_frame_tag "contents", class: "columns is-multiline" do
       - if @records.records.any?
         - @records.records.each do |record|
-          = turbo_frame_tag record, class: "column is-half-tablet is-one-third-desktop" do
+          = turbo_frame_tag record, class: "is-card-in-column" do
             = render Contents::Components::Card::Component.new(record: record)
       - else
         .column.is-full
