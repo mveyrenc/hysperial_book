@@ -139,3 +139,6 @@ gem 'friendly_id', '~> 5.5'
 
 # https://github.com/stefankroes/ancestry
 gem 'ancestry', '~> 4.3'
+
+# https://github.com/kaminari/kaminari
+gem 'kaminari', '~> 1.2'
