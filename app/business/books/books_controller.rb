@@ -9,7 +9,7 @@ module Books
     # GET /books
     def index
       authorize Book
-      @records = Books::Logics::List.call(params)
+      @records = Books::Logics::Search.call(params)
 
       render template: template_path
     end

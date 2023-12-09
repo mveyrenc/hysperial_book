@@ -9,7 +9,7 @@ module ContentTags
     # GET /tags
     def index
       authorize ContentTag
-      @records = ContentTags::Logics::List.call(params)
+      @records = ContentTags::Logics::Search.call(params)
 
       render template: template_path
     end

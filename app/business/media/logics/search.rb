@@ -3,9 +3,10 @@
 module Media
   module Logics
     # List media in the admin panel
-    class List < ApplicationInteractor
+    class Search < ApplicationInteractor
+      include SearchConcern
       def call
-        context.records = Medium.all
+        context.records = Medium.order(created_at: :desc)
       end
     end
   end

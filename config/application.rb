@@ -31,6 +31,8 @@ module HysperialBook
       system("bundle exec rubocop -A --fail-level=E #{parsable_files.shelljoin}", exception: true)
     end
 
+    config.autoload_paths += Dir["#{config.root}/app/business/concerns"]
+
     # To avoid conflicts between ViewComponent and other gems that also monkey patch the render method, it’s possible to
     # configure ViewComponent to not include the render monkey patch:
     config.view_component.render_monkey_patch_enabled = false # defaults to true

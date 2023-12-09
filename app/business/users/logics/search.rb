@@ -3,9 +3,10 @@
 module Users
   module Logics
     # List users in the admin panel
-    class List < ApplicationInteractor
+    class Search < ApplicationInteractor
+      include SearchConcern
       def call
-        context.records = User.all.order(:email)
+        context.records = User.order(:email)
       end
     end
   end

@@ -3,7 +3,8 @@
 module ContentTags
   module Logics
     # List tags in the admin panel
-    class List < ApplicationInteractor
+    class Search < ApplicationInteractor
+      include SearchConcern
       def call
         context.records = ContentTag.joins(:book).order(value: :asc)
       end

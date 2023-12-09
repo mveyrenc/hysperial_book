@@ -1,12 +1,20 @@
-section.hero.is-hero-bar
-  .hero-body
-    .level
-      .level-left
-        .level-item
-          h1.title
-            = title
-      .level-right
-        .level-item
+- if title?
+  section.hero.is-hero-bar
+    .hero-body
+      .level
+        .level-left
+          .level-item
+            h1.title
+              = title
+        .level-right
+          .level-item
 
-section.section.is-main-section
-  = main_section
+
+
+- if main_section?
+  section.section.is-main-section
+    - if header_actions?
+      .block
+        = header_actions
+    .block
+      = main_section

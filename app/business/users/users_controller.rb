@@ -9,7 +9,7 @@ module Users
     # GET /users
     def index
       authorize User
-      @records = Users::Logics::List.call(params)
+      @records = Users::Logics::Search.call(params)
 
       render template: template_path
     end

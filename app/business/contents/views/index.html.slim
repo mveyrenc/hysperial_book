@@ -1,13 +1,12 @@
 = render Layout::MainAreaComponent.new do |component|
   - component.with_title do
     = t('.title')
+  - component.with_header_actions do
+    = turbo_frame_tag Content.new do
+      = render Contents::Components::NewContentButtonComponent.new
   - component.with_main_section do
-    .block
-      = turbo_frame_tag Content.new do
-        = render Contents::Components::NewContentButtonComponent.new
-    .block
-      = turbo_frame_tag "contents", class: "columns is-multiline" do
-        - @records.records.each do |record|
-          = turbo_frame_tag record, class: "column is-half-tablet is-one-third-desktop" do
-            = render Contents::Components::CardComponent.new(record: record)
+    = turbo_frame_tag "contents", class: "columns is-multiline" do
+      - @records.records.each do |record|
+        = turbo_frame_tag record, class: "column is-half-tablet is-one-third-desktop" do
+          = render Contents::Components::CardComponent.new(record: record)
     = paginate @records.records

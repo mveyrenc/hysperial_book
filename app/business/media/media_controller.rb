@@ -9,7 +9,7 @@ module Media
     # GET /media
     def index
       authorize Medium
-      @records = Media::Logics::List.call(params)
+      @records = Media::Logics::Search.call(params)
 
       render template: template_path
     end

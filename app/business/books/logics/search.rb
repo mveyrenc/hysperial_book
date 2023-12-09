@@ -3,9 +3,11 @@
 module Books
   module Logics
     # List books in the admin panel
-    class List < ApplicationInteractor
+    class Search < ApplicationInteractor
+      include SearchConcern
+
       def call
-        context.records = Book.all.order(position: :asc)
+        context.records = Book.order(position: :asc)
       end
     end
   end
