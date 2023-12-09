@@ -1,5 +1,5 @@
 doctype html
-html
+html.has-aside-left.has-aside-mobile-transition.has-navbar-fixed-top.has-aside-expanded
   head
     title
       | HysperialBook
@@ -7,13 +7,14 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    link[rel="dns-prefetch" href="https://fonts.gstatic.com"]
+    link[href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"]
+    link[href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"]
     = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
   body
-    section.block
-      = render 'layouts/shared/navbar-menu'
-    section.block
-      .container.is-fluid
-        = render 'layouts/shared/flash'
-    section.block
-      .container.is-fluid
-        = yield
+    #app
+      = render Layout::NavbarComponent.new
+      = render Layout::AsideComponent.new
+      = render Layout::FlashComponent.new
+      = yield
+    = render Layout::FooterComponent.new

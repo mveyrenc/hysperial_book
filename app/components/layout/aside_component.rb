@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+module Layout
+  class AsideComponent < ApplicationComponent
+    def render?
+      user_signed_in?
+    end
+  end
+end

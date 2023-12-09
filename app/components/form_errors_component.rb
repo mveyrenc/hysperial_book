@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Display form errors
-class FormErrorsComponent < ViewComponent::Base
+class FormErrorsComponent < ApplicationComponent
   attr_reader :errors
 
   def initialize(errors:)

@@ -42,20 +42,21 @@ en:
   hello: "Hello world"
   layouts:
     shared:
-      navbar-menu:
-        home: "Home"
-        more: "More"
-        users: "Users"
-        sign_in: "Sign in"
-        sign_up: "Sign up"
-        log_out: "Log out"
+      aside:
         contents: "Contents"
+        more: "More"
         books: "Books"
         tags: "Content tags"
         documents: "Documents"
         media: "Media"
         pictures: "Pictures"
         scans: "Scans"
+        users: "Users"
+      navbar-menu:
+        home: "Home"
+        sign_in: "Sign in"
+        sign_up: "Sign up"
+        log_out: "Log out"
   application:
     no_entry: "No entry"
     submit: "Submit"

@@ -4,7 +4,7 @@
       = record_title
   .card-image
     figure.image.is-4by3
-      = image_tag record.thumbnail.file
+      = image_tag record.thumbnail.file.variant(resize_to_fill: [400, 300])
   .card-content
     p.subtitle
       = record_subtitle

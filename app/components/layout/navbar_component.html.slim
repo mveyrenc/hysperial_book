@@ -1,0 +1,17 @@
+nav.navbar.is-fixed-top.is-light[role="navigation" aria-label="main navigation"]
+  .navbar-brand
+    a.navbar-item.is-hidden-desktop.hb-aside-mobile-toggle[data-target="aside-menu"]
+      span.icon
+        span.material-symbols-outlined menu
+  .navbar-brand.is-right
+    a.navbar-item.is-hidden-desktop.hb-navbar-menu-toggle[data-target="navbar-menu"]
+      span.icon
+        span.material-symbols-outlined more_vert
+  - if user_signed_in?
+    .navbar-menu id="navbar-menu"
+      .navbar-end
+        .navbar-item
+          .buttons
+            - if user_signed_in?
+              = link_to current_user, edit_user_registration_path, class: "button is-white is-small", target: "_top"
+              = button_to t('.log_out'), destroy_user_session_path, method: :delete, data: { "turbo-method": :delete }, class: "button is-primary is-small"

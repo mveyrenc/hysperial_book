@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Display a field if present
-class FieldDisplayComponent < ViewComponent::Base
+class FieldDisplayComponent < ApplicationComponent
   attr_reader :label, :value
 
   def initialize(label:, value:)

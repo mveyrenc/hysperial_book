@@ -46,7 +46,7 @@ module ContentTags
       if result.success?
         @records = result.records
         respond_to do |format|
-          format.html { redirect_to records_url, notice: t('.successfully_created') }
+          format.html { redirect_to content_tags_url, notice: t('.successfully_created') }
           format.turbo_stream { render template: template_path }
         end
       else
@@ -65,7 +65,7 @@ module ContentTags
 
       if result.success?
         respond_to do |format|
-          format.html { redirect_to records_url, notice: t('.successfully_updated') }
+          format.html { redirect_to content_tags_url, notice: t('.successfully_updated') }
           format.turbo_stream { render template: template_path }
         end
       else
@@ -79,7 +79,7 @@ module ContentTags
       ContentTags::Logics::Destroy.call(record: @record)
 
       respond_to do |format|
-        format.html { redirect_to records_url, notice: t('.successfully_destroyed') }
+        format.html { redirect_to content_tags_url, notice: t('.successfully_destroyed') }
         format.turbo_stream { render template: template_path }
       end
     end

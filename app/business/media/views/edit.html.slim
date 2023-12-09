@@ -1,5 +1,6 @@
-.container-fluid
-  h1.title
+= render Layout::MainAreaComponent.new do |component|
+  - component.with_title do
     = t('.title')
-  = turbo_frame_tag @record do
-    = render Media::Components::FormComponent.new(medium: @record)
+  - component.with_main_section do
+    = turbo_frame_tag @record do
+      = render Media::Components::FormComponent.new(medium: @record)
