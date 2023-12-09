@@ -1,0 +1,17 @@
+.box
+  = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
+    = render FormErrors::Component.new(errors: record.errors)
+    - if record.new_record?
+      = f.collection_radio_buttons :book_id, book_select_values, :to_key, :to_s
+      = f.select :kind, options_for_select(ContentTagKind.kinds.map { |key, value| [ContentTagKind.human_attribute_name(key), value] }, record_kind)
+      = f.text_area :value, help: t('.value.help')
+    - else
+      = render FieldDisplay::Component.new(label: ContentTag.human_attribute_name(:book), value: record_book)
+      = f.select :kind, options_for_select(ContentTagKind.kinds.map { |key, value| [ContentTagKind.human_attribute_name(key), value] }, record_kind)
+      = f.text_field :value
+
+
+    .field
+      .buttons
+        = f.submit t('application.submit'), class: 'button is-primary'
+        = link_to t('application.cancel'), :back, class: 'button'

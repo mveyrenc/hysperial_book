@@ -1,4 +1,4 @@
-= render Layout::MainAreaComponent.new do |component|
+= render Layout::MainArea::Component.new do |component|
   - component.with_title do
     = t('.title')
   - component.with_main_section do
@@ -6,7 +6,7 @@
       - if @records.records.any?
         - @records.records.each do |record|
           = turbo_frame_tag record, class: "column is-half-tablet is-one-third-desktop" do
-            = render Media::Components::CardComponent.new(record: record)
+            = render Media::Components::Card::Component.new(record: record)
       - else
         .column.is-full
           = render NoRecord::Component.new

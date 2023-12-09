@@ -1,0 +1,12 @@
+.box
+  = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
+    = render FormErrors::Component.new(errors: record.errors)
+    = f.text_field :title, autofocus: true
+    = f.text_field :subtitle
+    = f.select :kind, options_for_select(BookKind.kinds.map { |key, value| [BookKind.human_attribute_name(key), value] }, record_kind)
+    = f.text_field :position
+
+    .field
+      .buttons
+        = f.submit t('application.submit'), class: 'button is-primary'
+        = link_to t('application.cancel'), :back, class: 'button'

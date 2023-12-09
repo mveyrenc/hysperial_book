@@ -9,7 +9,7 @@ module Media
     # GET /media
     def index
       authorize Medium
-      @records = Media::Logics::Search.call(params.merge(model: model))
+      @records = Media::Logics::Search.call(params.merge(model:))
 
       render template: template_path
     end

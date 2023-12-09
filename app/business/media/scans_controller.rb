@@ -9,6 +9,7 @@ module Media
     def model
       Scan
     end
+
     def media_media_url
       media_scans_url
     end

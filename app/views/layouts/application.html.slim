@@ -13,8 +13,8 @@ html.has-aside-left.has-aside-mobile-transition.has-navbar-fixed-top.has-aside-e
     = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
   body
     #app
-      = render Layout::NavbarComponent.new
-      = render Layout::AsideComponent.new
-      = render Layout::FlashComponent.new
+      = render Layout::Navbar::Component.new
+      = render Layout::Aside::Component.new
+      = render Layout::Flash::Component.new
       = yield
-    = render Layout::FooterComponent.new
+    = render Layout::Footer::Component.new

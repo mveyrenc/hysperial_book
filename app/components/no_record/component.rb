@@ -2,6 +2,5 @@
 
 module NoRecord
   class Component < ApplicationComponent
-
   end
 end

@@ -1,0 +1,19 @@
+.box
+  = render FieldDisplay::Component.new(label: Book.human_attribute_name(:title), value: record_title)
+  = render FieldDisplay::Component.new(label: Book.human_attribute_name(:subtitle), value: record_subtitle)
+  = render FieldDisplay::Component.new(label: Book.human_attribute_name(:kind), value: record_kind_name)
+  = render FieldDisplay::Component.new(label: Book.human_attribute_name(:position), value: record_position)
+
+  .field.is-grouped.is-grouped-centered
+    - if policy(record).update?
+      .control
+        = link_to t("application.edit"),
+                edit_book_path(record),
+                class: "button is-primary is-small"
+    - if policy(record).destroy?
+      .control
+        = button_to t("application.delete"),
+                book_path(record),
+                method: :delete,
+                data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure")  },
+                class: "button is-danger is-small"

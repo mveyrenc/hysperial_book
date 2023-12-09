@@ -1,6 +1,6 @@
 = turbo_stream.prepend "records" do
   - @records.each do |record|
     = turbo_frame_tag record, class: "column is-one-third" do
-      = render(ContentTags::Components::CardComponent.new(record: record))
-= turbo_stream.update ContentTag.new, render(ContentTags::Components::NewTagButtonComponent.new)
+      = render(ContentTags::Components::Card::Component.new(record: record))
+= turbo_stream.update ContentTag.new, render(ContentTags::Components::NewButton::Component.new)
 

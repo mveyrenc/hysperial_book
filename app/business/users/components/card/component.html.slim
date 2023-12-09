@@ -1,0 +1,18 @@
+.box
+  = render FieldDisplay::Component.new(label: User.human_attribute_name(:email), value: record_email)
+  = render FieldDisplay::Component.new(label: User.human_attribute_name(:name), value: record_name)
+  = render FieldDisplay::Component.new(label: User.human_attribute_name(:role), value: record_role_name)
+
+  .field.is-grouped.is-grouped-centered
+    - if policy(record).update?
+      .control
+        = link_to t("application.edit"),
+                edit_user_path(record),
+                class: "button is-primary is-small"
+    - if policy(record).destroy?
+      .control
+        = button_to t("application.delete"),
+                user_path(record),
+                method: :delete,
+                data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure")  },
+                class: "button is-danger is-small"

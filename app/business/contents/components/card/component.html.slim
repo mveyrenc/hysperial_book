@@ -1,0 +1,24 @@
+.card
+  .card-header
+    p.card-header-title
+      = record_title
+  .card-image
+    figure.image.is-4by3
+      = image_tag record.thumbnail.file.variant(resize_to_fill: [400, 300])
+  .card-content
+    p.subtitle
+      = record_subtitle
+    = render FieldDisplay::Component.new(label: Content.human_attribute_name(:kind), value: record_kind_name)
+  .card-footer
+    - if policy(record).update?
+      .card-footer-item
+        = link_to t("application.edit"),
+                edit_content_path(record),
+                class: "button is-primary is-small"
+    - if policy(record).destroy?
+      .card-footer-item
+        = button_to t("application.delete"),
+                content_path(record),
+                method: :delete,
+                data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure")  },
+                class: "button is-danger is-small"

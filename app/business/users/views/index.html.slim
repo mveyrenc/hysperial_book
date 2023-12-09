@@ -1,9 +1,13 @@
-= render Layout::MainAreaComponent.new do |component|
+= render Layout::MainArea::Component.new do |component|
   - component.with_title do
     = t('.title')
   - component.with_main_section do
     = turbo_frame_tag "users", class: "columns is-multiline" do
-      - @records.records.each do |record|
-        = turbo_frame_tag record, class: "column is-half-tablet is-one-third-desktop" do
-          = render Users::Components::CardComponent.new(record: record)
+      - if @records.records.any?
+        - @records.records.each do |record|
+          = turbo_frame_tag record, class: "column is-half-tablet is-one-third-desktop" do
+            = render Users::Components::Card::Component.new(record: record)
+      - else
+        .column.is-full
+          = render NoRecord::Component.new
     = paginate @records.records
