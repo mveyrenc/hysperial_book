@@ -6,6 +6,10 @@ module Media
   class DocumentsController < MediaController
     protected
 
+    def model
+      Document
+    end
+
     def media_media_url
       media_documents_url
     end

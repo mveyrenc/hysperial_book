@@ -9,7 +9,7 @@ module Media
     # GET /media
     def index
       authorize Medium
-      @records = Media::Logics::Search.call(params)
+      @records = Media::Logics::Search.call(params.merge(model: model))
 
       render template: template_path
     end
@@ -53,6 +53,10 @@ module Media
 
     def template_path(action = nil)
       "media/views/#{action || action_name}"
+    end
+
+    def model
+      raise NotImplementedError
     end
 
     def media_media_url

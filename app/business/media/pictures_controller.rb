@@ -6,6 +6,10 @@ module Media
   class PicturesController < MediaController
     protected
 
+    def model
+      Picture
+    end
+
     def media_media_url
       media_pictures_url
     end

@@ -6,6 +6,9 @@ module Media
   class ScansController < MediaController
     protected
 
+    def model
+      Scan
+    end
     def media_media_url
       media_scans_url
     end
