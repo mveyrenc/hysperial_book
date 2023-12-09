@@ -1,0 +1,18 @@
+.box
+  = render FieldDisplayComponent.new(label: Medium.human_attribute_name(:type), value: record_type)
+  = render_document
+
+  / TODO: add edit and delete buttons
+  / .field.is-grouped.is-grouped-centered
+  /   - if policy(record).update?
+  /     .control
+  /       = link_to t("application.edit"),
+  /               edit_medium_path(record),
+  /               class: "button is-primary is-small"
+  /   - if policy(record).destroy?
+  /     .control
+  /       = button_to t("application.delete"),
+  /               medium_path(record),
+  /               method: :delete,
+  /               data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure")  },
+  /               class: "button is-danger is-small"

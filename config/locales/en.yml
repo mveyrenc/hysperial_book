@@ -49,6 +49,7 @@ en:
         sign_in: "Sign in"
         sign_up: "Sign up"
         log_out: "Log out"
+        contents: "Contents"
         books: "Books"
         tags: "Content tags"
         documents: "Documents"

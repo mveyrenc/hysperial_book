@@ -3,18 +3,18 @@
 # Book policy
 class BookPolicy < ApplicationPolicy
   def index?
-    user.admin_role? || user.super_admin_role?
+    grant_to_admin
   end
 
   def create?
-    user.admin_role? || user.super_admin_role?
+    grant_to_admin
   end
 
   def update?
-    user.admin_role? || user.super_admin_role?
+    grant_to_admin
   end
 
   def destroy?
-    user.admin_role? || user.super_admin_role?
+    grant_to_admin
   end
 end

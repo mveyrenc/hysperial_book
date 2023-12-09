@@ -39,7 +39,10 @@ class Content < ApplicationRecord
   friendly_id :title, use: :slugged
 
   belongs_to :book
-  belongs_to :thumbnail, class_name: 'Medium::Picture'
+
+  belongs_to :thumbnail, class_name: 'Picture'
+  accepts_nested_attributes_for :thumbnail
+
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
@@ -48,14 +51,13 @@ class Content < ApplicationRecord
   has_many :content_taggings, dependent: :destroy
   has_many :content_tags, through: :content_taggings
 
-  enum kind:
-       { article: 'article',
-         tutorial: 'tutorial',
-         ingredient: 'ingredient',
-         recipe: 'recipe',
-         menu: 'menu',
-         pattern: 'pattern' }, _suffix: true
-
   has_rich_text :short_description
   has_rich_text :description
+
+  ## Enumerables
+  enum kind: ContentKind.kinds, _suffix: true
+
+  def kind_name
+    ContentKind.human_attribute_name(kind)
+  end
 end

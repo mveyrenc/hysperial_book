@@ -1,0 +1,13 @@
+en:
+  contents:
+    views:
+      edit:
+        title: "Edit content"
+      index:
+        title: "Contents"
+      new:
+        title: "New content"
+    contents:
+      successfully_created: "Content was successfully created"
+      successfully_updated: "Content was successfully updated"
+      successfully_destroyed: "Content was successfully destroyed"

@@ -56,4 +56,22 @@ class ApplicationPolicy
 
     attr_reader :user, :scope
   end
+
+  private
+
+  def grant_to_super_admin
+    user.super_admin_role?
+  end
+
+  def grant_to_admin
+    user.admin_role? || user.super_admin_role?
+  end
+
+  def grant_to_contributor
+    user.contributor_role? || user.admin_role? || user.super_admin_role?
+  end
+
+  def grant_to_reader
+    user.reader_role? || user.contributor_role? || user.admin_role? || user.super_admin_role?
+  end
 end

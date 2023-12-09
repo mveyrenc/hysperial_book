@@ -24,6 +24,8 @@ Rails.application.routes.draw do
                sign_up: 'sign-up'
              }
 
+  resources :contents, controller: 'contents/contents'
+
   resources :users, except: %i[show new create], controller: 'users/users'
 
   resources :books, except: %i[show], controller: 'books/books'

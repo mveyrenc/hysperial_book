@@ -14,6 +14,8 @@ nav.navbar.is-light[role="navigation" aria-label="main navigation"]
       .navbar-start
         a.navbar-item[href="/"]
           = t('.home')
+          - if policy(Content).index?
+            = link_to t('.contents'), contents_path, class: "navbar-item"
         .navbar-item.has-dropdown.is-hoverable
           a.navbar-link
             = t('.more')
