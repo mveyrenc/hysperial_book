@@ -14,7 +14,8 @@
       .card-footer-item
         = link_to t("application.edit"),
                 edit_content_path(record),
-                class: "button is-primary is-small"
+                class: "button is-primary is-small",
+                target: "_top"
     - if policy(record).destroy?
       .card-footer-item
         = button_to t("application.delete"),

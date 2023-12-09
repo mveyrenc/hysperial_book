@@ -3,13 +3,14 @@
     = render FormErrors::Component.new(errors: record.errors)
     = f.text_field :title, autofocus: true
     = f.text_field :subtitle
-    = f.select :book_id, options_for_select(Book.all.map { |book| [book, book.id] }, record_book)
-    = f.select :kind, options_for_select(ContentKind.kinds.map { |key, value| [ContentKind.human_attribute_name(key), value] }, record_kind)
+    - if record.new_record?
+      = f.select :book_id, options_for_select(Book.all.map { |book| [book, book.id] }, record_book)
+      = f.select :kind, options_for_select(ContentKind.kinds.map { |key, value| [ContentKind.human_attribute_name(key), value] }, record_kind)
     = f.text_field :version
     = f.text_field :source_url
     = f.fields_for :thumbnail do |f_thumbnail|
       = f_thumbnail.hidden_field :file, value: record.thumbnail.file.signed_id if record.thumbnail and record.thumbnail.file.attached?
-      = f_thumbnail.file_field :file, direct_upload: true
+      = f_thumbnail.image_field :file, direct_upload: true, label: Content.human_attribute_name(:thumbnail)
 
     .field
       .buttons

@@ -22,6 +22,8 @@ module AppFormBuilder
     include AppFormBuilder::Inputs::Select
     include AppFormBuilder::Inputs::TextField
     include AppFormBuilder::Inputs::TextArea
+    include AppFormBuilder::Inputs::FileField
+    include AppFormBuilder::Inputs::ImageField
     include AppFormBuilder::Inputs::CheckBox
     include AppFormBuilder::Inputs::CollectionCheckBoxes
     include AppFormBuilder::Inputs::CollectionRadioButtons
