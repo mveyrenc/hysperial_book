@@ -16,7 +16,8 @@ module Media
         end
 
         def render_document
-          render NoRecord::Component.new unless record_file.attached?
+          return render NoRecord::Component.new unless record_file&.attached?
+
           if record_type == 'Document'
             link_to record_file
           else

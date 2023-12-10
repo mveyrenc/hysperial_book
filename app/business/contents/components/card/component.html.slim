@@ -9,10 +9,14 @@
         .level-item
           span.tag
             = record_kind_name
+    / - if record.thumbnail&.file&.attached?
   - if record.thumbnail and record.thumbnail.file.attached?
     .card-image
       figure.image.is-4by3
         = image_tag record.thumbnail.file.variant(resize_to_fill: [400, 300])
+  - else
+      = render Contents::Components::NoThumbnail::Component.new(record: record)
+
   - unless record_subtitle.blank?
     .card-content
       p.subtitle
@@ -24,16 +28,10 @@
           content_path(record),
           class: "button is-primary is-small",
           target: "_top"
-    / - if policy(record).update?
-    /   .card-footer-item
-    /     = link_to t("application.edit"),
-    /       edit_content_path(record),
-    /       class: "button is-primary is-small",
-    /       target: "_top"
-    / - if policy(record).destroy?
-    /   .card-footer-item
-    /     = button_to t("application.delete"),
-    /       content_path(record),
-    /       method: :delete,
-    /       data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure") },
-    /       class: "button is-danger is-small"
+        / - if policy(record).destroy?
+          /   .card-footer-item
+          /     = button_to t("application.delete"),
+          /       content_path(record),
+          /       method: :delete,
+          /       data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure") },
+          /       class: "button is-danger is-small"

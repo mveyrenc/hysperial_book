@@ -6,6 +6,8 @@
 #
 #  id               :uuid             not null, primary key
 #  ancestry         :string           not null
+#  ancestry_depth   :integer          default(0)
+#  children_count   :integer          default(0)
 #  position         :integer          default(0), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

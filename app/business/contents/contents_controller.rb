@@ -4,9 +4,9 @@
 module Contents
   # Contents controller
   class ContentsController < ApplicationController
-    before_action :set_record, only: %i[edit update destroy]
+    before_action :set_record, only: %i[show edit update destroy]
     before_action :set_new_record, only: %i[create new]
-    before_action :authorize_record, only: %i[create new edit update destroy]
+    before_action :authorize_record, only: %i[show create new edit update destroy]
 
     # GET /contents
     def index
@@ -16,10 +16,14 @@ module Contents
       render template: template_path
     end
 
+    def show
+      respond_to do |format|
+        format.html { render template: template_path }
+      end
+    end
+
     # GET /contents/new
     def new
-      @record.build_thumbnail
-
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -37,7 +41,7 @@ module Contents
       result = Contents::Logics::Create.call(record: @record, params: strong_params.to_h, current_user:)
       if result.success?
         respond_to do |format|
-          format.html { redirect_to contents_url, notice: t('.successfully_created') }
+          format.html { redirect_to edit_content_url(@record), notice: t('.successfully_created') }
           format.turbo_stream { render template: template_path }
         end
       else
@@ -47,11 +51,11 @@ module Contents
 
     # PATCH/PUT /contents/:id
     def update
-      result = Contents::Logics::Update.call(record: @record, params: strong_params.to_h)
+      result = Contents::Logics::Update.call(record: @record, params: strong_params.to_h, current_user:)
 
       if result.success?
         respond_to do |format|
-          format.html { redirect_to contents_url, notice: t('.successfully_updated') }
+          format.html { redirect_to content_url(@record), notice: t('.successfully_updated') }
           format.turbo_stream { render template: template_path }
         end
       else
@@ -83,7 +87,7 @@ module Contents
       params
         .require(:content)
         .permit(:book_id, :title, :subtitle, :kind, :version, :source_url,
-                thumbnail_attributes: [:file])
+                thumbnail_attributes: %i[id file])
     end
   end
 end

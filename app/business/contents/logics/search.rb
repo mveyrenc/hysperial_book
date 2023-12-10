@@ -9,7 +9,7 @@ module Contents
       include SearchConcern
 
       def call
-        context.records = Content.left_joins(:thumbnail).includes(:thumbnail).order(:created_at)
+        context.records = Content.left_joins(:thumbnail).includes(:thumbnail).order(created_at: :desc)
       end
     end
   end

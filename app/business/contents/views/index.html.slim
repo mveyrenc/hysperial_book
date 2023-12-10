@@ -2,8 +2,9 @@
   - component.with_title do
     = t('.title')
   - component.with_header_actions do
-    = turbo_frame_tag Content.new do
-      = render Contents::Components::NewButton::Component.new
+    - if policy(Content).create?
+      = turbo_frame_tag Content.new do
+        = render Contents::Components::NewButton::Component.new
   - component.with_main_section do
     = turbo_frame_tag "contents", class: "columns is-multiline" do
       - if @records.records.any?

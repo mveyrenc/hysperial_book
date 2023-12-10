@@ -59,9 +59,7 @@ class Content < ApplicationRecord
   end
 
   def reject_thumbnail(attributes)
-    Rails.logger.debug '**************'
-    Rails.logger.debug attributes.inspect
-    attributes['file'].blank?
+    attributes['file'].nil?
   end
 
   ## Enumerables

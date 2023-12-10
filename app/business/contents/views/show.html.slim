@@ -1,0 +1,27 @@
+= render Layout::MainArea::Component.new do |component|
+  - component.with_title do
+    .level
+      .level-left
+        .level-item
+          h1.title
+            = @record.title
+  - component.with_header_actions do
+    .level
+      .level-left
+      .level-right
+        - if policy(@record).update?
+          .level-item
+            = link_to t("application.edit"),
+              edit_content_path(@record),
+              class: "button is-primary is-outlined",
+              target: "_top"
+        - if policy(@record).destroy?
+          .level-item
+            = button_to t("application.delete"),
+              content_path(@record),
+              method: :delete,
+              data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure") },
+              class: "button is-danger is-small is-outlined"
+  - component.with_main_section do
+    = turbo_frame_tag @record do
+      = render Contents::Components::Detail::Component.new(record: @record)
