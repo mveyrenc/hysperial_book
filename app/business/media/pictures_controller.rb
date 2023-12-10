@@ -19,7 +19,9 @@ module Media
     end
 
     def strong_params
-      params.require(:picture).permit(:file)
+      params
+        .require(:picture)
+        .permit(:file)
     end
   end
 end

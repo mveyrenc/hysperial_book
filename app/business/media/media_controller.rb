@@ -5,6 +5,8 @@ module Media
   # Media controller
   class MediaController < ApplicationController
     before_action :set_record, only: %i[edit update destroy]
+    before_action :set_new_record, only: %i[create new]
+    before_action :authorize_record, only: %i[create new edit update destroy]
 
     # GET /media
     def index
@@ -16,8 +18,6 @@ module Media
 
     # GET /media/:id/edit
     def edit
-      authorize @record
-
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -25,7 +25,6 @@ module Media
 
     # PATCH/PUT /media/:id
     def update
-      authorize @record
       result = Media::Logics::Update.call(medium: @record, params: strong_params.to_h)
 
       if result.success?
@@ -40,7 +39,6 @@ module Media
 
     # DELETE /media/:id
     def destroy
-      authorize @record
       Media::Logics::Destroy.call(medium: @record)
 
       respond_to do |format|
@@ -64,6 +62,10 @@ module Media
     end
 
     def set_record
+      raise NotImplementedError
+    end
+
+    def set_new_record
       raise NotImplementedError
     end
 

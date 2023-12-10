@@ -5,6 +5,8 @@ module Contents
   # Contents controller
   class ContentsController < ApplicationController
     before_action :set_record, only: %i[edit update destroy]
+    before_action :set_new_record, only: %i[create new]
+    before_action :authorize_record, only: %i[create new edit update destroy]
 
     # GET /contents
     def index
@@ -16,8 +18,6 @@ module Contents
 
     # GET /contents/new
     def new
-      @record = Content.new
-      authorize @record
       @record.build_thumbnail
 
       respond_to do |format|
@@ -27,8 +27,6 @@ module Contents
 
     # GET /contents/:id/edit
     def edit
-      authorize @record
-
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -36,14 +34,7 @@ module Contents
 
     # POST /contents
     def create
-      @record = Content.new
-      authorize @record
-
-      result = Contents::Logics::Create.call(
-        record: @record,
-        params: strong_params.to_h,
-        current_user:
-      )
+      result = Contents::Logics::Create.call(record: @record, params: strong_params.to_h, current_user:)
       if result.success?
         respond_to do |format|
           format.html { redirect_to contents_url, notice: t('.successfully_created') }
@@ -56,7 +47,6 @@ module Contents
 
     # PATCH/PUT /contents/:id
     def update
-      authorize @record
       result = Contents::Logics::Update.call(record: @record, params: strong_params.to_h)
 
       if result.success?
@@ -71,7 +61,6 @@ module Contents
 
     # DELETE /contents/:id
     def destroy
-      authorize @record
       Contents::Logics::Destroy.call(record: @record)
 
       respond_to do |format|
@@ -86,9 +75,15 @@ module Contents
       @record = Content.friendly.find(params[:id])
     end
 
+    def set_new_record
+      @record = Content.new
+    end
+
     def strong_params
-      params.require(:content).permit(:book_id, :title, :subtitle, :kind, :version, :source_url,
-                                      thumbnail_attributes: [:file])
+      params
+        .require(:content)
+        .permit(:book_id, :title, :subtitle, :kind, :version, :source_url,
+                thumbnail_attributes: [:file])
     end
   end
 end

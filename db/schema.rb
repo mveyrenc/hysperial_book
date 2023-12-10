@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_15_100555) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_15_084034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -166,7 +166,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_15_100555) do
     t.uuid "book_id", null: false
     t.string "version"
     t.string "source_url"
-    t.uuid "thumbnail_id", null: false
+    t.uuid "thumbnail_id"
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false

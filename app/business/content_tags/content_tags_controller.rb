@@ -5,6 +5,8 @@ module ContentTags
   # ContentTags controller
   class ContentTagsController < ApplicationController
     before_action :set_record, only: %i[edit update destroy]
+    before_action :set_new_record, only: %i[create new]
+    before_action :authorize_record, only: %i[create new edit update destroy]
 
     # GET /tags
     def index
@@ -16,9 +18,6 @@ module ContentTags
 
     # GET /tags/new
     def new
-      @record = ContentTag.new
-      authorize @record
-
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -26,8 +25,6 @@ module ContentTags
 
     # GET /tags/:id/edit
     def edit
-      authorize @record
-
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -35,14 +32,7 @@ module ContentTags
 
     # POST /tags
     def create
-      @record = ContentTag.new
-      authorize @record
-
-      result = ContentTags::Logics::Create.call(
-        record: @record,
-        params: strong_params.to_h,
-        current_user:
-      )
+      result = ContentTags::Logics::Create.call(record: @record, params: strong_params.to_h, current_user:)
       if result.success?
         @records = result.records
         respond_to do |format|
@@ -56,12 +46,7 @@ module ContentTags
 
     # PATCH/PUT /tags/:id
     def update
-      authorize @record
-      result = ContentTags::Logics::Update.call(
-        record: @record,
-        params: strong_params.to_h,
-        current_user:
-      )
+      result = ContentTags::Logics::Update.call(record: @record, params: strong_params.to_h, current_user:)
 
       if result.success?
         respond_to do |format|
@@ -75,7 +60,6 @@ module ContentTags
 
     # DELETE /tags/:id
     def destroy
-      authorize @record
       ContentTags::Logics::Destroy.call(record: @record)
 
       respond_to do |format|
@@ -90,8 +74,14 @@ module ContentTags
       @record = ContentTag.friendly.find(params[:id])
     end
 
+    def set_new_record
+      @record = ContentTag.new
+    end
+
     def strong_params
-      params.require(:content_tag).permit(:book_id, :kind, :value)
+      params
+        .require(:content_tag)
+        .permit(:book_id, :kind, :value)
     end
   end
 end

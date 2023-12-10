@@ -5,10 +5,11 @@ module Users
   # Users controller
   class UsersController < ApplicationController
     before_action :set_record, only: %i[edit update destroy]
+    before_action :set_new_record, only: %i[create new]
+    before_action :authorize_record, only: %i[create new edit update destroy]
 
     # GET /users
     def index
-      authorize User
       @records = Users::Logics::Search.call(params)
 
       render template: template_path
@@ -16,8 +17,6 @@ module Users
 
     # GET /users/:id/edit
     def edit
-      authorize @record
-
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -25,7 +24,6 @@ module Users
 
     # PATCH/PUT /users/:id
     def update
-      authorize @record
       result = Users::Logics::Update.call(user: @record, params: strong_params.to_h)
 
       if result.success?
@@ -40,7 +38,6 @@ module Users
 
     # DELETE /users/:id
     def destroy
-      authorize @record
       Users::Logics::Destroy.call(user: @record)
 
       respond_to do |format|
@@ -53,6 +50,10 @@ module Users
 
     def set_record
       @record = User.find(params[:id])
+    end
+
+    def set_new_record
+      raise NotImplementedError
     end
 
     def strong_params

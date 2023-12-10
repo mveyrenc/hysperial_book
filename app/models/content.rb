@@ -15,7 +15,7 @@
 #  updated_at    :datetime         not null
 #  book_id       :uuid             not null
 #  created_by_id :uuid             not null
-#  thumbnail_id  :uuid             not null
+#  thumbnail_id  :uuid
 #  updated_by_id :uuid             not null
 #
 # Indexes
@@ -40,7 +40,7 @@ class Content < ApplicationRecord
 
   belongs_to :book
 
-  belongs_to :thumbnail, class_name: 'Picture', dependent: :destroy
+  belongs_to :thumbnail, class_name: 'Picture', dependent: :destroy, optional: true
   accepts_nested_attributes_for :thumbnail, reject_if: :reject_thumbnail
 
   belongs_to :created_by, class_name: 'User'
@@ -59,8 +59,8 @@ class Content < ApplicationRecord
   end
 
   def reject_thumbnail(attributes)
-    puts "**************"
-    puts attributes.inspect
+    Rails.logger.debug '**************'
+    Rails.logger.debug attributes.inspect
     attributes['file'].blank?
   end
 

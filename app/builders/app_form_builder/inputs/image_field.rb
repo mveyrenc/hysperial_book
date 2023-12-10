@@ -30,6 +30,8 @@ module AppFormBuilder
         end
 
         def append_file_name(name)
+          return if object.nil?
+
           value = object.public_send(name)
           return unless !value.nil? && value.record.persisted? && value.record.file.attached?
 

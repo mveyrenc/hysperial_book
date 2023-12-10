@@ -5,6 +5,8 @@ module Books
   # Books controller
   class BooksController < ApplicationController
     before_action :set_record, only: %i[edit update destroy]
+    before_action :set_new_record, only: %i[create new]
+    before_action :authorize_record, only: %i[create new edit update destroy]
 
     # GET /books
     def index
@@ -16,9 +18,6 @@ module Books
 
     # GET /books/new
     def new
-      @record = Book.new
-      authorize @record
-
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -26,8 +25,6 @@ module Books
 
     # GET /books/:id/edit
     def edit
-      authorize @record
-
       respond_to do |format|
         format.html { render template: template_path }
       end
@@ -35,9 +32,6 @@ module Books
 
     # POST /books
     def create
-      @record = Book.new
-      authorize @record
-
       result = Books::Logics::Create.call(record: @record, params: strong_params.to_h)
       if result.success?
         respond_to do |format|
@@ -51,7 +45,6 @@ module Books
 
     # PATCH/PUT /books/:id
     def update
-      authorize @record
       result = Books::Logics::Update.call(record: @record, params: strong_params.to_h)
 
       if result.success?
@@ -66,7 +59,6 @@ module Books
 
     # DELETE /books/:id
     def destroy
-      authorize @record
       Books::Logics::Destroy.call(record: @record)
 
       respond_to do |format|
@@ -81,8 +73,14 @@ module Books
       @record = Book.friendly.find(params[:id])
     end
 
+    def set_new_record
+      @record = Book.new
+    end
+
     def strong_params
-      params.require(:book).permit(:title, :subtitle, :kind, :position)
+      params
+        .require(:book)
+        .permit(:title, :subtitle, :kind, :position)
     end
   end
 end
