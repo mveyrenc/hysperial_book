@@ -32,8 +32,8 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentNode < ApplicationRecord
-  belongs_to :content
-  belongs_to :content_block
+  belongs_to :content, presence: true, if: -> { is_root? }
+  belongs_to :content_block, presence: true, if: -> { has_parent? }
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
