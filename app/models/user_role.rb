@@ -10,6 +10,6 @@ class UserRole
   end
 
   def self.roles
-    Hash[ROLES.index_by(&:to_sym)]
+    ROLES.index_by(&:to_sym).to_h
   end
 end

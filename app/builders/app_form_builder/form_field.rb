@@ -5,21 +5,21 @@ module AppFormBuilder
   module FormField
     extend ActiveSupport::Concern
 
-    def form_field(*args, &block)
+    def form_field(*args, &)
       name = args.first
       options = args.extract_options!
 
       content_tag(:div, class: form_field_classes(options)) do
         concat field_label(name, options) unless options[:hide_label]
-        concat field_control(&block)
+        concat field_control(&)
         concat field_help(name, options)
       end
     end
 
     private
 
-    def field_control(&block)
-      content_tag(:div, class: 'control', &block)
+    def field_control(&)
+      content_tag(:div, class: 'control', &)
     end
 
     def field_help(_name, options)

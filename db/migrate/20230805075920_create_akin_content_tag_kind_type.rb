@@ -6,7 +6,7 @@
 #
 class CreateAkinContentTagKindType < ActiveRecord::Migration[7.0]
   def up
-    execute <<-SQL
+    execute <<-SQL.squish
       CREATE TYPE akin_content_tag_kind AS ENUM (
           'direct',
           'followable',
@@ -16,7 +16,7 @@ class CreateAkinContentTagKindType < ActiveRecord::Migration[7.0]
   end
 
   def down
-    execute <<-SQL
+    execute <<-SQL.squish
       DROP TYPE akin_content_tag_kind;
     SQL
   end

@@ -76,6 +76,5 @@ class ContentTag < ApplicationRecord
 
   ## Validations
   validates :kind, presence: true
-  validates :book, presence: true
   validates :value, presence: true, uniqueness: { scope: %i[kind book] }
 end

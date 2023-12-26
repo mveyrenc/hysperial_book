@@ -30,7 +30,7 @@
 class AddRoleToUsers < ActiveRecord::Migration[7.0]
   # rubocop:disable Metrics/MethodLength
   def up
-    execute <<-SQL
+    execute <<-SQL.squish
       CREATE TYPE user_role AS ENUM (
           'super_admin',
           'admin',
@@ -47,7 +47,7 @@ class AddRoleToUsers < ActiveRecord::Migration[7.0]
 
   def down
     remove_column :users, :role
-    execute <<-SQL
+    execute <<-SQL.squish
       DROP TYPE user_role;
     SQL
   end

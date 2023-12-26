@@ -6,7 +6,7 @@
 #
 class CreateContentKindType < ActiveRecord::Migration[7.0]
   def up
-    execute <<-SQL
+    execute <<-SQL.squish
       CREATE TYPE content_kind AS ENUM (
           'article',
           'tutorial',
@@ -19,7 +19,7 @@ class CreateContentKindType < ActiveRecord::Migration[7.0]
   end
 
   def down
-    execute <<-SQL
+    execute <<-SQL.squish
       DROP TYPE content_kind;
     SQL
   end

@@ -15,7 +15,7 @@
 #  updated_at    :datetime         not null
 #  book_id       :uuid             not null
 #  created_by_id :uuid             not null
-#  thumbnail_id  :uuid
+#  thumbnail_id  :uuid             not null
 #  updated_by_id :uuid             not null
 #
 # Indexes

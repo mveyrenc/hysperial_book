@@ -125,7 +125,7 @@ gem 'slim-rails', '~> 3.6'
 # https://github.com/collectiveidea/interactor
 # https://github.com/collectiveidea/interactor-rails
 gem 'interactor-rails', '~> 2.2'
-# TODO replace by https://github.com/aaronlasseigne/active_interaction
+# TODO: replace by https://github.com/aaronlasseigne/active_interaction
 
 # https://viewcomponent.org/guide/getting-started.html
 gem 'view_component', '~> 3.5'
@@ -143,8 +143,8 @@ gem 'acts_as_list', '~> 1.1'
 # https://github.com/norman/friendly_id
 gem 'friendly_id', '~> 5.5'
 
-# https://github.com/stefankroes/ancestry
-gem 'ancestry', '~> 4.3'
-
 # https://github.com/kaminari/kaminari
 gem 'kaminari', '~> 1.2'
+
+# https://github.com/collectiveidea/awesome_nested_set
+gem 'awesome_nested_set', '~> 3.6'

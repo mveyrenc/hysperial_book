@@ -18,7 +18,7 @@ module ContentTags
         protected
 
         def book_select_values
-          Book.all.order(position: :asc)
+          Book.order(position: :asc)
         end
       end
     end

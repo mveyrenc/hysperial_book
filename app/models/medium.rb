@@ -27,6 +27,4 @@ class Medium < ApplicationRecord
   belongs_to :updated_by, class_name: 'User'
 
   validates :type, presence: true
-  validates :created_by, presence: true
-  validates :updated_by, presence: true
 end

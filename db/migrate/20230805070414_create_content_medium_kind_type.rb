@@ -6,7 +6,7 @@
 #
 class CreateContentMediumKindType < ActiveRecord::Migration[7.0]
   def up
-    execute <<-SQL
+    execute <<-SQL.squish
       CREATE TYPE content_medium_kind AS ENUM (
           'document',
           'scanned_document',
@@ -18,7 +18,7 @@ class CreateContentMediumKindType < ActiveRecord::Migration[7.0]
   end
 
   def down
-    execute <<-SQL
+    execute <<-SQL.squish
       DROP TYPE content_medium_kind;
     SQL
   end

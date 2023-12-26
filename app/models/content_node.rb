@@ -7,13 +7,17 @@
 #  id               :uuid             not null, primary key
 #  ancestry         :string           not null
 #  ancestry_depth   :integer          default(0)
-#  children_count   :integer          default(0)
+#  children_count   :integer          default(0), not null
+#  depth            :integer
+#  lft              :uuid
 #  position         :integer          default(0), not null
+#  rgt              :uuid
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  content_block_id :uuid
 #  content_id       :uuid
 #  created_by_id    :uuid             not null
+#  parent_id        :uuid
 #  updated_by_id    :uuid             not null
 #
 # Indexes
@@ -32,12 +36,13 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentNode < ApplicationRecord
-  belongs_to :content, presence: true, if: -> { is_root? }
-  belongs_to :content_block, presence: true, if: -> { has_parent? }
+  belongs_to :content, validate: { presence: true, if: -> { is_root? } }
+  belongs_to :content_block, validate: { presence: true, if: -> { has_parent? } }
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  has_ancestry orphan_strategy: :destroy, cache_depth: true, counter_cache: true,
-               primary_key_format: '[-A-Fa-f0-9]{36}', update_strategy: :sql
-  acts_as_list scope: [:ancestry]
+  acts_as_nested_set scope: [:content_id],
+                     dependent: :destroy,
+                     counter_cache: :children_count,
+                     order_column: :position
 end

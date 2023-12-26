@@ -7,7 +7,7 @@
 class CreateContentBlockKindType < ActiveRecord::Migration[7.0]
   # rubocop:disable Metrics/MethodLength
   def up
-    execute <<-SQL
+    execute <<-SQL.squish
       CREATE TYPE content_block_kind AS ENUM (
           'rich_text',
           'yield',
@@ -31,7 +31,7 @@ class CreateContentBlockKindType < ActiveRecord::Migration[7.0]
   # rubocop:enable Metrics/MethodLength
 
   def down
-    execute <<-SQL
+    execute <<-SQL.squish
       DROP TYPE content_block_kind;
     SQL
   end

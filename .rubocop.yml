@@ -4,6 +4,8 @@ require:
   - rubocop-rspec
   - rubocop-factory_bot
 
+AllCops:
+  NewCops: enable
 
 Style/Documentation:
   Enabled: false

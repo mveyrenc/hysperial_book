@@ -6,7 +6,7 @@
 #
 class CreateBookKindType < ActiveRecord::Migration[7.0]
   def up
-    execute <<-SQL
+    execute <<-SQL.squish
       CREATE TYPE book_kind AS ENUM (
           'cooking',
           'care',
@@ -16,7 +16,7 @@ class CreateBookKindType < ActiveRecord::Migration[7.0]
   end
 
   def down
-    execute <<-SQL
+    execute <<-SQL.squish
       DROP TYPE book_kind;
     SQL
   end

@@ -10,6 +10,6 @@ class ContentKind
   end
 
   def self.kinds
-    Hash[KINDS.index_by(&:to_sym)]
+    KINDS.index_by(&:to_sym).to_h
   end
 end
