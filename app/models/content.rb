@@ -63,7 +63,7 @@ class Content < ApplicationRecord
   end
 
   ## Enumerables
-  enum kind: ContentKind.kinds, _suffix: true
+  enum :kind, ContentKind.kinds, suffix: true
 
   def kind_name
     ContentKind.human_attribute_name(kind)

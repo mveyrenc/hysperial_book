@@ -27,28 +27,14 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_role                  (role)
 #
-class AddRoleToUsers < ActiveRecord::Migration[7.0]
-  # rubocop:disable Metrics/MethodLength
-  def up
-    execute <<-SQL.squish
-      CREATE TYPE user_role AS ENUM (
-          'super_admin',
-          'admin',
-          'contributor',
-          'reader',
-          'noob'
-          )
-    SQL
+class AddRoleToUsers < ActiveRecord::Migration[8.0]
+  def change
+    create_enum :user_role, %w[super_admin admin contributor reader noob]
 
-    add_column :users, :role, :user_role
-    add_index :users, :role
-  end
-  # rubocop:enable Metrics/MethodLength
-
-  def down
-    remove_column :users, :role
-    execute <<-SQL.squish
-      DROP TYPE user_role;
-    SQL
+    safety_assured do
+      change_table :users do |t|
+        t.enum :role, enum_type: :user_role, default: :noob, index: true, null: false
+      end
+    end
   end
 end

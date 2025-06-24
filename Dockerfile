@@ -1,4 +1,4 @@
-FROM ruby:3.2.2
+FROM ruby:3.4.4
 
 ARG USERID
 ARG GROUPID
@@ -13,21 +13,20 @@ RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr
     && echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update -qq
 RUN apt-get install -y nodejs yarn postgresql-client imagemagick libvips poppler-utils ffmpeg
-#RUN apt-get install -y gcc g++ make
+RUN gem update bundler
 
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
+#COPY --chown=docker:docker Gemfile /app
+#COPY --chown=docker:docker Gemfile.lock /app
+#COPY --chown=docker:docker vendor /app
+#COPY --chown=docker:docker package.json /app
+#COPY --chown=docker:docker yarn.lock /app
 
+VOLUME /app
 WORKDIR /app
 
-USER docker
 
-COPY --chown=docker:docker . /app
-
-RUN bundle install
-
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "/app/entrypoint.sh"]
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]
 
 EXPOSE 3000

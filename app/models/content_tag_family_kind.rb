@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-class ContentTagKind
+class ContentTagFamilyKind
   extend ActiveModel::Translation
 
-  KINDS = %w[main_ingredients seasons special_occasions dish_type world_region
-             special_diets sources chefs authors meals courses].freeze
+  KINDS = %w[ingredient season occasion category geographic_area restriction source author thematic].freeze
 
   def initialize(kind)
     @kind = kind

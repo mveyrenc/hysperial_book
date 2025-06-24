@@ -31,7 +31,7 @@ class User < ApplicationRecord
   after_initialize :set_defaults
 
   ## Enumerables
-  enum role: UserRole.roles, _suffix: true
+  enum :role, UserRole.roles, suffix: true
 
   def role_name
     UserRole.human_attribute_name(role)

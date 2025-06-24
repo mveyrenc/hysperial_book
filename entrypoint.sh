@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# install gems
+bundle install --local
+
 # install yarn package
 yarn install
 

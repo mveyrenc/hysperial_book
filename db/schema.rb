@@ -10,19 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_26_111245) do
+ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
-  enable_extension "plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "akin_content_tag_kind", ["direct", "followable", "computed"]
   create_enum "book_kind", ["cooking", "care", "fabric_art"]
-  create_enum "content_block_kind", ["rich_text", "yield", "divisions_summary", "division", "equipment", "ingredients_summary", "ingredients", "ingredient", "supplies", "tools", "times", "how_to_section", "step", "direction", "nutrition", "notes", "comment"]
   create_enum "content_kind", ["article", "tutorial", "ingredient", "recipe", "menu", "pattern"]
   create_enum "content_medium_kind", ["document", "scanned_document", "before_picture", "during_picture", "after_picture"]
-  create_enum "content_tag_kind", ["main_ingredients", "seasons", "special_occasions", "dish_type", "world_region", "special_diets", "sources", "chefs", "authors", "meals", "courses", "thematic"]
+  create_enum "content_tag_family_kind", ["ingredient", "season", "occasion", "category", "geographic_area", "restriction", "source", "author", "thematic"]
   create_enum "user_role", ["super_admin", "admin", "contributor", "reader", "noob"]
 
   create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -85,59 +84,35 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_111245) do
     t.index ["slug"], name: "index_books_on_slug", unique: true
   end
 
-  create_table "content_blocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.enum "kind", null: false, enum_type: "content_block_kind"
-    t.uuid "content_id", null: false
-    t.jsonb "raw_data", default: {}, null: false
-    t.jsonb "settings", default: {}, null: false
-    t.jsonb "processed_data", default: {}, null: false
-    t.text "text"
-    t.string "text_format"
-    t.uuid "created_by_id", null: false
-    t.uuid "updated_by_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["content_id"], name: "index_content_blocks_on_content_id"
-    t.index ["created_by_id"], name: "index_content_blocks_on_created_by_id"
-    t.index ["kind"], name: "index_content_blocks_on_kind"
-    t.index ["updated_by_id"], name: "index_content_blocks_on_updated_by_id"
-  end
-
   create_table "content_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.enum "kind", null: false, enum_type: "content_medium_kind"
-    t.uuid "content_block_id", null: false
+    t.uuid "content_id", null: false
     t.uuid "medium_id", null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["content_block_id"], name: "index_content_media_on_content_block_id"
+    t.index ["content_id"], name: "index_content_media_on_content_id"
     t.index ["created_by_id"], name: "index_content_media_on_created_by_id"
     t.index ["kind"], name: "index_content_media_on_kind"
     t.index ["medium_id"], name: "index_content_media_on_medium_id"
     t.index ["updated_by_id"], name: "index_content_media_on_updated_by_id"
   end
 
-  create_table "content_nodes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "ancestry", null: false, collation: "C"
-    t.integer "position", default: 0, null: false
-    t.uuid "content_id"
-    t.uuid "content_block_id"
+  create_table "content_tag_families", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.enum "kind", null: false, enum_type: "content_tag_family_kind"
+    t.uuid "book_id", null: false
+    t.string "slug", null: false
+    t.string "title", null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "ancestry_depth", default: 0
-    t.integer "children_count", default: 0, null: false
-    t.uuid "parent_id"
-    t.uuid "lft"
-    t.uuid "rgt"
-    t.integer "depth"
-    t.index ["ancestry"], name: "index_content_nodes_on_ancestry"
-    t.index ["content_block_id"], name: "index_content_nodes_on_content_block_id"
-    t.index ["content_id"], name: "index_content_nodes_on_content_id"
-    t.index ["created_by_id"], name: "index_content_nodes_on_created_by_id"
-    t.index ["updated_by_id"], name: "index_content_nodes_on_updated_by_id"
+    t.index ["book_id"], name: "index_content_tag_families_on_book_id"
+    t.index ["created_by_id"], name: "index_content_tag_families_on_created_by_id"
+    t.index ["kind"], name: "index_content_tag_families_on_kind"
+    t.index ["slug"], name: "index_content_tag_families_on_slug", unique: true
+    t.index ["updated_by_id"], name: "index_content_tag_families_on_updated_by_id"
   end
 
   create_table "content_taggings", id: false, force: :cascade do |t|
@@ -148,20 +123,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_111245) do
   end
 
   create_table "content_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.enum "kind", null: false, enum_type: "content_tag_kind"
-    t.uuid "book_id", null: false
+    t.uuid "content_tag_family_id", null: false
     t.string "slug", null: false
-    t.string "value"
+    t.string "title"
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_content_tags_on_book_id"
+    t.index ["content_tag_family_id"], name: "index_content_tags_on_content_tag_family_id"
     t.index ["created_by_id"], name: "index_content_tags_on_created_by_id"
-    t.index ["kind"], name: "index_content_tags_on_kind"
     t.index ["slug"], name: "index_content_tags_on_slug", unique: true
+    t.index ["title", "content_tag_family_id"], name: "index_content_tags_on_title_and_content_tag_family_id", unique: true
     t.index ["updated_by_id"], name: "index_content_tags_on_updated_by_id"
-    t.index ["value", "kind", "book_id"], name: "index_content_tags_on_value_and_kind_and_book_id", unique: true
   end
 
   create_table "contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -231,20 +204,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_111245) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "akin_content_tags", "content_tags", column: "related_id", on_delete: :cascade
   add_foreign_key "akin_content_tags", "content_tags", column: "relater_id", on_delete: :cascade
-  add_foreign_key "content_blocks", "contents"
-  add_foreign_key "content_blocks", "users", column: "created_by_id", on_delete: :restrict
-  add_foreign_key "content_blocks", "users", column: "updated_by_id", on_delete: :restrict
-  add_foreign_key "content_media", "content_blocks"
+  add_foreign_key "content_media", "contents"
   add_foreign_key "content_media", "media"
   add_foreign_key "content_media", "users", column: "created_by_id", on_delete: :restrict
   add_foreign_key "content_media", "users", column: "updated_by_id", on_delete: :restrict
-  add_foreign_key "content_nodes", "content_blocks"
-  add_foreign_key "content_nodes", "contents"
-  add_foreign_key "content_nodes", "users", column: "created_by_id", on_delete: :restrict
-  add_foreign_key "content_nodes", "users", column: "updated_by_id", on_delete: :restrict
+  add_foreign_key "content_tag_families", "books"
+  add_foreign_key "content_tag_families", "users", column: "created_by_id", on_delete: :restrict
+  add_foreign_key "content_tag_families", "users", column: "updated_by_id", on_delete: :restrict
   add_foreign_key "content_taggings", "content_tags", on_delete: :cascade
   add_foreign_key "content_taggings", "contents", on_delete: :cascade
-  add_foreign_key "content_tags", "books"
+  add_foreign_key "content_tags", "content_tag_families"
   add_foreign_key "content_tags", "users", column: "created_by_id", on_delete: :restrict
   add_foreign_key "content_tags", "users", column: "updated_by_id", on_delete: :restrict
   add_foreign_key "contents", "books"

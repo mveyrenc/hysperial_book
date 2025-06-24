@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Create users table
-class DeviseCreateUsers < ActiveRecord::Migration[7.0]
+class DeviseCreateUsers < ActiveRecord::Migration[8.0]
   # rubocop:disable Metrics/MethodLength
   def change
     create_table :users, id: :uuid do |t|

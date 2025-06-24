@@ -2,13 +2,13 @@
   = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
     - if record.new_record?
-      = f.collection_radio_buttons :book_id, book_select_values, :to_key, :to_s
-      = f.select :kind, options_for_select(ContentTagKind.kinds.map { |key, value| [ContentTagKind.human_attribute_name(key), value] }, record_kind)
-      = f.text_area :value, help: t('.value.help')
+      = f.collection_radio_buttons :content_tag_family_id, content_tag_family_select_values, :to_key, :to_s
+      / = f.select :kind, options_for_select(ContentTagKind.kinds.map { |key, value| [ContentTagKind.human_attribute_name(key), value] }, record_kind)
+      = f.text_area :title, help: t('.title.help')
     - else
-      = render FieldDisplay::Component.new(label: ContentTag.human_attribute_name(:book), value: record_book)
-      = f.select :kind, options_for_select(ContentTagKind.kinds.map { |key, value| [ContentTagKind.human_attribute_name(key), value] }, record_kind)
-      = f.text_field :value
+      = render FieldDisplay::Component.new(label: ContentTag.human_attribute_name(:content_tag_family), value: record_content_tag_family)
+      / = f.select :kind, options_for_select(ContentTagKind.kinds.map { |key, value| [ContentTagKind.human_attribute_name(key), value] }, record_kind)
+      = f.text_field :title
 
 
     .field

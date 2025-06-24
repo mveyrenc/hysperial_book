@@ -22,7 +22,7 @@
 #  fk_rails_...  (created_by_id => users.id) ON DELETE => restrict
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
-class CreateMedia < ActiveRecord::Migration[7.0]
+class CreateMedia < ActiveRecord::Migration[8.0]
   def change
     create_table :media, id: :uuid do |t|
       t.string :type, null: false, index: true

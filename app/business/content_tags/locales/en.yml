@@ -6,7 +6,7 @@ en:
       index:
         title: "Content tags"
       new:
-        title: "New content tags"
+        title: "New content tag"
     content_tags:
       successfully_created: "Content tag was successfully created"
       successfully_updated: "Content tag was successfully updated"

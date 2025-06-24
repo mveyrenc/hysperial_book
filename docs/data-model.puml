@@ -108,12 +108,12 @@
     }
 
     enum TagKind {
-        main_ingredients: Ingrédients principaux (légumes, viande, poisson, tomate, poulet, etc.)
+        ingredient: Ingrédients principaux (légumes, viande, poisson, tomate, poulet, etc.)
         seasons: Saisons (printemps, été, automne, hiver, janvier, février, etc.)
-        special_occasions: Occasions spéciales (Noël, Pâques, etc.)
-        dish_type: Type de plat (gratin, soupe, etc.)
-        world_region: Région du monde (Asie, Europe, France, Lyon, etc.)
-        special_diets: Régimes spéciaux (végétarien, végétalien, sans gluten, allergies, etc.)
+        occasion: Occasions spéciales (Noël, Pâques, etc.)
+        category: Type de plat (gratin, soupe, etc.)
+        geographic_area: Région du monde (Asie, Europe, France, Lyon, etc.)
+        restriction: Régimes spéciaux (végétarien, végétalien, sans gluten, allergies, etc.)
         sources: Sources (livres, sites web, etc.)
         chefs: Chefs (Paul Bocuse, etc.)
         authors: Auteurs (Marie Kondo, etc.)

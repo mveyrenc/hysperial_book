@@ -1,0 +1,13 @@
+en:
+  content_tag_families:
+    views:
+      edit:
+        title: "Edit content tag family"
+      index:
+        title: "Content tags family"
+      new:
+        title: "New content tag family"
+    content_tag_families:
+      successfully_created: "Content tag family was successfully created"
+      successfully_updated: "Content tag family was successfully updated"
+      successfully_destroyed: "Content tag family was successfully destroyed"

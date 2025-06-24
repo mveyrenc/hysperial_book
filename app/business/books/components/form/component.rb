@@ -5,7 +5,7 @@ module Books
     module Form
       # Books card component
       class Component < ApplicationComponent
-        delegate :kind, to: :record, prefix: true
+        delegate :kind, :kind_name, to: :record, prefix: true
 
         attr_reader :record
 
@@ -13,6 +13,12 @@ module Books
           @record = record
 
           super
+        end
+
+        protected
+
+        def kind_select_values
+          BookKind.kinds.map { |key, value| [BookKind.human_attribute_name(key), value] }
         end
       end
     end

@@ -19,14 +19,15 @@
 #  index_books_on_kind  (kind)
 #  index_books_on_slug  (slug) UNIQUE
 #
-class CreateBooks < ActiveRecord::Migration[7.0]
+class CreateBooks < ActiveRecord::Migration[8.0]
   def change
+    create_enum :book_kind, %w[cooking care fabric_art]
     create_table :books, id: :uuid do |t|
       t.string :title, null: false
       t.string :subtitle
       t.string :slug, null: false, index: { unique: true }
 
-      t.column :kind, :book_kind, null: false, index: true
+      t.enum :kind, enum_type: :book_kind, default: :cooking, null: false, index: true
 
       t.integer :position
 

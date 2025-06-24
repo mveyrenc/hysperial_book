@@ -5,7 +5,7 @@ module ContentTags
     module Form
       # ContentTags card component
       class Component < ApplicationComponent
-        delegate :book, :kind, to: :record, prefix: true
+        delegate :content_tag_family, :title, to: :record, prefix: true
 
         attr_reader :record
 
@@ -17,8 +17,8 @@ module ContentTags
 
         protected
 
-        def book_select_values
-          Book.order(position: :asc)
+        def content_tag_family_select_values
+          ContentTagFamily.order(title: :asc)
         end
       end
     end

@@ -3,10 +3,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.4.4'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.1'
+gem 'rails', '~> 8.0'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -58,16 +58,16 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
   # https://github.com/deivid-rodriguez/byebug
-  gem 'byebug', '~> 11.1'
+  gem 'byebug'
 
   # https://thoughtbot.github.io/factory_bot/summary.html
-  gem 'factory_bot_rails', '~> 6.2'
+  gem 'factory_bot_rails'
 
   # https://github.com/faker-ruby/faker
-  gem 'faker', '~> 3.2'
+  gem 'faker'
 
   # https://github.com/thoughtbot/shoulda-matchers
-  gem 'shoulda-matchers', '~> 5.0'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -80,27 +80,27 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
-  # https://github.com/ctran/annotate_models
-  gem 'annotate', '~> 3.2'
+  # https://github.com/drwl/annotaterb/releases
+  gem 'annotaterb'
 
   # https://github.com/rubocop/rubocop-rails
   gem 'rubocop-rails', require: false
 
   # https://github.com/rubocop/rubocop-capybara
-  gem 'rubocop-capybara', '~> 2.18', require: false
+  gem 'rubocop-capybara', require: false
 
   # https://github.com/rubocop/rubocop-rspec
-  gem 'rubocop-rspec', '~> 2.22', require: false
+  gem 'rubocop-rspec', require: false
 
   # https://github.com/rubocop/rubocop-factory_bot
-  gem 'rubocop-factory_bot', '~> 2.23', require: false
+  gem 'rubocop-factory_bot', require: false
 
   # https://github.com/flyerhzm/rails_best_practices
-  gem 'rails_best_practices', '~> 1.23'
+  gem 'rails_best_practices'
 
   # https://github.com/BetterErrors/better_errors
-  gem 'better_errors', '~> 2.10'
-  gem 'binding_of_caller', '~> 1.0'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
@@ -110,7 +110,7 @@ group :test do
   gem 'webdrivers'
 
   # https://github.com/rspec/rspec-rails
-  gem 'rspec-rails', '~> 6.0'
+  gem 'rspec-rails'
 end
 
 # https://github.com/heartcombo/devise

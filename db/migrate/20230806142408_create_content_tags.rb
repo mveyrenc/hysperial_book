@@ -47,29 +47,31 @@
 #  fk_rails_...  (related_id => tags.id) ON DELETE => cascade
 #  fk_rails_...  (relater_id => tags.id) ON DELETE => cascade
 #
-class CreateContentTags < ActiveRecord::Migration[7.0]
+class CreateContentTags < ActiveRecord::Migration[8.0]
   # rubocop:disable Metrics/MethodLength
   def change
     create_table :content_tags, id: :uuid do |t|
-      t.column :kind, :content_tag_kind, null: false, index: true
-      t.references :book, null: false, foreign_key: true, type: :uuid
+      t.references :content_tag_family, null: false, foreign_key: true, type: :uuid
       t.string :slug, null: false, index: { unique: true }
-      t.string :value
+      t.string :title
 
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
 
       t.timestamps
+
+      t.index %i[title content_tag_family_id], unique: true
     end
     # rubocop:enable Metrics/MethodLength
+    create_enum :akin_content_tag_kind, %w[direct followable computed]
     create_table :akin_content_tags, id: false do |t|
       t.references :relater, null: false, foreign_key: { to_table: :content_tags, on_delete: :cascade }, type: :uuid
       t.references :related, null: false, foreign_key: { to_table: :content_tags, on_delete: :cascade }, type: :uuid
 
-      t.column :kind, :akin_content_tag_kind, null: false, index: true
+      t.enum :kind, enum_type: :akin_content_tag_kind, default: :direct, null: false, index: true
     end
 
-    create_table :content_tags_contents, id: false do |t|
+    create_table :content_taggings, id: false do |t|
       t.references :content, null: false, foreign_key: { to_table: :contents, on_delete: :cascade }, type: :uuid
       t.references :content_tag, null: false, foreign_key: { to_table: :content_tags, on_delete: :cascade }, type: :uuid
     end

@@ -4,52 +4,47 @@
 #
 # Table name: content_tags
 #
-#  id            :uuid             not null, primary key
-#  kind          :enum             not null
-#  slug          :string           not null
-#  value         :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  book_id       :uuid             not null
-#  created_by_id :uuid             not null
-#  updated_by_id :uuid             not null
+#  id                    :uuid             not null, primary key
+#  slug                  :string           not null
+#  title                 :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  content_tag_family_id :uuid             not null
+#  created_by_id         :uuid             not null
+#  updated_by_id         :uuid             not null
 #
 # Indexes
 #
-#  index_content_tags_on_book_id                     (book_id)
-#  index_content_tags_on_created_by_id               (created_by_id)
-#  index_content_tags_on_kind                        (kind)
-#  index_content_tags_on_slug                        (slug) UNIQUE
-#  index_content_tags_on_updated_by_id               (updated_by_id)
-#  index_content_tags_on_value_and_kind_and_book_id  (value,kind,book_id) UNIQUE
+#  index_content_tags_on_content_tag_family_id            (content_tag_family_id)
+#  index_content_tags_on_created_by_id                    (created_by_id)
+#  index_content_tags_on_slug                             (slug) UNIQUE
+#  index_content_tags_on_title_and_content_tag_family_id  (title,content_tag_family_id) UNIQUE
+#  index_content_tags_on_updated_by_id                    (updated_by_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (book_id => books.id)
+#  fk_rails_...  (content_tag_family_id => content_tag_families.id)
 #  fk_rails_...  (created_by_id => users.id) ON DELETE => restrict
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentTag < ApplicationRecord
   ## delegate
-  delegate :title, to: :book, prefix: true
+  delegate :title, to: :content_tag_family, prefix: true
 
   ## FriendlyId
   extend FriendlyId
   friendly_id :generate_custom_slug, use: :slugged
 
   def generate_custom_slug
-    [%i[book_title kind value]]
+    [%i[content_tag_family_title value]]
   end
 
-  ## Enumerables
-  enum kind: ContentTagKind.kinds, _suffix: true
-
   def kind_name
-    ContentTagKind.human_attribute_name(kind)
+    ContentTagFamily.human_attribute_name(kind)
   end
 
   ## Relations
-  belongs_to :book
+  belongs_to :content_tag_family
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
@@ -75,6 +70,5 @@ class ContentTag < ApplicationRecord
   has_many :contents, through: :content_taggings, dependent: :nullify
 
   ## Validations
-  validates :kind, presence: true
-  validates :value, presence: true, uniqueness: { scope: %i[kind book] }
+  validates :title, presence: true, uniqueness: { scope: %i[content_tag_family] }
 end

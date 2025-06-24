@@ -1,0 +1,17 @@
+= render Layout::MainArea::Component.new do |component|
+  - component.with_title do
+    = t('.title')
+  - component.with_header_actions do
+    - if policy(ContentTagFamily).create?
+      = turbo_frame_tag ContentTagFamily.new do
+        = render ContentTagFamilies::Components::NewButton::Component.new
+  - component.with_main_section do
+    = turbo_frame_tag "content_tag_families", class: "columns is-multiline" do
+      - if @records.records.any?
+        - @records.records.each do |record|
+          = turbo_frame_tag record, class: "is-card-in-column" do
+            = render ContentTagFamilies::Components::Card::Component.new(record: record)
+      - else
+        .column.is-full
+          = render NoRecord::Component.new
+    = paginate @records.records

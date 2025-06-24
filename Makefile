@@ -15,10 +15,24 @@ web_logs:
 
 bundle_install:
 	bundle install
-	docker compose exec web bundle install
+	bundle package --all
+	docker compose exec web bundle install --local
+
+db_recreate:
+	docker compose restart web
+	docker compose exec web rails db:drop
+	docker compose exec web rails db:create
+	docker compose exec web rails db:migrate
+	docker compose exec web rails db:seed --trace
+
+db_create:
+	docker compose exec web rails db:create
 
 db_migrate:
 	docker compose exec web rails db:migrate
+
+annotate:
+	docker compose exec web annotate --model
 
 rspec:
 	docker compose exec web rspec

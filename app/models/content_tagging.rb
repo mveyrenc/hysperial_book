@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Relation between contents and tags.
+# Used to tag contents.
+
 # == Schema Information
 #
 # Table name: content_taggings

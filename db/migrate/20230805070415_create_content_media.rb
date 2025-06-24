@@ -28,12 +28,13 @@
 #  fk_rails_...  (medium_id => media.id)
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
-class CreateContentMedia < ActiveRecord::Migration[7.0]
+class CreateContentMedia < ActiveRecord::Migration[8.0]
   def change
+    create_enum :content_medium_kind, %w[document scanned_document before_picture during_picture after_picture]
     create_table :content_media, id: :uuid do |t|
-      t.column :kind, :content_medium_kind, null: false, index: true
+      t.enum :kind, enum_type: :content_medium_kind, default: :document, null: false, index: true
 
-      t.references :content_block, null: false, foreign_key: true, type: :uuid
+      t.references :content, null: false, foreign_key: true, type: :uuid
       t.references :medium, null: false, foreign_key: true, type: :uuid
 
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid

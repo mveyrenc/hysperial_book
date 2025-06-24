@@ -3,7 +3,10 @@
     = render FormErrors::Component.new(errors: record.errors)
     = f.text_field :title, autofocus: true
     = f.text_field :subtitle
-    = f.select :kind, options_for_select(BookKind.kinds.map { |key, value| [BookKind.human_attribute_name(key), value] }, record_kind)
+    - if record.new_record?
+      = f.select :kind, options_for_select(kind_select_values, record_kind)
+    - else
+      = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:kind), value: record_kind_name)
     = f.text_field :position
 
     .field

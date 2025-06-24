@@ -25,7 +25,7 @@ class Book < ApplicationRecord
   friendly_id :title, use: :slugged
 
   ## Enumerables
-  enum kind: BookKind.kinds, _suffix: true
+  enum :kind, BookKind.kinds, suffix: true
 
   def kind_name
     BookKind.human_attribute_name(kind)

@@ -34,15 +34,16 @@
 #  fk_rails_...  (thumbnail_id => media.id) ON DELETE => cascade
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
-class CreateContents < ActiveRecord::Migration[7.0]
+class CreateContents < ActiveRecord::Migration[8.0]
   # rubocop:disable Metrics/MethodLength
   def change
+    create_enum :content_kind, %w[article tutorial ingredient recipe menu pattern]
     create_table :contents, id: :uuid do |t|
       t.string :title, null: false
       t.string :subtitle
       t.string :slug, null: false, index: { unique: true }
 
-      t.column :kind, :content_kind, null: false, index: true
+      t.enum :kind, enum_type: :content_kind, default: :article, null: false, index: true
       t.references :book, null: false, foreign_key: true, type: :uuid
 
       t.string :version

@@ -40,23 +40,6 @@ en:
           admin: Admin
           super_admin: Super-admin
   hello: "Hello world"
-  layouts:
-    shared:
-      aside:
-        contents: "Contents"
-        more: "More"
-        books: "Books"
-        tags: "Content tags"
-        documents: "Documents"
-        media: "Media"
-        pictures: "Pictures"
-        scans: "Scans"
-        users: "Users"
-      navbar-menu:
-        home: "Home"
-        sign_in: "Sign in"
-        sign_up: "Sign up"
-        log_out: "Log out"
   application:
     no_entry: "No entry"
     read: "Read"

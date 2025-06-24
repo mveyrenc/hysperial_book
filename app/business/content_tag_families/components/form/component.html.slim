@@ -1,0 +1,15 @@
+.box
+  = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
+    = render FormErrors::Component.new(errors: record.errors)
+    - if record.new_record?
+      = f.text_area :title, help: t('.title.help')
+      = f.select :kind, options_for_select(kind_select_values, record_kind)
+    - else
+      = f.text_field :title, autofocus: true
+      = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:kind), value: record_kind_name)
+
+
+    .field
+      .buttons
+        = f.submit t('application.submit'), class: 'button is-primary'
+        = link_to t('application.cancel'), :back, class: 'button'

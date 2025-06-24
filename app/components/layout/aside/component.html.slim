@@ -26,6 +26,12 @@ aside.aside.is-placed-left.is-expanded
               span.material-symbols-outlined menu_book
             span.menu-item-label
               = t('.books')
+        - if policy(ContentTagFamily).index?
+          = link_to content_tag_families_path, class: "has-icon", target: "_top" do
+            span.icon
+              span.material-symbols-outlined label
+            span.menu-item-label
+              = t('.content_tag_families')
         - if policy(ContentTag).index?
           = link_to content_tags_path, class: "has-icon", target: "_top" do
             span.icon

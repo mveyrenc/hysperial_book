@@ -1,0 +1,6 @@
+= render Layout::MainArea::Component.new do |component|
+  - component.with_title do
+    = t('.title')
+  - component.with_main_section do
+    = turbo_frame_tag @record do
+      = render ContentTagFamilies::Components::Form::Component.new(record: @record)
