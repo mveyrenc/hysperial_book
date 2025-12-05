@@ -5,7 +5,8 @@
 # Table name: contents
 #
 #  id            :uuid             not null, primary key
-#  kind          :enum             not null
+#  kind          :enum             default("article"), not null
+#  metadata      :jsonb            not null
 #  slug          :string           not null
 #  source_url    :string
 #  subtitle      :string

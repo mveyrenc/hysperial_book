@@ -16,7 +16,7 @@ module AppFormBuilder
               # classes <<= 'is-danger' if error?(name) TODO undefined method `error?'
               options[:class] = classes.compact.join(' ')
 
-              send("#{field_name}_without_bulma".to_sym, name, options)
+              send(:"#{field_name}_without_bulma", name, options)
             end
           end
 
@@ -24,8 +24,8 @@ module AppFormBuilder
         end
 
         def bulma_alias(field_name)
-          alias_method "#{field_name}_without_bulma".to_sym, field_name
-          alias_method field_name, "#{field_name}_with_bulma".to_sym
+          alias_method :"#{field_name}_without_bulma", field_name
+          alias_method field_name, :"#{field_name}_with_bulma"
         end
       end
     end

@@ -148,3 +148,5 @@ gem 'kaminari', '~> 1.2'
 
 # https://github.com/collectiveidea/awesome_nested_set
 gem 'awesome_nested_set', '~> 3.6'
+
+gem 'dartsass-rails', '~> 0.5.1'

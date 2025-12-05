@@ -1,0 +1,133 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mx;
+
+$navbar-input-color: cv.getVar("grey-darker");
+$navbar-input-placeholder-color: cv.getVar("grey-lighter");
+$navbar-box-shadow: 0 1px 0 rgba(24, 28, 33, .04);
+$navbar-divider-border: 1px solid rgba(cv.getVar("grey-lighter"), .25);
+$navbar-item-h-padding: calc(cv.getVar("default-padding") * .75);
+$navbar-avatar-size: 1.75rem;
+
+nav.navbar {
+  box-shadow: $navbar-box-shadow;
+
+  .navbar-item {
+    &.has-user-avatar {
+      .is-user-avatar {
+        margin-right: calc(cv.getVar("default-padding") * .5);
+        display: inline-flex;
+        width: $navbar-avatar-size;
+        height: $navbar-avatar-size;
+      }
+    }
+
+    &.has-divider {
+      border-right: $navbar-divider-border;
+    }
+
+    &.no-left-space {
+      padding-left: 0;
+    }
+
+    &.has-dropdown {
+      padding-right: 0;
+      padding-left: 0;
+
+      .navbar-link {
+        padding-right: $navbar-item-h-padding;
+        padding-left: $navbar-item-h-padding;
+      }
+    }
+
+    &.has-control {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .control {
+      .input {
+        color: $navbar-input-color;
+        border: 0;
+        box-shadow: none;
+        background: transparent;
+
+        &::placeholder {
+          color: $navbar-input-placeholder-color;
+        }
+      }
+    }
+  }
+}
+
+@include mx.touch {
+  nav.navbar {
+    display: flex;
+    padding-right: 0;
+
+    .navbar-brand {
+      flex: 1;
+
+      &.is-right {
+        flex: none;
+      }
+    }
+
+    .navbar-item {
+      &.no-left-space-touch {
+        padding-left: 0;
+      }
+    }
+
+    .navbar-menu {
+      position: absolute;
+      width: 100vw;
+      padding-top: 0;
+      top: cv.getVar("navbar-height");
+      left: 0;
+
+      .navbar-item {
+        .icon:first-child {
+          margin-right: calc(cv.getVar("default-padding") * .5);
+        }
+
+        &.has-dropdown {
+          >.navbar-link {
+            background-color: cv.getVar("white-ter");
+            .icon:last-child {
+              display: none;
+            }
+          }
+        }
+
+        &.has-user-avatar {
+          >.navbar-link {
+            display: flex;
+            align-items: center;
+            padding-top: calc(cv.getVar("default-padding") * .5);
+            padding-bottom: calc(cv.getVar("default-padding") * .5);
+          }
+        }
+      }
+    }
+  }
+}
+
+@include mx.desktop {
+  nav.navbar {
+    .navbar-item {
+      padding-right: $navbar-item-h-padding;
+      padding-left: $navbar-item-h-padding;
+
+      &:not(.is-desktop-icon-only) {
+        .icon:first-child {
+          margin-right: calc(cv.getVar("default-padding") * .5);
+        }
+      }
+      &.is-desktop-icon-only {
+        span:not(.icon) {
+          display: none;
+        }
+      }
+    }
+  }
+}

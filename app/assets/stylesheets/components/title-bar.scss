@@ -1,0 +1,36 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mx;
+
+/* Title Bar: specifics */
+$title-bar-color: cv.getVar("grey");
+$title-bar-active-color: cv.getVar("black-ter");
+
+section.section.is-title-bar {
+  padding: cv.getVar("default-padding");
+  //border-bottom: v.$light-border;
+
+  ul {
+    li {
+      display: inline-block;
+      padding: 0 calc(cv.getVar("default-padding") * .5) 0 0;
+      font-size: cv.getVar("default-padding");
+      color: $title-bar-color;
+
+      &:after {
+        display: inline-block;
+        content: '/';
+        padding-left: calc(cv.getVar("default-padding") * .5);
+      }
+
+      &:last-child {
+        padding-right: 0;
+        font-weight: 900;
+        color: $title-bar-active-color;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}

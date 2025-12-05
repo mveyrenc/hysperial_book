@@ -4,7 +4,10 @@
 #
 # Table name: akin_content_tags
 #
-#  kind       :enum             not null
+#  kind       :enum             default("direct"), not null
+#  metadata   :jsonb            not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #  related_id :uuid             not null
 #  relater_id :uuid             not null
 #

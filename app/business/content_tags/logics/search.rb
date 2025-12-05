@@ -7,10 +7,9 @@ module ContentTags
       include SearchConcern
 
       def call
-        context.records = ContentTag.joins(:content_tag_family)
-                                    .includes(:content_tag_family)
-                                    .order(ContentTagFamily.arel_table[:kind].asc)
-                                    .order(ContentTagFamily.arel_table[:title].asc)
+        context.records = ContentTag.includes(content_tag_family: :book)
+                                    .order('book.position')
+                                    .order('content_tag_family.title')
                                     .order(:title)
       end
     end

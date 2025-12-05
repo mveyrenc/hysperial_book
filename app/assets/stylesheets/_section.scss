@@ -1,9 +1,0 @@
-section.section.is-flash-section {
-  padding: $default-padding;
-}
-
-section.section.is-main-section {
-  @extend .container;
-  @extend .is-fullhd;
-  padding: $default-padding;
-}

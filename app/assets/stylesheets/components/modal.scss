@@ -1,0 +1,30 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mx;
+
+
+/* Modal card: Bulma override */
+$modal-card-head-background-color: cv.getVar("white-ter");
+$modal-card-title-size: cv.getVar("text");
+$modal-card-body-padding: cv.getVar("default-padding") 20px;
+$modal-card-head-border-bottom: 1px solid cv.getVar("white-ter");
+$modal-card-foot-border-top: 0;
+
+/* Modal card: specifics */
+$modal-card-width: 40vw;
+$modal-card-width-mobile: 90vw;
+$modal-card-foot-background-color: cv.getVar("white-ter");
+
+.modal-card {
+  width: $modal-card-width;
+}
+
+.modal-card-foot {
+  background-color: $modal-card-foot-background-color;
+}
+
+@include mx.mobile {
+  .modal .modal-card {
+    width: $modal-card-width-mobile;
+    margin: 0 auto;
+  }
+}

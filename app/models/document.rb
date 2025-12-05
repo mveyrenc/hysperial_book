@@ -5,6 +5,7 @@
 # Table name: media
 #
 #  id            :uuid             not null, primary key
+#  metadata      :jsonb            not null
 #  type          :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

@@ -28,6 +28,7 @@ module AppFormBuilder
     include AppFormBuilder::Inputs::CollectionCheckBoxes
     include AppFormBuilder::Inputs::CollectionRadioButtons
     include AppFormBuilder::Inputs::CollectionSelect
+    include AppFormBuilder::Inputs::GroupedCollectionSelect
 
     delegate :content_tag, :capture, :concat, :tag, to: :@template
 

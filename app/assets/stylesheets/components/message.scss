@@ -1,0 +1,6 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
+/* Message: Bulma override */
+$message-padding: calc(calc(cv.getVar("default-padding") * .75)) cv.getVar("default-padding");
+
+@use "bulma/sass/components/message";

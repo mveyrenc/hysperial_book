@@ -1,14 +1,14 @@
 .box
   span.has-text-grey-light
-    = record_book
+    = record_content_tag_family.book
   span.mx-1
     | /
   span.has-text-grey
-    = record_kind_name
+    = record_content_tag_family.title
   span.mx-1
     | /
   span.has-text-grey-darker
-    = record_value
+    = record_title
 
   .field.is-grouped.is-grouped-centered
     - if policy(record).update?

@@ -55,6 +55,8 @@ class CreateContentTags < ActiveRecord::Migration[8.0]
       t.string :slug, null: false, index: { unique: true }
       t.string :title
 
+      t.jsonb :metadata, null: false, default: {}
+
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
 
@@ -69,11 +71,19 @@ class CreateContentTags < ActiveRecord::Migration[8.0]
       t.references :related, null: false, foreign_key: { to_table: :content_tags, on_delete: :cascade }, type: :uuid
 
       t.enum :kind, enum_type: :akin_content_tag_kind, default: :direct, null: false, index: true
+
+      t.jsonb :metadata, null: false, default: {}
+
+      t.timestamps
     end
 
     create_table :content_taggings, id: false do |t|
       t.references :content, null: false, foreign_key: { to_table: :contents, on_delete: :cascade }, type: :uuid
       t.references :content_tag, null: false, foreign_key: { to_table: :content_tags, on_delete: :cascade }, type: :uuid
+
+      t.jsonb :metadata, null: false, default: {}
+
+      t.timestamps
     end
   end
 end

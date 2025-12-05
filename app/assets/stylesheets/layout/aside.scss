@@ -1,0 +1,203 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mx;
+@use "bulma/sass/utilities/functions" as fn;
+
+@use "../abstracts/mixins";
+
+@use "sass:color";
+
+/* Aside: Bulma override */
+$menu-label-color: fn.bulmaLighten(cv.getVar("scheme-main"), 55%);
+$menu-item-color: fn.bulmaLighten(cv.getVar("scheme-main"), 60%);
+$menu-item-hover-color: cv.getVar("white");
+$menu-item-hover-background-color: fn.bulmaLighten(cv.getVar("scheme-main"), -3.5%);
+$menu-item-active-color: cv.getVar("white");
+$menu-item-active-background-color: fn.bulmaLighten(cv.getVar("scheme-main"), -2.5%);
+
+$aside-width: calc(cv.getVar("text") * 14);
+$aside-mobile-width: calc(cv.getVar("text") * 15);
+$aside-icon-width: calc(cv.getVar("text") * 3);
+$aside-submenu-font-size: calc(cv.getVar("text") * .95);
+$aside-background-color: cv.getVar("scheme-main");
+$aside-box-shadow: none;
+$aside-tools-background-color: fn.bulmaLighten($aside-background-color, -10%);
+$aside-tools-color: cv.getVar("white");
+
+@include mx.desktop {
+  html {
+    &.has-aside-left {
+      &.has-aside-expanded {
+        nav.navbar, body {
+          padding-left: $aside-width;
+        }
+      }
+
+      nav.navbar, body {
+        @include mixins.transition(padding-left);
+      }
+
+      aside.is-placed-left {
+        display: block;
+      }
+    }
+  }
+
+  aside.aside.is-expanded {
+    width: $aside-width;
+
+    .menu-list {
+      @include mixins.icon-with-update-mark($aside-icon-width);
+
+      span.menu-item-label {
+        display: inline-block;
+      }
+
+      li.is-active {
+        ul {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+aside.aside {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  height: 100vh;
+  padding: 0;
+  box-shadow: $aside-box-shadow;
+  background: $aside-background-color;
+
+  .aside-tools {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: $aside-tools-background-color;
+    color: $aside-tools-color;
+    line-height: cv.getVar("navbar-height");
+    min-height: cv.getVar("navbar-height");
+    padding-left: calc(cv.getVar("default-padding") * .5);
+    flex: 1;
+
+    .aside-tools-label {
+      display: flex;
+      align-items: center;
+      color: $aside-tools-color;
+      font-weight: bolder;
+    }
+
+    .icon {
+      margin-right: calc(cv.getVar("default-padding") * .5);
+    }
+  }
+
+  .menu {
+    padding: calc(cv.getVar("default-padding") * .5);
+  }
+
+  .menu-list {
+    li {
+      a {
+        &.has-dropdown-icon {
+          position: relative;
+          padding-right: $aside-icon-width;
+
+          .dropdown-icon {
+            position: absolute;
+            top: calc(cv.getVar("text") * .5);
+            right: 0;
+          }
+        }
+
+        &.has-icon {
+          padding-left: 0;
+          display: flex;
+          align-items: center;
+        }
+
+        &.is-active {
+          &:not(:hover) {
+            background: transparent;
+          }
+        }
+      }
+
+      ul {
+        display: none;
+        border-left: 0;
+        background-color: fn.bulmaDarken(cv.getVar("scheme-main"), 2.5%);
+        padding-left: 0;
+        margin: 0 0 calc(cv.getVar("default-padding") * .5);
+
+        li {
+          a {
+            padding: calc(cv.getVar("default-padding") * .5) 0 calc(cv.getVar("default-padding") * .5) calc(cv.getVar("default-padding") * .5);
+            font-size: $aside-submenu-font-size;
+          }
+        }
+      }
+    }
+  }
+
+  //.menu-label {
+  //  padding: 0 calc(cv.getVar("default-padding") * .5);
+  //  margin-top: calc(cv.getVar("default-padding") * .5);
+  //  margin-bottom: calc(cv.getVar("default-padding") * .5);
+  //}
+
+}
+
+@include mx.touch {
+  #app, nav.navbar {
+    @include mixins.transition(margin-left);
+  }
+  aside.aside {
+    @include mixins.transition(left);
+  }
+  html.has-aside-mobile-transition {
+    body {
+      overflow-x: hidden;
+    }
+
+    aside.aside {
+      width: $aside-mobile-width;
+      display: block;
+      left: calc($aside-mobile-width * -1);
+
+      .image {
+        img {
+          max-width: calc($aside-mobile-width * .33);
+        }
+      }
+
+      .menu-list {
+        li.is-active {
+          ul {
+            display: block;
+          }
+        }
+
+        a {
+          @include mixins.icon-with-update-mark($aside-icon-width);
+
+          span.menu-item-label {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+  html.has-aside-mobile-expanded {
+    #app, nav.navbar {
+      margin-left: $aside-mobile-width;
+    }
+
+    aside.aside {
+      left: 0;
+    }
+  }
+}

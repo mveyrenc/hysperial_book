@@ -5,6 +5,7 @@
 # Table name: content_tags
 #
 #  id                    :uuid             not null, primary key
+#  metadata              :jsonb            not null
 #  slug                  :string           not null
 #  title                 :string
 #  created_at            :datetime         not null
@@ -36,7 +37,7 @@ class ContentTag < ApplicationRecord
   friendly_id :generate_custom_slug, use: :slugged
 
   def generate_custom_slug
-    [%i[content_tag_family_title value]]
+    [%i[content_tag_family_title title]]
   end
 
   def kind_name

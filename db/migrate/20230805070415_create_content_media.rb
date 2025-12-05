@@ -37,6 +37,8 @@ class CreateContentMedia < ActiveRecord::Migration[8.0]
       t.references :content, null: false, foreign_key: true, type: :uuid
       t.references :medium, null: false, foreign_key: true, type: :uuid
 
+      t.jsonb :metadata, null: false, default: {}
+
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
 
