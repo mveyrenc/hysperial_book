@@ -51,6 +51,8 @@ class CreateContents < ActiveRecord::Migration[8.0]
 
       t.references :thumbnail, null: false, foreign_key: { to_table: :media, on_delete: :cascade }, type: :uuid
 
+      t.jsonb :metadata, null: false, default: {}
+
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
 

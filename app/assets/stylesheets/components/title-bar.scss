@@ -1,0 +1,35 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mx;
+
+$title-bar-color: cv.getVar("grey");
+$title-bar-active-color: cv.getVar("black-ter");
+
+section.section.is-title-bar {
+  padding: cv.getVar("gap");
+  //border-bottom: v.$light-border;
+
+  ul {
+    li {
+      display: inline-block;
+      padding: 0 calc(cv.getVar("gap") * .5) 0 0;
+      font-size: cv.getVar("gap");
+      color: $title-bar-color;
+
+      &:after {
+        display: inline-block;
+        content: '/';
+        padding-left: calc(cv.getVar("gap") * .5);
+      }
+
+      &:last-child {
+        padding-right: 0;
+        font-weight: 900;
+        color: $title-bar-active-color;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}

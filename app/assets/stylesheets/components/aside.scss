@@ -1,0 +1,228 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/mixins" as mx;
+@use "bulma/sass/utilities/functions" as fn;
+
+@use "../utilities/mixins";
+
+@use "sass:color";
+
+$aside-h: cv.getVar("scheme-h");
+$aside-s: cv.getVar("scheme-s");
+$aside-background-l: cv.getVar("background-l");
+$aside-background-l-delta: 0%;
+$aside-hover-background-l-delta: cv.getVar("hover-background-l-delta");
+$aside-active-background-l-delta: cv.getVar("active-background-l-delta");
+$aside-color-l: cv.getVar("text-l");
+
+$aside-width: calc(cv.getVar("text") * 14);
+$aside-mobile-width: calc(cv.getVar("text") * 15);
+$aside-icon-width: calc(cv.getVar("text") * 3);
+$aside-submenu-font-size: calc(cv.getVar("text") * .95);
+$aside-box-shadow: none;
+$aside-tools-background-l-delta: cv.getVar("active-background-l-delta");
+$aside-tools-color: cv.getVar("text-l");
+
+$aside-colors: dv.$colors !default;
+
+.#{iv.$class-prefix}aside {
+
+  @include cv.register-vars(
+      (
+        "aside-h": #{$aside-h},
+        "aside-s": #{$aside-s},
+        "aside-background-l": #{$aside-background-l},
+        "aside-background-l-delta": #{$aside-background-l-delta},
+        "aside-hover-background-l-delta": #{$aside-hover-background-l-delta},
+        "aside-active-background-l-delta": #{$aside-active-background-l-delta},
+        "aside-color-l": #{$aside-color-l},
+        "aside-width": #{$aside-width},
+        "aside-mobile-width": #{$aside-mobile-width},
+        "aside-icon-width": #{$aside-icon-width},
+        "aside-submenu-font-size": #{$aside-submenu-font-size},
+        "aside-box-shadow": #{$aside-box-shadow},
+        "aside-tools-background-l-delta": #{$aside-tools-background-l-delta},
+        "aside-tools-color": #{$aside-tools-color}
+      )
+  );
+
+  display: none;
+  height: 100vh;
+  box-shadow: $aside-box-shadow;
+  background-color: hsl(
+      cv.getVar("aside-h"),
+      cv.getVar("aside-s"),
+      calc(
+        #{cv.getVar("aside-background-l")} + #{cv.getVar("aside-background-l-delta")}
+      )
+  );
+  color: hsl(cv.getVar("aside-h"), cv.getVar("aside-s"), cv.getVar("aside-color-l"));
+
+  .menu {
+    padding: calc(#{cv.getVar("gap")} * 0.5);
+  }
+
+  .menu-list {
+    li {
+      a {
+        &.has-dropdown-icon {
+          position: relative;
+          padding-right: $aside-icon-width;
+
+          .dropdown-icon {
+            position: absolute;
+            top: calc(cv.getVar("text") * .5);
+            right: 0;
+          }
+        }
+
+        &.has-icon {
+          padding-left: 0;
+          display: flex;
+          align-items: center;
+        }
+
+        &.is-active {
+          &:not(:hover) {
+            background: transparent;
+          }
+        }
+      }
+
+      ul {
+        display: none;
+        border-left: 0;
+        background-color: fn.bulmaDarken(cv.getVar("scheme-main"), 2.5%);
+        padding-left: 0;
+        margin: 0 0 calc(cv.getVar("gap") * .5);
+
+        li {
+          a {
+            padding: calc(cv.getVar("gap") * .5) 0 calc(cv.getVar("gap") * .5) calc(cv.getVar("gap") * .5);
+            font-size: $aside-submenu-font-size;
+          }
+        }
+      }
+    }
+  }
+
+  // Colors
+  @each $name, $pair in $aside-colors {
+    &.#{iv.$class-prefix}is-#{$name} {
+      @include cv.register-vars(
+          (
+            "aside-h": #{cv.getVar($name, "", "-h")},
+            "aside-s": #{cv.getVar($name, "", "-s")},
+            "aside-background-l": #{cv.getVar($name, "", "-l")},
+            "aside-color-l": #{cv.getVar($name, "", "-invert-l")}
+          )
+      );
+
+      &.#{iv.$class-prefix}is-light {
+        @include cv.register-vars(
+            (
+              "aside-background-l": #{cv.getVar("light-l")},
+              "aside-color-l": #{cv.getVar($name, "", "-light-invert-l")}
+            )
+        );
+      }
+    }
+  }
+
+  //.menu-label {
+  //  padding: 0 calc(cv.getVar("gap") * .5);
+  //  margin-top: calc(cv.getVar("gap") * .5);
+  //  margin-bottom: calc(cv.getVar("gap") * .5);
+  //}
+
+}
+
+@include mx.desktop {
+  html {
+    &.has-aside-left {
+      &.has-aside-expanded {
+        nav.navbar, body {
+          padding-left: $aside-width;
+        }
+      }
+
+      nav.navbar, body {
+        @include mixins.transition(padding-left);
+      }
+
+      aside.is-placed-left {
+        display: block;
+      }
+    }
+  }
+
+  aside.aside.is-expanded {
+    width: $aside-width;
+
+    .menu-list {
+      @include mixins.icon-with-update-mark($aside-icon-width);
+
+      span.menu-item-label {
+        display: inline-block;
+      }
+
+      li.is-active {
+        ul {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@include mx.touch {
+  #app, nav.navbar {
+    @include mixins.transition(margin-left);
+  }
+  aside.aside {
+    @include mixins.transition(left);
+  }
+  html.has-aside-mobile-transition {
+    body {
+      overflow-x: hidden;
+    }
+
+    aside.aside {
+      width: $aside-mobile-width;
+      display: block;
+      left: calc($aside-mobile-width * -1);
+
+      .image {
+        img {
+          max-width: calc($aside-mobile-width * .33);
+        }
+      }
+
+      .menu-list {
+        li.is-active {
+          ul {
+            display: block;
+          }
+        }
+
+        a {
+          @include mixins.icon-with-update-mark($aside-icon-width);
+
+          span.menu-item-label {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+  html.has-aside-mobile-expanded {
+    #app, nav.navbar {
+      margin-left: $aside-mobile-width;
+    }
+
+    aside.aside {
+      left: 0;
+    }
+  }
+}

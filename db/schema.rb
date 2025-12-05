@@ -65,7 +65,10 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   create_table "akin_content_tags", id: false, force: :cascade do |t|
     t.uuid "relater_id", null: false
     t.uuid "related_id", null: false
-    t.enum "kind", null: false, enum_type: "akin_content_tag_kind"
+    t.enum "kind", default: "direct", null: false, enum_type: "akin_content_tag_kind"
+    t.jsonb "metadata", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["kind"], name: "index_akin_content_tags_on_kind"
     t.index ["related_id"], name: "index_akin_content_tags_on_related_id"
     t.index ["relater_id"], name: "index_akin_content_tags_on_relater_id"
@@ -75,19 +78,25 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
     t.string "title", null: false
     t.string "subtitle"
     t.string "slug", null: false
-    t.enum "kind", null: false, enum_type: "book_kind"
-    t.integer "position"
+    t.enum "kind", default: "cooking", null: false, enum_type: "book_kind"
     t.jsonb "settings", default: {}, null: false
+    t.integer "position"
+    t.jsonb "metadata", default: {}, null: false
+    t.uuid "created_by_id", null: false
+    t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_books_on_created_by_id"
     t.index ["kind"], name: "index_books_on_kind"
     t.index ["slug"], name: "index_books_on_slug", unique: true
+    t.index ["updated_by_id"], name: "index_books_on_updated_by_id"
   end
 
   create_table "content_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.enum "kind", null: false, enum_type: "content_medium_kind"
+    t.enum "kind", default: "document", null: false, enum_type: "content_medium_kind"
     t.uuid "content_id", null: false
     t.uuid "medium_id", null: false
+    t.jsonb "metadata", default: {}, null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
@@ -100,10 +109,11 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   end
 
   create_table "content_tag_families", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.enum "kind", null: false, enum_type: "content_tag_family_kind"
+    t.enum "kind", default: "category", null: false, enum_type: "content_tag_family_kind"
     t.uuid "book_id", null: false
     t.string "slug", null: false
     t.string "title", null: false
+    t.jsonb "metadata", default: {}, null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
@@ -118,6 +128,9 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   create_table "content_taggings", id: false, force: :cascade do |t|
     t.uuid "content_id", null: false
     t.uuid "content_tag_id", null: false
+    t.jsonb "metadata", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_content_taggings_on_content_id"
     t.index ["content_tag_id"], name: "index_content_taggings_on_content_tag_id"
   end
@@ -126,6 +139,7 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
     t.uuid "content_tag_family_id", null: false
     t.string "slug", null: false
     t.string "title"
+    t.jsonb "metadata", default: {}, null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
@@ -141,11 +155,12 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
     t.string "title", null: false
     t.string "subtitle"
     t.string "slug", null: false
-    t.enum "kind", null: false, enum_type: "content_kind"
+    t.enum "kind", default: "article", null: false, enum_type: "content_kind"
     t.uuid "book_id", null: false
     t.string "version"
     t.string "source_url"
     t.uuid "thumbnail_id", null: false
+    t.jsonb "metadata", default: {}, null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
@@ -171,6 +186,7 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
 
   create_table "media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "type", null: false
+    t.jsonb "metadata", default: {}, null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
@@ -181,8 +197,10 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "name", null: false
+    t.enum "role", default: "noob", null: false, enum_type: "user_role"
+    t.string "email", null: false
+    t.string "encrypted_password", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -191,10 +209,9 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.jsonb "metadata", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.enum "role", enum_type: "user_role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["role"], name: "index_users_on_role"
@@ -204,6 +221,8 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "akin_content_tags", "content_tags", column: "related_id", on_delete: :cascade
   add_foreign_key "akin_content_tags", "content_tags", column: "relater_id", on_delete: :cascade
+  add_foreign_key "books", "users", column: "created_by_id", on_delete: :restrict
+  add_foreign_key "books", "users", column: "updated_by_id", on_delete: :restrict
   add_foreign_key "content_media", "contents"
   add_foreign_key "content_media", "media"
   add_foreign_key "content_media", "users", column: "created_by_id", on_delete: :restrict

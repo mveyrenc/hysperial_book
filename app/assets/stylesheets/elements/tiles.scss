@@ -1,0 +1,5 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
+.is-tiles-wrapper {
+  margin-bottom: cv.getVar("gap");
+}

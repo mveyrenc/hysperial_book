@@ -5,7 +5,8 @@
 # Table name: content_tag_families
 #
 #  id            :uuid             not null, primary key
-#  kind          :enum             not null
+#  kind          :enum             default("category"), not null
+#  metadata      :jsonb            not null
 #  slug          :string           not null
 #  title         :string           not null
 #  created_at    :datetime         not null
@@ -29,7 +30,6 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentTagFamily < ApplicationRecord
-
   belongs_to :book
 
   ## Enumerables

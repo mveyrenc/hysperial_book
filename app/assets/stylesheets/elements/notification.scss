@@ -1,0 +1,10 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
+$notification-padding-x: calc(cv.getVar("gap") * .75);
+$notification-padding-y: cv.getVar("gap");
+
+//@use "bulma/sass/elements/notification" with (
+//  $notification-padding: $notification-padding-x $notification-padding-y
+//);
+@use "bulma/sass/elements/notification";
+

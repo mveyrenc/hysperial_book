@@ -1,0 +1,41 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
+@use "../utilities/mixins";
+
+/* Hero Bar: specifics */
+$hero-bar-background: cv.getVar("white");
+
+section.hero.is-hero-bar {
+  background-color: $hero-bar-background;
+  border-bottom: cv.getVar("light-border");
+
+  .hero-body {
+    padding: cv.getVar("gap");
+
+    .level-item {
+      &.is-hero-avatar-item {
+        margin-right: cv.getVar("gap");
+      }
+
+      > div > .level {
+        margin-bottom: calc(cv.getVar("gap") * .5);
+      }
+
+      .subtitle + p {
+        margin-top: calc(cv.getVar("gap") * .5);
+      }
+    }
+
+    .button {
+      &.is-hero-button {
+        background-color: rgba(cv.getVar("white"), .5);
+        font-weight: 300;
+        @include mixins.transition(background-color);
+
+        &:hover {
+          background-color: cv.getVar("white");
+        }
+      }
+    }
+  }
+}

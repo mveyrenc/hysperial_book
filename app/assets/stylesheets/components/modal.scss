@@ -1,0 +1,31 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mx;
+@use "bulma/sass/components/modal" with (
+  $modal-card-head-background-color: cv.getVar("white-ter"),
+  $modal-card-title-size: cv.getVar("text"),
+  $modal-card-body-padding: cv.getVar("gap") 20px
+);
+
+$modal-card-width: 40vw;
+$modal-card-width-mobile: 90vw;
+$modal-card-foot-background-color: cv.getVar("white-ter");
+
+.modal-card {
+  width: $modal-card-width;
+}
+
+.modal-card-head {
+  border-bottom: 1px solid cv.getVar("white-ter");
+}
+
+.modal-card-foot {
+  background-color: $modal-card-foot-background-color;
+  border-top: 0;
+}
+
+@include mx.mobile {
+  .modal .modal-card {
+    width: $modal-card-width-mobile;
+    margin: 0 auto;
+  }
+}

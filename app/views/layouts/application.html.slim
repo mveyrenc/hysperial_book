@@ -1,5 +1,5 @@
 doctype html
-html.has-aside-left.has-aside-mobile-transition.has-navbar-fixed-top.has-aside-expanded
+html.has-aside-left.has-aside-mobile-transition.has-navbar-fixed-top.has-aside-expanded.theme-light
   head
     title
       | HysperialBook
@@ -14,7 +14,18 @@ html.has-aside-left.has-aside-mobile-transition.has-navbar-fixed-top.has-aside-e
   body
     #app
       = render Layout::Navbar::Component.new
-      = render Layout::Aside::Component.new
-      = render Layout::Flash::Component.new
-      = yield
-    = render Layout::Footer::Component.new
+      section.container-fluid
+        .columns
+          - if user_signed_in?
+            .column.is-narrow
+              = render Layout::Aside::Component.new
+            .column.mt-3
+              = render Layout::Flash::Component.new
+              = yield
+          - else
+            .column.is-half.is-offset-one-quarter
+              = render Layout::Flash::Component.new
+              section.section
+                = yield
+
+      = render Layout::Footer::Component.new

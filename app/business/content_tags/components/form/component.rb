@@ -17,8 +17,8 @@ module ContentTags
 
         protected
 
-        def content_tag_family_select_values
-          ContentTagFamily.order(title: :asc)
+        def content_tag_family_group_method
+          Book.order(:position)
         end
       end
     end

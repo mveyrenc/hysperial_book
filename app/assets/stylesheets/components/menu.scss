@@ -1,0 +1,93 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+
+@use "bulma/sass/components/menu";
+
+$menu-h: cv.getVar("scheme-h") !default;
+$menu-s: cv.getVar("scheme-s") !default;
+$menu-l: cv.getVar("scheme-main-l") !default;
+$menu-background-color: cv.getVar("scheme-main") !default;
+
+$menu-item-background-a: 0 !default;
+$menu-item-background-l: cv.getVar("scheme-main-l") !default;
+$menu-item-background-l-delta: 0% !default;
+$menu-item-hover-background-l-delta: cv.getVar(
+    "hover-background-l-delta"
+) !default;
+$menu-item-active-background-l-delta: cv.getVar(
+    "active-background-l-delta"
+) !default;
+$menu-item-color-l: cv.getVar("text-l") !default;
+$menu-item-color: hsl(
+    #{cv.getVar("menu-h")},
+    #{cv.getVar("menu-s")},
+    #{cv.getVar("menu-item-color-l")}
+) !default;
+
+$menu-label-color: cv.getVar("text-weak");
+
+$menu-colors: dv.$colors !default;
+
+.#{iv.$class-prefix}menu {
+  @include cv.register-vars(
+      (
+        "menu-h": #{$menu-h},
+        "menu-s": #{$menu-s},
+        "menu-l": #{$menu-l},
+        "menu-background-color": #{$menu-background-color},
+        "menu-item-background-a": #{$menu-item-background-a},
+        "menu-item-background-l": #{$menu-item-background-l},
+        "menu-item-background-l-delta": #{$menu-item-background-l-delta},
+        "menu-item-hover-background-l-delta": #{$menu-item-hover-background-l-delta},
+        "menu-item-active-background-l-delta": #{$menu-item-active-background-l-delta},
+        "menu-item-color-l": #{$menu-item-color-l},
+        "menu-item-color": #{$menu-item-color},
+        "menu-label-color": #{$menu-label-color}
+      )
+  );
+
+  // Colors
+  @each $name, $pair in $menu-colors {
+    &.#{iv.$class-prefix}is-#{$name} {
+      @include cv.register-vars(
+          (
+            "menu-item-h": #{cv.getVar($name, "", "-h")},
+            "menu-item-s": #{cv.getVar($name, "", "-s")},
+            "menu-item-background-l": #{cv.getVar($name, "", "-l")},
+            "menu-item-background-l-delta": #{cv.getVar($name, "", "-l-delta")},
+            "menu-item-color-h": #{cv.getVar($name, "", "-invert-h")},
+            "menu-item-color-s": #{cv.getVar($name, "", "-invert-s")},
+            "menu-item-color-l": #{cv.getVar($name, "", "-invert-l")},
+            "menu-label-color": #{cv.getVar($name, "", "-invert")}
+          )
+      );
+
+      &.#{iv.$class-prefix}is-light {
+        @include cv.register-vars(
+            (
+              "menu-item-background-l": #{cv.getVar("light-l")},
+              "menu-item-color-h": #{cv.getVar($name, "", "-light-invert-h")},
+              "menu-item-color-s": #{cv.getVar($name, "", "-light-invert-s")},
+              "menu-item-color-l": #{cv.getVar($name, "", "-light-invert-l")},
+              "menu-label-color": #{cv.getVar($name, "", "-light-invert")}
+            )
+        );
+      }
+    }
+  }
+
+  .#{iv.$class-prefix}menu-list {
+    a,
+    button,
+    .#{iv.$class-prefix}menu-item {
+      color: cv.getVar("navbar-item-color");
+    }
+  }
+
+  .#{iv.$class-prefix}has-icon {
+    .icon {
+      padding-right: 0.25em;
+    }
+  }
+}

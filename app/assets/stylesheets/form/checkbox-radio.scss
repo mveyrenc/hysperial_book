@@ -1,0 +1,20 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
+.switch input[type=checkbox]+.check:before {
+  box-shadow: none;
+}
+
+.switch, .b-checkbox.checkbox {
+  input[type=checkbox] {
+    &:focus + .check, &:focus:checked + .check {
+      box-shadow: none!important;
+    }
+  }
+}
+
+.b-checkbox.checkbox input[type=checkbox], .b-radio.radio input[type=radio] {
+  &+.check {
+    border-color: cv.getVar("input-border-color");
+    border-radius: cv.getVar("input-radius");
+  }
+}

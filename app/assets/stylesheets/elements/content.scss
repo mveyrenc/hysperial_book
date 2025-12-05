@@ -1,0 +1,6 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/elements/content";
+
+.content blockquote {
+  border-color: cv.getVar("scheme-main");
+}

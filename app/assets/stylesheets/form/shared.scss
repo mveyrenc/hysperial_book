@@ -1,0 +1,25 @@
+@use "bulma/sass/form";
+
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mx;
+
+.field {
+  &.has-check {
+    .field-body {
+      margin-top: calc(cv.getVar("gap") * .125);
+    }
+  }
+  .control {
+    .mdi-24px.mdi-set, .mdi-24px.mdi:before {
+      font-size: inherit;
+    }
+  }
+}
+
+.input, .textarea, select {
+  box-shadow: none;
+
+  &:focus, &:active {
+    box-shadow: none!important;
+  }
+}

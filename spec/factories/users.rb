@@ -7,15 +7,16 @@
 #  id                     :uuid             not null, primary key
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
+#  email                  :string           not null
+#  encrypted_password     :string           not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
-#  name                   :string
+#  metadata               :jsonb            not null
+#  name                   :string           not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  role                   :enum
+#  role                   :enum             default("noob"), not null
 #  sign_in_count          :integer          default(0), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null

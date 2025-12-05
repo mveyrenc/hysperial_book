@@ -1,0 +1,51 @@
+@use "bulma/sass/base" with (
+  $body-family: '"Nunito", sans-serif'
+);
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/css-variables" as cv;
+
+#{iv.$variables-host} {
+  @include cv.register-vars(
+      (
+        "gap": 32px
+      )
+  )
+};
+
+$user-avatar-max-width: calc(cv.getVar("text") * 7);
+$icon-update-mark-size: calc(cv.getVar("small-font-size") * 0.5);
+$icon-update-mark-color: cv.getVar("yellow");
+
+html, body, #app {
+  height: 100vh;
+}
+
+.is-user-avatar {
+  &.has-max-width {
+    max-width: $user-avatar-max-width;
+  }
+
+  &.is-aligned-center {
+    margin: 0 auto;
+  }
+
+  img {
+    margin: 0 auto;
+    border-radius: cv.getVar("radius-rounded");
+  }
+}
+
+.icon.has-update-mark {
+  position: relative;
+
+  &:after {
+    content: '';
+    width: $icon-update-mark-size;
+    height: $icon-update-mark-size;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    background-color: $icon-update-mark-color;
+    border-radius: cv.getVar("radius-rounded");
+  }
+}

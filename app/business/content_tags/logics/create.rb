@@ -9,17 +9,17 @@ module ContentTags
       end
 
       def create_from_params
-        split_values = context.params[:value].split("\n")
-        params = context.params.except(:value)
+        split_titles = context.params[:title].split("\n")
+        params = context.params.except(:title)
         context.records = []
-        split_values.each do |value|
-          create_one(params, value, context.current_user)
+        split_titles.each do |title|
+          create_one(params, title, context.current_user)
         end
       end
 
-      def create_one(params, value, current_user)
+      def create_one(params, title, current_user)
         record = ContentTag.new(params)
-        record.value = value
+        record.title = title
         record.created_by = current_user
         record.updated_by = current_user
 

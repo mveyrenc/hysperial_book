@@ -5,7 +5,8 @@
 # Table name: content_media
 #
 #  id            :uuid             not null, primary key
-#  kind          :enum             not null
+#  kind          :enum             default("document"), not null
+#  metadata      :jsonb            not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  content_id    :uuid             not null

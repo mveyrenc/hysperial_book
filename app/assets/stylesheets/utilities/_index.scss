@@ -1,0 +1,50 @@
+@use "bulma/sass/utilities/functions" as fn;
+$orange: #FF470F;
+$yellow: #c7ff0f;
+$green: #0fff47;
+$turquoise: #0fffbf;
+$cyan: #0fc7ff;
+$blue: #470fff;
+$purple: #bf0fff;
+$red: #D62D1A;
+
+// https://gradients.app
+
+$primary: #2b006b;
+$link: #006b60;
+
+$cooking: #6b000b;
+$cooking-invert: fn.bulmaFindColorInvert($cooking);
+$care: #00406b;
+$care-invert: fn.bulmaFindColorInvert($care);
+$fabric-art: #6b0040;
+$fabric-art-invert: fn.bulmaFindColorInvert($fabric-art);
+$gardening: #406b00;
+$gardening-invert: fn.bulmaFindColorInvert($gardening);
+
+$custom-colors: (
+  "cooking": ($cooking, $cooking-invert),
+  "care": ($care, $care-invert),
+  "fabric-art": ($fabric-art, $fabric-art-invert),
+  "gardening": ($gardening, $gardening-invert)
+);
+
+// Path to Bulma's sass folder
+@use "bulma/sass/utilities" with (
+  $orange: $orange,
+  $yellow: $yellow,
+  $green: $green,
+  $turquoise: $turquoise,
+  $cyan: $cyan,
+  $blue: $blue,
+  $purple: $purple,
+  $red: $red,
+
+  $family-primary: '"Nunito", sans-serif',
+  $primary: $primary,
+  $link: $link,
+  $warning: $orange,
+
+  $custom-colors: $custom-colors
+);
+@forward "mixins";

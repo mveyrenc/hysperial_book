@@ -3,7 +3,7 @@
 class BookKind
   extend ActiveModel::Translation
 
-  KINDS = %w[cooking care fabric_art].freeze
+  KINDS = %w[cooking care fabric_art gardening].freeze
 
   def initialize(kind)
     @kind = kind

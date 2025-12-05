@@ -1,0 +1,24 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mx;
+
+/* Footer: Bulma override */
+$footer-background-color: cv.getVar("white");
+$footer-padding: calc(cv.getVar("gap") * 33) cv.getVar("gap");
+
+/* Footer: specifics */
+$footer-logo-height: calc(cv.getVar("text") * 2);
+
+footer.footer {
+  .logo {
+    img {
+      width: auto;
+      height: $footer-logo-height;
+    }
+  }
+}
+
+@include mx.mobile {
+  .footer-copyright {
+    text-align: center;
+  }
+}

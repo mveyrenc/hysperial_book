@@ -29,9 +29,14 @@ class CreateBooks < ActiveRecord::Migration[8.0]
 
       t.enum :kind, enum_type: :book_kind, default: :cooking, null: false, index: true
 
+      t.jsonb :settings, null: false, default: {}
+
       t.integer :position
 
-      t.jsonb :settings, null: false, default: {}
+      t.jsonb :metadata, null: false, default: {}
+
+      t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
+      t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
 
       t.timestamps
     end

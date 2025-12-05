@@ -1,12 +1,5 @@
-aside.aside.is-placed-left.is-expanded
-  .aside-tools
-    a.aside-tools-label[href="/app/assets/builds" target="_top"]
-      span.icon
-        span.material-symbols-outlined local_library
-      / = image_tag "logo.png", class: "icon"
-      span HysperiaBook
-
-  .menu.is-menu-main
+aside.aside.is-placed-left.is-expanded.is-primary.is-light#aside
+  .menu.is-menu-main.is-primary.is-light
     ul.menu-list
       li
         - if policy(Content).index?

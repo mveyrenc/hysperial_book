@@ -34,6 +34,9 @@ db_migrate:
 annotate:
 	docker compose exec web annotate --model
 
+sass_watch:
+	rails dartsass:watch
+
 rspec:
 	docker compose exec web rspec
 
