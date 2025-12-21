@@ -16,20 +16,6 @@
         fabric_art
     }
 
-    class ContentNode {
-        book: Book
-        type: string
-        kind: string
-        title: string
-        subtitle: string
-        short_description: string
-        description: string
-        thumbnail: Image
-
-        ancestry
-        position: number
-    }
-
     class Content {
         categories: Tag[]
         rating
@@ -41,9 +27,6 @@
         raw_data: jsonb
         processed_data: jsonb
     }
-
-    ContentNode <|-- Content
-    ContentNode <|-- ContentBlock
 
     enum ContentKind {
         article
@@ -90,13 +73,6 @@
 
     class InstructionsData {
 
-    }
-
-    class ContentNode {
-        root: Content
-        parent: ContentNode
-        node: ContentBlock
-        position: number
     }
 
     class Tag {

@@ -16,4 +16,4 @@ nav.main-nav.navbar.is-fixed-top.is-primary[role="navigation" aria-label="main n
             .buttons
               - if user_signed_in?
                 = link_to current_user, edit_user_registration_path, class: "button is-white is-small", target: "_top"
-                = button_to t('.log_out'), destroy_user_session_path, method: :delete, data: { "turbo-method": :delete }, class: "button is-primary is-small"
+                = button_to t('.log_out'), destroy_user_session_path, method: :delete, data: { "turbo-method": :delete }, class: "button is-edit-action"

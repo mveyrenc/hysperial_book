@@ -1,1 +1,17 @@
+@use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/elements/button";
+
+.#{iv.$class-prefix}button {
+  &.is-new-action {
+    @extend .is-primary;
+    @extend .is-outlined;
+  }
+  &.is-edit-action {
+    @extend .is-primary;
+    @extend .is-small;
+  }
+  &.is-delete-action {
+    @extend .is-danger;
+    @extend .is-small;
+  }
+}

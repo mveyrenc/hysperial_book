@@ -12,13 +12,13 @@
       .card-footer-item
         = link_to t("application.read"),
           content_path(record),
-          class: "button is-primary is-small",
+          class: "button is-edit-action",
           target: "_top"
     / - if policy(record).update?
     /   .card-footer-item
     /     = link_to t("application.edit"),
     /       edit_content_path(record),
-    /       class: "button is-primary is-small",
+    /       class: "button is-edit-action",
     /       target: "_top"
     / - if policy(record).destroy?
     /   .card-footer-item
@@ -26,4 +26,4 @@
     /       content_path(record),
     /       method: :delete,
     /       data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure") },
-    /       class: "button is-danger is-small"
+    /       class: "button is-delete-action"

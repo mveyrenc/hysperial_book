@@ -21,7 +21,8 @@
 #
 class CreateBooks < ActiveRecord::Migration[8.0]
   def change
-    create_enum :book_kind, %w[cooking care fabric_art]
+    create_enum :book_kind, %w[cooking care fabric_art gardening]
+
     create_table :books, id: :uuid do |t|
       t.string :title, null: false
       t.string :subtitle

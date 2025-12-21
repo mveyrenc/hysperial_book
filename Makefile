@@ -21,6 +21,7 @@ bundle_install:
 db_recreate:
 	docker compose restart web
 	docker compose exec web rails db:drop
+	rm db/schema.rb
 	docker compose exec web rails db:create
 	docker compose exec web rails db:migrate
 	docker compose exec web rails db:seed --trace

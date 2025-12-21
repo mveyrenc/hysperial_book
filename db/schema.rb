@@ -18,9 +18,9 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "akin_content_tag_kind", ["direct", "followable", "computed"]
-  create_enum "book_kind", ["cooking", "care", "fabric_art"]
+  create_enum "book_kind", ["cooking", "care", "fabric_art", "gardening"]
+  create_enum "content_attribute_kind", ["document", "scanned_document", "text", "quantity", "supplies", "tools", "instructions"]
   create_enum "content_kind", ["article", "tutorial", "ingredient", "recipe", "menu", "pattern"]
-  create_enum "content_medium_kind", ["document", "scanned_document", "before_picture", "during_picture", "after_picture"]
   create_enum "content_tag_family_kind", ["ingredient", "season", "occasion", "category", "geographic_area", "restriction", "source", "author", "thematic"]
   create_enum "user_role", ["super_admin", "admin", "contributor", "reader", "noob"]
 
@@ -92,20 +92,20 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
     t.index ["updated_by_id"], name: "index_books_on_updated_by_id"
   end
 
-  create_table "content_media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.enum "kind", default: "document", null: false, enum_type: "content_medium_kind"
+  create_table "content_attributes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.enum "kind", default: "document", null: false, enum_type: "content_attribute_kind"
     t.uuid "content_id", null: false
-    t.uuid "medium_id", null: false
+    t.jsonb "settings", default: {}, null: false
+    t.integer "position"
     t.jsonb "metadata", default: {}, null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["content_id"], name: "index_content_media_on_content_id"
-    t.index ["created_by_id"], name: "index_content_media_on_created_by_id"
-    t.index ["kind"], name: "index_content_media_on_kind"
-    t.index ["medium_id"], name: "index_content_media_on_medium_id"
-    t.index ["updated_by_id"], name: "index_content_media_on_updated_by_id"
+    t.index ["content_id"], name: "index_content_attributes_on_content_id"
+    t.index ["created_by_id"], name: "index_content_attributes_on_created_by_id"
+    t.index ["kind"], name: "index_content_attributes_on_kind"
+    t.index ["updated_by_id"], name: "index_content_attributes_on_updated_by_id"
   end
 
   create_table "content_tag_families", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -223,10 +223,9 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   add_foreign_key "akin_content_tags", "content_tags", column: "relater_id", on_delete: :cascade
   add_foreign_key "books", "users", column: "created_by_id", on_delete: :restrict
   add_foreign_key "books", "users", column: "updated_by_id", on_delete: :restrict
-  add_foreign_key "content_media", "contents"
-  add_foreign_key "content_media", "media"
-  add_foreign_key "content_media", "users", column: "created_by_id", on_delete: :restrict
-  add_foreign_key "content_media", "users", column: "updated_by_id", on_delete: :restrict
+  add_foreign_key "content_attributes", "contents"
+  add_foreign_key "content_attributes", "users", column: "created_by_id", on_delete: :restrict
+  add_foreign_key "content_attributes", "users", column: "updated_by_id", on_delete: :restrict
   add_foreign_key "content_tag_families", "books"
   add_foreign_key "content_tag_families", "users", column: "created_by_id", on_delete: :restrict
   add_foreign_key "content_tag_families", "users", column: "updated_by_id", on_delete: :restrict

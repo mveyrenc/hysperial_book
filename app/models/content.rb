@@ -47,10 +47,10 @@ class Content < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  has_one :content_node, dependent: :destroy
-
   has_many :content_taggings, dependent: :destroy
   has_many :content_tags, through: :content_taggings
+
+  has_many :content_attributes, -> { order(position: :asc) }
 
   has_rich_text :short_description
   has_rich_text :description

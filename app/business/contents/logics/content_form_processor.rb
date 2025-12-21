@@ -24,16 +24,6 @@ module Contents
         def record_has_thumbnail?
           context.record.thumbnail&.file&.attached?
         end
-
-        def initialize_content_tree
-          return unless context.record.content_node.nil?
-
-          node = ContentNode.new
-          node.content = context.record
-          node.created_by = context.record.created_by
-          node.updated_by = context.record.updated_by
-          node.save
-        end
       end
     end
   end
