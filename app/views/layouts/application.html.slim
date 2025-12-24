@@ -14,17 +14,13 @@ html.has-aside-left.has-aside-mobile-transition.has-navbar-fixed-top.has-aside-e
   body
     #app
       = render Layout::Navbar::Component.new
-      section.container-fluid
-        .columns
-          - if user_signed_in?
-            .column.is-narrow
-              = render Layout::Aside::Component.new
-            .column.mt-3
-              = render Layout::Flash::Component.new
-              = yield
-          - else
+      section.container.is-fluid
+        = render Layout::Flash::Component.new
+        - if user_signed_in?
+          = yield
+        - else
+          .columns
             .column.is-half.is-offset-one-quarter
-              = render Layout::Flash::Component.new
               section.section
                 = yield
 

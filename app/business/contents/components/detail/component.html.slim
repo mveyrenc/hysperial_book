@@ -3,9 +3,9 @@
     .card-image
       figure.image.is-4by3
         = image_tag record_thumbnail.file.variant(resize_to_fill: [400, 300])
-  - unless record_alternate_name.blank?
-    .card-content
-      p.alternate_name
+  .card-content
+    - unless record_alternate_name.blank?
+      p.subtitle
         = record_alternate_name
-  - record_content_attributes.each do |a|
-    = render ContentAttributes::Components::AttributeDisplay::Component.new(record: a)
+    - record_content_attributes.each do |a|
+      = render ContentAttributes::Components::AttributeDisplay::Component.new(record: a)

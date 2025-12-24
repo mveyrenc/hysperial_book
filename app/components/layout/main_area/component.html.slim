@@ -6,15 +6,13 @@
           .level-item
             h1.title
               = title
-        .level-right
-          .level-item
-
-
-
-- if main_section?
-  section.section.is-main-section
-    - if header_actions?
-      .block
-        = header_actions
-    .block
-      = main_section
+        - if header_actions?
+          .level-right
+            .level-item
+              = header_actions
+.columns
+  - if aside?
+    .column.is-narrow
+      = aside
+  .column
+    = main_section
