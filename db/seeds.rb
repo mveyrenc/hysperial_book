@@ -8,4 +8,4 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Dir[Rails.root.join('db/seeds*.rb')].each { |f| require_relative f }
+Dir[Rails.root.join('db/seeds_*.rb')].each { |f| require_relative f }

@@ -9,8 +9,8 @@ module ContentTagFamilies
       end
 
       def create_from_params
-        split_titles = context.params[:title].split("\n")
-        params = context.params.except(:title)
+        split_titles = context.params[:name].split("\n")
+        params = context.params.except(:name)
         context.records = []
         split_titles.each do |title|
           create_one(params, title, context.current_user)

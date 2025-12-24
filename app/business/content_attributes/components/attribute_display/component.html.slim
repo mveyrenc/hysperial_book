@@ -1,0 +1,9 @@
+- if attribute_body_renderer.render?
+  .field.is-horizontal
+    - if attribute_label_renderer.render?
+      .field-label
+        .label
+          = render attribute_label_renderer
+    .field-body
+      .control
+        = render attribute_body_renderer

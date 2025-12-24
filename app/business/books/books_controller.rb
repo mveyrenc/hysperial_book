@@ -80,7 +80,7 @@ module Books
     def strong_params
       params
         .require(:book)
-        .permit(:title, :subtitle, :kind, :position)
+        .permit(:name, :alternate_name, :kind, :position)
     end
   end
 end

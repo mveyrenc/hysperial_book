@@ -4,23 +4,23 @@
       .level-left
         .level-item
           h1.title.is-5
-            = record_title
+            = record_name
       .level-right
         .level-item
           span.tag
             = record_kind_name
-    / - if record.thumbnail&.file&.attached?
-  - if record.thumbnail and record.thumbnail.file.attached?
+    / - if record_thumbnail&.file&.attached?
+  - if record_thumbnail and record_thumbnail.file.attached?
     .card-image
       figure.image.is-4by3
-        = image_tag record.thumbnail.file.variant(resize_to_fill: [400, 300])
+        = image_tag record_thumbnail.file.variant(resize_to_fill: [400, 300])
   - else
-      = render Contents::Components::NoThumbnail::Component.new(record: record)
+    = render Contents::Components::NoThumbnail::Component.new(record: record)
 
-  - unless record_subtitle.blank?
+  - unless record_alternate_name.blank?
     .card-content
-      p.subtitle
-        = record_subtitle
+      p.alternate_name
+        = record_alternate_name
   .card-footer
     - if policy(record).show?
       .card-footer-item

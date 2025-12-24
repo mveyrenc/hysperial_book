@@ -4,23 +4,23 @@
 #
 # Table name: content_tags
 #
-#  id                    :uuid             not null, primary key
-#  metadata              :jsonb            not null
-#  slug                  :string           not null
-#  title                 :string
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  content_tag_family_id :uuid             not null
-#  created_by_id         :uuid             not null
-#  updated_by_id         :uuid             not null
+#  id                                                         :uuid             not null, primary key
+#  metadata(A hash to store some data about the item)         :jsonb            not null
+#  name(The name of the item)                                 :string           not null
+#  slug(Human readable item identifier)                       :string           not null
+#  created_at                                                 :datetime         not null
+#  updated_at                                                 :datetime         not null
+#  content_tag_family_id(The family to which the tag belongs) :uuid             not null
+#  created_by_id                                              :uuid             not null
+#  updated_by_id                                              :uuid             not null
 #
 # Indexes
 #
-#  index_content_tags_on_content_tag_family_id            (content_tag_family_id)
-#  index_content_tags_on_created_by_id                    (created_by_id)
-#  index_content_tags_on_slug                             (slug) UNIQUE
-#  index_content_tags_on_title_and_content_tag_family_id  (title,content_tag_family_id) UNIQUE
-#  index_content_tags_on_updated_by_id                    (updated_by_id)
+#  index_content_tags_on_content_tag_family_id           (content_tag_family_id)
+#  index_content_tags_on_created_by_id                   (created_by_id)
+#  index_content_tags_on_name_and_content_tag_family_id  (name,content_tag_family_id) UNIQUE
+#  index_content_tags_on_slug                            (slug) UNIQUE
+#  index_content_tags_on_updated_by_id                   (updated_by_id)
 #
 # Foreign Keys
 #
@@ -30,14 +30,15 @@
 #
 class ContentTag < ApplicationRecord
   ## delegate
-  delegate :title, to: :content_tag_family, prefix: true
+  delegate :name, to: :content_tag_family, prefix: true
 
   ## FriendlyId
   extend FriendlyId
+
   friendly_id :generate_custom_slug, use: :slugged
 
   def generate_custom_slug
-    [%i[content_tag_family_title title]]
+    [%i[content_tag_family_name name]]
   end
 
   def kind_name
@@ -71,5 +72,5 @@ class ContentTag < ApplicationRecord
   has_many :contents, through: :content_taggings, dependent: :nullify
 
   ## Validations
-  validates :title, presence: true, uniqueness: { scope: %i[content_tag_family] }
+  validates :name, presence: true, uniqueness: { scope: %i[content_tag_family] }
 end

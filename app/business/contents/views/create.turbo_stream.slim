@@ -1,5 +1,5 @@
 = turbo_stream.prepend "contents" do
-  = turbo_frame_tag @record, class: "is-card-in-column" do
+  = turbo_frame_tag @record do
     = render(Contents::Components::Card::Component.new(record: @record))
 = turbo_stream.update Content.new, render(Contents::Components::NewButton::Component.new)
 

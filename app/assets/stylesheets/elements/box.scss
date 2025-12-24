@@ -1,1 +1,9 @@
+@use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/elements/box";
+
+.#{iv.$class-prefix}card-box {
+  @extend .box;
+  margin-bottom: 0.75em;
+}
+
+

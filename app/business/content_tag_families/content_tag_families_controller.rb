@@ -81,7 +81,7 @@ module ContentTagFamilies
     def strong_params
       params
         .require(:content_tag_family)
-        .permit(:kind, :title)
+        .permit(:kind, :name)
     end
   end
 end

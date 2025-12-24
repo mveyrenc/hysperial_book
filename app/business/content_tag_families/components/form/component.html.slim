@@ -1,11 +1,11 @@
-.box
+.card-box
   = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
     - if record.new_record?
-      = f.text_area :title, help: t('.title.help')
+      = f.text_area :name, help: t('.name.help')
       = f.select :kind, options_for_select(kind_select_values, record_kind)
     - else
-      = f.text_field :title, autofocus: true
+      = f.text_field :name, autofocus: true
       = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:kind), value: record_kind_name)
 
 

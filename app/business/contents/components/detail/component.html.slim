@@ -1,29 +1,11 @@
 .card
-  - if record.thumbnail and record.thumbnail.file.attached?
+  - if record_thumbnail and record_thumbnail.file.attached?
     .card-image
       figure.image.is-4by3
-        = image_tag record.thumbnail.file.variant(resize_to_fill: [400, 300])
-  - unless record_subtitle.blank?
+        = image_tag record_thumbnail.file.variant(resize_to_fill: [400, 300])
+  - unless record_alternate_name.blank?
     .card-content
-      p.subtitle
-        = record_subtitle
-  .card-footer
-    - if policy(record).show?
-      .card-footer-item
-        = link_to t("application.read"),
-          content_path(record),
-          class: "button is-edit-action",
-          target: "_top"
-    / - if policy(record).update?
-    /   .card-footer-item
-    /     = link_to t("application.edit"),
-    /       edit_content_path(record),
-    /       class: "button is-edit-action",
-    /       target: "_top"
-    / - if policy(record).destroy?
-    /   .card-footer-item
-    /     = button_to t("application.delete"),
-    /       content_path(record),
-    /       method: :delete,
-    /       data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure") },
-    /       class: "button is-delete-action"
+      p.alternate_name
+        = record_alternate_name
+  - record_content_attributes.each do |a|
+    = render ContentAttributes::Components::AttributeDisplay::Component.new(record: a)

@@ -1,0 +1,4 @@
+- if record_name.blank?
+  = ContentAttribute.human_attribute_name(record_kind)
+- else
+  = record_name

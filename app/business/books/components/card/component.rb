@@ -7,7 +7,7 @@ module Books
       class Component < ApplicationComponent
         attr_reader :record
 
-        delegate :title, :subtitle, :kind_name, :position, to: :record, prefix: true
+        delegate :name, :alternate_name, :kind_name, :position, to: :record, prefix: true
 
         def initialize(record:)
           @record = record

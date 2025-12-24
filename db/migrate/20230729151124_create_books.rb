@@ -21,20 +21,18 @@
 #
 class CreateBooks < ActiveRecord::Migration[8.0]
   def change
-    create_enum :book_kind, %w[cooking care fabric_art gardening]
-
     create_table :books, id: :uuid do |t|
-      t.string :title, null: false
-      t.string :subtitle
-      t.string :slug, null: false, index: { unique: true }
+      t.string :name, null: false, comment: 'The name of the item'
+      t.string :alternate_name, null: true, comment: 'An alias for the item'
+      t.text :description, null: true, comment: 'A description of the item'
+      t.string :slug, null: false, index: { unique: true }, comment: 'Human readable item identifier'
+      t.string :kind, null: false, comment: 'The kind or type of the item'
 
-      t.enum :kind, enum_type: :book_kind, default: :cooking, null: false, index: true
+      t.jsonb :settings, null: false, default: {}, comment: 'A hash to configure the item'
 
-      t.jsonb :settings, null: false, default: {}
+      t.integer :position, comment: 'The position of the item'
 
-      t.integer :position
-
-      t.jsonb :metadata, null: false, default: {}
+      t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'
 
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid

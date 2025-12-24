@@ -1,0 +1,5 @@
+- if record_data.key?("html_text")
+  .content
+    = record_data["html_text"].html_safe
+- elsif record_data.key?("plain_text")
+  = record_data["plain_text"]

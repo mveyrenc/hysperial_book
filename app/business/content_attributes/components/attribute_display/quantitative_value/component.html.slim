@@ -1,0 +1,6 @@
+- if record_data.key?("value")
+  = record_data["value"]
+- elsif record_data.key?("html_text")
+  = record_data["html_text"].html_safe
+- elsif record_data.key?("plain_text")
+  = record_data["plain_text"]

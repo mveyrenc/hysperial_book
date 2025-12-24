@@ -1,21 +1,20 @@
-.box
-  span.has-text-grey
-    = record_book
-  span.mx-1
-    | /
-  span.has-text-grey-darker
-    = record_title
-
-  .field.is-grouped.is-grouped-centered
-    - if policy(record).update?
-      .control
-        = link_to t("application.edit"),
-                edit_content_tag_family_path(record),
-                class: "button is-edit-action"
-    - if policy(record).destroy?
-      .control
-        = button_to t("application.delete"),
-                content_tag_family_path(record),
-                method: :delete,
-                data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure")  },
-                class: "button is-delete-action"
+.card-box
+  .grid
+    .cell
+      = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:book), value: record_book)
+    .cell
+      = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:name), value: record_name)
+    .cell.is-align-self-center
+      .field.is-grouped.is-grouped-centered
+        - if policy(record).update?
+          .control
+            = link_to t("application.edit"),
+                    edit_content_tag_family_path(record),
+                    class: "button is-edit-action"
+        - if policy(record).destroy?
+          .control
+            = button_to t("application.delete"),
+                    content_tag_family_path(record),
+                    method: :delete,
+                    data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure")  },
+                    class: "button is-delete-action"

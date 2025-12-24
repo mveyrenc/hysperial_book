@@ -18,10 +18,6 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "akin_content_tag_kind", ["direct", "followable", "computed"]
-  create_enum "book_kind", ["cooking", "care", "fabric_art", "gardening"]
-  create_enum "content_attribute_kind", ["document", "scanned_document", "text", "quantity", "supplies", "tools", "instructions"]
-  create_enum "content_kind", ["article", "tutorial", "ingredient", "recipe", "menu", "pattern"]
-  create_enum "content_tag_family_kind", ["ingredient", "season", "occasion", "category", "geographic_area", "restriction", "source", "author", "thematic"]
   create_enum "user_role", ["super_admin", "admin", "contributor", "reader", "noob"]
 
   create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -75,44 +71,45 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   end
 
   create_table "books", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title", null: false
-    t.string "subtitle"
-    t.string "slug", null: false
-    t.enum "kind", default: "cooking", null: false, enum_type: "book_kind"
-    t.jsonb "settings", default: {}, null: false
-    t.integer "position"
-    t.jsonb "metadata", default: {}, null: false
+    t.string "name", null: false, comment: "The name of the item"
+    t.string "alternate_name", comment: "An alias for the item"
+    t.text "description", comment: "A description of the item"
+    t.string "slug", null: false, comment: "Human readable item identifier"
+    t.string "kind", null: false, comment: "The kind or type of the item"
+    t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
+    t.integer "position", comment: "The position of the item"
+    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_books_on_created_by_id"
-    t.index ["kind"], name: "index_books_on_kind"
     t.index ["slug"], name: "index_books_on_slug", unique: true
     t.index ["updated_by_id"], name: "index_books_on_updated_by_id"
   end
 
   create_table "content_attributes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.enum "kind", default: "document", null: false, enum_type: "content_attribute_kind"
-    t.uuid "content_id", null: false
-    t.jsonb "settings", default: {}, null: false
-    t.integer "position"
-    t.jsonb "metadata", default: {}, null: false
+    t.string "name", null: false, comment: "The name of the item"
+    t.string "kind", null: false, comment: "The kind or type of the item"
+    t.uuid "content_id", null: false, comment: "The content to which the attribute belongs"
+    t.integer "position", comment: "The position of the item"
+    t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
+    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
+    t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_content_attributes_on_content_id"
     t.index ["created_by_id"], name: "index_content_attributes_on_created_by_id"
-    t.index ["kind"], name: "index_content_attributes_on_kind"
     t.index ["updated_by_id"], name: "index_content_attributes_on_updated_by_id"
   end
 
   create_table "content_tag_families", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.enum "kind", default: "category", null: false, enum_type: "content_tag_family_kind"
-    t.uuid "book_id", null: false
     t.string "slug", null: false
-    t.string "title", null: false
+    t.string "name", null: false
+    t.string "kind", null: false
+    t.uuid "book_id", null: false
     t.jsonb "metadata", default: {}, null: false
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
@@ -120,7 +117,6 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_content_tag_families_on_book_id"
     t.index ["created_by_id"], name: "index_content_tag_families_on_created_by_id"
-    t.index ["kind"], name: "index_content_tag_families_on_kind"
     t.index ["slug"], name: "index_content_tag_families_on_slug", unique: true
     t.index ["updated_by_id"], name: "index_content_tag_families_on_updated_by_id"
   end
@@ -136,38 +132,37 @@ ActiveRecord::Schema[8.0].define(version: 2023_08_06_142408) do
   end
 
   create_table "content_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "content_tag_family_id", null: false
-    t.string "slug", null: false
-    t.string "title"
-    t.jsonb "metadata", default: {}, null: false
+    t.uuid "content_tag_family_id", null: false, comment: "The family to which the tag belongs"
+    t.string "slug", null: false, comment: "Human readable item identifier"
+    t.string "name", null: false, comment: "The name of the item"
+    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_tag_family_id"], name: "index_content_tags_on_content_tag_family_id"
     t.index ["created_by_id"], name: "index_content_tags_on_created_by_id"
+    t.index ["name", "content_tag_family_id"], name: "index_content_tags_on_name_and_content_tag_family_id", unique: true
     t.index ["slug"], name: "index_content_tags_on_slug", unique: true
-    t.index ["title", "content_tag_family_id"], name: "index_content_tags_on_title_and_content_tag_family_id", unique: true
     t.index ["updated_by_id"], name: "index_content_tags_on_updated_by_id"
   end
 
   create_table "contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "title", null: false
-    t.string "subtitle"
-    t.string "slug", null: false
-    t.enum "kind", default: "article", null: false, enum_type: "content_kind"
-    t.uuid "book_id", null: false
-    t.string "version"
-    t.string "source_url"
-    t.uuid "thumbnail_id", null: false
-    t.jsonb "metadata", default: {}, null: false
+    t.string "name", null: false, comment: "The name of the item"
+    t.string "alternate_name", comment: "An alias for the item"
+    t.string "slug", null: false, comment: "Human readable item identifier"
+    t.string "kind", null: false, comment: "The kind or type of the item"
+    t.uuid "book_id", null: false, comment: "The book in which the item is located"
+    t.string "version", comment: "The version of the item"
+    t.string "source_url", comment: "The URL from which the item was imported"
+    t.uuid "thumbnail_id", null: false, comment: "A very small image for the item"
+    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.uuid "created_by_id", null: false
     t.uuid "updated_by_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_contents_on_book_id"
     t.index ["created_by_id"], name: "index_contents_on_created_by_id"
-    t.index ["kind"], name: "index_contents_on_kind"
     t.index ["slug"], name: "index_contents_on_slug", unique: true
     t.index ["thumbnail_id"], name: "index_contents_on_thumbnail_id"
     t.index ["updated_by_id"], name: "index_contents_on_updated_by_id"

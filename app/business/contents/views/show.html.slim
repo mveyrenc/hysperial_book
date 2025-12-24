@@ -4,7 +4,11 @@
       .level-left
         .level-item
           h1.title
-            = @record.title
+            = @record.name
+      .level-right
+        .level-item
+          span.tag
+            = @record.kind_name
   - component.with_header_actions do
     .level
       .level-left
@@ -13,7 +17,7 @@
           .level-item
             = link_to t("application.edit"),
               edit_content_path(@record),
-              class: "button is-primary is-outlined",
+              class: "button is-edit-action",
               target: "_top"
         - if policy(@record).destroy?
           .level-item
@@ -21,7 +25,7 @@
               content_path(@record),
               method: :delete,
               data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure") },
-              class: "button is-danger is-small is-outlined"
+              class: "button is-delete-action"
   - component.with_main_section do
     = turbo_frame_tag @record do
       = render Contents::Components::Detail::Component.new(record: @record)

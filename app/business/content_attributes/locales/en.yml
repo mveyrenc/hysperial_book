@@ -1,0 +1,13 @@
+en:
+  content_attributes:
+    views:
+      edit:
+        title: "Edit content attribute"
+      index:
+        title: "Content attributes"
+      new:
+        title: "New content attribute"
+    content_attributes:
+      successfully_created: "Book was successfully created"
+      successfully_updated: "Book was successfully updated"
+      successfully_destroyed: "Book was successfully destroyed"

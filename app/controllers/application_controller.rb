@@ -3,15 +3,23 @@
 # Application controller
 class ApplicationController < ActionController::Base
   include CableReady::Broadcaster
+
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :configure_view_path
+
+  # Append this param to bust the cache in development 🙌
+  # https://localhost:3000?clear_cache=true
+  before_action :clear_cache_if_requested if Rails.env.development?
 
   include Pundit::Authorization
 
   protected
+
+  def clear_cache_if_requested
+    Rails.cache.clear if params[:clear_cache].present?
+  end
 
   def authorize_record
     authorize @record

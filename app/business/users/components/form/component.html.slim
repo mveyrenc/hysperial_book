@@ -1,4 +1,4 @@
-.box
+.card-box
   = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
     = f.text_field :name, autofocus: true

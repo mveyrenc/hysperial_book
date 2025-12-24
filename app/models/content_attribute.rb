@@ -1,24 +1,26 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: content_attributes
 #
-#  id            :uuid             not null, primary key
-#  kind          :enum             default("document"), not null
-#  metadata      :jsonb            not null
-#  position      :integer
-#  settings      :jsonb            not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  content_id    :uuid             not null
-#  created_by_id :uuid             not null
-#  updated_by_id :uuid             not null
+#  id                                                     :uuid             not null, primary key
+#  data(A hash to store the data of the item)             :jsonb            not null
+#  kind(The kind or type of the item)                     :string           not null
+#  metadata(A hash to store some data about the item)     :jsonb            not null
+#  name(The name of the item)                             :string           not null
+#  position(The position of the item)                     :integer
+#  settings(A hash to configure the item)                 :jsonb            not null
+#  created_at                                             :datetime         not null
+#  updated_at                                             :datetime         not null
+#  content_id(The content to which the attribute belongs) :uuid             not null
+#  created_by_id                                          :uuid             not null
+#  updated_by_id                                          :uuid             not null
 #
 # Indexes
 #
 #  index_content_attributes_on_content_id     (content_id)
 #  index_content_attributes_on_created_by_id  (created_by_id)
-#  index_content_attributes_on_kind           (kind)
 #  index_content_attributes_on_updated_by_id  (updated_by_id)
 #
 # Foreign Keys
@@ -28,14 +30,6 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentAttribute < ApplicationRecord
-
-  ## Enumerables
-  enum :kind, ContentAttributeKind.kinds, suffix: true
-
-  def kind_name
-    ContentAttributeKind.human_attribute_name(kind)
-  end
-
   ## Relations
   belongs_to :content
 
@@ -47,4 +41,14 @@ class ContentAttribute < ApplicationRecord
 
   ## Validations
 
+  ## Enumerables
+  # enum :kind, ContentAttributeKind.kinds, suffix: true
+
+  def kind_name
+    ContentAttributeKind.human_attribute_name(kind)
+  end
+
+  def data_type
+    ContentAttributeKind.data_type(kind)
+  end
 end

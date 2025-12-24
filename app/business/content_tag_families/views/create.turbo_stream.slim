@@ -1,6 +1,6 @@
 = turbo_stream.prepend "records" do
   - @records.each do |record|
-    = turbo_frame_tag record, class: "is-card-in-column" do
+    = turbo_frame_tag record do
       = render(ContentTagFamilies::Components::Card::Component.new(record: record))
 = turbo_stream.update ContentTagFamily.new, render(ContentTagFamilies::Components::NewButton::Component.new)
 

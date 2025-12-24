@@ -37,21 +37,22 @@
 class CreateContents < ActiveRecord::Migration[8.0]
   # rubocop:disable Metrics/MethodLength
   def change
-    create_enum :content_kind, %w[article tutorial ingredient recipe menu pattern]
+    # create_enum :content_kind, %w[article tutorial ingredient recipe menu pattern]
     create_table :contents, id: :uuid do |t|
-      t.string :title, null: false
-      t.string :subtitle
-      t.string :slug, null: false, index: { unique: true }
+      t.string :name, null: false, comment: 'The name of the item'
+      t.string :alternate_name, null: true, comment: 'An alias for the item'
+      t.string :slug, null: false, index: { unique: true }, comment: 'Human readable item identifier'
+      t.string :kind, null: false, comment: 'The kind or type of the item'
 
-      t.enum :kind, enum_type: :content_kind, default: :article, null: false, index: true
-      t.references :book, null: false, foreign_key: true, type: :uuid
+      t.references :book, null: false, foreign_key: true, type: :uuid, comment: 'The book in which the item is located'
 
-      t.string :version
-      t.string :source_url
+      t.string :version, null: true, comment: 'The version of the item'
+      t.string :source_url, null: true, comment: 'The URL from which the item was imported'
 
-      t.references :thumbnail, null: false, foreign_key: { to_table: :media, on_delete: :cascade }, type: :uuid
+      t.references :thumbnail, null: false, foreign_key: { to_table: :media, on_delete: :cascade }, type: :uuid,
+                               comment: 'A very small image for the item'
 
-      t.jsonb :metadata, null: false, default: {}
+      t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'
 
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid

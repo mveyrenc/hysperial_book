@@ -4,23 +4,23 @@
 #
 # Table name: books
 #
-#  id            :uuid             not null, primary key
-#  kind          :enum             default("cooking"), not null
-#  metadata      :jsonb            not null
-#  position      :integer
-#  settings      :jsonb            not null
-#  slug          :string           not null
-#  subtitle      :string
-#  title         :string           not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  created_by_id :uuid             not null
-#  updated_by_id :uuid             not null
+#  id                                                 :uuid             not null, primary key
+#  alternate_name(An alias for the item)              :string
+#  description(A description of the item)             :text
+#  kind(The kind or type of the item)                 :string           not null
+#  metadata(A hash to store some data about the item) :jsonb            not null
+#  name(The name of the item)                         :string           not null
+#  position(The position of the item)                 :integer
+#  settings(A hash to configure the item)             :jsonb            not null
+#  slug(Human readable item identifier)               :string           not null
+#  created_at                                         :datetime         not null
+#  updated_at                                         :datetime         not null
+#  created_by_id                                      :uuid             not null
+#  updated_by_id                                      :uuid             not null
 #
 # Indexes
 #
 #  index_books_on_created_by_id  (created_by_id)
-#  index_books_on_kind           (kind)
 #  index_books_on_slug           (slug) UNIQUE
 #  index_books_on_updated_by_id  (updated_by_id)
 #
@@ -32,17 +32,18 @@
 class Book < ApplicationRecord
   ## FriendlyId
   extend FriendlyId
-  friendly_id :title, use: :slugged
+
+  friendly_id :name, use: :slugged
 
   ## Enumerables
-  enum :kind, BookKind.kinds, suffix: true
+  # enum :kind, BookKind.kinds, suffix: true
 
   def kind_name
     BookKind.human_attribute_name(kind)
   end
 
   ## Relations
-  has_many :content_tag_families, -> { order(title: :asc) }
+  has_many :content_tag_families, -> { order(name: :asc) }
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
@@ -51,10 +52,10 @@ class Book < ApplicationRecord
   acts_as_list
 
   ## Validations
-  validates :title, presence: true
+  validates :name, presence: true
   validates :kind, presence: true
 
   def to_s
-    title
+    name
   end
 end

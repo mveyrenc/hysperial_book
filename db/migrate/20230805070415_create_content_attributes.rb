@@ -30,17 +30,20 @@
 #
 class CreateContentAttributes < ActiveRecord::Migration[8.0]
   def change
-    create_enum :content_attribute_kind, %w[document scanned_document text quantity supplies tools instructions]
+    #    create_enum :content_attribute_kind, %w[text integer number url boolean date duration video_object duration item_list how_to_supply how_to_tool how_to_section
+    # how_to_step how_to_direction how_to_tip property_value quantitative_value monetary_amount rating location reference]
     create_table :content_attributes, id: :uuid do |t|
-      t.enum :kind, enum_type: :content_attribute_kind, default: :document, null: false, index: true
+      t.string :name, null: false, comment: 'The name of the item'
+      t.string :kind, null: false, comment: 'The kind or type of the item'
 
-      t.references :content, null: false, foreign_key: true, type: :uuid
+      t.references :content, null: false, foreign_key: true, type: :uuid,
+                             comment: 'The content to which the attribute belongs'
 
-      t.jsonb :settings, null: false, default: {}
+      t.integer :position, comment: 'The position of the item'
 
-      t.integer :position
-
-      t.jsonb :metadata, null: false, default: {}
+      t.jsonb :data, null: false, default: {}, comment: 'A hash to store the data of the item'
+      t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'
+      t.jsonb :settings, null: false, default: {}, comment: 'A hash to configure the item'
 
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid

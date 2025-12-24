@@ -9,7 +9,7 @@ module ContentTagFamilies
       def call
         context.records = ContentTagFamily.includes(:book)
                                           .order('book.position')
-                                          .order(:title)
+                                          .order(:name)
       end
     end
   end

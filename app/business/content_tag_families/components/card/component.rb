@@ -7,7 +7,7 @@ module ContentTagFamilies
       class Component < ApplicationComponent
         attr_reader :record
 
-        delegate :book, :title, to: :record, prefix: true
+        delegate :book, :name, to: :record, prefix: true
 
         def initialize(record:)
           @record = record

@@ -5,6 +5,7 @@ module Users
     # List users in the admin panel
     class Search < ApplicationInteractor
       include SearchConcern
+
       def call
         context.records = User.order(:email)
       end

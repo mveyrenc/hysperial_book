@@ -10,7 +10,7 @@ module ContentTags
         context.records = ContentTag.includes(content_tag_family: :book)
                                     .order('book.position')
                                     .order('content_tag_family.title')
-                                    .order(:title)
+                                    .order(:name)
       end
     end
   end

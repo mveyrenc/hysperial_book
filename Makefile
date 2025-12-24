@@ -32,6 +32,9 @@ db_create:
 db_migrate:
 	docker compose exec web rails db:migrate
 
+db_seed:
+	docker compose exec web rails db:seed --trace -v
+
 annotate:
 	docker compose exec web annotate --model
 
