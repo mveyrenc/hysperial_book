@@ -10,9 +10,11 @@
           span.tag
             = record_kind_name
     / - if record_thumbnail&.file&.attached?
+  = debug record_thumbnail.file.attached?
   - if record_thumbnail and record_thumbnail.file.attached?
     .card-image
       figure.image.is-4by3
+
         = image_tag record_thumbnail.file.variant(resize_to_fill: [400, 300])
   - else
     = render Contents::Components::NoThumbnail::Component.new(record: record)
