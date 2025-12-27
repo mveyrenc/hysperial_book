@@ -11,9 +11,17 @@ module Books
     # GET /books
     def index
       authorize Book
-      @records = Books::Logics::Search.call(params)
+      @records = Books::Logics::Search.call(query: params)
 
       render template: template_path
+    end
+
+    # GET /books/search
+    def search
+      authorize Book, :index?
+      @records = Books::Logics::Search.call(query: params)
+
+      render template: template_path('index')
     end
 
     # GET /books/new

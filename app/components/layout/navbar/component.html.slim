@@ -19,7 +19,7 @@ nav.main-nav.navbar.is-fixed-top.is-primary[role="navigation" aria-label="main n
               a.navbar-link
                 = t('.contents')
               .navbar-dropdown
-                = link_to contents_path, class: "navbar-item", target: "_top" do
+                = link_to contents_path, class: "navbar-item#{" is-active" if controller_name == 'contents'}", target: "_top" do
                   span
                     = t('.all_contents')
                 - Book.all.each do |book|
@@ -31,31 +31,31 @@ nav.main-nav.navbar.is-fixed-top.is-primary[role="navigation" aria-label="main n
               = t('.more')
             .navbar-dropdown
               - if policy(Book).index?
-                = link_to books_path, class: "navbar-item", target: "_top" do
+                = link_to books_path, class: "navbar-item#{" is-active" if controller_name == 'books'}", target: "_top" do
                   span
                     = t('.books')
               - if policy(ContentTagFamily).index?
-                = link_to content_tag_families_path, class: "navbar-item", target: "_top" do
+                = link_to content_tag_families_path, class: "navbar-item#{" is-active" if controller_name == 'content_tag_families'}", target: "_top" do
                   span
                     = t('.content_tag_families')
               - if policy(ContentTag).index?
-                = link_to content_tags_path, class: "navbar-item", target: "_top" do
+                = link_to content_tags_path, class: "navbar-item#{" is-active" if controller_name == 'content_tags'}", target: "_top" do
                   span
                     = t('.content_tags')
               - if policy(Document).index?
-                = link_to media_documents_path, class: "navbar-item", target: "_top" do
+                = link_to media_documents_path, class: "navbar-item#{" is-active" if controller_name == 'documents'}", target: "_top" do
                   span
                     = t('.documents')
               - if policy(Picture).index?
-                = link_to media_pictures_path, class: "navbar-item", target: "_top" do
+                = link_to media_pictures_path, class: "navbar-item#{" is-active" if controller_name == 'pictures'}", target: "_top" do
                   span
                     = t('.pictures')
               - if policy(Scan).index?
-                = link_to media_scans_path, class: "navbar-item", target: "_top" do
+                = link_to media_scans_path, class: "navbar-item#{" is-active" if controller_name == 'scans'}", target: "_top" do
                   span
                     = t('.scans')
               - if policy(User).index?
-                = link_to users_path, class: "navbar-item", target: "_top" do
+                = link_to users_path, class: "navbar-item#{" is-active" if controller_name == 'users'}", target: "_top" do
                   span
                     = t('.users')
         .navbar-end

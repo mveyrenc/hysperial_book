@@ -4,7 +4,7 @@ module Users
   module Logics
     # List users in the admin panel
     class Search < ApplicationInteractor
-      include SearchConcern
+      include PaginatedConcern
 
       def call
         context.records = User.order(:email)

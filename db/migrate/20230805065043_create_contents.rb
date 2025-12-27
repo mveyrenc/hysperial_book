@@ -49,7 +49,7 @@ class CreateContents < ActiveRecord::Migration[8.0]
       t.string :version, null: true, comment: 'The version of the item'
       t.string :source_url, null: true, comment: 'The URL from which the item was imported'
 
-      t.references :thumbnail, null: false, foreign_key: { to_table: :media, on_delete: :cascade }, type: :uuid,
+      t.references :thumbnail, null: true, foreign_key: { to_table: :media, on_delete: :cascade }, type: :uuid,
                                comment: 'A very small image for the item'
 
       t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'

@@ -41,6 +41,9 @@ en:
           super_admin: Super-admin
   hello: "Hello world"
   application:
+    search: "Search"
+    reset_search: "Reset"
+    search_q_placeholder: "Search..."
     no_entry: "No entry"
     read: "Read"
     submit: "Submit"

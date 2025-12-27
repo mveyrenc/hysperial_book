@@ -11,8 +11,6 @@ module Media
 
         def initialize(record:)
           @record = record
-
-          super
         end
 
         def render_document

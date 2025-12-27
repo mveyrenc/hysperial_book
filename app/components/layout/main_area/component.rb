@@ -5,7 +5,8 @@ module Layout
     class Component < ApplicationComponent
       renders_one :title
       renders_one :header_actions
-      renders_one :aside
+      renders_one :left_aside
+      renders_one :right_aside
       renders_one :main_section
     end
   end

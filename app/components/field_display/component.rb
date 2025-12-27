@@ -8,8 +8,6 @@ module FieldDisplay
     def initialize(label:, value:)
       @label = label
       @value = value
-
-      super
     end
 
     def render?

@@ -4,7 +4,7 @@ module Media
   module Logics
     # List media in the admin panel
     class Search < ApplicationInteractor
-      include SearchConcern
+      include PaginatedConcern
 
       before :set_model
 

@@ -15,7 +15,7 @@ web_logs:
 
 bundle_install:
 	bundle install
-	bundle package --all
+	bundle package
 	docker compose exec web bundle install --local
 
 db_recreate:
@@ -33,7 +33,13 @@ db_migrate:
 	docker compose exec web rails db:migrate
 
 db_seed:
-	docker compose exec web rails db:seed --trace -v
+	docker compose exec web rails db:seed -vvv --trace
+
+search_reindex_all:
+	docker compose exec web rails searchkick:reindex:all
+
+search_reindex:
+	docker compose exec web rails searchkick:reindex CLASS=Book
 
 annotate:
 	docker compose exec web annotate --model
@@ -43,4 +49,7 @@ sass_watch:
 
 rspec:
 	docker compose exec web rspec
+
+clear_cache:
+	docker compose exec web rails tmp:cache:clear
 

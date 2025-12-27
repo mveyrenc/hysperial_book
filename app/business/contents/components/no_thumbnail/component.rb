@@ -11,8 +11,6 @@ module Contents
 
         def initialize(record:)
           @record = record
-
-          super
         end
 
         def material_icon

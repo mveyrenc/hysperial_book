@@ -15,7 +15,7 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 6.0'
+gem 'puma', '~> 7.0'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem 'jsbundling-rails'
@@ -42,10 +42,10 @@ gem 'redis', '~> 5.0'
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', require: false
+gem 'bootsnap', '~> 1.20', require: false
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -55,7 +55,7 @@ gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'debug', platforms: %i[mri windows]
 
   # https://github.com/deivid-rodriguez/byebug
   gem 'byebug'
@@ -95,18 +95,24 @@ group :development do
   # https://github.com/rubocop/rubocop-factory_bot
   gem 'rubocop-factory_bot', require: false
 
+  # https://github.com/rubocop/rubocop-rspec_rails
+  gem 'rubocop-rspec_rails', require: false
+
   # https://github.com/flyerhzm/rails_best_practices
   gem 'rails_best_practices'
 
   # https://github.com/BetterErrors/better_errors
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  # https://github.com/qqshfox/meta_request
+  gem 'meta_request'
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 4.39'
   gem 'webdrivers'
 
   # https://github.com/rspec/rspec-rails
@@ -120,7 +126,7 @@ gem 'devise', '~> 4.9'
 gem 'pundit', '~> 2.3'
 
 # https://github.com/slim-template/slim-rails
-gem 'slim-rails', '~> 3.6'
+gem 'slim-rails', '~> 4.0'
 
 # https://github.com/collectiveidea/interactor
 # https://github.com/collectiveidea/interactor-rails
@@ -128,7 +134,7 @@ gem 'interactor-rails', '~> 2.2'
 # TODO: replace by https://github.com/aaronlasseigne/active_interaction
 
 # https://viewcomponent.org/guide/getting-started.html
-gem 'view_component', '~> 3.5'
+gem 'view_component', '~> 4.1'
 
 # https://docs.stimulusreflex.com/
 # https://github.com/joshleblanc/view_component_reflex
@@ -149,4 +155,8 @@ gem 'kaminari', '~> 1.2'
 # https://github.com/collectiveidea/awesome_nested_set
 gem 'awesome_nested_set', '~> 3.6'
 
-gem 'dartsass-rails', '~> 0.5.1'
+gem 'dartsass-rails', '~> 0.5'
+
+# https://github.com/ankane/searchkick
+gem 'opensearch-ruby'
+gem 'searchkick'

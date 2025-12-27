@@ -11,8 +11,6 @@ module ContentTagFamilies
 
         def initialize(record:)
           @record = record
-
-          super
         end
       end
     end

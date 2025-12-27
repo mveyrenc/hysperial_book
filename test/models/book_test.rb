@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: books
@@ -29,35 +27,17 @@
 #  fk_rails_...  (created_by_id => users.id) ON DELETE => restrict
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
-class Book < ApplicationRecord
-  # Searchkick
-  searchkick highlight: %i[name alternate_name description]
-
-  ## FriendlyId
-  extend FriendlyId
-
-  friendly_id :name, use: :slugged
-
-  ## Enumerables
-
-  def kind_name
-    BookKind.human_attribute_name(kind)
+class ArticleTest < ActiveSupport::TestCase
+  teardown do
+    Book.__elasticsearch__.unstub(:search)
   end
 
-  ## Relations
-  has_many :content_tag_families, -> { order(name: :asc) }
+  test 'has a search method delegating to __elasticsearch__' do
+    Book.__elasticsearch__.expects(:search).with do |definition|
+      assert_equal 'foo', definition[:query][:multi_match][:query]
+      true
+    end
 
-  belongs_to :created_by, class_name: 'User'
-  belongs_to :updated_by, class_name: 'User'
-
-  ## Act as
-  acts_as_list
-
-  ## Validations
-  validates :name, presence: true
-  validates :kind, presence: true
-
-  def to_s
-    name
+    Book.search 'foo'
   end
 end

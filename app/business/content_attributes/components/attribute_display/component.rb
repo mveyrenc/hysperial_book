@@ -9,8 +9,6 @@ module ContentAttributes
 
         def initialize(record:)
           @record = record
-
-          super
         end
 
         def attribute_label_renderer

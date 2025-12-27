@@ -16,7 +16,7 @@
 #  updated_at                                           :datetime         not null
 #  book_id(The book in which the item is located)       :uuid             not null
 #  created_by_id                                        :uuid             not null
-#  thumbnail_id(A very small image for the item)        :uuid             not null
+#  thumbnail_id(A very small image for the item)        :uuid
 #  updated_by_id                                        :uuid             not null
 #
 # Indexes
@@ -42,7 +42,7 @@ class Content < ApplicationRecord
   belongs_to :book
 
   belongs_to :thumbnail, class_name: 'Picture', dependent: :destroy, optional: true
-  accepts_nested_attributes_for :thumbnail, reject_if: :reject_thumbnail
+  # accepts_nested_attributes_for :thumbnail, reject_if: :reject_thumbnail
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
@@ -55,16 +55,7 @@ class Content < ApplicationRecord
   has_rich_text :short_description
   has_rich_text :description
 
-  def thumbnail
-    super || build_thumbnail
-  end
-
-  def reject_thumbnail(attributes)
-    attributes['file'].nil?
-  end
-
   ## Enumerables
-  # enum :kind, ContentKind.kinds, suffix: true
 
   def kind_name
     ContentKind.human_attribute_name(kind)

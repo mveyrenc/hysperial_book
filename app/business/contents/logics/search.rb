@@ -6,7 +6,7 @@ module Contents
     # https://web-crunch.com/posts/turbo-charged-real-time-search-ruby-on-rails-7
     # https://github.com/ankane/searchkick
     class Search < ApplicationInteractor
-      include SearchConcern
+      include PaginatedConcern
 
       def call
         context.records = Content.left_joins(:thumbnail).includes(:thumbnail).order(created_at: :desc)

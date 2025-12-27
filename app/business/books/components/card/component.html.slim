@@ -8,6 +8,8 @@
       = render FieldDisplay::Component.new(label: Book.human_attribute_name(:alternate_name), value: record_alternate_name)
     .cell
       = render FieldDisplay::Component.new(label: Book.human_attribute_name(:kind), value: record_kind_name)
+    .cell
+      = render FieldDisplay::Component.new(label: Book.human_attribute_name(:description), value: record_description)
     .cell.is-align-self-center
       .field.is-grouped.is-grouped-centered
         - if policy(record).update?

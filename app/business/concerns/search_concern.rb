@@ -6,22 +6,39 @@ module SearchConcern
   included do
     # any code that you want inside the class that includes this concern
 
-    before :set_page
-    before :set_per_page
-    after :paginate_results
+    before :set_model
+    before :compact_query
+    before :set_q
+
+    after :set_where
+    after :set_aggs
+    after :set_order
+    after :set_highlight
+
+    def call
+      context.records = context.model.search(context.query[:q])
+    end
 
     private
 
-    def set_page
-      context.page = context.page || 1
+    def set_model
+      raise NotImplementedError
     end
 
-    def set_per_page
-      context.per_page = context.per_page || 12
+    def compact_query
+      context.query.compact_blank!
     end
 
-    def paginate_results
-      context.records = context.records.page(context.page).per(context.per_page)
+    def set_q
+      context.query.merge!({ q: '*' }) if context.query[:q].nil? || context[:q] == ''
+    end
+
+    def set_where; end
+
+    def set_order; end
+
+    def set_highlight
+      context.records = context.records.highlight(tag: '<span class="has-background-primary-light">')
     end
   end
 

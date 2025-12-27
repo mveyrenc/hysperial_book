@@ -7,8 +7,6 @@ module FormErrors
 
     def initialize(errors:)
       @errors = errors
-
-      super
     end
 
     def render?

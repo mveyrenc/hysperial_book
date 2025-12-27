@@ -4,7 +4,7 @@ module ContentTags
   module Logics
     # List tags in the admin panel
     class Search < ApplicationInteractor
-      include SearchConcern
+      include PaginatedConcern
 
       def call
         context.records = ContentTag.includes(content_tag_family: :book)

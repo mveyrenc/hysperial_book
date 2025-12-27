@@ -1,6 +1,6 @@
 = render Layout::MainArea::Component.new do |component|
   - component.with_title do
-    = t('.name')
+    = t('.title')
   - component.with_header_actions do
     - if policy(Content).create?
       = turbo_frame_tag Content.new do

@@ -11,8 +11,6 @@ module Users
 
         def initialize(record:)
           @record = record
-
-          super
         end
       end
     end

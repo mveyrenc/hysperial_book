@@ -42,7 +42,6 @@ class ContentAttribute < ApplicationRecord
   ## Validations
 
   ## Enumerables
-  # enum :kind, ContentAttributeKind.kinds, suffix: true
 
   def kind_name
     ContentAttributeKind.human_attribute_name(kind)

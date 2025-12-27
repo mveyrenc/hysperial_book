@@ -11,8 +11,6 @@ module ContentTags
 
         def initialize(record:)
           @record = record
-
-          super
         end
 
         protected

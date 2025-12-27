@@ -32,8 +32,6 @@ class ContentTagFamily < ApplicationRecord
   belongs_to :book
 
   ## Enumerables
-  # enum :kind, ContentTagFamilyKind.kinds, suffix: true
-
   def kind_name
     ContentTagFamilyKind.human_attribute_name(kind)
   end

@@ -3,7 +3,7 @@
 module Books
   module Components
     module Form
-      # Books card component
+      # Books create/edit form component
       class Component < ApplicationComponent
         delegate :kind, :kind_name, to: :record, prefix: true
 
@@ -11,8 +11,6 @@ module Books
 
         def initialize(record:)
           @record = record
-
-          super
         end
 
         protected

@@ -1,16 +1,18 @@
 = render Layout::MainArea::Component.new do |component|
   - component.with_title do
-    = t('.name')
+    = t('.title')
   - component.with_header_actions do
     - if policy(Book).create?
       = turbo_frame_tag Book.new do
         = render Books::Components::NewButton::Component.new
+  - component.with_left_aside do
+    = render Books::Components::SearchForm::Component.new(params: params, records: @records.records)
   - component.with_main_section do
     = turbo_frame_tag "books", class: "container" do
       - if @records.records.any?
-        - @records.records.each do |record|
+        - @records.records.__send__(controller.action_name == 'search' ? :with_highlights : :each) do |record, highlights|
           = turbo_frame_tag record do
-            = render Books::Components::Card::Component.new(record: record)
+            = render Books::Components::Card::Component.new(record: record, highlights: highlights)
       - else
         = render NoRecord::Component.new
     = paginate @records.records

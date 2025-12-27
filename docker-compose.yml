@@ -9,16 +9,39 @@ services:
       - POSTGRES_DB=hysperial_book_development
       - PGDATA=/var/lib/postgresql/data
 
-  elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.1
+  opensearch:
+    image: opensearchproject/opensearch:latest
     environment:
       - discovery.type=single-node
+      - bootstrap.memory_lock=true  # along with the memlock settings below, disables swapping
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m  # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=hysp3rial_bOOk    # Sets the demo admin user password when using demo configuration, required for OpenSearch 2.12 and higher
+      - DISABLE_INSTALL_DEMO_CONFIG=true # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
+      - DISABLE_SECURITY_PLUGIN=true # Disables Security plugin
     ulimits:
       memlock:
         soft: -1
         hard: -1
+      nofile:
+        soft: 65536  # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
     volumes:
-      - hysperial_book_index:/usr/share/elasticsearch/data
+      - hysperial_book_opensearch_data:/usr/share/opensearch/data
+    ports:
+      - 9200:9200
+      - 9600:9600  # required for Performance Analyzer
+
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:latest
+    ports:
+      - 5601:5601
+    expose:
+      - '5601'
+    environment:
+      - OPENSEARCH_HOSTS=["http://opensearch:9200"]
+      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
+    depends_on:
+     - opensearch
 
   redis:
     image: "redis:alpine"
@@ -39,7 +62,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
-      - elastic
+      - opensearch
       - redis
 
   adminer:
@@ -57,3 +80,4 @@ volumes:
   hysperial_book_data: ~
   hysperial_book_index: ~
   hysperial_book_yarn_cache: ~
+  hysperial_book_opensearch_data:
