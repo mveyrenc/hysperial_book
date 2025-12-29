@@ -5,8 +5,6 @@ module Books
     module SearchForm
       # Books search form component
       class Component < ApplicationComponent
-        delegate :q, to: :params, prefix: true
-
         attr_reader :params, :records
 
         def initialize(params:, records:)
@@ -15,6 +13,10 @@ module Books
         end
 
         protected
+
+        def params_q
+          params[:q] if params[:q] != '*'
+        end
 
         def kind_select_values
           records.aggs['kind']['buckets'].map do |agg|

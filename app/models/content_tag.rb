@@ -29,6 +29,19 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentTag < ApplicationRecord
+  # Searchkick
+  searchkick highlight: %i[name, content_tag_family_name, book_name]
+  def search_data
+    attributes.merge(
+      content_tag_family_name: content_tag_family.name,
+      content_tag_family_kind: content_tag_family.kind,
+      book_name: book.name,
+      book_kind: book.kind,
+      book_position: book.position
+    )
+  end
+  scope :search_import, -> { includes(:content_tag_family, :book) }
+
   ## delegate
   delegate :name, to: :content_tag_family, prefix: true
 
@@ -47,6 +60,8 @@ class ContentTag < ApplicationRecord
 
   ## Relations
   belongs_to :content_tag_family
+  has_one :book, through: :content_tag_family
+
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
@@ -73,4 +88,8 @@ class ContentTag < ApplicationRecord
 
   ## Validations
   validates :name, presence: true, uniqueness: { scope: %i[content_tag_family] }
+
+  def to_s
+    name
+  end
 end

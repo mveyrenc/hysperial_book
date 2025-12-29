@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ContentTagFamilies
+module ContentTags
   module Components
     module SearchForm
       # Books search form component
@@ -17,9 +17,10 @@ module ContentTagFamilies
         def params_q
           params[:q] if params[:q] != '*'
         end
-        def kind_select_values
-          if records.aggs.include?('kind') && records.aggs['kind'].include?('buckets')
-            records.aggs['kind']['buckets'].map do |agg|
+
+        def content_tag_family_kind_select_values
+          if records.aggs.include?('content_tag_family_kind') && records.aggs['content_tag_family_kind'].include?('buckets')
+            records.aggs['content_tag_family_kind']['buckets'].map do |agg|
               ["#{ContentTagFamilyKind.human_attribute_name(agg['key'])} (#{agg['doc_count']})", agg['key']]
             end
           else
@@ -27,9 +28,9 @@ module ContentTagFamilies
           end
         end
 
-        def book_name_select_values
-          if records.aggs.include?('book_name') && records.aggs['book_name'].include?('buckets')
-            records.aggs['book_name']['buckets'].map do |agg|
+        def content_tag_family_name_select_values
+          if records.aggs.include?('content_tag_family_name') && records.aggs['content_tag_family_name'].include?('buckets')
+            records.aggs['content_tag_family_name']['buckets'].map do |agg|
               ["#{agg['key']} (#{agg['doc_count']})", agg['key']]
             end
           else
@@ -41,6 +42,16 @@ module ContentTagFamilies
           if records.aggs.include?('book_kind') && records.aggs['book_kind'].include?('buckets')
             records.aggs['book_kind']['buckets'].map do |agg|
               ["#{BookKind.human_attribute_name(agg['key'])} (#{agg['doc_count']})", agg['key']]
+            end
+          else
+            []
+          end
+        end
+
+        def book_name_select_values
+          if records.aggs.include?('book_name') && records.aggs['book_name'].include?('buckets')
+            records.aggs['book_name']['buckets'].map do |agg|
+              ["#{agg['key']} (#{agg['doc_count']})", agg['key']]
             end
           else
             []

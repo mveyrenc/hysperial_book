@@ -12,9 +12,11 @@ module Books
       end
 
       def set_where
-        return unless context.query.key?(:kind) && (context.query[:kind] != '')
-
-        context.records = context.records.where(kind: context.query[:kind])
+        %i[kind].each do |f|
+          if context.query.include?(f) && context.query[f].present?
+            context.records = context.records.where("#{f}": context.query[f])
+          end
+        end
       end
 
       def set_aggs

@@ -13,7 +13,7 @@ module PaginatedConcern
     private
 
     def set_page
-      context.page = context.page || 1
+      context.page = context.query[:page] || 1
     end
 
     def set_per_page

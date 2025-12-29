@@ -10,7 +10,7 @@
   - component.with_main_section do
     = turbo_frame_tag "books", class: "container" do
       - if @records.records.any?
-        - @records.records.__send__(controller.action_name == 'search' ? :with_highlights : :each) do |record, highlights|
+        - @records.records.with_highlights.each do |record, highlights|
           = turbo_frame_tag record do
             = render Books::Components::Card::Component.new(record: record, highlights: highlights)
       - else

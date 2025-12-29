@@ -30,7 +30,7 @@
 #
 class ContentTagFamily < ApplicationRecord
   # Searchkick
-  searchkick highlight: %i[name]
+  searchkick highlight: %i[name, book_name]
   def search_data
     attributes.merge(
       book_name: book.name,

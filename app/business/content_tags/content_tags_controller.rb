@@ -8,29 +8,37 @@ module ContentTags
     before_action :set_new_record, only: %i[create new]
     before_action :authorize_record, only: %i[create new edit update destroy]
 
-    # GET /tags
+    # GET /content_tags
     def index
       authorize ContentTag
-      @records = ContentTags::Logics::Search.call(params)
+      @records = ContentTags::Logics::Search.call(query: params)
 
       render template: template_path
     end
 
-    # GET /tags/new
+    # GET /content_tag_families/search
+    def search
+      authorize ContentTag, :index?
+      @records = ContentTags::Logics::Search.call(query: params)
+
+      render template: template_path('index')
+    end
+
+    # GET /content_tags/new
     def new
       respond_to do |format|
         format.html { render template: template_path }
       end
     end
 
-    # GET /tags/:id/edit
+    # GET /content_tags/:id/edit
     def edit
       respond_to do |format|
         format.html { render template: template_path }
       end
     end
 
-    # POST /tags
+    # POST /content_tags
     def create
       result = ContentTags::Logics::Create.call(record: @record, params: strong_params.to_h, current_user:)
       if result.success?
@@ -44,7 +52,7 @@ module ContentTags
       end
     end
 
-    # PATCH/PUT /tags/:id
+    # PATCH/PUT /content_tags/:id
     def update
       result = ContentTags::Logics::Update.call(record: @record, params: strong_params.to_h, current_user:)
 
@@ -58,7 +66,7 @@ module ContentTags
       end
     end
 
-    # DELETE /tags/:id
+    # DELETE /content_tags/:id
     def destroy
       ContentTags::Logics::Destroy.call(record: @record)
 

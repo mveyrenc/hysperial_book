@@ -1,9 +1,9 @@
 .card-box
   .grid
     .cell
-      = render FieldDisplay::Component.new(label: ContentTag.human_attribute_name(:book), value: record_content_tag_family.book)
+      = render FieldDisplay::Component.new(label: ContentTag.human_attribute_name(:book), value: record_book)
     .cell
-      = render FieldDisplay::Component.new(label: ContentTag.human_attribute_name(:content_tag_family), value: record_content_tag_family.title)
+      = render FieldDisplay::Component.new(label: ContentTag.human_attribute_name(:content_tag_family), value: record_content_tag_family)
     .cell
       = render FieldDisplay::Component.new(label: ContentTag.human_attribute_name(:name), value: record_name)
     .cell.is-align-self-center
