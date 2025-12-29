@@ -24,8 +24,12 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class Medium < ApplicationRecord
+  ## Relations
+
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
+
+  ## Validations
 
   validates :type, presence: true
 end

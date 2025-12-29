@@ -5,13 +5,12 @@ module Media
   # Media controller
   class MediaController < ApplicationController
     before_action :set_record, only: %i[edit update destroy]
-    before_action :set_new_record, only: %i[create new]
-    before_action :authorize_record, only: %i[create new edit update destroy]
+    before_action :authorize_record, only: %i[edit update destroy]
 
     # GET /media
     def index
       authorize Medium
-      @records = Media::Logics::Search.call(params.merge(model:))
+      @records = Media::Logics::Search.call(query: params.merge(model:))
 
       render template: template_path
     end
@@ -62,10 +61,6 @@ module Media
     end
 
     def set_record
-      raise NotImplementedError
-    end
-
-    def set_new_record
       raise NotImplementedError
     end
 

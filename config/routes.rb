@@ -163,9 +163,9 @@ Rails.application.routes.draw do
   end
 
   namespace :media do
-    resources :pictures, except: %i[show], controller: 'pictures'
-    resources :scans, except: %i[show], controller: 'scans'
-    resources :documents, except: %i[show], controller: 'documents'
+    resources :pictures, except: %i[show new create], controller: 'pictures'
+    resources :scans, except: %i[show new create], controller: 'scans'
+    resources :documents, except: %i[show new create], controller: 'documents'
   end
 
   mount ActionCable.server => '/cable'

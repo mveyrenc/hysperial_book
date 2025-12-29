@@ -2,12 +2,11 @@
   - component.with_title do
     = t('.title')
   - component.with_main_section do
-    = turbo_frame_tag "media", class: "columns is-multiline" do
+    = turbo_frame_tag "media", class: "container" do
       - if @records.records.any?
         - @records.records.each do |record|
           = turbo_frame_tag record do
             = render Media::Components::Card::Component.new(record: record)
       - else
-        .column.is-full
-          = render NoRecord::Component.new
+        = render NoRecord::Component.new
     = paginate @records.records

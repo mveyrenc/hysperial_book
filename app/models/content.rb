@@ -35,9 +35,19 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class Content < ApplicationRecord
+
+  ## FriendlyId
   extend FriendlyId
 
   friendly_id :name, use: :slugged
+
+  ## Enumerables
+
+  def kind_name
+    ContentKind.human_attribute_name(kind)
+  end
+
+  ## Relations
 
   belongs_to :book
 
@@ -52,12 +62,8 @@ class Content < ApplicationRecord
 
   has_many :content_attributes, -> { order(position: :asc) }, inverse_of: :content, dependent: :restrict_with_exception
 
+  ## Rich text
+
   has_rich_text :short_description
   has_rich_text :description
-
-  ## Enumerables
-
-  def kind_name
-    ContentKind.human_attribute_name(kind)
-  end
 end
