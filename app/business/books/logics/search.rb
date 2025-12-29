@@ -12,7 +12,7 @@ module Books
       end
 
       def set_where
-        return unless context.query.key? :kind and context.query[:kind] != ''
+        return unless context.query.key?(:kind) && (context.query[:kind] != '')
 
         context.records = context.records.where(kind: context.query[:kind])
       end

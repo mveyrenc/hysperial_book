@@ -8,29 +8,37 @@ module ContentTagFamilies
     before_action :set_new_record, only: %i[create new]
     before_action :authorize_record, only: %i[create new edit update destroy]
 
-    # GET /tags
+    # GET /content_tag_families
     def index
       authorize ContentTagFamily
-      @records = ContentTagFamilies::Logics::Search.call(params)
+      @records = ContentTagFamilies::Logics::Search.call(query: params)
 
       render template: template_path
     end
 
-    # GET /tags/new
+    # GET /content_tag_families/search
+    def search
+      authorize ContentTagFamily, :index?
+      @records = ContentTagFamilies::Logics::Search.call(query: params)
+
+      render template: template_path('index')
+    end
+
+    # GET /content_tag_families/new
     def new
       respond_to do |format|
         format.html { render template: template_path }
       end
     end
 
-    # GET /tags/:id/edit
+    # GET /content_tag_families/:id/edit
     def edit
       respond_to do |format|
         format.html { render template: template_path }
       end
     end
 
-    # POST /tags
+    # POST /content_tag_families
     def create
       result = ContentTagFamilies::Logics::Create.call(record: @record, params: strong_params.to_h, current_user:)
       if result.success?
@@ -44,7 +52,7 @@ module ContentTagFamilies
       end
     end
 
-    # PATCH/PUT /tags/:id
+    # PATCH/PUT /content_tag_families/:id
     def update
       result = ContentTagFamilies::Logics::Update.call(record: @record, params: strong_params.to_h, current_user:)
 
@@ -58,7 +66,7 @@ module ContentTagFamilies
       end
     end
 
-    # DELETE /tags/:id
+    # DELETE /content_tag_families/:id
     def destroy
       ContentTagFamilies::Logics::Destroy.call(record: @record)
 

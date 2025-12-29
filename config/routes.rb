@@ -155,7 +155,9 @@ Rails.application.routes.draw do
     collection { get :search }
   end
 
-  resources :content_tag_families, except: %i[show], controller: 'content_tag_families/content_tag_families'
+  resources :content_tag_families, except: %i[show], controller: 'content_tag_families/content_tag_families' do
+    collection { get :search }
+  end
   resources :content_tags, except: %i[show], controller: 'content_tags/content_tags'
 
   namespace :media do

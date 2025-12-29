@@ -27,7 +27,7 @@ module HysperialBook
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Add translations files from business
-    config.i18n.load_path += Dir[Rails.root.join('app/business/*/locales/*.{rb,yml}')]
+    config.i18n.load_path += Dir[Rails.root.glob('app/business/*/locales/*.{rb,yml}').to_s]
 
     # Don't generate system test files.
     config.generators.after_generate do |files|

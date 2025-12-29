@@ -50,7 +50,7 @@ class Content < ApplicationRecord
   has_many :content_taggings, dependent: :destroy
   has_many :content_tags, through: :content_taggings
 
-  has_many :content_attributes, -> { order(position: :asc) }
+  has_many :content_attributes, -> { order(position: :asc) }, inverse_of: :content, dependent: :restrict_with_exception
 
   has_rich_text :short_description
   has_rich_text :description

@@ -45,7 +45,7 @@ class Book < ApplicationRecord
   end
 
   ## Relations
-  has_many :content_tag_families, -> { order(name: :asc) }
+  has_many :content_tag_families, -> { order(name: :asc) }, inverse_of: :book, dependent: :restrict_with_exception
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'

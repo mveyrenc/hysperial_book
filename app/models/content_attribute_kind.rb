@@ -104,7 +104,7 @@ class ContentAttributeKind
   end
 
   def self.data_type(kind)
-    raise('attribute kind %s unknown' % kind) unless AVAILABLE_KINDS.key? kind.to_sym
+    raise "attribute kind #{kind} unknown" unless AVAILABLE_KINDS.key? kind.to_sym
 
     AVAILABLE_KINDS[kind.to_sym][:data_type]
   end

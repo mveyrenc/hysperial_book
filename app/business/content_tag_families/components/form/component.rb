@@ -16,7 +16,11 @@ module ContentTagFamilies
         protected
 
         def kind_select_values
-          BookKind.kinds.map { |key, value| [BookKind.human_attribute_name(key), value] }
+          ContentTagFamilyKind.kinds.map { |key, value| [ContentTagFamilyKind.human_attribute_name(key), value] }
+        end
+
+        def book_collection
+          Book.order(:position)
         end
       end
     end

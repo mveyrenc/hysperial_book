@@ -3,7 +3,11 @@
     .cell
       = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:book), value: record_book)
     .cell
+      = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:book_kind), value: BookKind::human_attribute_name(record_book.kind))
+    .cell
       = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:name), value: record_name)
+    .cell
+      = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:kind), value: ContentTagFamilyKind::human_attribute_name(record_kind))
     .cell.is-align-self-center
       .field.is-grouped.is-grouped-centered
         - if policy(record).update?

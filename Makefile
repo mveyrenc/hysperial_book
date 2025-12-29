@@ -40,6 +40,7 @@ search_reindex_all:
 
 search_reindex:
 	docker compose exec web rails searchkick:reindex CLASS=Book
+	docker compose exec web rails searchkick:reindex CLASS=ContentTagFamily
 
 annotate:
 	docker compose exec web annotate --model

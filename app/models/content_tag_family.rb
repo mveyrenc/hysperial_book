@@ -29,7 +29,16 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentTagFamily < ApplicationRecord
-  belongs_to :book
+  # Searchkick
+  searchkick highlight: %i[name]
+  def search_data
+    attributes.merge(
+      book_name: book.name,
+      book_kind: book.kind,
+      book_position: book.position
+    )
+  end
+  scope :search_import, -> { includes(:book) }
 
   ## Enumerables
   def kind_name
@@ -46,6 +55,8 @@ class ContentTagFamily < ApplicationRecord
   end
 
   ## Relations
+  belongs_to :book
+
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 

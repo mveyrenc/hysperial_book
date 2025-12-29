@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 setup do
   @record = books(:one)
 

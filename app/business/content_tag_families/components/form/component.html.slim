@@ -4,6 +4,7 @@
     - if record.new_record?
       = f.text_area :name, help: t('.name.help')
       = f.select :kind, options_for_select(kind_select_values, record_kind)
+      = f.collection_select :book_id, book_collection, :id, :name
     - else
       = f.text_field :name, autofocus: true
       = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:kind), value: record_kind_name)

@@ -7,6 +7,12 @@ plugins:
 
 AllCops:
   NewCops: enable
+  Exclude:
+    - config/routes.rb
+    - db/seeds/**
+    - db/seeds_*
+    - db/schema.rb
+    - tmp
 
 Style/Documentation:
   Enabled: false
