@@ -11,9 +11,17 @@ module Contents
     # GET /contents
     def index
       authorize Content
-      @records = Contents::Logics::Search.call(params)
+      @records = Contents::Logics::Search.call(query: params)
 
       render template: template_path
+    end
+
+    # GET /books/search
+    def search
+      authorize Content, :index?
+      @records = Contents::Logics::Search.call(query: params)
+
+      render template: template_path('index')
     end
 
     def show

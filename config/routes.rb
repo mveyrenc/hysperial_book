@@ -147,7 +147,9 @@ Rails.application.routes.draw do
                sign_up: 'sign-up'
              }
 
-  resources :contents, controller: 'contents/contents'
+  resources :contents, controller: 'contents/contents' do
+    collection { get :search }
+  end
 
   resources :users, except: %i[show new create], controller: 'users/users'
 

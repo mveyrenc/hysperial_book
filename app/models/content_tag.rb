@@ -31,6 +31,7 @@
 class ContentTag < ApplicationRecord
   # Searchkick
   searchkick highlight: %i[name, content_tag_family_name, book_name]
+
   def search_data
     attributes.merge(
       content_tag_family_name: content_tag_family.name,
@@ -40,6 +41,14 @@ class ContentTag < ApplicationRecord
       book_position: book.position
     )
   end
+
+  def content_search_data
+    {
+      "content_tags_n_#{content_tag_family.name.to_sym}": [name],
+      "content_tags_k_#{content_tag_family.kind.to_sym}": [name]
+    }
+  end
+
   scope :search_import, -> { includes(:content_tag_family, :book) }
 
   ## delegate

@@ -7,9 +7,27 @@ module Contents
     # https://github.com/ankane/searchkick
     class Search < ApplicationInteractor
       include PaginatedConcern
+      include SearchConcern
 
-      def call
-        context.records = Content.left_joins(:thumbnail).includes(:thumbnail).order(created_at: :desc)
+      def set_model
+        context.model = Content
+      end
+
+      def set_where
+        %i[kind book_kind book_name].each do |f|
+          if context.query.include?(f) && context.query[f].present?
+            context.records = context.records.where("#{f}": context.query[f])
+          end
+        end
+      end
+
+      def set_aggs
+        context.records = context.records.aggs(kind: {}, book_kind: {}, book_name: {})
+      end
+
+      def set_order
+        context.records = context.records
+                                 .includes(:thumbnail, :book)
       end
     end
   end

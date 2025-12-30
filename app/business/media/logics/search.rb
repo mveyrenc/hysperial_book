@@ -9,6 +9,7 @@ module Media
       before :set_model
 
       def call
+        puts context.model
         context.records = context.model
                                  .order(created_at: :desc)
       end

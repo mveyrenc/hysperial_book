@@ -30,6 +30,13 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentAttribute < ApplicationRecord
+  ## Searchkick
+  def content_search_data
+    {
+      "content_attributes_k_#{kind.to_sym}": data
+    }
+  end
+
   ## Relations
   belongs_to :content
 

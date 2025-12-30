@@ -35,6 +35,33 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class Content < ApplicationRecord
+  # Searchkick
+  searchkick highlight: %i[name alternate_name description]
+
+  def search_data
+    attributes.merge(
+      book_name: book.name,
+      book_kind: book.kind,
+    ).merge(search_data_content_tags).merge(search_data_content_attributes)
+  end
+
+  def search_data_content_tags
+    ct = {}
+    content_tags.each do |t|
+      ct.merge!(t.content_search_data) { |key, old_value, new_value| old_value.union(new_value) }
+    end
+    ct
+  end
+
+  def search_data_content_attributes
+    ca = {}
+    content_attributes.each do |t|
+      ca.merge!(t.content_search_data) { |key, old_value, new_value| old_value.union(new_value) }
+    end
+    ca
+  end
+
+  scope :search_import, -> { includes(:book, :thumbnail, :content_tags, :content_attributes) }
 
   ## FriendlyId
   extend FriendlyId

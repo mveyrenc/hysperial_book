@@ -5,12 +5,13 @@ module Contents
     module Card
       # Contents card component
       class Component < ApplicationComponent
-        attr_reader :record
+        attr_reader :record, :highlights
 
         delegate :name, :alternate_name, :kind_name, :thumbnail, to: :record, prefix: true
 
-        def initialize(record:)
+        def initialize(record:, highlights: nil)
           @record = record
+          @highlights = highlights
         end
       end
     end

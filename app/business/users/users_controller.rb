@@ -5,12 +5,11 @@ module Users
   # Users controller
   class UsersController < ApplicationController
     before_action :set_record, only: %i[edit update destroy]
-    before_action :set_new_record, only: %i[create new]
-    before_action :authorize_record, only: %i[create new edit update destroy]
+    before_action :authorize_record, only: %i[edit update destroy]
 
     # GET /users
     def index
-      @records = Users::Logics::Search.call(params)
+      @records = Users::Logics::Search.call(query: params)
 
       render template: template_path
     end
