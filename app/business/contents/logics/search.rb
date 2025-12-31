@@ -14,7 +14,7 @@ module Contents
       end
 
       def set_where
-        %i[kind book_kind book_name].each do |f|
+        %i[kind book_id book_kind book_name].each do |f|
           if context.query.include?(f) && context.query[f].present?
             context.records = context.records.where("#{f}": context.query[f])
           end

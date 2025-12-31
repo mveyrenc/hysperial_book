@@ -40,6 +40,7 @@ class Content < ApplicationRecord
 
   def search_data
     attributes.merge(
+      book_id: book.slug,
       book_name: book.name,
       book_kind: book.kind,
     ).merge(search_data_content_tags).merge(search_data_content_attributes)

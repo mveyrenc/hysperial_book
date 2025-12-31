@@ -23,7 +23,7 @@ nav.main-nav.navbar.is-fixed-top.is-primary[role="navigation" aria-label="main n
                   span
                     = t('.all_contents')
                 - Book.all.each do |book|
-                  = link_to book, class: "navbar-item", target: "_top" do
+                  = link_to search_book_contents_path(book), class: "navbar-item", target: "_top" do
                     span
                       = book.name
           .navbar-item.has-dropdown.is-hoverable

@@ -5,6 +5,8 @@ en:
         title: "Edit book"
       index:
         title: "Books"
+      search:
+        title: "Books search results"
       new:
         title: "New book"
     books:

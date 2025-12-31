@@ -5,6 +5,8 @@ en:
         title: "Edit content"
       index:
         title: "Contents"
+      search:
+        title: "Contents search results"
       new:
         title: "New content"
     contents:

@@ -4,7 +4,9 @@ en:
       edit:
         title: "Edit content tag family"
       index:
-        title: "Content tags family"
+        title: "Content tag families"
+      search:
+        title: "Content tag families search results"
       new:
         title: "New content tag family"
     content_tag_families:

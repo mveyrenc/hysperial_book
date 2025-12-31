@@ -5,6 +5,8 @@ en:
         title: "Edit content tag"
       index:
         title: "Content tags"
+      search:
+        title: "Content tags search results"
       new:
         title: "New content tag"
     content_tags:

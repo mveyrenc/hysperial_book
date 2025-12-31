@@ -31,6 +31,6 @@ class ApplicationController < ActionController::Base
   end
 
   def template_path(action = nil)
-    "#{controller_name}/views/#{action || action_name}"
+    "#{controller_path.delete_suffix("/#{controller_name}")}/views/#{action || action_name}"
   end
 end
