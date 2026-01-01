@@ -4,9 +4,9 @@
 module Contents
   # Contents controller
   class ContentsController < ApplicationController
-    before_action :set_record, only: %i[show edit update destroy]
+    before_action :set_record, only: %i[edit update destroy]
     before_action :set_new_record, only: %i[create new]
-    before_action :authorize_record, only: %i[show create new edit update destroy]
+    before_action :authorize_record, only: %i[create new edit update destroy]
 
     # GET /contents
     def index
@@ -25,6 +25,12 @@ module Contents
     end
 
     def show
+      @record = Content.includes(content_tags: :content_tag_family)
+                       .order(content_tags: { name: :asc }, content_tag_family: { name: :asc })
+                       .friendly
+                       .find(params[:id])
+      authorize @record
+
       respond_to do |format|
         format.html { render template: template_path }
       end

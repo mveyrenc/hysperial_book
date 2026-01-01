@@ -57,6 +57,8 @@ class ContentTagFamily < ApplicationRecord
   ## Relations
   belongs_to :book
 
+  has_many :content_tags, dependent: :destroy, inverse_of: :content_tag_family
+
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 

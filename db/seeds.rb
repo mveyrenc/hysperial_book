@@ -8,4 +8,4 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Rails.root.glob('db/seeds_*.rb').each { |f| require_relative f }
+Rails.root.glob('db/seeds_4*.rb').each { |f| require_relative f }

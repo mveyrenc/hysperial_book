@@ -1,11 +1,22 @@
-.card
-  - if record_thumbnail and record_thumbnail.file.attached?
-    .card-image
-      figure.image.is-4by3
-        = image_tag record_thumbnail.file.variant(resize_to_fill: [400, 300])
-  .card-content
-    - unless record_alternate_name.blank?
-      p.subtitle
-        = record_alternate_name
-    - record_content_attributes.each do |a|
-      = render ContentAttributes::Components::AttributeDisplay::Component.new(record: a)
+- unless record_alternate_name.blank?
+  p.subtitle
+    = record_alternate_name
+
+.card-box
+  - if record_content_tags.any?
+    .grid
+      - record_content_tags.group_by { |ct| ct.content_tag_family.name }.each do |f, cts|
+        .cell
+          .field.is-horizontal
+            .field-label
+              .label
+                = f
+            .field-body
+              .control
+                - cts.each do |ct|
+                  span.tag.is-primary.is-light
+                    = ct.name
+
+.card-box
+  - record_content_attributes.each do |a|
+    = render ContentAttributes::Components::AttributeDisplay::Component.new(record: a)

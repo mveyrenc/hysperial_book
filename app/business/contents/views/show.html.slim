@@ -1,14 +1,18 @@
 = render Layout::MainArea::Component.new do |component|
   - component.with_title do
-    .level
-      .level-left
-        .level-item
-          h1.title
-            = @record.name
-      .level-right
-        .level-item
-          span.tag
-            = @record.kind_name
+    .media
+      figure.media-left
+        p.image.is-128x128
+          - if @record.thumbnail.present? and @record.thumbnail.file.attached?
+            = image_tag @record.thumbnail.file.variant(resize_to_fill: [258, 258])
+          - else
+            = render Contents::Components::NoThumbnail::Component.new(record: record)
+      .media-content
+        h1.title
+          = @record.name
+      .media-right
+        span.tag
+          = @record.kind_name
   - component.with_header_actions do
     .level
       .level-left
