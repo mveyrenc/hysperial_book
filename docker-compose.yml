@@ -31,18 +31,6 @@ services:
       - 9200:9200
       - 9600:9600  # required for Performance Analyzer
 
-  opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:latest
-    ports:
-      - 5601:5601
-    expose:
-      - '5601'
-    environment:
-      - OPENSEARCH_HOSTS=["http://opensearch:9200"]
-      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
-    depends_on:
-     - opensearch
-
   redis:
     image: "redis:alpine"
     environment:
@@ -65,11 +53,23 @@ services:
       - opensearch
       - redis
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "3001:8080"
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - "3001:8080"
+#
+#  opensearch-dashboards:
+#    image: opensearchproject/opensearch-dashboards:latest
+#    ports:
+#      - 5601:5601
+#    expose:
+#      - '5601'
+#    environment:
+#      - OPENSEARCH_HOSTS=["http://opensearch:9200"]
+#      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
+#    depends_on:
+#      - opensearch
 
   mailhog:
     image: mailhog/mailhog
