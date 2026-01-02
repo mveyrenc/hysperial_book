@@ -19,12 +19,14 @@ bundle_install:
 	docker compose exec web bundle install --local
 
 db_recreate:
+	find storage -mindepth 1 -maxdepth 1 -type d  -print0 | xargs -0 /bin/rm -rf
 	docker compose restart web
 	docker compose exec web rails db:drop
-	rm db/schema.rb
+	rm -f db/schema.rb
 	docker compose exec web rails db:create
 	docker compose exec web rails db:migrate
-	docker compose exec web rails db:seed --trace
+	docker compose exec web rails db:seed
+	docker compose exec web rails searchkick:reindex:all
 
 db_create:
 	docker compose exec web rails db:create
@@ -34,6 +36,7 @@ db_migrate:
 
 db_seed:
 	docker compose exec web rails db:seed -vvv --trace
+	docker compose exec web rails searchkick:reindex:all
 
 search_reindex_all:
 	docker compose exec web rails searchkick:reindex:all

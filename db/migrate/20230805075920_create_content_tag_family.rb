@@ -2,20 +2,26 @@
 
 class CreateContentTagFamily < ActiveRecord::Migration[8.0]
   def change
-    # create_enum :content_tag_family_kind,
-    #             %w[ingredient season occasion category geographic_area restriction source author thematic]
     create_table :content_tag_families, id: :uuid do |t|
-      t.string :slug, null: false, index: { unique: true }
       t.string :name, null: false
+
+      t.string :slug, null: false, index: { unique: true }
       t.string :kind, null: false
+
       t.references :book, null: false, foreign_key: true, type: :uuid
 
-      t.jsonb :metadata, null: false, default: {}
+      t.jsonb :data, null: false, default: {}, comment: 'A hash to store the data of the item'
+      t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'
+      t.jsonb :settings, null: false, default: {}, comment: 'A hash to configure the item'
+
+      t.integer :position, comment: 'The position of the item'
 
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
 
       t.timestamps
+
+      t.index %i[kind name book_id], unique: true
     end
   end
 end

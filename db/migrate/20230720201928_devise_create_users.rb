@@ -4,11 +4,10 @@
 class DeviseCreateUsers < ActiveRecord::Migration[8.0]
   # rubocop:disable Metrics/MethodLength
   def change
-    create_enum :user_role, %w[super_admin admin contributor reader noob]
     create_table :users, id: :uuid do |t|
       ## Database authenticatable
       t.string :name, null: false
-      t.enum :role, enum_type: :user_role, default: :noob, index: true, null: false
+      t.string :role, default: :noob, index: true, null: false
       t.string :email, null: false
       t.string :encrypted_password, null: false
 

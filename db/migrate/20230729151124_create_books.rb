@@ -25,14 +25,15 @@ class CreateBooks < ActiveRecord::Migration[8.0]
       t.string :name, null: false, comment: 'The name of the item'
       t.string :alternate_name, null: true, comment: 'An alias for the item'
       t.text :description, null: true, comment: 'A description of the item'
+
       t.string :slug, null: false, index: { unique: true }, comment: 'Human readable item identifier'
       t.string :kind, null: false, comment: 'The kind or type of the item'
 
+      t.jsonb :data, null: false, default: {}, comment: 'A hash to store the data of the item'
+      t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'
       t.jsonb :settings, null: false, default: {}, comment: 'A hash to configure the item'
 
       t.integer :position, comment: 'The position of the item'
-
-      t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'
 
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid

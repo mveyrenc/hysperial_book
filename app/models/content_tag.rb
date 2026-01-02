@@ -5,8 +5,10 @@
 # Table name: content_tags
 #
 #  id                                                         :uuid             not null, primary key
+#  data(A hash to store the data of the item)                 :jsonb            not null
 #  metadata(A hash to store some data about the item)         :jsonb            not null
 #  name(The name of the item)                                 :string           not null
+#  settings(A hash to configure the item)                     :jsonb            not null
 #  slug(Human readable item identifier)                       :string           not null
 #  created_at                                                 :datetime         not null
 #  updated_at                                                 :datetime         not null
@@ -30,7 +32,7 @@
 #
 class ContentTag < ApplicationRecord
   # Searchkick
-  searchkick highlight: %i[name, content_tag_family_name, book_name]
+  searchkick highlight: %i[name content_tag_family_name book_name]
 
   def search_data
     attributes.merge(
@@ -43,10 +45,10 @@ class ContentTag < ApplicationRecord
   end
 
   def content_search_data
-    {
-      "content_tags_n_#{content_tag_family.name.to_sym}": [name],
-      "content_tags_k_#{content_tag_family.kind.to_sym}": [name]
-    }
+    [
+      [ContentTagFamily.content_tags_index_id(content_tag_family), [id]],
+      [ContentTagFamily.content_tags_index_name(content_tag_family), [name]]
+    ].to_h
   end
 
   scope :search_import, -> { includes(:content_tag_family, :book) }

@@ -5,11 +5,11 @@ module Books
     module SearchForm
       # Books search form component
       class Component < ApplicationComponent
-        attr_reader :params, :records
+        attr_reader :params, :aggs
 
-        def initialize(params:, records:)
+        def initialize(params:, aggs:)
           @params = params
-          @records = records
+          @aggs = aggs
         end
 
         protected
@@ -19,8 +19,8 @@ module Books
         end
 
         def kind_select_values
-          if records.aggs.include?('kind') && records.aggs['kind'].include?('buckets')
-            records.aggs['kind']['buckets'].map do |agg|
+          if aggs.aggs.include?('kind') && aggs.aggs['kind'].include?('buckets')
+            aggs.aggs['kind']['buckets'].map do |agg|
               ["#{BookKind.human_attribute_name(agg['key'])} (#{agg['doc_count']})", agg['key']]
             end
           else

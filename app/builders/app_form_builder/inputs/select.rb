@@ -13,7 +13,7 @@ module AppFormBuilder
 
           div_class = ['select']
           div_class.push('is-fullwidth') if options.delete(:fullwidth)
-          div_class.push('is-multiple') if html_options[:multiple]
+          div_class.push('is-multiple') if options[:multiple]
 
           form_field_builder(method, options, html_options) do
             content_tag(:div, class: div_class.join(' ')) do

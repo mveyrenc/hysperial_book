@@ -9,14 +9,16 @@ module SearchConcern
     before :set_model
     before :compact_query
     before :set_q
+    before :init_search_query
+    before :set_where
+    before :set_aggs
+    before :set_order
+    before :set_highlight
 
-    after :set_where
-    after :set_aggs
-    after :set_order
-    after :set_highlight
+    after :rearrange_aggs
 
-    def call
-      context.records = context.model.search(context.query[:q])
+    def init_search_query
+      context.search_query = context.model.search(context.query[:q])
     end
 
     private
@@ -30,16 +32,25 @@ module SearchConcern
     end
 
     def set_q
-      context.query.merge!({ q: '*' }) if context.query[:q].nil? || context[:q] == ''
+      context.query.merge!({ q: '*' }) if context.query[:q].blank?
     end
 
     def set_where; end
 
+    def set_aggs; end
+
     def set_order; end
 
     def set_highlight
-      context.records = context.records.highlight(tag: '<span class="has-background-primary-light">')
+      context.search_query = context.search_query.highlight(tag: '<span class="has-background-primary-light">')
     end
+
+    def call
+      context.records = context.search_query.load
+      context.aggs = context.records.aggs
+    end
+
+    def rearrange_aggs; end
   end
 
   class_methods do

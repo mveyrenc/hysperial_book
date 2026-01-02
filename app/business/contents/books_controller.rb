@@ -9,7 +9,7 @@ module Contents
     # GET /books/:book_id/contents
     def index
       authorize Content
-      @records = Contents::Logics::Search.call(query: params)
+      @records = Contents::Logics::Search.call(query: params, book: @book_record)
 
       render template: template_path
     end
@@ -17,7 +17,7 @@ module Contents
     # GET  /books/:book_id/contents/search
     def search
       authorize Content, :index?
-      @records = Contents::Logics::Search.call(query: params)
+      @records = Contents::Logics::Search.call(query: params, book: @book_record)
 
       render template: template_path('index')
     end

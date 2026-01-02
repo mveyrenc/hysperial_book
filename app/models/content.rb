@@ -4,33 +4,38 @@
 #
 # Table name: contents
 #
-#  id                                                   :uuid             not null, primary key
-#  alternate_name(An alias for the item)                :string
-#  kind(The kind or type of the item)                   :string           not null
-#  metadata(A hash to store some data about the item)   :jsonb            not null
-#  name(The name of the item)                           :string           not null
-#  slug(Human readable item identifier)                 :string           not null
-#  source_url(The URL from which the item was imported) :string
-#  version(The version of the item)                     :string
-#  created_at                                           :datetime         not null
-#  updated_at                                           :datetime         not null
-#  book_id(The book in which the item is located)       :uuid             not null
-#  created_by_id                                        :uuid             not null
-#  thumbnail_id(A very small image for the item)        :uuid
-#  updated_by_id                                        :uuid             not null
+#  id                                                                                                         :uuid             not null, primary key
+#  alternate_name(An alias for the item)                                                                      :string
+#  data(A hash to store the data of the item)                                                                 :jsonb            not null
+#  is_based_on_url(The URL from which the item was imported)                                                  :string
+#  kind(The kind or type of the item)                                                                         :string           not null
+#  metadata(A hash to store some data about the item)                                                         :jsonb            not null
+#  name(The name of the item)                                                                                 :string           not null
+#  settings(A hash to configure the item)                                                                     :jsonb            not null
+#  slug(Human readable item identifier)                                                                       :string           not null
+#  version(The version of the item)                                                                           :string
+#  created_at                                                                                                 :datetime         not null
+#  updated_at                                                                                                 :datetime         not null
+#  book_id(The book in which the item is located)                                                             :uuid             not null
+#  created_by_id                                                                                              :uuid             not null
+#  is_based_on_id(A content from which this work is derived or from which it is a modification or adaptation) :uuid
+#  thumbnail_id(A very small image for the item)                                                              :uuid
+#  updated_by_id                                                                                              :uuid             not null
 #
 # Indexes
 #
-#  index_contents_on_book_id        (book_id)
-#  index_contents_on_created_by_id  (created_by_id)
-#  index_contents_on_slug           (slug) UNIQUE
-#  index_contents_on_thumbnail_id   (thumbnail_id)
-#  index_contents_on_updated_by_id  (updated_by_id)
+#  index_contents_on_book_id         (book_id)
+#  index_contents_on_created_by_id   (created_by_id)
+#  index_contents_on_is_based_on_id  (is_based_on_id)
+#  index_contents_on_slug            (slug) UNIQUE
+#  index_contents_on_thumbnail_id    (thumbnail_id)
+#  index_contents_on_updated_by_id   (updated_by_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (book_id => books.id)
 #  fk_rails_...  (created_by_id => users.id) ON DELETE => restrict
+#  fk_rails_...  (is_based_on_id => contents.id) ON DELETE => nullify
 #  fk_rails_...  (thumbnail_id => media.id) ON DELETE => cascade
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
@@ -40,16 +45,16 @@ class Content < ApplicationRecord
 
   def search_data
     attributes.merge(
-      book_id: book.slug,
+      book_id: book.id,
       book_name: book.name,
-      book_kind: book.kind,
+      book_kind: book.kind
     ).merge(search_data_content_tags).merge(search_data_content_attributes)
   end
 
   def search_data_content_tags
     ct = {}
     content_tags.each do |t|
-      ct.merge!(t.content_search_data) { |key, old_value, new_value| old_value.union(new_value) }
+      ct.merge!(t.content_search_data) { |_key, old_value, new_value| old_value.union(new_value) }
     end
     ct
   end
@@ -57,7 +62,7 @@ class Content < ApplicationRecord
   def search_data_content_attributes
     ca = {}
     content_attributes.each do |t|
-      ca.merge!(t.content_search_data) { |key, old_value, new_value| old_value.union(new_value) }
+      ca.merge!(t.content_search_data) { |_key, old_value, new_value| old_value.union(new_value) }
     end
     ca
   end

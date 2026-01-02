@@ -30,10 +30,9 @@
 #
 class CreateContentAttributes < ActiveRecord::Migration[8.0]
   def change
-    #    create_enum :content_attribute_kind, %w[text integer number url boolean date duration video_object duration item_list how_to_supply how_to_tool how_to_section
-    # how_to_step how_to_direction how_to_tip property_value quantitative_value monetary_amount rating location reference]
     create_table :content_attributes, id: :uuid do |t|
       t.string :name, null: false, comment: 'The name of the item'
+
       t.string :kind, null: false, comment: 'The kind or type of the item'
 
       t.references :content, null: false, foreign_key: true, type: :uuid,

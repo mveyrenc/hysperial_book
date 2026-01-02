@@ -6,6 +6,7 @@
 #
 #  id                                                 :uuid             not null, primary key
 #  alternate_name(An alias for the item)              :string
+#  data(A hash to store the data of the item)         :jsonb            not null
 #  description(A description of the item)             :text
 #  kind(The kind or type of the item)                 :string           not null
 #  metadata(A hash to store some data about the item) :jsonb            not null

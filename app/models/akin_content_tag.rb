@@ -4,7 +4,7 @@
 #
 # Table name: akin_content_tags
 #
-#  kind       :enum             default("direct"), not null
+#  kind       :string           not null
 #  metadata   :jsonb            not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -26,8 +26,8 @@ class AkinContentTag < ApplicationRecord
   belongs_to :relater, class_name: 'ContentTag'
   belongs_to :related, class_name: 'ContentTag'
 
-  enum :kind,
-       { direct: 'direct',
-         followable: 'followable',
-         computed: 'computed' }, suffix: true
+  ## Enumerables
+  def kind_name
+    AkinContentTagKind.human_attribute_name(kind)
+  end
 end
