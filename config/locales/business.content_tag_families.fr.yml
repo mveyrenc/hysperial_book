@@ -1,0 +1,18 @@
+fr:
+  content_tag_families:
+    views:
+      edit:
+        title: "Modifier la famille d'étiquettes"
+      index:
+        title: "Familles d'étiquettes"
+      search:
+        title: "Résultats de recherche de familles d'étiquettes"
+      new:
+        title: "Nouvelle famille d'étiquettes"
+    content_tag_families:
+      create:
+        successfully_created: "La famille d'étiquettes a été créée avec succès"
+      update:
+        successfully_updated: "La famille d'étiquettes a été modifiée avec succès"
+      destroy:
+        successfully_destroyed: "La famille d'étiquettes a été supprimée avec succès"

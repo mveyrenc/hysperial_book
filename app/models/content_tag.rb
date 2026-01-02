@@ -38,6 +38,7 @@ class ContentTag < ApplicationRecord
     attributes.merge(
       content_tag_family_name: content_tag_family.name,
       content_tag_family_kind: content_tag_family.kind,
+      book_id: book.id,
       book_name: book.name,
       book_kind: book.kind,
       book_position: book.position

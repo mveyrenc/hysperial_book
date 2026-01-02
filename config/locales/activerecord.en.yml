@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      content_tag_family: Tag family
+      content_tag: Tag
+    attributes:
+      user:
+        role_list:
+          noob: Noob
+          reader: Reader
+          contributor: Contributor
+          admin: Admin
+          super_admin: Super-admin

@@ -9,4 +9,4 @@
     .field
       .buttons
         = f.submit t('application.search'), class: 'button is-primary'
-        = link_to t('application.reset search'), book.present? ? book_contents_path(book) : contents_path, class: 'button'
+        = link_to t('application.reset_search'), book.present? ? book_contents_path(book) : contents_path, class: 'button'

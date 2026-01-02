@@ -1,0 +1,18 @@
+en:
+  books:
+    views:
+      edit:
+        title: "Edit book"
+      index:
+        title: "Books"
+      search:
+        title: "Books search results"
+      new:
+        title: "New book"
+    books:
+      create:
+        successfully_created: "Book was successfully created"
+      update:
+        successfully_updated: "Book was successfully updated"
+      destroy:
+        successfully_destroyed: "Book was successfully destroyed"

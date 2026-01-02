@@ -1,0 +1,18 @@
+fr:
+  content_tags:
+    views:
+      edit:
+        title: "Modifier l'étiquette"
+      index:
+        title: "Étiquettes"
+      search:
+        title: "Résultats de recherche d'étiquettes"
+      new:
+        title: "Nouvelle étiquette"
+    content_tags:
+      create:
+        successfully_created: "L'étiquette a été créée avec succès"
+      update:
+        successfully_updated: "L'étiquette a été modifiée avec succès"
+      destroy:
+        successfully_destroyed: "L'étiquette a été supprimée avec succès"

@@ -1,0 +1,18 @@
+fr:
+  contents:
+    views:
+      edit:
+        title: "Modifier le contenu"
+      index:
+        title: "Contenus"
+      search:
+        title: "Résultats de recherche de contenus"
+      new:
+        title: "Nouveau contenu"
+    contents:
+      create:
+        successfully_created: "Le contenu a été créé avec succès"
+      update:
+        successfully_updated: "Le contenu a été modifié avec succès"
+      destroy:
+        successfully_destroyed: "Le contenu a été supprimé avec succès"

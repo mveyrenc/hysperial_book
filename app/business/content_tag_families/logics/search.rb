@@ -58,11 +58,11 @@ module ContentTagFamilies
             }
           when 'book_id'
             aggs[k] = {
-              name: ContentTagFamily.human_attribute_name(:book_id),
+              name: ContentTagFamily.human_attribute_name(:book),
               multiple: false,
-              buckets: context.aggs['book_id']['buckets'].map do |agg|
-                b = Book.find(agg['key'])
-                ["#{b.name} (#{agg['doc_count']})", b.slug]
+              buckets: agg['buckets'].map do |agg|
+                b = Book.find_by(id: agg['key'])
+                ["#{b.name} (#{agg['doc_count']})", b.slug] if b.present?
               end
             }
           end

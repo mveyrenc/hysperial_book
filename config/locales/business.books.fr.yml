@@ -1,0 +1,18 @@
+fr:
+  books:
+    views:
+      edit:
+        title: "Modifier le livre"
+      index:
+        title: "Livres"
+      search:
+        title: "Résultats de recherche de livres"
+      new:
+        title: "Nouveau livre"
+    books:
+      create:
+        successfully_created: "Le livre a été créé avec succès"
+      update:
+        successfully_updated: "Le livre a été modifié avec succès"
+      destroy:
+        successfully_destroyed: "Le livre a été supprimé avec succès"

@@ -28,23 +28,32 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
-
-en:
+fr:
 
   hello: "Hello world"
 
   application:
-    search: "Search"
-    reset_search: "Reset"
-    search_q_placeholder: "Search..."
-    no_entry: "No entry"
-    read: "Read"
-    submit: "Submit"
-    cancel: "Cancel"
-    edit: "Edit"
-    delete: "Delete"
-    are_you_sure: "Are you sure?"
+    search: "Rechercher"
+    reset_search: "Réinitialiser la recherche"
+    search_q_placeholder: "Recherche..."
+    no_entry: "Aucune entrée"
+    nothing: "Rien trouvé"
+    read: "Voir"
+    submit: "Valider"
+    cancel: "Annuler"
+    new: "Nouveau"
+    edit: "Éditer"
+    delete: "Supprimer"
+    are_you_sure: "Es tu sûr ?"
+
+    home: "Home"
+    all_contents: "Tous les contenus"
+    more: "Autres"
+    sign_in: "Sign in"
+    sign_up: "Sign up"
+    log_out: "Log out"
 
   file_field:
-    choose_file: "Choose a file..."
+    choose_file: "Choisis un fichier..."
+
 
