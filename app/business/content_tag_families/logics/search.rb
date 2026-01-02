@@ -42,7 +42,6 @@ module ContentTagFamilies
           case k
           when 'kind'
             aggs[k] = {
-              key: :kind,
               name: ContentTagFamily.human_attribute_name(:kind),
               multiple: false,
               buckets: context.aggs['kind']['buckets'].map do |agg|
@@ -51,7 +50,6 @@ module ContentTagFamilies
             }
           when 'book_kind'
             aggs[k] = {
-              key: :book_kind,
               name: ContentTagFamily.human_attribute_name(:book_kind),
               multiple: false,
               buckets: context.aggs['book_kind']['buckets'].map do |agg|
@@ -60,7 +58,6 @@ module ContentTagFamilies
             }
           when 'book_id'
             aggs[k] = {
-              key: :book_id,
               name: ContentTagFamily.human_attribute_name(:book_id),
               multiple: false,
               buckets: context.aggs['book_id']['buckets'].map do |agg|
