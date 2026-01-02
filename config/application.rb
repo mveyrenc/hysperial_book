@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module HysperialBook
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 8.0
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -25,9 +25,6 @@ module HysperialBook
     #
     config.time_zone = 'Europe/Paris'
     # config.eager_load_paths << Rails.root.join("extras")
-
-    # Add translations files from business
-    config.i18n.load_path += Dir[Rails.root.glob('app/business/*/locales/*.{rb,yml}').to_s]
 
     # Don't generate system test files.
     config.generators.after_generate do |files|

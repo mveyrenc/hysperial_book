@@ -9,7 +9,6 @@
     "cable_ready": "^5.0.3",
     "esbuild": "^0.27.1",
     "sass": "^1.94.2",
-    "stimulus_reflex": "^3.5.0-rc3",
     "trix": "^2.1.15"
   },
   "scripts": {

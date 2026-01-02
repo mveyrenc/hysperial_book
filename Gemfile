@@ -136,10 +136,6 @@ gem 'interactor-rails', '~> 2.2'
 # https://viewcomponent.org/guide/getting-started.html
 gem 'view_component', '~> 4.1'
 
-# https://docs.stimulusreflex.com/
-# https://github.com/joshleblanc/view_component_reflex
-# example: https://github.com/marcoroth/boxdrop/tree/master
-gem 'view_component_reflex', '~> 3.3'
 # https://github.com/roidrage/redis-session-store
 gem 'redis-session-store', '~> 0.11.5'
 
