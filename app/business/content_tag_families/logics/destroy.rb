@@ -2,11 +2,9 @@
 
 module ContentTagFamilies
   module Logics
-    # Destroy a user
+    # Destroy a content tag family
     class Destroy < ApplicationInteractor
-      def call
-        context.record.destroy
-      end
+      include DestroyRecordConcern
     end
   end
 end

@@ -1,5 +1,6 @@
-= turbo_stream.prepend "books" do
-  = turbo_frame_tag @record do
-    = render(Books::Components::Card::Component.new(record: @record))
-= turbo_stream.update Book.new, render(Books::Components::NewButton::Component.new)
-
+= turbo_stream.replace(:flash)
+  = render Layout::Flash::Component.new
+= turbo_stream.update Book.new do
+  = render(Books::Components::NewButton::Component.new)
+= turbo_stream.turbo_frame_set_src :books, books_path
+= turbo_stream.turbo_frame_reload :books

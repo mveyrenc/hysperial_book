@@ -1,0 +1,25 @@
+en:
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+    currency:
+      format:
+        unit: '€'
+        precision: 2
+        format: '%n %u'
+    human:
+      format:
+        delimiter: ""
+        precision: 3
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"

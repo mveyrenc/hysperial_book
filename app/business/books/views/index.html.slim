@@ -1,18 +1,18 @@
-= render Layout::MainArea::Component.new do |component|
+= render Layout::MainArea::Component.new(turbo_frame_tag_id: :books) do |component|
   - component.with_title do
     = t('.title')
-  - component.with_header_actions do
+  - component.with_actions do
     - if policy(Book).create?
       = turbo_frame_tag Book.new do
         = render Books::Components::NewButton::Component.new
   - component.with_left_aside do
     = render Books::Components::SearchForm::Component.new(params: params, aggs: @records.aggs)
   - component.with_main_section do
-    = turbo_frame_tag "books", class: "container" do
+    .container
       - if @records.records.any?
         - @records.records.with_highlights.each do |record, highlights|
           = turbo_frame_tag record do
             = render Books::Components::Card::Component.new(record: record, highlights: highlights)
+        = paginate @records.records
       - else
         = render NoRecord::Component.new
-    = paginate @records.records

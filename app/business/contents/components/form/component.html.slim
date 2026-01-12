@@ -5,7 +5,7 @@
       = f.select :book_id, options_for_select(Book.all.map { |book| [book, book.id] }, record_book)
       = f.select :kind, options_for_select(ContentKind.kinds.map { |key, value| [ContentKind.human_attribute_name(key), value] }, record_kind)
     = f.text_field :name, autofocus: true
-    = f.text_field :alternate_name
+    = f.text_field :alternate_names
     = f.text_field :version
     = f.text_field :source_url
     = f.fields_for :thumbnail do |f_thumbnail|

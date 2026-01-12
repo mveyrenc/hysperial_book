@@ -3,7 +3,9 @@
 class CreateContentTagFamily < ActiveRecord::Migration[8.0]
   def change
     create_table :content_tag_families, id: :uuid do |t|
-      t.string :name, null: false
+      t.string :name, null: false, comment: 'The name of the item'
+      t.text :alternate_names, null: true, comment: 'Aliases for the item'
+      t.text :description, null: true, comment: 'A description of the item'
 
       t.string :slug, null: false, index: { unique: true }
       t.string :kind, null: false

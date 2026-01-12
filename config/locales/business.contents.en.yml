@@ -1,3 +1,5 @@
+---
+
 en:
   contents:
     views:
@@ -9,7 +11,24 @@ en:
         title: "Contents search results"
       new:
         title: "New content"
-    contents:
-      successfully_created: "Content was successfully created"
-      successfully_updated: "Content was successfully updated"
-      successfully_destroyed: "Content was successfully destroyed"
+    logics:
+      create:
+        save_record:
+          success: "The content was created successfully"
+      update:
+        save_record:
+          success: "The content has been successfully modified"
+      create_record:
+        no_current_user: "No user found in the settings"
+        no_record: "No content found in the settings"
+      hydrate_record:
+        no_record: "No content found in the settings"
+      update_record:
+        no_current_user: "No user found in the settings"
+        no_record: "No content found in the settings"
+        successfully_updated: "The content has been successfully modified"
+      save_record:
+        no_record: "No content found in the settings"
+        failure: "An error occurred while saving the content"
+      destroy:
+        successfully_destroyed: "The content was successfully destroyed"

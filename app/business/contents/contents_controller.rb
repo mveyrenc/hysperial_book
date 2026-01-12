@@ -100,7 +100,7 @@ module Contents
     def strong_params
       params
         .require(:content)
-        .permit(:book_id, :name, :alternate_name, :kind, :version, :source_url,
+        .permit(:book_id, :name, :alternate_names, :kind, :version, :source_url,
                 thumbnail_attributes: %i[id file])
     end
   end

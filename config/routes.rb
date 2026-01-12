@@ -3,29 +3,6 @@
 # == Route Map
 #
 #                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
-#                              new_example GET    /example/new(.:format)                                                                            examples#new
-#                             edit_example GET    /example/edit(.:format)                                                                           examples#edit
-#                                  example GET    /example(.:format)                                                                                examples#show
-#                                          PATCH  /example(.:format)                                                                                examples#update
-#                                          PUT    /example(.:format)                                                                                examples#update
-#                                          DELETE /example(.:format)                                                                                examples#destroy
-#                                          POST   /example(.:format)                                                                                examples#create
-#                                   test2s GET    /test2s(.:format)                                                                                 test2s#index
-#                                          POST   /test2s(.:format)                                                                                 test2s#create
-#                                new_test2 GET    /test2s/new(.:format)                                                                             test2s#new
-#                               edit_test2 GET    /test2s/:id/edit(.:format)                                                                        test2s#edit
-#                                    test2 GET    /test2s/:id(.:format)                                                                             test2s#show
-#                                          PATCH  /test2s/:id(.:format)                                                                             test2s#update
-#                                          PUT    /test2s/:id(.:format)                                                                             test2s#update
-#                                          DELETE /test2s/:id(.:format)                                                                             test2s#destroy
-#                                    tests GET    /tests(.:format)                                                                                  tests#index
-#                                          POST   /tests(.:format)                                                                                  tests#create
-#                                 new_test GET    /tests/new(.:format)                                                                              tests#new
-#                                edit_test GET    /tests/:id/edit(.:format)                                                                         tests#edit
-#                                     test GET    /tests/:id(.:format)                                                                              tests#show
-#                                          PATCH  /tests/:id(.:format)                                                                              tests#update
-#                                          PUT    /tests/:id(.:format)                                                                              tests#update
-#                                          DELETE /tests/:id(.:format)                                                                              tests#destroy
 #                         new_user_session GET    /auth/login(.:format)                                                                             devise/sessions#new
 #                             user_session POST   /auth/login(.:format)                                                                             devise/sessions#create
 #                     destroy_user_session DELETE /auth/logout(.:format)                                                                            devise/sessions#destroy
@@ -41,6 +18,7 @@
 #                                          PUT    /auth/register(.:format)                                                                          registrations#update
 #                                          DELETE /auth/register(.:format)                                                                          registrations#destroy
 #                                          POST   /auth/register(.:format)                                                                          registrations#create
+#                          search_contents GET    /contents/search(.:format)                                                                        contents/contents#search
 #                                 contents GET    /contents(.:format)                                                                               contents/contents#index
 #                                          POST   /contents(.:format)                                                                               contents/contents#create
 #                              new_content GET    /contents/new(.:format)                                                                           contents/contents#new
@@ -54,6 +32,9 @@
 #                                     user PATCH  /users/:id(.:format)                                                                              users/users#update
 #                                          PUT    /users/:id(.:format)                                                                              users/users#update
 #                                          DELETE /users/:id(.:format)                                                                              users/users#destroy
+#                             search_books GET    /books/search(.:format)                                                                           books/books#search
+#                     search_book_contents GET    /books/:book_id/contents/search(.:format)                                                         contents/books#search
+#                            book_contents GET    /books/:book_id/contents(.:format)                                                                contents/books#index
 #                                    books GET    /books(.:format)                                                                                  books/books#index
 #                                          POST   /books(.:format)                                                                                  books/books#create
 #                                 new_book GET    /books/new(.:format)                                                                              books/books#new
@@ -61,13 +42,15 @@
 #                                     book PATCH  /books/:id(.:format)                                                                              books/books#update
 #                                          PUT    /books/:id(.:format)                                                                              books/books#update
 #                                          DELETE /books/:id(.:format)                                                                              books/books#destroy
-#                        content_tag_families GET    /content_tag_families(.:format)                                                                      content_tag_families/content_tag_families#index
-#                                          POST   /content_tag_families(.:format)                                                                      content_tag_families/content_tag_families#create
-#                     new_content_tag_family GET    /content_tag_families/new(.:format)                                                                  content_tag_families/content_tag_families#new
-#                    edit_content_tag_family GET    /content_tag_families/:id/edit(.:format)                                                             content_tag_families/content_tag_families#edit
-#                         content_tag_family PATCH  /content_tag_families/:id(.:format)                                                                  content_tag_families/content_tag_families#update
-#                                          PUT    /content_tag_families/:id(.:format)                                                                  content_tag_families/content_tag_families#update
-#                                          DELETE /content_tag_families/:id(.:format)                                                                  content_tag_families/content_tag_families#destroy
+#              search_content_tag_families GET    /content_tag_families/search(.:format)                                                            content_tag_families/content_tag_families#search
+#                     content_tag_families GET    /content_tag_families(.:format)                                                                   content_tag_families/content_tag_families#index
+#                                          POST   /content_tag_families(.:format)                                                                   content_tag_families/content_tag_families#create
+#                   new_content_tag_family GET    /content_tag_families/new(.:format)                                                               content_tag_families/content_tag_families#new
+#                  edit_content_tag_family GET    /content_tag_families/:id/edit(.:format)                                                          content_tag_families/content_tag_families#edit
+#                       content_tag_family PATCH  /content_tag_families/:id(.:format)                                                               content_tag_families/content_tag_families#update
+#                                          PUT    /content_tag_families/:id(.:format)                                                               content_tag_families/content_tag_families#update
+#                                          DELETE /content_tag_families/:id(.:format)                                                               content_tag_families/content_tag_families#destroy
+#                      search_content_tags GET    /content_tags/search(.:format)                                                                    content_tags/content_tags#search
 #                             content_tags GET    /content_tags(.:format)                                                                           content_tags/content_tags#index
 #                                          POST   /content_tags(.:format)                                                                           content_tags/content_tags#create
 #                          new_content_tag GET    /content_tags/new(.:format)                                                                       content_tags/content_tags#new
@@ -76,27 +59,21 @@
 #                                          PUT    /content_tags/:id(.:format)                                                                       content_tags/content_tags#update
 #                                          DELETE /content_tags/:id(.:format)                                                                       content_tags/content_tags#destroy
 #                           media_pictures GET    /media/pictures(.:format)                                                                         media/pictures#index
-#                                          POST   /media/pictures(.:format)                                                                         media/pictures#create
-#                        new_media_picture GET    /media/pictures/new(.:format)                                                                     media/pictures#new
 #                       edit_media_picture GET    /media/pictures/:id/edit(.:format)                                                                media/pictures#edit
 #                            media_picture PATCH  /media/pictures/:id(.:format)                                                                     media/pictures#update
 #                                          PUT    /media/pictures/:id(.:format)                                                                     media/pictures#update
 #                                          DELETE /media/pictures/:id(.:format)                                                                     media/pictures#destroy
 #                              media_scans GET    /media/scans(.:format)                                                                            media/scans#index
-#                                          POST   /media/scans(.:format)                                                                            media/scans#create
-#                           new_media_scan GET    /media/scans/new(.:format)                                                                        media/scans#new
 #                          edit_media_scan GET    /media/scans/:id/edit(.:format)                                                                   media/scans#edit
 #                               media_scan PATCH  /media/scans/:id(.:format)                                                                        media/scans#update
 #                                          PUT    /media/scans/:id(.:format)                                                                        media/scans#update
 #                                          DELETE /media/scans/:id(.:format)                                                                        media/scans#destroy
 #                          media_documents GET    /media/documents(.:format)                                                                        media/documents#index
-#                                          POST   /media/documents(.:format)                                                                        media/documents#create
-#                       new_media_document GET    /media/documents/new(.:format)                                                                    media/documents#new
 #                      edit_media_document GET    /media/documents/:id/edit(.:format)                                                               media/documents#edit
 #                           media_document PATCH  /media/documents/:id(.:format)                                                                    media/documents#update
 #                                          PUT    /media/documents/:id(.:format)                                                                    media/documents#update
 #                                          DELETE /media/documents/:id(.:format)                                                                    media/documents#destroy
-#                                                 /cable                                                                                            #<ActionCable::Server::Base:0x00007fecf12b5828 @config=#<ActionCable::Server::Configuration:0x00007fecf12b6228 @log_tags=[], @connection_class=#<Proc:0x00007fecf33121e8 /usr/local/bundle/gems/actioncable-8.0.2/lib/action_cable/engine.rb:55 (lambda)>, @worker_pool_size=4, @disable_request_forgery_protection=false, @allow_same_origin_as_host=true, @filter_parameters=[:passw, :email, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn, :cvv, :cvc], @health_check_application=#<Proc:0x00007fecf32f21e0 /usr/local/bundle/gems/actioncable-8.0.2/lib/action_cable/engine.rb:31 (lambda)>, @logger=#<Logger:0x00007fecf12b57d8 @level=0, @progname=nil, @default_formatter=#<Logger::Formatter:0x00007fecf11bbff8 @datetime_format=nil>, @formatter=nil, @logdev=nil, @level_override={}>, @cable={"adapter" => "redis", "url" => "redis://redis:6379/1"}, @mount_path="/cable", @precompile_assets=true, @allowed_request_origins=/https?:\/\/localhost:\d+/>, @mutex=#<Monitor:0x00007fecf11bc160>, @pubsub=nil, @worker_pool=nil, @event_loop=nil, @remote_connections=nil>
+#                                                 /cable                                                                                            #<ActionCable::Server::Base:0x00007f3d51c7f390 @config=#<ActionCable::Server::Configuration:0x00007f3d51c7f9d0 @log_tags=[], @connection_class=#<Proc:0x00007f3d52059128 /usr/local/bundle/gems/actioncable-8.1.1/lib/action_cable/engine.rb:55 (lambda)>, @worker_pool_size=4, @disable_request_forgery_protection=false, @allow_same_origin_as_host=true, @filter_parameters=[:passw, :email, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn, :cvv, :cvc], @health_check_application=#<Proc:0x00007f3d5205ec90 /usr/local/bundle/gems/actioncable-8.1.1/lib/action_cable/engine.rb:31 (lambda)>, @logger=#<Logger:0x00007f3d51c7f340 @level=0, @progname=nil, @default_formatter=#<Logger::Formatter:0x00007f3d529f3968 @datetime_format=nil>, @formatter=nil, @logdev=nil, @level_override={}>, @cable={"adapter" => "redis", "url" => "redis://redis:6379/1"}, @mount_path="/cable", @precompile_assets=true, @allowed_request_origins=/https?:\/\/localhost:\d+/>, @mutex=#<Monitor:0x00007f3d529f3d78>, @pubsub=nil, @worker_pool=nil, @event_loop=nil, @remote_connections=nil>
 #                                     root GET    /                                                                                                 home#index
 #         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
 #         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
@@ -169,6 +146,10 @@ Rails.application.routes.draw do
     resources :pictures, except: %i[show new create], controller: 'pictures'
     resources :scans, except: %i[show new create], controller: 'scans'
     resources :documents, except: %i[show new create], controller: 'documents'
+  end
+
+  authenticate :admin do
+    mount PgHero::Engine, at: '/admins/postgres'
   end
 
   mount ActionCable.server => '/cable'

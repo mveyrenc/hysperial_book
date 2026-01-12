@@ -1,3 +1,5 @@
+---
+
 fr:
   contents:
     views:
@@ -9,10 +11,26 @@ fr:
         title: "Résultats de recherche de contenus"
       new:
         title: "Nouveau contenu"
-    contents:
+    logics:
       create:
-        successfully_created: "Le contenu a été créé avec succès"
+        save_record:
+          success: "Le contenu a été créé avec succès"
       update:
+        save_record:
+          success: "Le contenu a été modifié avec succès"
+      create_record:
+        no_current_user: "Aucun utilisateur trouvé en paramètre"
+        no_record: "Aucun contenu trouvé en paramètre"
+      hydrate_record:
+        no_record: "Aucun contenu trouvé en paramètre"
+      update_record:
+        no_current_user: "Aucun utilisateur trouvé en paramètre"
+        no_record: "Aucun contenu trouvé en paramètre"
         successfully_updated: "Le contenu a été modifié avec succès"
+      save_record:
+        no_record: "Aucun contenu trouvé en paramètre"
+        failure: "Une erreur s'est produite lors de l'enregistrement du contenu"
       destroy:
-        successfully_destroyed: "Le contenu a été supprimé avec succès"
+        no_record: "Aucun contenu trouvé en paramètre"
+        success: "Le contenu a été supprimé avec succès"
+        failure: "Une erreur s'est produite lors de la suppression du contenu"

@@ -1,7 +1,7 @@
 = render Layout::MainArea::Component.new do |component|
   - component.with_title do
     = t('.title')
-  - component.with_header_actions do
+  - component.with_actions do
     - if policy(ContentTag).create?
       = turbo_frame_tag ContentTag.new do
         = render ContentTags::Components::NewButton::Component.new

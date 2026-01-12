@@ -1,0 +1,25 @@
+fr:
+  number:
+    format:
+      separator: ','
+      delimiter: ' '
+      precision: 3
+    currency:
+      format:
+        unit: '€'
+        precision: 2
+        format: '%n %u'
+    human:
+      format:
+        delimiter: ""
+        precision: 3
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "octet"
+            other: "octets"
+          kb: "ko"
+          mb: "Mo"
+          gb: "Go"
+          tb: "To"

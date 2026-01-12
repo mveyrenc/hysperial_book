@@ -1,0 +1,47 @@
+---
+
+fr:
+  activemodel:
+
+    attributes:
+
+      akin_content_tag_kind:
+        limited_relation: Relation limitée
+        followable_relation: Relation à suivre
+        computed: Calculée
+        excludes: Exclut
+        suggests: Suggère
+
+      book_kind:
+        cooking: Cuisine
+        body_home_care: Soins du corps et de la maison
+        fabric_art: Art textile
+        gardening: Jardinage
+        woodworking: Travail du bois
+        animals: Animaux
+
+      content_tag_family_kind:
+        ingredient: Ingrédient
+        season: Saison
+        occasion: Occasion
+        category: Catégorie
+        geographic_area: Zone géographique
+        restriction: Restriction
+        source: Source
+        author: Auteur
+        thematic: Thématique
+
+      content_kind:
+        article: Article
+        tutorial: Tutoriel
+        ingredient: Ingrédient
+        recipe: Recette
+        menu: Menu
+        pattern: Patron
+
+      user_role:
+        noob: Noob
+        reader: Lecteur
+        contributor: Contributeur
+        admin: Admin
+        super_admin: Super-admin

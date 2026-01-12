@@ -1,0 +1,10 @@
+---
+
+fr:
+  views:
+    pagination:
+      next: "Suivante"
+      prev: "Précédente"
+      last: "Dernière"
+      first: "Première"
+      truncate: "..."

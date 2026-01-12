@@ -22,7 +22,7 @@ module AppFormBuilder
                   content_tag(:span, class: 'file-icon') do
                     content_tag(:span, 'upload', class: 'material-symbols-outlined')
                   end + content_tag(:span, class: 'file-label') do
-                    I18n.t('.file_field.choose_file')
+                    I18n.t('application.file_field.choose_file')
                   end
                 end + append_file_name(name)
               end

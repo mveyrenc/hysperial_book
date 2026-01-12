@@ -5,13 +5,15 @@
 # Table name: contents
 #
 #  id                                                                                                         :uuid             not null, primary key
-#  alternate_name(An alias for the item)                                                                      :string
+#  alternate_names(Aliases for the item)                                                                      :text
 #  data(A hash to store the data of the item)                                                                 :jsonb            not null
+#  description(A description of the item)                                                                     :text
 #  is_based_on_url(The URL from which the item was imported)                                                  :string
 #  kind(The kind or type of the item)                                                                         :string           not null
 #  metadata(A hash to store some data about the item)                                                         :jsonb            not null
 #  name(The name of the item)                                                                                 :string           not null
 #  settings(A hash to configure the item)                                                                     :jsonb            not null
+#  short_description(A short description of the item)                                                         :text
 #  slug(Human readable item identifier)                                                                       :string           not null
 #  version(The version of the item)                                                                           :string
 #  created_at                                                                                                 :datetime         not null
@@ -41,7 +43,7 @@
 #
 class Content < ApplicationRecord
   # Searchkick
-  searchkick highlight: %i[name alternate_name description]
+  searchkick highlight: %i[name alternate_names description]
 
   def search_data
     attributes.merge(
@@ -75,13 +77,11 @@ class Content < ApplicationRecord
   friendly_id :name, use: :slugged
 
   ## Enumerables
-
   def kind_name
     ContentKind.human_attribute_name(kind)
   end
 
   ## Relations
-
   belongs_to :book
 
   belongs_to :thumbnail, class_name: 'Picture', dependent: :destroy, optional: true
@@ -95,8 +95,7 @@ class Content < ApplicationRecord
 
   has_many :content_attributes, -> { order(position: :asc) }, inverse_of: :content, dependent: :restrict_with_exception
 
-  ## Rich text
-
-  has_rich_text :short_description
-  has_rich_text :description
+  ## Validation
+  validates :name, presence: true
+  validates :kind, presence: true
 end

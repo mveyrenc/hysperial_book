@@ -1,21 +1,20 @@
 - if title?
   section.hero.is-hero-bar
     .hero-body
-      .level
-        .level-left
-          .level-item
-            h1.title
-              = title
-        - if header_actions?
-          .level-right
-            .level-item
-              = header_actions
-.columns
-  - if left_aside?
-    .column.is-narrow
-      = left_aside
-  .column
-    = main_section
-  - if right_aside?
-    .column.is-narrow
-      = right_aside
+      h1.title
+        = title
+
+- if actions?
+  .block
+    = actions
+
+= helpers.turbo_frame_tag turbo_frame_tag_id, refresh: :replace
+  .columns
+    - if left_aside?
+      .column.is-narrow
+        = left_aside
+    .column
+      = main_section
+    - if right_aside?
+      .column.is-narrow
+        = right_aside

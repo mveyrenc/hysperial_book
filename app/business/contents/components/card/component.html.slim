@@ -9,9 +9,9 @@
     .media-content
       h1.title.is-5
         = record_name
-      - unless record_alternate_name.blank?
+      - unless record_alternate_names.blank?
         p.subtitle
-          = record_alternate_name
+          = record_alternate_names
     .media-right
       span.tag
         = record_kind_name

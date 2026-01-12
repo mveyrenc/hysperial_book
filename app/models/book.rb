@@ -5,7 +5,7 @@
 # Table name: books
 #
 #  id                                                 :uuid             not null, primary key
-#  alternate_name(An alias for the item)              :string
+#  alternate_names(Aliases for the item)              :text
 #  data(A hash to store the data of the item)         :jsonb            not null
 #  description(A description of the item)             :text
 #  kind(The kind or type of the item)                 :string           not null
@@ -32,7 +32,7 @@
 #
 class Book < ApplicationRecord
   # Searchkick
-  searchkick highlight: %i[name alternate_name description]
+  searchkick highlight: %i[name alternate_names description]
 
   ## FriendlyId
   extend FriendlyId
@@ -40,23 +40,31 @@ class Book < ApplicationRecord
   friendly_id :name, use: :slugged
 
   ## Enumerables
-
   def kind_name
     BookKind.human_attribute_name(kind)
   end
 
   ## Relations
-  has_many :content_tag_families, -> { order(name: :asc) }, inverse_of: :book, dependent: :restrict_with_exception
+  has_many :content_tag_families, -> { order(position: :asc) }, inverse_of: :book, dependent: :restrict_with_exception
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  ## Act as
-  acts_as_list
+  ## Position
+  positioned
 
   ## Validations
   validates :name, presence: true
   validates :kind, presence: true
+
+  validates_uniqueness_of :name, case_sensitive: false
+
+  ## Callbacks
+  after_commit :reindex_books
+  def reindex_books
+    # Reindex all books to update position
+    Book.reindex
+  end
 
   def to_s
     name

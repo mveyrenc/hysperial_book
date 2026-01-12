@@ -18,8 +18,8 @@ module Books
           highlights.present? && highlights.key?(:name) ? highlights[:name].html_safe : record.name
         end
 
-        def record_alternate_name
-          highlights.present? && highlights.key?(:alternate_name) ? highlights[:alternate_name].html_safe : record.alternate_name
+        def record_alternate_names
+          highlights.present? && highlights.key?(:alternate_names) ? highlights[:alternate_names].html_safe : record.alternate_names
         end
 
         def record_description

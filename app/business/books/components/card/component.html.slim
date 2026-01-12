@@ -5,7 +5,7 @@
     .cell
       = render FieldDisplay::Component.new(label: Book.human_attribute_name(:name), value: record_name)
     .cell
-      = render FieldDisplay::Component.new(label: Book.human_attribute_name(:alternate_name), value: record_alternate_name)
+      = render FieldDisplay::Component.new(label: Book.human_attribute_name(:alternate_names), value: record_alternate_names)
     .cell
       = render FieldDisplay::Component.new(label: Book.human_attribute_name(:kind), value: record_kind_name)
     .cell

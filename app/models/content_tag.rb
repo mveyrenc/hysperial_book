@@ -5,7 +5,9 @@
 # Table name: content_tags
 #
 #  id                                                         :uuid             not null, primary key
+#  alternate_names(Aliases for the item)                      :text
 #  data(A hash to store the data of the item)                 :jsonb            not null
+#  description(A description of the item)                     :text
 #  metadata(A hash to store some data about the item)         :jsonb            not null
 #  name(The name of the item)                                 :string           not null
 #  settings(A hash to configure the item)                     :jsonb            not null

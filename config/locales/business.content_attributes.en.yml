@@ -1,13 +1,34 @@
+---
+
 en:
   content_attributes:
     views:
       edit:
-        title: "Edit content attribute"
+        title: "Edit the attribute"
       index:
-        title: "Content attributes"
+        title: "Attributes"
+      search:
+        title: "Attribute search results"
       new:
-        title: "New content attribute"
-    content_attributes:
-      successfully_created: "Book was successfully created"
-      successfully_updated: "Book was successfully updated"
-      successfully_destroyed: "Book was successfully destroyed"
+        title: "New attribute"
+    logics:
+      create:
+        save_record:
+          success: "The attribute was created successfully"
+      update:
+        save_record:
+          success: "The attribute has been successfully modified"
+      create_record:
+        no_current_user: "No user found in the settings"
+        no_record: "No attribute found in the settings"
+      hydrate_record:
+        no_record: "No attribute found in the settings"
+      update_record:
+        no_current_user: "No user found in the settings"
+        no_record: "No attribute found in the settings"
+        successfully_updated: "The attribute has been successfully modified"
+      save_record:
+        no_record: "No attribute found in the settings"
+        failure: "An error occurred while saving the attribute"
+      destroy:
+        successfully_destroyed: "The attribute was successfully destroyed"

@@ -40,29 +40,34 @@ module ContentTagFamilies
 
     # POST /content_tag_families
     def create
-      result = ContentTagFamilies::Logics::Create.call(record: @record, params: strong_params.to_h, current_user:)
-      if result.success?
-        @records = result.records
-        respond_to do |format|
-          format.html { redirect_to content_tag_families_url, notice: t('.successfully_created') }
+      result = ContentTagFamilies::Logics::Create.call(post_context)
+      respond_to do |format|
+        if result.success?
+          flash.now.notice = result.message
+          format.html { redirect_to content_tag_families_path }
           format.turbo_stream { render template: template_path }
+        else
+          flash.now.alert = result.message
+          format.html { render template: template_path(:new), status: :unprocessable_entity }
+          format.turbo_stream { render template: template_path(:new) }
         end
-      else
-        render template: template_path(:new), status: :unprocessable_entity
       end
     end
 
     # PATCH/PUT /content_tag_families/:id
     def update
-      result = ContentTagFamilies::Logics::Update.call(record: @record, params: strong_params.to_h, current_user:)
+      result = ContentTagFamilies::Logics::Update.call(post_context)
 
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to content_tag_families_url, notice: t('.successfully_updated') }
+      respond_to do |format|
+        if result.success?
+          flash.now.notice = result.message
+          format.html { redirect_to content_tag_families_path }
           format.turbo_stream { render template: template_path }
+        else
+          flash.now.alert = t(".#{result.error}")
+          format.html { render template: template_path(:edit), status: :unprocessable_entity }
+          format.turbo_stream { render template: template_path(:edit) }
         end
-      else
-        render template: template_path(:edit), status: :unprocessable_entity
       end
     end
 
@@ -71,7 +76,7 @@ module ContentTagFamilies
       ContentTagFamilies::Logics::Destroy.call(record: @record)
 
       respond_to do |format|
-        format.html { redirect_to content_tag_families_url, notice: t('.successfully_destroyed') }
+        format.html { redirect_to content_tag_families_path, notice: result.message }
         format.turbo_stream { render template: template_path }
       end
     end
@@ -89,7 +94,11 @@ module ContentTagFamilies
     def strong_params
       params
         .require(:content_tag_family)
-        .permit(:kind, :name)
+        .permit(:name, :alternate_names, :description, :kind, :position, :book_id)
+    end
+
+    def post_context
+      Interactor::Context.build(record: @record, params: strong_params.to_h, current_user:)
     end
   end
 end

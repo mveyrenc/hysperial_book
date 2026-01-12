@@ -5,10 +5,12 @@
 # Table name: content_tag_families
 #
 #  id                                                 :uuid             not null, primary key
+#  alternate_names(Aliases for the item)              :text
 #  data(A hash to store the data of the item)         :jsonb            not null
+#  description(A description of the item)             :text
 #  kind                                               :string           not null
 #  metadata(A hash to store some data about the item) :jsonb            not null
-#  name                                               :string           not null
+#  name(The name of the item)                         :string           not null
 #  position(The position of the item)                 :integer
 #  settings(A hash to configure the item)             :jsonb            not null
 #  slug                                               :string           not null
@@ -78,8 +80,8 @@ class ContentTagFamily < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  ## Act as
-  acts_as_list scope: :books
+  ## Position
+  positioned on: :book
 
   ## Validations
   validates :name, presence: true

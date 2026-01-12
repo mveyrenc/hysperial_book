@@ -40,28 +40,34 @@ module Books
 
     # POST /books
     def create
-      result = Books::Logics::Create.call(record: @record, params: strong_params.to_h)
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to books_url, notice: t('.successfully_created') }
+      result = Books::Logics::Create.call(post_context)
+      respond_to do |format|
+        if result.success?
+          flash.now.notice = result.message
+          format.html { redirect_to books_path }
           format.turbo_stream { render template: template_path }
+        else
+          flash.now.alert = result.message
+          format.html { render template: template_path(:new), status: :unprocessable_entity }
+          format.turbo_stream { render template: template_path(:new) }
         end
-      else
-        render template: template_path(:new), status: :unprocessable_entity
       end
     end
 
     # PATCH/PUT /books/:id
     def update
-      result = Books::Logics::Update.call(record: @record, params: strong_params.to_h)
+      result = Books::Logics::Update.call(post_context)
 
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to books_url, notice: t('.successfully_updated') }
+      respond_to do |format|
+        if result.success?
+          flash.now.notice = result.message
+          format.html { redirect_to books_path }
           format.turbo_stream { render template: template_path }
+        else
+          flash.now.alert = t(".#{result.error}")
+          format.html { render template: template_path(:edit), status: :unprocessable_entity }
+          format.turbo_stream { render template: template_path(:edit) }
         end
-      else
-        render template: template_path(:edit), status: :unprocessable_entity
       end
     end
 
@@ -70,7 +76,7 @@ module Books
       Books::Logics::Destroy.call(record: @record)
 
       respond_to do |format|
-        format.html { redirect_to books_url, notice: t('.successfully_destroyed') }
+        format.html { redirect_to books_path, notice: result.message }
         format.turbo_stream { render template: template_path }
       end
     end
@@ -88,7 +94,11 @@ module Books
     def strong_params
       params
         .require(:book)
-        .permit(:name, :alternate_name, :kind, :position)
+        .permit(:name, :alternate_names, :description, :kind, :position)
+    end
+
+    def post_context
+      Interactor::Context.build(record: @record, params: strong_params.to_h, current_user:)
     end
   end
 end

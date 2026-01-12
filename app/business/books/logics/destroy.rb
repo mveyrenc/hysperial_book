@@ -2,11 +2,9 @@
 
 module Books
   module Logics
-    # Destroy a user
+    # Destroy a book
     class Destroy < ApplicationInteractor
-      def call
-        context.record.destroy
-      end
+      include DestroyRecordConcern
     end
   end
 end

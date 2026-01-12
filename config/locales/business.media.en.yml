@@ -1,3 +1,5 @@
+---
+
 en:
   media:
     views:
@@ -5,7 +7,28 @@ en:
         title: "Edit media"
       index:
         title: "Media"
-    media:
-      successfully_created: "Media was successfully created"
-      successfully_updated: "Media was successfully updated"
-      successfully_destroyed: "Media was successfully destroyed"
+      search:
+        title: "Media search results"
+      new:
+        title: "New media"
+    logics:
+      create:
+        save_record:
+          success: "The media was created successfully"
+      update:
+        save_record:
+          success: "The media has been successfully modified"
+      create_record:
+        no_current_user: "No user found in the settings"
+        no_record: "No media found in the settings"
+      hydrate_record:
+        no_record: "No media found in the settings"
+      update_record:
+        no_current_user: "No user found in the settings"
+        no_record: "No media found in the settings"
+        successfully_updated: "The media has been successfully modified"
+      save_record:
+        no_record: "No media found in the settings"
+        failure: "An error occurred while saving the media"
+      destroy:
+        successfully_destroyed: "The media was successfully destroyed"

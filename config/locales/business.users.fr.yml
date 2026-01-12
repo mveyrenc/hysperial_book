@@ -1,0 +1,36 @@
+---
+
+fr:
+  books:
+    views:
+      edit:
+        title: "Modifier l'utilisateur"
+      index:
+        title: "Utilisateurs"
+      search:
+        title: "Résultats de recherche de utilisateurs"
+      new:
+        title: "Nouvel utilisateur"
+    logics:
+      create:
+        save_record:
+          success: "L'utilisateur a été créé avec succès"
+      update:
+        save_record:
+          success: "L'utilisateur a été modifié avec succès"
+      create_record:
+        no_current_user: "Aucun utilisateur trouvé en paramètre"
+        no_record: "Aucun utilisateur trouvé en paramètre"
+      hydrate_record:
+        no_record: "Aucun utilisateur trouvé en paramètre"
+      update_record:
+        no_current_user: "Aucun utilisateur trouvé en paramètre"
+        no_record: "Aucun utilisateur trouvé en paramètre"
+        successfully_updated: "L'utilisateur a été modifié avec succès"
+      save_record:
+        no_record: "Aucun utilisateur trouvé en paramètre"
+        failure: "Une erreur s'est produite lors de l'enregistrement de l'utilisateur"
+      destroy:
+        no_record: "Aucun utilisateur trouvé en paramètre"
+        success: "L'utilisateur a été supprimé avec succès"
+        failure: "Une erreur s'est produite lors de la suppression de l'utilisateur"

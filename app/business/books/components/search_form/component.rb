@@ -20,8 +20,8 @@ module Books
 
         def kind_select_values
           if aggs.aggs.include?('kind') && aggs.aggs['kind'].include?('buckets')
-            aggs.aggs['kind']['buckets'].map do |agg|
-              ["#{BookKind.human_attribute_name(agg['key'])} (#{agg['doc_count']})", agg['key']]
+            aggs.aggs['kind']['buckets'].map do |bkt|
+              ["#{BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
             end
           else
             []

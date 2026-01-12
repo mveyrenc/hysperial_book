@@ -44,25 +44,28 @@ module ContentTagFamilies
             aggs[k] = {
               name: ContentTagFamily.human_attribute_name(:kind),
               multiple: false,
-              buckets: context.aggs['kind']['buckets'].map do |agg|
-                ["#{ContentTagFamilyKind.human_attribute_name(agg['key'])} (#{agg['doc_count']})", agg['key']]
+              buckets: context.aggs['kind']['buckets'].map do |bkt|
+                ["#{ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
               end
             }
           when 'book_kind'
             aggs[k] = {
               name: ContentTagFamily.human_attribute_name(:book_kind),
               multiple: false,
-              buckets: context.aggs['book_kind']['buckets'].map do |agg|
-                ["#{BookKind.human_attribute_name(agg['key'])} (#{agg['doc_count']})", agg['key']]
+              buckets: context.aggs['book_kind']['buckets'].map do |bkt|
+                ["#{BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
               end
             }
           when 'book_id'
+            # get all books in the bucket in one request
+            bkt_books = Book.find( agg['buckets'].map{ |bkt| bkt['key'] } ).index_by(&:id)
             aggs[k] = {
               name: ContentTagFamily.human_attribute_name(:book),
               multiple: false,
-              buckets: agg['buckets'].map do |agg|
-                b = Book.find_by(id: agg['key'])
-                ["#{b.name} (#{agg['doc_count']})", b.slug] if b.present?
+              buckets: agg['buckets'].map do |bkt|
+                # replace book id by there name
+                b = bkt_books[bkt['key']]
+                ["#{b.name} (#{bkt['doc_count']})", b.slug] if b.present?
               end
             }
           end

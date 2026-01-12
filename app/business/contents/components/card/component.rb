@@ -7,7 +7,7 @@ module Contents
       class Component < ApplicationComponent
         attr_reader :record, :highlights
 
-        delegate :name, :alternate_name, :kind_name, :thumbnail, to: :record, prefix: true
+        delegate :name, :alternate_names, :kind_name, :thumbnail, to: :record, prefix: true
 
         def initialize(record:, highlights: nil)
           @record = record

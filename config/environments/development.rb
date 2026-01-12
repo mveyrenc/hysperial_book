@@ -4,6 +4,15 @@ require 'active_support/core_ext/integer/time'
 
 # rubocop:disable Metrics/BlockLength
 Rails.application.configure do
+  config.after_initialize do
+    Bullet.enable        = true
+    Bullet.alert         = true
+    Bullet.bullet_logger = true
+    Bullet.console       = true
+    Bullet.rails_logger  = true
+    Bullet.add_footer    = true
+  end
+
   config.session_store :redis_session_store,
                        serializer: :json,
                        on_redis_down: ->(*a) { Rails.logger.error("Redis down! #{a.inspect}") },
@@ -72,7 +81,7 @@ Rails.application.configure do
   config.active_job.verbose_enqueue_logs = true
 
   # Raises error for missing translations.
-  # config.i18n.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
 
   # Annotate rendered view with file names.
   config.action_view.annotate_rendered_view_with_filenames = true
@@ -91,5 +100,15 @@ Rails.application.configure do
 
   # Indent html for pretty debugging and do not sort attributes
   Slim::Engine.set_options pretty: true, sort_attrs: false
+
+  config.after_initialize do
+    Bullet.enable               = true
+    Bullet.alert                = false
+    Bullet.bullet_logger        = false
+    Bullet.console              = false
+    Bullet.rails_logger         = true
+    Bullet.add_footer           = false
+    Bullet.counter_cache_enable = true
+  end
 end
 # rubocop:enable Metrics/BlockLength

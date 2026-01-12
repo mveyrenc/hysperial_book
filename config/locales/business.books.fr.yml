@@ -1,3 +1,5 @@
+---
+
 fr:
   books:
     views:
@@ -9,10 +11,27 @@ fr:
         title: "Résultats de recherche de livres"
       new:
         title: "Nouveau livre"
-    books:
+    logics:
       create:
-        successfully_created: "Le livre a été créé avec succès"
+        save_record:
+          success: "Le livre a été créé avec succès"
       update:
+        save_record:
+          success: "Le livre a été modifié avec succès"
+      create_record:
+        no_current_user: "Aucun utilisateur trouvé en paramètre"
+        no_record: "Aucun livre trouvé en paramètre"
+      hydrate_record:
+        no_record: "Aucun livre trouvé en paramètre"
+      update_record:
+        no_current_user: "Aucun utilisateur trouvé en paramètre"
+        no_record: "Aucun livre trouvé en paramètre"
         successfully_updated: "Le livre a été modifié avec succès"
+      save_record:
+        no_record: "Aucun livre trouvé en paramètre"
+        failure: "Une erreur s'est produite lors de l'enregistrement du livre"
       destroy:
-        successfully_destroyed: "Le livre a été supprimé avec succès"
+        no_record: "Aucun livre trouvé en paramètre"
+        success: "Le livre a été supprimé avec succès"
+        failure: "Une erreur s'est produite lors de la suppression du livre"
+

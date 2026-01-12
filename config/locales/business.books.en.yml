@@ -1,18 +1,37 @@
+---
+
 en:
   books:
     views:
       edit:
-        title: "Edit book"
+        title: "Edit the book"
       index:
         title: "Books"
       search:
-        title: "Books search results"
+        title: "Book search results"
       new:
         title: "New book"
-    books:
+    logics:
       create:
-        successfully_created: "Book was successfully created"
+        save_record:
+          success: "The book was created successfully"
       update:
-        successfully_updated: "Book was successfully updated"
+        save_record:
+          success: "The book has been successfully modified"
+      create_record:
+        no_current_user: "No user found in the settings"
+        no_record: "No book found in the settings"
+      hydrate_record:
+        no_record: "No book found in the settings"
+      update_record:
+        no_current_user: "No user found in the settings"
+        no_record: "No book found in the settings"
+        successfully_updated: "The book has been successfully modified"
+      save_record:
+        no_record: "No book found in the settings"
+        failure: "An error occurred while saving the book"
       destroy:
-        successfully_destroyed: "Book was successfully destroyed"
+        no_record: "No book found in the settings"
+        success: "The book was successfully deleted"
+        failure: "An error occurred while deleting the book"
+

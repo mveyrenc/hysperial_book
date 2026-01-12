@@ -2,6 +2,8 @@
 
 # Application controller
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
@@ -10,8 +12,6 @@ class ApplicationController < ActionController::Base
   # Append this param to bust the cache in development 🙌
   # https://localhost:3000?clear_cache=true
   before_action :clear_cache_if_requested if Rails.env.development?
-
-  include Pundit::Authorization
 
   protected
 

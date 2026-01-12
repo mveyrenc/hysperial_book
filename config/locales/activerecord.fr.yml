@@ -1,3 +1,4 @@
+---
 
 fr:
   activerecord:
@@ -18,39 +19,18 @@ fr:
 
     attributes:
 
-      akin_content_tag_kind:
-        limited_relation: Relation limitée
-        followable_relation: Relation à suivre
-        computed: Calculée
-        excludes: Exclut
-        suggests: Suggère
-
-      book_kind:
-        cooking: Cuisine
-        care: Soin
-        fabric_art: Art textile
-        gardening: Jardinage
-
       book:
         name: Nom
-        alternate_name: Autre nom
+        alternate_names: Autres noms
+        description: Description
         kind: Type
         created_at: Créé le
         updated_at: Modifié le
 
-      content_tag_family_kind:
-        ingredient: Ingrédient
-        season: Saison
-        occasion: Occasion
-        category: Catégorie
-        geographic_area: Zone géographique
-        restriction: Restriction
-        source: Source
-        author: Auteur
-        thematic: Thématique
-
       content_tag_family:
         name: Nom
+        alternate_names: Autres noms
+        description: Description
         book: Livre
         book_kind: Type de livre
         kind: Type
@@ -59,6 +39,8 @@ fr:
 
       content_tag:
         name: Nom
+        alternate_names: Autres noms
+        description: Description
         kind: Type
         book: Livre
         book_kind: Type de livre
@@ -67,16 +49,10 @@ fr:
         created_at: Créé le
         updated_at: Modifié le
 
-      content_kind:
-        article: Article
-        tutorial: Tutoriel
-        ingredient: Ingrédient
-        recipe: Recette
-        menu: Menu
-        pattern: Patron
-
       content:
         name: Nom
+        alternate_names: Autres noms
+        description: Description
         kind: Type
         book: Livre
         book_kind: Type de livre
@@ -88,9 +64,48 @@ fr:
       user:
         name: Nom
         role: Rôle
-        role_list:
-          noob: Noob
-          reader: Lecteur
-          contributor: Contributeur
-          admin: Admin
-          super_admin: Super-admin
+
+    errors:
+      template:
+        header:
+          one: "Impossible d'enregistrer %{model} : une erreur"
+          other: "Impossible d'enregistrer %{model} : %{count} erreurs."
+        body: "Veuillez vérifier les champs suivants :"
+      messages:
+        required: "est requis"
+        inclusion: "n'est pas inclus(e) dans la liste"
+        exclusion: "n'est pas disponible"
+        invalid: "n'est pas valide"
+        confirmation: "ne concorde pas avec la confirmation"
+        accepted: "doit être accepté(e)"
+        empty: "doit être renseigné(e)"
+        blank: "doit être renseigné(e)"
+        too_long: "est trop long (pas plus de %{count} caractères)"
+        too_short: "est trop court (au moins %{count} caractères)"
+        wrong_length: "ne fait pas la bonne longueur (doit comporter %{count} caractères)"
+        taken: "est déjà utilisé"
+        not_a_number: "n'est pas un nombre"
+        not_a_date: "n'est pas une date valide"
+        greater_than: "doit être supérieur à %{count}"
+        greater_than_or_equal_to: "doit être supérieur ou égal à %{count}"
+        equal_to: "doit être égal à %{count}"
+        less_than: "doit être inférieur à %{count}"
+        less_than_or_equal_to: "doit être inférieur ou égal à %{count}"
+        odd: "doit être impair"
+        even: "doit être pair"
+        greater_than_start_date: "doit être postérieure à la date de début"
+        not_same_project: "n'appartient pas au même projet"
+        circular_dependency: "Cette relation créerait une dépendance circulaire"
+        cant_link_an_issue_with_a_descendant: "Une demande ne peut pas être liée à l'une de ses sous-tâches"
+        earlier_than_minimum_start_date: "ne peut pas être antérieure au %{date} à cause des demandes qui précèdent"
+        not_a_regexp: "n'est pas une expression regulière valide"
+        open_issue_with_closed_parent: "Une demande ouverte ne peut pas être rattachée à une demande fermée"
+        must_contain_uppercase: "doit contenir des lettres majuscules (A-Z)"
+        must_contain_lowercase: "doit contenir des lettres minuscules (a-z)"
+        must_contain_digits: "doit contenir des chiffres (0-9)"
+        must_contain_special_chars: "doit contenir des caractères spéciaux (!, $, %, ...)"
+        domain_not_allowed: "contient un domaine non autorisé (%{domain})"
+        too_simple: "est trop simple"
+        record_invalid: "enregistrement n'est pas valide"
+
+  actionview_instancetag_blank_option: Choisir

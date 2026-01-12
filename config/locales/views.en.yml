@@ -1,0 +1,10 @@
+---
+
+en:
+  views:
+    pagination:
+      first: First
+      last: Last
+      next: Next
+      previous: Previous
+      truncate: Truncate

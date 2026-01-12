@@ -34,8 +34,8 @@ module Books
                              key: :kind,
                              name: Book.human_attribute_name(:kind),
                              multiple: false,
-                             buckets: context.aggs['kind']['buckets'].map do |agg|
-                               ["#{BookKind.human_attribute_name(agg['key'])} (#{agg['doc_count']})", agg['key']]
+                             buckets: context.aggs['kind']['buckets'].map do |bkt|
+                               ["#{BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
                              end
                            }
                          ]

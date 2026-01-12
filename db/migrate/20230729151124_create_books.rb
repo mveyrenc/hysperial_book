@@ -23,7 +23,7 @@ class CreateBooks < ActiveRecord::Migration[8.0]
   def change
     create_table :books, id: :uuid do |t|
       t.string :name, null: false, comment: 'The name of the item'
-      t.string :alternate_name, null: true, comment: 'An alias for the item'
+      t.text :alternate_names, null: true, comment: 'Aliases for the item'
       t.text :description, null: true, comment: 'A description of the item'
 
       t.string :slug, null: false, index: { unique: true }, comment: 'Human readable item identifier'

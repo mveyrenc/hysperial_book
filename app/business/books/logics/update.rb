@@ -4,13 +4,9 @@ module Books
   module Logics
     # Update a book
     class Update < ApplicationInteractor
-      def call
-        update_from_params
-      end
-
-      def update_from_params
-        context.fail!(message: 'update_record.failure') unless context.record.update(context.params)
-      end
+      include HydrateRecordWithParamsConcern
+      include UpdatedByConcern
+      include SaveRecordConcern
     end
   end
 end

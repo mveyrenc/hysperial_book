@@ -6,6 +6,7 @@
       = render FieldDisplay::Component.new(label: User.human_attribute_name(:name), value: record_name)
     .cell
       = render FieldDisplay::Component.new(label: User.human_attribute_name(:role), value: record_role_name)
+
     .cell.is-align-self-center
       .field.is-grouped.is-grouped-centered
         - if policy(record).update?

@@ -3,11 +3,18 @@
 module Layout
   module MainArea
     class Component < ApplicationComponent
+
+      attr_reader :turbo_frame_tag_id
+
       renders_one :title
-      renders_one :header_actions
+      renders_one :actions
       renders_one :left_aside
       renders_one :right_aside
       renders_one :main_section
+
+      def initialize(turbo_frame_tag_id:)
+        @turbo_frame_tag_id = turbo_frame_tag_id
+      end
     end
   end
 end

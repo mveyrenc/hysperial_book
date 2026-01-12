@@ -13,22 +13,6 @@ $red: #D62D1A;
 $primary: #543875;
 $link: #387573;
 
-$cooking: #6b000b;
-$cooking-invert: fn.bulmaFindColorInvert($cooking);
-$care: #00406b;
-$care-invert: fn.bulmaFindColorInvert($care);
-$fabric-art: #6b0040;
-$fabric-art-invert: fn.bulmaFindColorInvert($fabric-art);
-$gardening: #406b00;
-$gardening-invert: fn.bulmaFindColorInvert($gardening);
-
-$custom-colors: (
-  "cooking": ($cooking, $cooking-invert),
-  "care": ($care, $care-invert),
-  "fabric-art": ($fabric-art, $fabric-art-invert),
-  "gardening": ($gardening, $gardening-invert)
-);
-
 // Path to Bulma's sass folder
 @use "bulma/sass/utilities" with (
   $orange: $orange,
@@ -44,7 +28,5 @@ $custom-colors: (
   $primary: $primary,
   $link: $link,
   $warning: $orange,
-
-  $custom-colors: $custom-colors
 );
 @forward "mixins";

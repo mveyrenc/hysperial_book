@@ -15,8 +15,9 @@ web_logs:
 
 bundle_install:
 	bundle install
-	bundle package
+	bundle pack
 	docker compose exec web bundle install --local
+	touch tmp/restart
 
 db_recreate:
 	find storage -mindepth 1 -maxdepth 1 -type d  -print0 | xargs -0 /bin/rm -rf
@@ -48,14 +49,17 @@ search_reindex:
 	docker compose exec web rails searchkick:reindex CLASS=Content
 
 annotate:
-	docker compose exec web annotate --model
+	docker compose exec web annotaterb models
+	docker compose exec web annotaterb routes
 
 sass_watch:
 	rails dartsass:watch
 
 rspec:
-	docker compose exec web rspec
+	docker compose exec web rspec -fd
 
 clear_cache:
 	docker compose exec web rails tmp:cache:clear
 
+optimize_db:
+	docker compose exec web lol_dba db:find_indexes

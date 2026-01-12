@@ -2,14 +2,36 @@ en:
   content_tags:
     views:
       edit:
-        title: "Edit content tag"
+        title: "Edit tag"
       index:
-        title: "Content tags"
+        title: "Tags"
       search:
-        title: "Content tags search results"
+        title: "Tag search results"
       new:
-        title: "New content tag"
-    content_tags:
-      successfully_created: "Content tag was successfully created"
-      successfully_updated: "Content tag was successfully updated"
-      successfully_destroyed: "Content tag was successfully destroyed"
+        title: "New tag"
+    logics:
+      create:
+        save_record:
+          success: "The tag was created successfully"
+      update:
+        save_record:
+          success: "The tag has been successfully modified"
+      create_record:
+        no_current_user: "No user found in the settings"
+        no_record: "No tag found in the settings"
+      hydrate_record:
+        no_record: "No tag found in the settings"
+      update_record:
+        no_current_user: "No user found in the settings"
+        no_record: "No tag found in the settings"
+        successfully_updated: "The tag has been successfully modified"
+      save_record:
+        no_record: "No tag found in the settings"
+        failure: "An error occurred while saving the tag"
+      destroy:
+        successfully_destroyed: "The tag was successfully destroyed"
+    components:
+      form:
+        component:
+          name:
+            help: "Add on value by line to create several content tags in one go"

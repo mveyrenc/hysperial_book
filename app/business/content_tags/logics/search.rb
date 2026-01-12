@@ -50,8 +50,8 @@ module ContentTags
               name: ContentTagFamily.human_attribute_name(:book_kind),
               multiple: false,
               position: 1,
-              buckets: agg['buckets'].map do |agg|
-                ["#{BookKind.human_attribute_name(agg['key'])} (#{agg['doc_count']})", agg['key']]
+              buckets: agg['buckets'].map do |bkt|
+                ["#{BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
               end
             }
           when 'book_id'
@@ -59,9 +59,9 @@ module ContentTags
               name: ContentTagFamily.human_attribute_name(:book),
               multiple: false,
               position: 2,
-              buckets: agg['buckets'].map do |agg|
-                b = Book.find_by(id: agg['key'])
-                ["#{b.name} (#{agg['doc_count']})", b.slug] if b.present?
+              buckets: agg['buckets'].map do |bkt|
+                b = Book.find_by(id: bkt['key'])
+                ["#{b.name} (#{bkt['doc_count']})", b.slug] if b.present?
               end
             }
           when 'content_tag_family_kind'
@@ -69,8 +69,8 @@ module ContentTags
               name: ContentTag.human_attribute_name(:content_tag_family_kind),
               multiple: false,
               position: 3,
-              buckets: agg['buckets'].map do |agg|
-                ["#{ContentTagFamilyKind.human_attribute_name(agg['key'])} (#{agg['doc_count']})", agg['key']]
+              buckets: agg['buckets'].map do |bkt|
+                ["#{ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
               end
             }
           when 'content_tag_family_id'
@@ -78,9 +78,9 @@ module ContentTags
               name: ContentTag.human_attribute_name(:content_tag_family),
               multiple: false,
               position: 4,
-              buckets: agg['buckets'].map do |agg|
-                b = ContentTagFamily.find_by(id: agg['key'])
-                ["#{b.name} (#{agg['doc_count']})", b.slug] if b.present?
+              buckets: agg['buckets'].map do |bkt|
+                b = ContentTagFamily.find_by(id: bkt['key'])
+                ["#{b.name} (#{bkt['doc_count']})", b.slug] if b.present?
               end
             }
           end

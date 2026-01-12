@@ -424,3 +424,8 @@ trix@^2.1.15:
   integrity sha512-LoaXWczdTUV8+3Box92B9b1iaDVbxD14dYemZRxi3PwY+AuDm97BUJV2aHLBUFPuDABhxp0wzcbf0CxHCVmXiw==
   dependencies:
     dompurify "^3.2.5"
+
+turbo_power@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/turbo_power/-/turbo_power-0.7.1.tgz#591769f37cca9b8149ea07682021081039c9f32c"
+  integrity sha512-xnB1Yb3xXSVcDQyiqZV8kLjbHdCmyBfQYZJeJklEnEz+jM5xl6JUNo2yy5vc/8ZPKKMzS05INvvvLxafQYJVuQ==

@@ -5,10 +5,13 @@
 # Table name: content_attributes
 #
 #  id                                                     :uuid             not null, primary key
+#  alternate_names(Aliases for the item)                  :text
 #  data(A hash to store the data of the item)             :jsonb            not null
+#  description(A description of the item)                 :text
 #  kind(The kind or type of the item)                     :string           not null
 #  metadata(A hash to store some data about the item)     :jsonb            not null
 #  name(The name of the item)                             :string           not null
+#  plain_text(The plain text of the item)                 :text
 #  position(The position of the item)                     :integer
 #  settings(A hash to configure the item)                 :jsonb            not null
 #  created_at                                             :datetime         not null
@@ -43,13 +46,12 @@ class ContentAttribute < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  ## Act as
-  acts_as_list
+  ## Position
+  positioned
 
   ## Validations
 
   ## Enumerables
-
   def kind_name
     ContentAttributeKind.human_attribute_name(kind)
   end
@@ -57,4 +59,7 @@ class ContentAttribute < ApplicationRecord
   def data_type
     ContentAttributeKind.data_type(kind)
   end
+
+  ## Rich text
+  has_rich_text :html_text
 end
