@@ -3,13 +3,13 @@
   "private": "true",
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
-    "@hotwired/turbo-rails": "^8.0.20",
-    "@rails/actiontext": "^8.1.100",
+    "@hotwired/turbo-rails": "^8.0.21",
+    "@rails/actiontext": "^8.1.200",
     "bulma": "^1.0.4",
     "cable_ready": "^5.0.3",
-    "esbuild": "^0.27.1",
-    "sass": "^1.94.2",
-    "trix": "^2.1.15",
+    "esbuild": "^0.27.2",
+    "sass": "^1.97.2",
+    "trix": "^2.1.16",
     "turbo_power": "^0.7.1"
   },
   "scripts": {

@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.4'
+ruby '3.4.8'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 8.0'
@@ -20,11 +20,11 @@ gem 'pg', '~> 1.1'
 
 # https://github.com/ankane/pghero
 # A performance dashboard for Postgres
-gem 'pghero'
+gem 'pghero', '~> 3.7'
 
 # https://github.com/pawurb/rails-pg-extras
 # Get useful insights on your database health
-gem 'rails-pg-extras'
+gem 'rails-pg-extras', '~> 5.6'
 
 # https://github.com/evilmartians/evil-seed
 # Create partial anonymized dump of your production database to perform
@@ -37,12 +37,12 @@ gem 'rails-pg-extras'
 
 # https://github.com/holli/auto_strip_attributes
 # AutoStripAttributes helps to remove unnecessary whitespaces from ActiveRecord or ActiveModel attributes
-gem 'auto_strip_attributes'
+gem 'auto_strip_attributes', '~> 2.6'
 
 # https://github.com/rgrove/sanitize
 # Sanitize is an allowlist-based HTML and CSS sanitizer. It removes all HTML and/or CSS from a string except the
 # elements, attributes, and properties you choose to allow.
-gem 'sanitize'
+gem 'sanitize', '~> 7.0'
 
 # #######################
 # ActiveRecord extensions
@@ -54,7 +54,7 @@ gem 'awesome_nested_set', '~> 3.6'
 
 # https://github.com/brendon/positioning
 # The aim of this gem is to allow you to easily position Active Record model instances within a scope of your choosing.
-gem 'positioning'
+gem 'positioning', '~> 0.4'
 
 # https://github.com/norman/friendly_id
 # FriendlyId is the "Swiss Army bulldozer" of slugging and permalink plugins for Active Record
@@ -62,7 +62,7 @@ gem 'friendly_id', '~> 5.5'
 
 # https://github.com/palkan/store_attribute
 # Active Record extension which adds type casting support to store accessors.
-gem 'store_attribute'
+gem 'store_attribute', '~> 2.1'
 
 # ##############
 # Business logic
@@ -71,7 +71,6 @@ gem 'store_attribute'
 # https://github.com/collectiveidea/interactor
 # https://github.com/collectiveidea/interactor-rails
 gem 'interactor-rails', '~> 2.2'
-# TODO: replace by https://github.com/aaronlasseigne/active_interaction
 
 # ################################
 # Application maintenance & health
@@ -79,18 +78,17 @@ gem 'interactor-rails', '~> 2.2'
 
 # https://github.com/ankane/strong_migrations
 # Catch unsafe migrations in development
-gem 'strong_migrations'
+gem 'strong_migrations', '~> 2.5'
 
 # ################
 # Assets, CSS & JS
 # ################
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem 'sprockets-rails'
-# TODO: a supprimer
+gem 'sprockets-rails', '~> 3.5'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem 'jsbundling-rails'
+gem 'jsbundling-rails', '~> 1.3'
 
 # https://github.com/rails/dartsass-rails
 # Sass is a stylesheet language that’s compiled to CSS.
@@ -98,15 +96,15 @@ gem 'dartsass-rails', '~> 0.5'
 
 # https://github.com/hotwired/turbo-rails
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'turbo-rails'
+gem 'turbo-rails', '~> 2.0'
 
 # https://github.com/marcoroth/turbo_power-rails
 # TurboPower Rails is a power-pack for Turbo Streams
-gem 'turbo_power'
+gem 'turbo_power', '~> 0.7'
 
 # https://github.com/hotwired/stimulus-rails
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails'
+gem 'stimulus-rails', '~> 1.3'
 
 # https://guides.rubyonrails.org/active_storage_overview.html#transforming-images
 # Use Active Storage variants
@@ -153,18 +151,18 @@ gem 'kaminari', '~> 1.2'
 
 # https://github.com/ankane/searchkick
 # Intelligent search made easy
-gem 'searchkick'
+gem 'searchkick', '~> 6.0'
 
 # https://github.com/opensearch-project/opensearch-ruby
 # OpenSearch Ruby Client
-gem 'opensearch-ruby'
+gem 'opensearch-ruby', '~> 3.4'
 
 # ##########
 # Other gems
 # ##########
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem 'jbuilder'
+gem 'jbuilder', '~> 2.14'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 5.0'
@@ -179,7 +177,7 @@ gem 'redis', '~> 5.0'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '~> 1.20'
+gem 'bootsnap', '~> 1.21'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -187,11 +185,7 @@ group :development, :test do
 
   # https://github.com/deivid-rodriguez/byebug
   # Byebug is a simple to use and feature rich debugger for Ruby.
-  gem 'byebug'
-
-  # https://github.com/thoughtbot/factory_bot_rails
-  # factory_bot is a fixtures replacement with a straightforward definition syntax
-  gem 'factory_bot_rails'
+  gem 'byebug', '~> 13.0'
 
   # https://github.com/faker-ruby/faker
   # Generate (almost) realistic fake data for testing, demos, and populating your database during development.
@@ -208,6 +202,10 @@ group :development, :test do
   # $ lol_dba db:find_indexes
   gem 'lol_dba'
 
+  # https://github.com/jhawthorn/vernier
+  # Next-generation Ruby 3.2.1+ sampling profiler. Tracks multiple threads, GVL activity, GC pauses, idle time,
+  # and more.
+  gem 'vernier', require: false
 end
 
 group :development do
@@ -234,7 +232,7 @@ group :development do
   # The main goal of the project is to help you avoid various issues due to inconsistencies and inefficiencies between
   # a database schema and application models.
   # $ database_consistency
-  gem 'database_consistency'
+  gem 'database_consistency', require: false
 
   # https://github.com/palkan/isolator
   # Detect non-atomic interactions within DB transactions.
@@ -248,13 +246,10 @@ group :development do
   # https://github.com/rubocop/rubocop-rails
   gem 'rubocop-rails', require: false
 
-  # https://github.com/rubocop/rubocop-capybara
-  gem 'rubocop-capybara', require: false
-
   # https://github.com/flyerhzm/rails_best_practices
   # rails_best_practices is a code metric tool to check the quality of Rails code.
   # $ rails_best_practices -e "db/migrate,vendor" .
-  gem 'rails_best_practices'
+  gem 'rails_best_practices', require: false
 
   # https://github.com/BetterErrors/better_errors
   # Better Errors replaces the standard Rails error page with a much better and more useful error page
@@ -266,7 +261,7 @@ group :development do
 
   # https://github.com/qqshfox/meta_request
   # Supporting gem for Rails Panel (Google Chrome extension for Rails development).
-  gem 'meta_request'
+  gem 'meta_request', require: false
 
   # https://github.com/glebm/i18n-tasks
   # i18n-tasks helps you find and manage missing and unused translations.
@@ -295,10 +290,6 @@ group :development do
   # Middleware that displays speed badge for every HTML page
   # gem 'rack-mini-profiler'
 
-  # https://github.com/jhawthorn/vernier
-  # Next-generation Ruby 3.2.1+ sampling profiler. Tracks multiple threads, GVL activity, GC pauses, idle time, and more.
-  # gem 'vernier'
-
   # https://github.com/fastruby/next_rails
   # This is a toolkit to upgrade your next Rails application
   # $ bundle_report outdated
@@ -309,8 +300,8 @@ group :development do
   # A code complexity metrics visualization and exploration tool for Ruby and JavaScript
   # $ attractor report
   gem 'attractor'
-  gem 'attractor-ruby'
   gem 'attractor-javascript'
+  gem 'attractor-ruby'
 
   # https://github.com/danmayer/coverband
   # A gem to measure production code usage, showing a counter for the number of times each line of code is executed.
@@ -319,6 +310,14 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+
+  # https://github.com/thoughtbot/factory_bot_rails
+  # factory_bot is a fixtures replacement with a straightforward definition syntax
+  gem 'factory_bot_rails'
+
+  # https://github.com/rubocop/rubocop-factory_bot
+  # factory_bot-specific analysis for your projects, as an extension to RuboCop.
+  gem 'rubocop-factory_bot', require: false
 
   # #################
   # Integration tests
@@ -332,31 +331,17 @@ group :test do
   # Capture a screenshot for every test failure automatically!
   gem 'capybara-screenshot'
 
-  # https://rubygems.org/gems/selenium-webdriver
-  # Selenium implements the W3C WebDriver protocol to automate popular browsers
-  gem 'selenium-webdriver', '~> 4.39'
-
-  # https://github.com/evilmartians/capybara-thruster
-  # This gem makes it possible to use Thruster as a Capybara server. Run your browser test with HTTP/2 enabled and
-  # static assets served via Thruster for faster load times!
-  # gem 'capybara-thruster'
-
-  # https://rubygems-org.translate.goog/gems/webdrivers
-  # Run Selenium tests more easily with install and updates for all supported webdrivers.
-  gem 'webdrivers'
-
-  # https://github.com/vcr/vcr
-  # Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests.
-  # gem 'vcr'
+  # https://github.com/rubocop/rubocop-capybara
+  gem 'rubocop-capybara', require: false
 
   # https://github.com/rubycdp/cuprite
-  # Cuprite is a pure Ruby driver (read as no Selenium/WebDriver/ChromeDriver dependency) for Capybara.
-  # gem 'cuprite'
+  # Cuprite is a pure Ruby driver (read as no Selenium/WebDriver/ChromeDriver dependency) for Capybara
+  gem 'cuprite'
 
-  # https://github.com/site-prism/site_prism
-  # SitePrism gives you a simple, clean and semantic DSL for describing your site using the Page Object Model pattern,
-  # for use with Capybara in automated acceptance testing.
-  # gem 'site_prism'
+  # https://github.com/vcr/vcr
+  # Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic,
+  # accurate tests.
+  # gem 'vcr'
 
   # ##########
   # Unit tests
@@ -364,30 +349,21 @@ group :test do
 
   # https://github.com/minitest/minitest-rails
   # Minitest integration for Rails 8.1
-  gem "minitest-rails"
+  gem 'minitest-rails'
 
   # https://github.com/simplecov-ruby/simplecov
   # Code coverage for Ruby
-  gem 'simplecov'
+  gem 'simplecov', require: false
 
   # https://github.com/DatabaseCleaner/database_cleaner
   # Ensure a clean state during tests
   gem 'database_cleaner-active_record'
 
-  # https://github.com/bblimke/webmock
-  # Mock network requests and prevent outgoing requests from occuring in the test suite.
-  gem 'webmock'
-
-  # https://github.com/Casecommons/with_model
-  # with_model dynamically builds an Active Record model (with table) before each test in a group and destroys it
-  # afterwards.
-  gem 'with_model'
+  # # https://github.com/bblimke/webmock
+  # # Mock network requests and prevent outgoing requests from occuring in the test suite.
+  # gem 'webmock'
 
   # https://github.com/alindeman/zonebie
   # Zonebie prevents bugs in code that deals with timezones by randomly assigning a zone on every run.
   gem 'zonebie'
-
-  # https://github.com/test-prof/test-prof
-  # TestProf is a collection of different tools to analyze your test suite performance.
-  gem 'test-prof'
 end
