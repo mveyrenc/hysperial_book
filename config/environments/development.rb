@@ -101,6 +101,14 @@ Rails.application.configure do
   # Indent html for pretty debugging and do not sort attributes
   Slim::Engine.set_options pretty: true, sort_attrs: false
 
+  config.consider_all_requests_local = true
+
+  # Enable DNS rebinding protection and other `Host` header attacks.
+  config.hosts << 'localhost'
+  config.hosts << 'web:3000'
+  # https://github.com/rails/rails/issues/37474
+  config.hosts << 'www.example.com'
+
   config.after_initialize do
     Bullet.enable               = true
     Bullet.alert                = false

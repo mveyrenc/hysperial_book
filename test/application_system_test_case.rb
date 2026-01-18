@@ -1,10 +1,19 @@
-require "test_helper"
-require "minitest/rails/capybara"
+# frozen_string_literal: true
+
+require 'test_helper'
+require_relative 'support/capybara'
+require_relative 'support/system_helper'
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
+  include SystemHelper
 
-  register_spec_type(self) do |desc, *addl|
+  before do
+    Capybara.reset_sessions!
+  end
+
+  driven_by :my_cuprite
+
+  register_spec_type(self) do |_desc, *addl|
     addl.include? :system
   end
 end

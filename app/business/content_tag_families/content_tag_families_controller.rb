@@ -48,7 +48,7 @@ module ContentTagFamilies
           format.turbo_stream { render template: template_path }
         else
           flash.now.alert = result.message
-          format.html { render template: template_path(:new), status: :unprocessable_entity }
+          format.html { render template: template_path(:new), status: :unprocessable_content }
           format.turbo_stream { render template: template_path(:new) }
         end
       end
@@ -65,7 +65,7 @@ module ContentTagFamilies
           format.turbo_stream { render template: template_path }
         else
           flash.now.alert = t(".#{result.error}")
-          format.html { render template: template_path(:edit), status: :unprocessable_entity }
+          format.html { render template: template_path(:edit), status: :unprocessable_content }
           format.turbo_stream { render template: template_path(:edit) }
         end
       end
@@ -73,7 +73,7 @@ module ContentTagFamilies
 
     # DELETE /content_tag_families/:id
     def destroy
-      ContentTagFamilies::Logics::Destroy.call(record: @record)
+      result = ContentTagFamilies::Logics::Destroy.call(record: @record)
 
       respond_to do |format|
         format.html { redirect_to content_tag_families_path, notice: result.message }

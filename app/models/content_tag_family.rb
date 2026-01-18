@@ -35,8 +35,12 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentTagFamily < ApplicationRecord
-  # Searchkick
+
+  self.implicit_order_column = 'created_at'
+
+  ## Searchkick
   searchkick highlight: %i[name book_name]
+
   def search_data
     attributes.merge(
       book_name: book.name,
@@ -44,6 +48,7 @@ class ContentTagFamily < ApplicationRecord
       book_position: book.position
     )
   end
+
   scope :search_import, -> { includes(:book) }
 
   def self.content_tags_index_id(family)
@@ -58,11 +63,6 @@ class ContentTagFamily < ApplicationRecord
     :"content_tags_k_#{family.kind}"
   end
 
-  ## Enumerables
-  def kind_name
-    ContentTagFamilyKind.human_attribute_name(kind)
-  end
-
   ## FriendlyId
   extend FriendlyId
 
@@ -70,6 +70,14 @@ class ContentTagFamily < ApplicationRecord
 
   def generate_custom_slug
     [%i[kind name]]
+  end
+
+  ## Position
+  positioned on: :book
+
+  ## Enumerable
+  def kind_name
+    ContentTagFamilyKind.human_attribute_name(kind)
   end
 
   ## Relations
@@ -80,13 +88,19 @@ class ContentTagFamily < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  ## Position
-  positioned on: :book
-
   ## Validations
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: [:kind, :book_id], case_sensitive: false }
   validates :kind, presence: true
+  validates :slug, presence: true, uniqueness: true
 
+  ## Callbacks
+  after_commit :reindex_content_tag_families
+  def reindex_content_tag_families
+    # Reindex tag families related to the same book to update position
+    ContentTagFamily.where(book: book).reindex
+  end
+
+  ## Conversion Methods
   def to_s
     name
   end

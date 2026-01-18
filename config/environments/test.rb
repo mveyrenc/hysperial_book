@@ -6,12 +6,6 @@
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
-  config.after_initialize do
-    Bullet.enable        = true
-    Bullet.bullet_logger = true
-    Bullet.raise         = true # raise an error if n+1 query occurs
-  end
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   # While tests run files are not watched, reloading is not necessary.
@@ -45,7 +39,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :test
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: 'example.com' }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
@@ -58,4 +52,27 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.after_initialize do
+    Bullet.enable        = true
+    Bullet.bullet_logger = true
+    Bullet.raise         = true # raise an error if n+1 query occurs
+  end
+
+  # Encryptable attributes will be encrypted according to the encryption settings defined in the model
+  config.active_record.encryption.encrypt_fixtures = true
+
+  # Bubble up errors like in prod
+  config.action_dispatch.show_exceptions = true
+
+  # should only use static (precompiled) assets
+  config.assets.compile = false
+
+  # Enable DNS rebinding protection and other `Host` header attacks.
+  # https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization
+  config.hosts << 'localhost'
+  config.hosts << 'www.example.com'
+  config.hosts << '0.0.0.0/0'
+  config.hosts << '::/0'
+  config.hosts << /127\.0\.0\.1:\d+/
 end

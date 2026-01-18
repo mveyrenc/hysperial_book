@@ -31,7 +31,10 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class Book < ApplicationRecord
-  # Searchkick
+
+  self.implicit_order_column = 'created_at'
+
+  ## Searchkick
   searchkick highlight: %i[name alternate_names description]
 
   ## FriendlyId
@@ -39,7 +42,10 @@ class Book < ApplicationRecord
 
   friendly_id :name, use: :slugged
 
-  ## Enumerables
+  ## Position
+  positioned
+
+  ## Enumerable
   def kind_name
     BookKind.human_attribute_name(kind)
   end
@@ -50,14 +56,10 @@ class Book < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  ## Position
-  positioned
-
   ## Validations
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :kind, presence: true
-
-  validates_uniqueness_of :name, case_sensitive: false
+  validates :slug, presence: true, uniqueness: true
 
   ## Callbacks
   after_commit :reindex_books
@@ -66,6 +68,7 @@ class Book < ApplicationRecord
     Book.reindex
   end
 
+  ## Conversion Methods
   def to_s
     name
   end

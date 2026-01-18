@@ -24,7 +24,9 @@ module Books
       end
 
       def set_order
-        context.search_query = context.search_query.order(position: :asc)
+        context.search_query = context.search_query.order(
+          [position: { order: :asc, unmapped_type: :integer }]
+        )
       end
 
       def rearrange_aggs

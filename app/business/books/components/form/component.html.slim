@@ -2,8 +2,8 @@
   = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
     = f.text_field :name, autofocus: true
-    = f.textarea :alternate_names
-    = f.textarea :description
+    = f.text_area :alternate_names
+    = f.text_area :description
     - if record.new_record?
       = f.select :kind, options_for_select(kind_select_values, record_kind)
     - else

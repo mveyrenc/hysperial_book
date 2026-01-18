@@ -7,13 +7,14 @@ module ContentTagFamilies
       include SaveRecordConcern
 
       def call
-        return context.fail!(message: t('.create_record.no_current_user')) unless context.current_user.present?
+        return context.fail!(message: t('.create_record.no_current_user')) if context.current_user.blank?
+
         hydrate_bulk_with_params
         create_all
       end
 
       def hydrate_bulk_with_params
-        names = context.params[:name].split("\n").reject { |t| t.empty? }.uniq
+        names = context.params[:name].split("\n").reject(&:empty?).uniq
         params = context.params.merge(created_by: context.current_user, updated_by: context.current_user)
         context.records = []
         names.each do |name|
@@ -25,11 +26,9 @@ module ContentTagFamilies
 
       def create_all
         context.records.each do |record|
-          if record.save
-            next
-          else
-            context.fail!(message: t('.save_record.failure'))
-          end
+          next if record.save
+
+          context.fail!(message: t('.save_record.failure'))
         end
       end
     end

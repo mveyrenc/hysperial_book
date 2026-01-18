@@ -33,6 +33,7 @@ module HysperialBook
     end
 
     config.autoload_paths += Dir["#{config.root}/app/business/concerns"]
+    config.autoload_paths += Dir["#{config.root}/app/interactors"]
 
     # To avoid conflicts between ViewComponent and other gems that also monkey patch the render method, it’s possible to
     # configure ViewComponent to not include the render monkey patch:

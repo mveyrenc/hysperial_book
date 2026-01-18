@@ -2,6 +2,7 @@
 
 # == Route Map
 #
+# Routes for application:
 #                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
 #                         new_user_session GET    /auth/login(.:format)                                                                             devise/sessions#new
 #                             user_session POST   /auth/login(.:format)                                                                             devise/sessions#create
@@ -73,7 +74,8 @@
 #                           media_document PATCH  /media/documents/:id(.:format)                                                                    media/documents#update
 #                                          PUT    /media/documents/:id(.:format)                                                                    media/documents#update
 #                                          DELETE /media/documents/:id(.:format)                                                                    media/documents#destroy
-#                                                 /cable                                                                                            #<ActionCable::Server::Base:0x00007f3d51c7f390 @config=#<ActionCable::Server::Configuration:0x00007f3d51c7f9d0 @log_tags=[], @connection_class=#<Proc:0x00007f3d52059128 /usr/local/bundle/gems/actioncable-8.1.1/lib/action_cable/engine.rb:55 (lambda)>, @worker_pool_size=4, @disable_request_forgery_protection=false, @allow_same_origin_as_host=true, @filter_parameters=[:passw, :email, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn, :cvv, :cvc], @health_check_application=#<Proc:0x00007f3d5205ec90 /usr/local/bundle/gems/actioncable-8.1.1/lib/action_cable/engine.rb:31 (lambda)>, @logger=#<Logger:0x00007f3d51c7f340 @level=0, @progname=nil, @default_formatter=#<Logger::Formatter:0x00007f3d529f3968 @datetime_format=nil>, @formatter=nil, @logdev=nil, @level_override={}>, @cable={"adapter" => "redis", "url" => "redis://redis:6379/1"}, @mount_path="/cable", @precompile_assets=true, @allowed_request_origins=/https?:\/\/localhost:\d+/>, @mutex=#<Monitor:0x00007f3d529f3d78>, @pubsub=nil, @worker_pool=nil, @event_loop=nil, @remote_connections=nil>
+#                                  pg_hero        /admins/postgres                                                                                  PgHero::Engine
+#                                                 /cable                                                                                            #<ActionCable::Server::Base:0x00007fd827c7b878 @config=#<ActionCable::Server::Configuration:0x00007fd827c7ccc8 @log_tags=[], @connection_class=#<Proc:0x00007fd828476140 /usr/local/bundle/gems/actioncable-8.1.2/lib/action_cable/engine.rb:55 (lambda)>, @worker_pool_size=4, @disable_request_forgery_protection=false, @allow_same_origin_as_host=true, @filter_parameters=[:passw, :email, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn, :cvv, :cvc], @health_check_application=#<Proc:0x00007fd8284790e8 /usr/local/bundle/gems/actioncable-8.1.2/lib/action_cable/engine.rb:31 (lambda)>, @logger=#<Logger:0x00007fd827c7b7d8 @level=0, @progname=nil, @default_formatter=#<Logger::Formatter:0x00007fd82777b120 @datetime_format=nil>, @formatter=nil, @logdev=nil, @level_override={}>, @cable={"adapter" => "redis", "url" => "redis://redis:6379"}, @mount_path="/cable", @precompile_assets=true, @allowed_request_origins=/https?:\/\/localhost:\d+/>, @mutex=#<Monitor:0x00007fd82777baa8>, @pubsub=nil, @worker_pool=nil, @event_loop=nil, @remote_connections=nil>
 #                                     root GET    /                                                                                                 home#index
 #         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
 #         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
@@ -101,6 +103,34 @@
 #                       rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                                       active_storage/disk#show
 #                update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                               active_storage/disk#update
 #                     rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                                    active_storage/direct_uploads#create
+#
+# Routes for PgHero::Engine:
+#                    Prefix Verb URI Pattern                                      Controller#Action
+#                     space GET  (/:database)/space(.:format)                     pg_hero/home#space
+#            relation_space GET  (/:database)/space/:relation(.:format)           pg_hero/home#relation_space
+#               index_bloat GET  (/:database)/index_bloat(.:format)               pg_hero/home#index_bloat
+#              live_queries GET  (/:database)/live_queries(.:format)              pg_hero/home#live_queries
+#                   queries GET  (/:database)/queries(.:format)                   pg_hero/home#queries
+#                show_query GET  (/:database)/queries/:query_hash(.:format)       pg_hero/home#show_query
+#                    system GET  (/:database)/system(.:format)                    pg_hero/home#system
+#                 cpu_usage GET  (/:database)/cpu_usage(.:format)                 pg_hero/home#cpu_usage
+#          connection_stats GET  (/:database)/connection_stats(.:format)          pg_hero/home#connection_stats
+#     replication_lag_stats GET  (/:database)/replication_lag_stats(.:format)     pg_hero/home#replication_lag_stats
+#                load_stats GET  (/:database)/load_stats(.:format)                pg_hero/home#load_stats
+#          free_space_stats GET  (/:database)/free_space_stats(.:format)          pg_hero/home#free_space_stats
+#                   explain GET  (/:database)/explain(.:format)                   pg_hero/home#explain
+#                      tune GET  (/:database)/tune(.:format)                      pg_hero/home#tune
+#               connections GET  (/:database)/connections(.:format)               pg_hero/home#connections
+#               maintenance GET  (/:database)/maintenance(.:format)               pg_hero/home#maintenance
+#                      kill POST (/:database)/kill(.:format)                      pg_hero/home#kill
+# kill_long_running_queries POST (/:database)/kill_long_running_queries(.:format) pg_hero/home#kill_long_running_queries
+#                  kill_all POST (/:database)/kill_all(.:format)                  pg_hero/home#kill_all
+#        enable_query_stats POST (/:database)/enable_query_stats(.:format)        pg_hero/home#enable_query_stats
+#                           POST (/:database)/explain(.:format)                   pg_hero/home#explain
+#         reset_query_stats POST (/:database)/reset_query_stats(.:format)         pg_hero/home#reset_query_stats
+#              system_stats GET  (/:database)/system_stats(.:format)              redirect(301, system)
+#               query_stats GET  (/:database)/query_stats(.:format)               redirect(301, queries)
+#                      root GET  /(:database)(.:format)                           pg_hero/home#index
 
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do

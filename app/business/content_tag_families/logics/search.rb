@@ -30,8 +30,10 @@ module ContentTagFamilies
       def set_order
         context.search_query = context.search_query
                                       .includes(:book)
-                                      .order(:book_position)
-                                      .order(:position)
+                                      .order(
+                                        [book_position: { order: :asc, unmapped_type: :integer },
+                                         position: { order: :asc, unmapped_type: :integer }]
+                                      )
       end
 
       def rearrange_aggs
@@ -58,7 +60,7 @@ module ContentTagFamilies
             }
           when 'book_id'
             # get all books in the bucket in one request
-            bkt_books = Book.find( agg['buckets'].map{ |bkt| bkt['key'] } ).index_by(&:id)
+            bkt_books = Book.find(agg['buckets'].map { |bkt| bkt['key'] }).index_by(&:id)
             aggs[k] = {
               name: ContentTagFamily.human_attribute_name(:book),
               multiple: false,
