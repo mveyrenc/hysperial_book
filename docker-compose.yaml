@@ -4,10 +4,12 @@ services:
     volumes:
       - hysperial_book_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
       - POSTGRES_DB=hysperial_book_development
       - PGDATA=/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   opensearch:
     image: opensearchproject/opensearch:latest
@@ -37,21 +39,38 @@ services:
       - REDIS_REPLICATION_MODE=master
 
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      args:
+        BUNDLE_WITHOUT: ''
+        RAILS_ENV: 'development'
+    entrypoint: docker/entrypoints/rails.sh
+    command: [ 'bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0' ]
     environment:
       - RAILS_ENV=development
       - APP_DATABASE_NAME=hysperial_book_development
       - APP_DATABASE_USERNAME=docker
       - APP_DATABASE_PASSWORD=docker
+      - PG_URL=postgres://postgres:postgres@db
     volumes:
-      - .:/app
+      - .:/usr/src/app
       - hysperial_book_yarn_cache:/root/.yarn-cache
     ports:
       - "3000:3000"
-    depends_on:
+    links:
       - db
       - opensearch
       - redis
+    stdin_open: true
+    tty: true
+    env_file:
+      - .docker/web-variables.env
+
+  selenium:
+    image: selenium/standalone-chrome
+    expose:
+      - '4444'
 
 #  adminer:
 #    image: adminer
