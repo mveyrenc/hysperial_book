@@ -1,0 +1,6 @@
+node_modules
+.git
+docs
+tmp/cache
+tmp/pids
+tmp/storage
