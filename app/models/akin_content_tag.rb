@@ -23,8 +23,13 @@
 #  fk_rails_...  (relater_id => content_tags.id) ON DELETE => cascade
 #
 class AkinContentTag < ApplicationRecord
+  self.implicit_order_column = 'created_at'
+
   belongs_to :relater, class_name: 'ContentTag'
   belongs_to :related, class_name: 'ContentTag'
+
+  ## Validations
+  validates :kind, presence: true
 
   ## Enumerables
   def kind_name

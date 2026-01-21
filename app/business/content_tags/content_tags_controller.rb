@@ -4,92 +4,36 @@
 module ContentTags
   # ContentTags controller
   class ContentTagsController < ApplicationController
-    before_action :set_record, only: %i[edit update destroy]
-    before_action :set_new_record, only: %i[create new]
-    before_action :authorize_record, only: %i[create new edit update destroy]
-
-    # GET /content_tags
-    def index
-      authorize ContentTag
-      @records = ContentTags::Logics::Search.call(query: params)
-
-      render template: template_path
-    end
-
-    # GET /content_tag_families/search
-    def search
-      authorize ContentTag, :index?
-      @records = ContentTags::Logics::Search.call(query: params)
-
-      render template: template_path('index')
-    end
-
-    # GET /content_tags/new
-    def new
-      respond_to do |format|
-        format.html { render template: template_path }
-      end
-    end
-
-    # GET /content_tags/:id/edit
-    def edit
-      respond_to do |format|
-        format.html { render template: template_path }
-      end
-    end
-
-    # POST /content_tags
-    def create
-      result = ContentTags::Logics::Create.call(record: @record, params: strong_params.to_h, current_user:)
-      if result.success?
-        @records = result.records
-        respond_to do |format|
-          format.html { redirect_to content_tags_url, notice: t('.successfully_created') }
-          format.turbo_stream { render template: template_path }
-        end
-      else
-        render template: template_path(:new), status: :unprocessable_entity
-      end
-    end
-
-    # PATCH/PUT /content_tags/:id
-    def update
-      result = ContentTags::Logics::Update.call(record: @record, params: strong_params.to_h, current_user:)
-
-      if result.success?
-        respond_to do |format|
-          format.html { redirect_to content_tags_url, notice: t('.successfully_updated') }
-          format.turbo_stream { render template: template_path }
-        end
-      else
-        render template: template_path(:edit), status: :unprocessable_entity
-      end
-    end
-
-    # DELETE /content_tags/:id
-    def destroy
-      ContentTags::Logics::Destroy.call(record: @record)
-
-      respond_to do |format|
-        format.html { redirect_to content_tags_url, notice: t('.successfully_destroyed') }
-        format.turbo_stream { render template: template_path }
-      end
-    end
+    include IndexSearchActionsConcern
+    include NewCreateActionsConcern
+    include EditUpdateActionsConcern
+    include DestroyActionConcern
 
     private
 
-    def set_record
-      @record = ContentTag.friendly.find(params[:id])
+    def model
+      ContentTag
     end
 
-    def set_new_record
-      @record = ContentTag.new
+    def redirect_to_after_create
+      content_tags_path
+    end
+
+    def redirect_to_after_update
+      content_tags_path
+    end
+
+    def redirect_to_after_destroy
+      content_tag_path
     end
 
     def strong_params
       params
         .require(:content_tag)
-        .permit(:content_tag_family_id, :name)
+        .permit(
+          :content_tag_family_id,
+          :name
+        )
     end
   end
 end

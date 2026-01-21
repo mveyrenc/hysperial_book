@@ -9,7 +9,7 @@ en:
         title: "Tag search results"
       new:
         title: "New tag"
-    logics:
+    interactors:
       create:
         save_record:
           success: "The tag was created successfully"

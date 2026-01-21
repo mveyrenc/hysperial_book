@@ -1,4 +1,4 @@
 = turbo_stream.update(:flash)
-  = render Layout::Flash::Component.new
+= render Layout::Flash::Component.new
 = turbo_stream.turbo_frame_set_src :content_tag_families, content_tag_families_path
 = turbo_stream.turbo_frame_reload :content_tag_families

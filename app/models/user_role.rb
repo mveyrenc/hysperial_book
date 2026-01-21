@@ -3,7 +3,7 @@
 class UserRole
   extend ActiveModel::Translation
 
-  ROLES = %w[super_admin admin contributor reader noob].freeze
+  ROLES = %w[admin contributor noob reader super_admin].freeze
 
   def initialize(role)
     @role = role

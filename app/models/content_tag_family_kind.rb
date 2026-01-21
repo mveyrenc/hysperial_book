@@ -3,7 +3,7 @@
 class ContentTagFamilyKind
   extend ActiveModel::Translation
 
-  KINDS = %w[ingredient season occasion category geographic_area restriction source author thematic].freeze
+  KINDS = %w[author category geographic_area ingredient occasion restriction season source thematic].freeze
 
   def initialize(kind)
     @kind = kind

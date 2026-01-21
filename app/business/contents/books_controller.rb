@@ -4,28 +4,22 @@
 module Contents
   # Books controller
   class BooksController < ApplicationController
+    include IndexSearchActionsConcern
+
     before_action :set_book_record, only: %i[index search]
-
-    # GET /books/:book_id/contents
-    def index
-      authorize Content
-      @records = Contents::Logics::Search.call(query: params, book: @book_record)
-
-      render template: template_path
-    end
-
-    # GET  /books/:book_id/contents/search
-    def search
-      authorize Content, :index?
-      @records = Contents::Logics::Search.call(query: params, book: @book_record)
-
-      render template: template_path('index')
-    end
 
     private
 
+    def model
+      Content
+    end
+
     def set_book_record
       @book_record = Book.friendly.find(params[:book_id])
+    end
+
+    def search_context
+      Interactor::Context.build(query: params, book: @book_record)
     end
   end
 end

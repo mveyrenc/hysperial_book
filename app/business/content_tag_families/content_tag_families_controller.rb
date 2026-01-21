@@ -4,101 +4,40 @@
 module ContentTagFamilies
   # ContentTagFamiliesController controller
   class ContentTagFamiliesController < ApplicationController
-    before_action :set_record, only: %i[edit update destroy]
-    before_action :set_new_record, only: %i[create new]
-    before_action :authorize_record, only: %i[create new edit update destroy]
-
-    # GET /content_tag_families
-    def index
-      authorize ContentTagFamily
-      @records = ContentTagFamilies::Logics::Search.call(query: params)
-
-      render template: template_path
-    end
-
-    # GET /content_tag_families/search
-    def search
-      authorize ContentTagFamily, :index?
-      @records = ContentTagFamilies::Logics::Search.call(query: params)
-
-      render template: template_path('index')
-    end
-
-    # GET /content_tag_families/new
-    def new
-      respond_to do |format|
-        format.html { render template: template_path }
-      end
-    end
-
-    # GET /content_tag_families/:id/edit
-    def edit
-      respond_to do |format|
-        format.html { render template: template_path }
-      end
-    end
-
-    # POST /content_tag_families
-    def create
-      result = ContentTagFamilies::Logics::Create.call(post_context)
-      respond_to do |format|
-        if result.success?
-          flash.now.notice = result.message
-          format.html { redirect_to content_tag_families_path }
-          format.turbo_stream { render template: template_path }
-        else
-          flash.now.alert = result.message
-          format.html { render template: template_path(:new), status: :unprocessable_content }
-          format.turbo_stream { render template: template_path(:new) }
-        end
-      end
-    end
-
-    # PATCH/PUT /content_tag_families/:id
-    def update
-      result = ContentTagFamilies::Logics::Update.call(post_context)
-
-      respond_to do |format|
-        if result.success?
-          flash.now.notice = result.message
-          format.html { redirect_to content_tag_families_path }
-          format.turbo_stream { render template: template_path }
-        else
-          flash.now.alert = t(".#{result.error}")
-          format.html { render template: template_path(:edit), status: :unprocessable_content }
-          format.turbo_stream { render template: template_path(:edit) }
-        end
-      end
-    end
-
-    # DELETE /content_tag_families/:id
-    def destroy
-      result = ContentTagFamilies::Logics::Destroy.call(record: @record)
-
-      respond_to do |format|
-        format.html { redirect_to content_tag_families_path, notice: result.message }
-        format.turbo_stream { render template: template_path }
-      end
-    end
+    include IndexSearchActionsConcern
+    include NewCreateActionsConcern
+    include EditUpdateActionsConcern
+    include DestroyActionConcern
 
     private
 
-    def set_record
-      @record = ContentTagFamily.friendly.find(params[:id])
+    def model
+      ContentTagFamily
     end
 
-    def set_new_record
-      @record = ContentTagFamily.new
+    def redirect_to_after_create
+      content_tag_families_path
+    end
+
+    def redirect_to_after_update
+      content_tag_families_path
+    end
+
+    def redirect_to_after_destroy
+      content_tag_families_path
     end
 
     def strong_params
       params
         .require(:content_tag_family)
-        .permit(:name, :alternate_names, :description, :kind, :position, :book_id)
-    end
-
-    def post_context
-      Interactor::Context.build(record: @record, params: strong_params.to_h, current_user:)
+        .permit(
+          :alternate_names,
+          :book_id,
+          :description,
+          :kind,
+          :name,
+          :position
+        )
     end
   end
 end

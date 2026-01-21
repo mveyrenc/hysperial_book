@@ -50,6 +50,11 @@ docker-up: ## Start containers
 docker-stop: ## Stop containers
 	docker compose stop
 
+docker-recreate-web: # Remove and recreate web container
+	docker compose stop web
+	docker compose rm web
+	docker compose up -d
+
 logs-web: ## Display `web` container logs
 	docker compose logs web
 

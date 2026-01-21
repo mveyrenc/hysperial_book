@@ -33,6 +33,8 @@ class CreateMedia < ActiveRecord::Migration[8.0]
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
 
       t.timestamps
+
+      t.index %i[id type]
     end
   end
 end

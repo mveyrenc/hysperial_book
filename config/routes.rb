@@ -75,7 +75,7 @@
 #                                          PUT    /media/documents/:id(.:format)                                                                    media/documents#update
 #                                          DELETE /media/documents/:id(.:format)                                                                    media/documents#destroy
 #                                  pg_hero        /admins/postgres                                                                                  PgHero::Engine
-#                                                 /cable                                                                                            #<ActionCable::Server::Base:0x00007fd827c7b878 @config=#<ActionCable::Server::Configuration:0x00007fd827c7ccc8 @log_tags=[], @connection_class=#<Proc:0x00007fd828476140 /usr/local/bundle/gems/actioncable-8.1.2/lib/action_cable/engine.rb:55 (lambda)>, @worker_pool_size=4, @disable_request_forgery_protection=false, @allow_same_origin_as_host=true, @filter_parameters=[:passw, :email, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn, :cvv, :cvc], @health_check_application=#<Proc:0x00007fd8284790e8 /usr/local/bundle/gems/actioncable-8.1.2/lib/action_cable/engine.rb:31 (lambda)>, @logger=#<Logger:0x00007fd827c7b7d8 @level=0, @progname=nil, @default_formatter=#<Logger::Formatter:0x00007fd82777b120 @datetime_format=nil>, @formatter=nil, @logdev=nil, @level_override={}>, @cable={"adapter" => "redis", "url" => "redis://redis:6379"}, @mount_path="/cable", @precompile_assets=true, @allowed_request_origins=/https?:\/\/localhost:\d+/>, @mutex=#<Monitor:0x00007fd82777baa8>, @pubsub=nil, @worker_pool=nil, @event_loop=nil, @remote_connections=nil>
+#                                                 /cable                                                                                            #<ActionCable::Server::Base:0x00007fc161a04108 @config=#<ActionCable::Server::Configuration:0x00007fc161a046a8 @log_tags=[], @connection_class=#<Proc:0x00007fc161ae2a70 /usr/local/bundle/gems/actioncable-8.1.2/lib/action_cable/engine.rb:55 (lambda)>, @worker_pool_size=4, @disable_request_forgery_protection=false, @allow_same_origin_as_host=true, @filter_parameters=[:passw, :email, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn, :cvv, :cvc], @health_check_application=#<Proc:0x00007fc161ae4cd0 /usr/local/bundle/gems/actioncable-8.1.2/lib/action_cable/engine.rb:31 (lambda)>, @logger=#<Logger:0x00007fc161a040b8 @level=0, @progname=nil, @default_formatter=#<Logger::Formatter:0x00007fc161c29668 @datetime_format=nil>, @formatter=nil, @logdev=nil, @level_override={}>, @cable={"adapter" => "redis", "url" => "redis://redis:6379"}, @mount_path="/cable", @precompile_assets=true, @allowed_request_origins=/https?:\/\/localhost:\d+/>, @mutex=#<Monitor:0x00007fc161c297a8>, @pubsub=nil, @worker_pool=nil, @event_loop=nil, @remote_connections=nil>
 #                                     root GET    /                                                                                                 home#index
 #         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
 #         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
@@ -156,7 +156,9 @@ Rails.application.routes.draw do
     collection { get :search }
   end
 
-  resources :users, except: %i[show new create], controller: 'users/users'
+  resources :users, except: %i[show new create], controller: 'users/users' do
+    collection { get :search }
+  end
 
   resources :books, except: %i[show], controller: 'books/books' do
     collection { get :search }

@@ -48,7 +48,8 @@ Rails.application.configure do
   end
 
   # Change to :null_store to avoid any caching.
-  config.cache_store = :memory_store
+  config.cache_store = :null_store
+  # config.cache_store = :memory_store
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
@@ -86,6 +87,9 @@ Rails.application.configure do
   # Annotate rendered view with file names.
   config.action_view.annotate_rendered_view_with_filenames = true
 
+  # Controls whether or not templates should be reloaded on each request. Defaults to !config.enable_reloading.
+  config.action_view.cache_template_loading = false
+
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
@@ -96,7 +100,7 @@ Rails.application.configure do
   config.generators.apply_rubocop_autocorrect_after_generate!
 
   # Allow connections to local server.
-  config.web_console.whitelisted_ips = ['172.16.0.0/12', '192.168.0.0/16']
+  config.web_console.allowed_ips = ['172.16.0.0/12', '192.168.0.0/16']
 
   # Indent html for pretty debugging and do not sort attributes
   Slim::Engine.set_options pretty: true, sort_attrs: false

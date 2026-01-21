@@ -4,10 +4,7 @@
     = f.text_field :name, autofocus: true
     = f.text_area :alternate_names
     = f.text_area :description
-    - if record.new_record?
-      = f.select :kind, options_for_select(kind_select_values, record_kind)
-    - else
-      = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:kind), value: record_kind_name)
+    = f.select :kind, options_for_select(kind_select_values, record.kind),{}, { disabled: record.persisted? }
     = f.text_field :position
 
     .field

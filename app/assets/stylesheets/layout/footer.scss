@@ -1,6 +1,8 @@
 @use "bulma/sass/utilities/css-variables" as cv;
 @use "bulma/sass/utilities/mixins" as mx;
 
+@use "bulma/sass/layout/footer";
+
 /* Footer: Bulma override */
 $footer-background-color: cv.getVar("white");
 $footer-padding: calc(cv.getVar("gap") * 33) cv.getVar("gap");

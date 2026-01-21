@@ -1,12 +1,9 @@
+@use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/utilities/css-variables" as cv;
-@use "bulma/sass/layout/container";
+@use "bulma/sass/layout/section";
 
-section.section.is-flash-section {
-  padding: cv.getVar("gap");
-}
-
-section.section.is-main-section {
-  @extend .container;
-  @extend .is-fullhd;
-  padding: cv.getVar("gap");
+.#{iv.$class-prefix}section {
+  &.is-flash-section {
+    padding: cv.getVar("gap");
+  }
 }

@@ -3,7 +3,7 @@
 class ContentKind
   extend ActiveModel::Translation
 
-  KINDS = %w[article tutorial ingredient recipe menu pattern].freeze
+  KINDS = %w[article glossary ingredient menu pattern plant recipe tool tutorial].freeze
 
   def initialize(kind)
     @kind = kind

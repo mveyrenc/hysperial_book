@@ -7,7 +7,7 @@ module Media
   end
 
   # Business logic for media
-  module Logics
+  module Interactors
   end
 
   # Views for media

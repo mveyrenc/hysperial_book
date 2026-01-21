@@ -38,8 +38,8 @@ FactoryBot.define do
     updated_by factory: :user
 
     trait :reindex do
-      after(:create) do |book, _evaluator|
-        book.reindex(refresh: true)
+      after(:create) do |elem, _evaluator|
+        elem.reindex(refresh: true)
       end
     end
   end

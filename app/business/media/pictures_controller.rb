@@ -4,18 +4,22 @@
 module Media
   # Pictures controller
   class PicturesController < MediaController
-    protected
+    private
 
     def model
-      Picture
+      @model = Picture
     end
 
-    def media_media_url
+    def redirect_to_after_create
       media_pictures_url
     end
 
-    def set_record
-      @record = Picture.find(params[:id])
+    def redirect_to_after_update
+      media_pictures_url
+    end
+
+    def redirect_to_after_destroy
+      media_pictures_url
     end
 
     def strong_params

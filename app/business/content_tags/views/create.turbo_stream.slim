@@ -1,6 +1,6 @@
-= turbo_stream.prepend "records" do
-  - @records.each do |record|
-    = turbo_frame_tag record do
-      = render(ContentTags::Components::Card::Component.new(record: record))
-= turbo_stream.update ContentTag.new, render(ContentTags::Components::NewButton::Component.new)
-
+= turbo_stream.replace(:flash)
+  = render Layout::Flash::Component.new
+= turbo_stream.update ContentTag.new do
+  = render(ContentTags::Components::NewButton::Component.new)
+= turbo_stream.turbo_frame_set_src :content_tags, content_tags_path
+= turbo_stream.turbo_frame_reload :content_tags

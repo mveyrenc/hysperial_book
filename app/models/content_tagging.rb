@@ -24,6 +24,8 @@
 #  fk_rails_...  (content_tag_id => content_tags.id) ON DELETE => cascade
 #
 class ContentTagging < ApplicationRecord
+  self.implicit_order_column = 'created_at'
+
   belongs_to :content
   belongs_to :content_tag
 end

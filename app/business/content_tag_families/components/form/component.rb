@@ -5,8 +5,6 @@ module ContentTagFamilies
     module Form
       # ContentTags card component
       class Component < ApplicationComponent
-        delegate :kind, :kind_name, to: :record, prefix: true
-
         attr_reader :record
 
         def initialize(record:)

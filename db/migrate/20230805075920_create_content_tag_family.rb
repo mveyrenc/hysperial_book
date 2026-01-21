@@ -23,7 +23,7 @@ class CreateContentTagFamily < ActiveRecord::Migration[8.0]
 
       t.timestamps
 
-      t.index %i[kind name book_id], unique: true
+      t.index %i[name book_id kind], unique: true
     end
   end
 end

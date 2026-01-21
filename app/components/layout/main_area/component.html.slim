@@ -1,5 +1,9 @@
-- if title?
-  section.hero.is-hero-bar
+- if hero_body?
+  section.hero.is-small
+    .hero-body
+      = hero_body
+- elsif title?
+  section.hero.is-small
     .hero-body
       h1.title
         = title

@@ -7,15 +7,19 @@ module Media
     protected
 
     def model
-      Scan
+      @model = Scan
     end
 
-    def media_media_url
+    def redirect_to_after_create
       media_scans_url
     end
 
-    def set_record
-      @record = Scan.find(params[:id])
+    def redirect_to_after_update
+      media_scans_url
+    end
+
+    def redirect_to_after_destroy
+      media_scans_url
     end
 
     def strong_params

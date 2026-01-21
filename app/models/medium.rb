@@ -24,6 +24,11 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class Medium < ApplicationRecord
+  self.implicit_order_column = 'created_at'
+
+  ## Searchkick
+  searchkick
+
   ## Relations
 
   belongs_to :created_by, class_name: 'User'

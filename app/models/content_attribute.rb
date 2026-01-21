@@ -33,6 +33,8 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentAttribute < ApplicationRecord
+  self.implicit_order_column = 'created_at'
+
   ## Searchkick
   def content_search_data
     {
@@ -50,6 +52,8 @@ class ContentAttribute < ApplicationRecord
   positioned
 
   ## Validations
+  validates :name, presence: true
+  validates :kind, presence: true
 
   ## Enumerables
   def kind_name

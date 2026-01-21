@@ -1,23 +1,23 @@
 .card-box
   .grid.is-gap-2
     .cell
-      = render FieldDisplay::Component.new(label: User.human_attribute_name(:email), value: record_email)
+      = render FieldDisplay::Component.new(label: User.human_attribute_name(:email), value: record.email)
     .cell
-      = render FieldDisplay::Component.new(label: User.human_attribute_name(:name), value: record_name)
+      = render FieldDisplay::Component.new(label: User.human_attribute_name(:name), value: record.name)
     .cell
-      = render FieldDisplay::Component.new(label: User.human_attribute_name(:role), value: record_role_name)
+      = render FieldDisplay::Component.new(label: User.human_attribute_name(:role), value: record.role_name)
 
     .cell.is-align-self-center
       .field.is-grouped.is-grouped-centered
-        - if policy(record).update?
+        - if policy(record.object).update?
           .control
             = link_to t("application.edit"),
-                    edit_user_path(record),
+                    edit_user_path(record.object),
                     class: "button is-edit-action"
-        - if policy(record).destroy?
+        - if policy(record.object).destroy?
           .control
             = button_to t("application.delete"),
-                    user_path(record),
+                    user_path(record.object),
                     method: :delete,
                     data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure")  },
                     class: "button is-delete-action"

@@ -11,7 +11,7 @@ en:
         title: "Contents search results"
       new:
         title: "New content"
-    logics:
+    interactors:
       create:
         save_record:
           success: "The content was created successfully"

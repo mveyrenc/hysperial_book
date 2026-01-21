@@ -31,7 +31,6 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class Book < ApplicationRecord
-
   self.implicit_order_column = 'created_at'
 
   ## Searchkick
@@ -46,9 +45,7 @@ class Book < ApplicationRecord
   positioned
 
   ## Enumerable
-  def kind_name
-    BookKind.human_attribute_name(kind)
-  end
+  validates :kind, inclusion: BookKind::KINDS
 
   ## Relations
   has_many :content_tag_families, -> { order(position: :asc) }, inverse_of: :book, dependent: :restrict_with_exception

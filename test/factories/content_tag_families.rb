@@ -38,13 +38,13 @@ FactoryBot.define do
   factory :content_tag_family do
     sequence(:name) { |n| "#{Faker::Name.title} #{n}" }
     kind { ContentTagFamilyKind::KINDS.sample }
-    book  factory: :book
+    book factory: :book
     created_by factory: :user
     updated_by factory: :user
 
     trait :reindex do
-      after(:create) do |book, _evaluator|
-        book.reindex(refresh: true)
+      after(:create) do |elem, _evaluator|
+        elem.reindex(refresh: true)
       end
     end
   end

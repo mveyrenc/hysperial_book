@@ -35,9 +35,10 @@ gem 'rails-pg-extras', '~> 5.6'
 # Attributes cleanup & sanitizing
 # ###############################
 
-# https://github.com/holli/auto_strip_attributes
-# AutoStripAttributes helps to remove unnecessary whitespaces from ActiveRecord or ActiveModel attributes
-gem 'auto_strip_attributes', '~> 2.6'
+# https://github.com/rmm5t/strip_attributes
+# StripAttributes is an ActiveModel extension that automatically strips all attributes of leading and trailing
+# whitespace before validation. If the attribute is blank, it strips the value to nil by default.
+gem 'strip_attributes', '~> 2.0'
 
 # https://github.com/rgrove/sanitize
 # Sanitize is an allowlist-based HTML and CSS sanitizer. It removes all HTML and/or CSS from a string except the
@@ -71,6 +72,10 @@ gem 'store_attribute', '~> 2.1'
 # https://github.com/collectiveidea/interactor
 # https://github.com/collectiveidea/interactor-rails
 gem 'interactor-rails', '~> 2.2'
+
+# https://github.com/drapergem/draper
+# Draper adds an object-oriented layer of presentation logic to your Rails application.
+gem 'draper', '~> 4.0'
 
 # ################################
 # Application maintenance & health
@@ -144,6 +149,7 @@ gem 'view_component', '~> 4.1'
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for modern web app frameworks
 # and ORMs
 gem 'kaminari', '~> 1.2'
+# TODO: try https://github.com/ddnexus/pagy
 
 # ######
 # Search

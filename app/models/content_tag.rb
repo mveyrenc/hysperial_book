@@ -33,6 +33,8 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentTag < ApplicationRecord
+  self.implicit_order_column = 'created_at'
+
   # Searchkick
   searchkick highlight: %i[name content_tag_family_name book_name]
 
@@ -74,7 +76,12 @@ class ContentTag < ApplicationRecord
 
   ## Relations
   belongs_to :content_tag_family
+
+  delegate :name, to: :content_tag_family, prefix: true
+
   has_one :book, through: :content_tag_family
+
+  delegate :name, to: :book, prefix: true
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
@@ -101,7 +108,8 @@ class ContentTag < ApplicationRecord
   has_many :contents, through: :content_taggings, dependent: :nullify
 
   ## Validations
-  validates :name, presence: true, uniqueness: { scope: %i[content_tag_family] }
+  validates :name, presence: true, uniqueness: { scope: %i[content_tag_family_id], case_sensitive: false }
+  validates :slug, presence: true, uniqueness: true
 
   def to_s
     name

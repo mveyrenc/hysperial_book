@@ -1,7 +1,7 @@
 ---
 
 fr:
-  books:
+  content_attributes:
     views:
       edit:
         title: "Modifier l'attribut"
@@ -11,7 +11,7 @@ fr:
         title: "Résultats de recherche de attributs"
       new:
         title: "Nouvel attribut"
-    logics:
+    interactors:
       create:
         save_record:
           success: "L'attribut a été créé avec succès"

@@ -5,8 +5,6 @@ module Books
     module Form
       # Books create/edit form component
       class Component < ApplicationComponent
-        delegate :kind, :kind_name, to: :record, prefix: true
-
         attr_reader :record
 
         def initialize(record:)

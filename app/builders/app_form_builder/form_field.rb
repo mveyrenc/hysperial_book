@@ -34,7 +34,7 @@ module AppFormBuilder
     def field_label(name, options)
       classes = %w[label]
       classes << 'required' if options[:required]
-      label(name, options[:label], class: classes)
+      label(name.to_s.delete_suffix('_id').to_sym, options[:label], class: classes)
     end
 
     def form_field_classes(options)

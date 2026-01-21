@@ -3,9 +3,9 @@
 module Layout
   module MainArea
     class Component < ApplicationComponent
-
       attr_reader :turbo_frame_tag_id
 
+      renders_one :hero_body
       renders_one :title
       renders_one :actions
       renders_one :left_aside

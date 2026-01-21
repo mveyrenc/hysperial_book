@@ -11,7 +11,7 @@ fr:
         title: "Résultats de recherche d'étiquettes"
       new:
         title: "Nouvelle étiquette"
-    logics:
+    interactors:
       create:
         save_record:
           success: "L'étiquette a été créée avec succès"

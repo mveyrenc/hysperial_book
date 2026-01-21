@@ -11,7 +11,7 @@ en:
         title: "Tag Family search results"
       new:
         title: "New tag family"
-    logics:
+    interactors:
       create:
         save_record:
           success: "The tag family was created successfully"

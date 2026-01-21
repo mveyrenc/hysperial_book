@@ -35,7 +35,6 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class ContentTagFamily < ApplicationRecord
-
   self.implicit_order_column = 'created_at'
 
   ## Searchkick
@@ -76,9 +75,7 @@ class ContentTagFamily < ApplicationRecord
   positioned on: :book
 
   ## Enumerable
-  def kind_name
-    ContentTagFamilyKind.human_attribute_name(kind)
-  end
+  validates :kind, inclusion: ContentTagFamilyKind::KINDS
 
   ## Relations
   belongs_to :book
@@ -89,12 +86,13 @@ class ContentTagFamily < ApplicationRecord
   belongs_to :updated_by, class_name: 'User'
 
   ## Validations
-  validates :name, presence: true, uniqueness: { scope: [:kind, :book_id], case_sensitive: false }
+  validates :name, presence: true, uniqueness: { scope: %i[kind book_id], case_sensitive: false }
   validates :kind, presence: true
   validates :slug, presence: true, uniqueness: true
 
   ## Callbacks
   after_commit :reindex_content_tag_families
+
   def reindex_content_tag_families
     # Reindex tag families related to the same book to update position
     ContentTagFamily.where(book: book).reindex

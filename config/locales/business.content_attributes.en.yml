@@ -11,7 +11,7 @@ en:
         title: "Attribute search results"
       new:
         title: "New attribute"
-    logics:
+    interactors:
       create:
         save_record:
           success: "The attribute was created successfully"

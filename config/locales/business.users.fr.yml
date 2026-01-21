@@ -1,7 +1,7 @@
 ---
 
 fr:
-  books:
+  users:
     views:
       edit:
         title: "Modifier l'utilisateur"
@@ -11,7 +11,7 @@ fr:
         title: "Résultats de recherche de utilisateurs"
       new:
         title: "Nouvel utilisateur"
-    logics:
+    interactors:
       create:
         save_record:
           success: "L'utilisateur a été créé avec succès"

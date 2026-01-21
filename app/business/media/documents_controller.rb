@@ -4,18 +4,22 @@
 module Media
   # Documents controller
   class DocumentsController < MediaController
-    protected
+    private
 
     def model
-      Document
+      @model = Document
     end
 
-    def media_media_url
+    def redirect_to_after_create
       media_documents_url
     end
 
-    def set_record
-      @record = Document.find(params[:id])
+    def redirect_to_after_update
+      media_documents_url
+    end
+
+    def redirect_to_after_destroy
+      media_documents_url
     end
 
     def strong_params

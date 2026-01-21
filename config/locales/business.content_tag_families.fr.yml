@@ -1,3 +1,5 @@
+---
+
 fr:
   content_tag_families:
     views:
@@ -9,7 +11,7 @@ fr:
         title: "Résultats de recherche de familles d'étiquettes"
       new:
         title: "Nouvelle famille d'étiquettes"
-    logics:
+    interactors:
       create:
         save_record:
           success: "La famille d'étiquettes a été créée avec succès"

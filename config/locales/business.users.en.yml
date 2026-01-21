@@ -11,7 +11,7 @@ en:
         title: "User search results"
       new:
         title: "New user"
-    logics:
+    interactors:
       create:
         save_record:
           success: "The user was created successfully"

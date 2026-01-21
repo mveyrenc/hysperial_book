@@ -7,7 +7,7 @@ module ContentTags
   end
 
   # Business logic for tags
-  module Logics
+  module Interactors
   end
 
   # Views for tags

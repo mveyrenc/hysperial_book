@@ -1,4 +1,4 @@
-= render Layout::MainArea::Component.new do |component|
+= render Layout::MainArea::Component.new(turbo_frame_tag_id: :contents) do |component|
   - component.with_title do
     = t('.title')
   - component.with_actions do
@@ -8,11 +8,11 @@
   - component.with_left_aside do
     = render Contents::Components::SearchForm::Component.new(params: params, aggs: @records.aggs, book: @records.book)
   - component.with_main_section do
-    = turbo_frame_tag "contents", class: "container" do
+    .container
       - if @records.records.any?
-        - @records.records.with_highlights.each do |record, highlights|
-          = turbo_frame_tag record do
-            = render Contents::Components::Card::Component.new(record: record, highlights: highlights)
+        - @records.records.each do |record|
+          = turbo_frame_tag record.object do
+            = render Contents::Components::Card::Component.new(record: record)
+        = paginate @records.records
       - else
         = render NoRecord::Component.new
-    = paginate @records.records

@@ -28,10 +28,12 @@
 #  index_users_on_role                  (role)
 #
 class User < ApplicationRecord
-  ## Callbacks
-  after_initialize :set_defaults
+  self.implicit_order_column = 'created_at'
 
-  ## Enumerables
+  ## Searchkick
+  searchkick highlight: %i[email name]
+
+  ## Enumerable
   def role_name
     UserRole.human_attribute_name(role)
   end
@@ -56,18 +58,28 @@ class User < ApplicationRecord
     role == 'super_admin'
   end
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable
+  ## Validate
+  validates :email, presence: true, uniqueness: true
+  validates :name, presence: true
+  validates :encrypted_password, presence: true
+  # validates :reset_password_token, uniqueness: true
 
+  ## Callbacks
+  after_initialize :set_defaults
+
+  ## Conversion Methods
   def to_s
     email
   end
 
-  protected
-
+  ## Default values
   def set_defaults
     self.role ||= :noob
   end
+
+  ## Devise
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :trackable
 end

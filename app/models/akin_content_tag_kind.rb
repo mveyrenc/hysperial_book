@@ -3,7 +3,7 @@
 class AkinContentTagKind
   extend ActiveModel::Translation
 
-  KINDS = %w[limited_relation followable_relation computed excludes suggests].freeze
+  KINDS = %w[computed excludes followable_relation limited_relation suggests].freeze
 
   def initialize(kind)
     @kind = kind

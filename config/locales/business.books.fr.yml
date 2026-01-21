@@ -11,7 +11,7 @@ fr:
         title: "Résultats de recherche de livres"
       new:
         title: "Nouveau livre"
-    logics:
+    interactors:
       create:
         save_record:
           success: "Le livre a été créé avec succès"

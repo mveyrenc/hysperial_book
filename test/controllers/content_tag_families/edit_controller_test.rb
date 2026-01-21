@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class TagFamiliesControllerTest < ActionDispatch::IntegrationTest
+class ContentTagFamiliesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = FactoryBot.create(:user, :super_admin)
     sign_in(@user, scope: :user)

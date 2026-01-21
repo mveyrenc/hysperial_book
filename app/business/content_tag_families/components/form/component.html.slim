@@ -2,14 +2,13 @@
   = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
     - if record.new_record?
-      = f.text_area :name, help: t('.name.help')
-      = f.select :kind, options_for_select(kind_select_values, record_kind)
-      = f.collection_select :book_id, book_collection, :id, :name
+      = f.text_area :name, autofocus: true, help: t('.name.help')
     - else
       = f.text_field :name, autofocus: true
-      = f.text_area :alternate_names
-      = f.text_area :description
-      = render FieldDisplay::Component.new(label: ContentTagFamily.human_attribute_name(:kind), value: record_kind_name)
+    = f.select :kind, options_for_select(kind_select_values, record.kind), {}, { disabled: record.persisted? }
+    = f.collection_select :book_id, book_collection, :id, :name, {}, { disabled: record.persisted? }
+    = f.text_area :alternate_names
+    = f.text_area :description
     = f.text_field :position
 
     .field

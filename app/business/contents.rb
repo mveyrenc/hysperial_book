@@ -7,7 +7,7 @@ module Contents
   end
 
   # Business logic for contents
-  module Logics
+  module Interactors
   end
 
   # Views for contents

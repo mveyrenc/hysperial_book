@@ -1,35 +1,4 @@
-= render Layout::MainArea::Component.new do |component|
-  - component.with_title do
-    .media
-      figure.media-left
-        p.image.is-128x128
-          - if @record.thumbnail.present? and @record.thumbnail.file.attached?
-            = image_tag @record.thumbnail.file.variant(resize_to_fill: [258, 258])
-          - else
-            = render Contents::Components::NoThumbnail::Component.new(record: record)
-      .media-content
-        h1.title
-          = @record.name
-      .media-right
-        span.tag
-          = @record.kind_name
-  - component.with_actions do
-    .level
-      .level-left
-      .level-right
-        - if policy(@record).update?
-          .level-item
-            = link_to t("application.edit"),
-              edit_content_path(@record),
-              class: "button is-edit-action",
-              target: "_top"
-        - if policy(@record).destroy?
-          .level-item
-            = button_to t("application.delete"),
-              content_path(@record),
-              method: :delete,
-              data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure") },
-              class: "button is-delete-action"
+= render Layout::MainArea::Component.new(turbo_frame_tag_id: @record) do |component|
   - component.with_main_section do
     = turbo_frame_tag @record do
       = render Contents::Components::Detail::Component.new(record: @record)

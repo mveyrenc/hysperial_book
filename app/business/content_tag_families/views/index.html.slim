@@ -10,9 +10,9 @@
   - component.with_main_section do
     .container
       - if @records.records.any?
-        - @records.records.with_highlights.each do |record, highlights|
-          = turbo_frame_tag record do
-            = render ContentTagFamilies::Components::Card::Component.new(record: record, highlights: highlights)
+        - @records.records.each do |record|
+          = turbo_frame_tag record.object do
+            = render ContentTagFamilies::Components::Card::Component.new(record: record)
         = paginate @records.records
       - else
         = render NoRecord::Component.new

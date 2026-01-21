@@ -1,26 +1,23 @@
 .card-box
-  .media
-    .media-left
-      - if record_thumbnail.present? and record_thumbnail.file.attached?
+  .grid.is-gap-2
+    .cell
+      - if record.thumbnail.present?
         figure.image.is-128x128
-          = image_tag record_thumbnail.file.variant(resize_to_fill: [258, 258])
+          = image_tag record.thumbnail.variant(resize_to_fill: [258, 258])
       - else
         = render Contents::Components::NoThumbnail::Component.new(record: record)
-    .media-content
-      h1.title.is-5
-        = record_name
-      - unless record_alternate_names.blank?
+    .cell
+      = record.name
+      - unless record.alternate_names.blank?
         p.subtitle
-          = record_alternate_names
-    .media-right
+          = record.alternate_names
+    .cell
       span.tag
-        = record_kind_name
-  .level
-    .level-left
-    .level-right
-      - if policy(record).show?
-        .level-item
-          = link_to t("application.read"),
-            content_path(record),
-            class: "button is-edit-action",
-            target: "_top"
+        = record.kind_name
+    .cell.is-align-self-center
+      .field.is-grouped.is-grouped-centered
+      - if policy(record.object).show?
+        = link_to t("application.read"),
+          content_path(record.object),
+          class: "button is-edit-action",
+          target: "_top"

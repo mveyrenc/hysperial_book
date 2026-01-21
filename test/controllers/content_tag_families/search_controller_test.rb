@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class TagFamiliesControllerTest < ActionDispatch::IntegrationTest
+class ContentTagFamiliesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = FactoryBot.create(:user, :super_admin)
     sign_in(@user, scope: :user)
@@ -20,7 +20,7 @@ class TagFamiliesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get search with some tag families' do
     ContentTagFamily.reindex
-    create_list(:content_tag_family, 3, created_by: @user, updated_by: @user)
+    create_list(:content_tag_family, 3)
 
     get search_content_tag_families_url
     assert_response :success

@@ -11,7 +11,7 @@ fr:
         title: "Résultats de recherche de médias"
       new:
         title: "Nouveau média"
-    logics:
+    interactors:
       create:
         save_record:
           success: "Le média a été créé avec succès"

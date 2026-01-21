@@ -1,2 +1,4 @@
-= turbo_stream.update @record do
-  = render(Users::Components::Card::Component.new(record: @record))
+= turbo_stream.update(:flash)
+  = render Layout::Flash::Component.new
+= turbo_stream.turbo_frame_set_src :users, users_path
+= turbo_stream.turbo_frame_reload :users

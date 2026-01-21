@@ -1,5 +1,6 @@
-= turbo_stream.prepend "contents" do
-  = turbo_frame_tag @record do
-    = render(Contents::Components::Card::Component.new(record: @record))
-= turbo_stream.update Content.new, render(Contents::Components::NewButton::Component.new)
-
+= turbo_stream.replace(:flash)
+  = render Layout::Flash::Component.new
+= turbo_stream.update Content.new do
+  = render(Contents::Components::NewButton::Component.new)
+= turbo_stream.turbo_frame_set_src :contents, contents_path
+= turbo_stream.turbo_frame_reload :contents

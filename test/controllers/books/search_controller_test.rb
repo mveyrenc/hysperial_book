@@ -20,7 +20,7 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get search with some books' do
     Book.reindex
-    create_list(:book, 3, created_by: @user, updated_by: @user)
+    create_list(:book, 3)
 
     get search_books_url
     assert_response :success

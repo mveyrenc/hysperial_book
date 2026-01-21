@@ -1,1 +1,4 @@
-= turbo_stream.remove @record
+= turbo_stream.replace(:flash)
+  = render Layout::Flash::Component.new
+= turbo_stream.turbo_frame_set_src :contents, contents_path
+= turbo_stream.turbo_frame_reload :contents

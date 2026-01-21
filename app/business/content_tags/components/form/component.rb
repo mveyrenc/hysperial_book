@@ -15,8 +15,8 @@ module ContentTags
 
         protected
 
-        def content_tag_family_group_method
-          Book.order(:position)
+        def book_collection
+          Book.includes([:content_tag_families]).order(:position)
         end
       end
     end

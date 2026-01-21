@@ -7,7 +7,7 @@ module ContentTagFamilies
   end
 
   # Business logic for tag kinds
-  module Logics
+  module Interactors
   end
 
   # Views for tag kinds

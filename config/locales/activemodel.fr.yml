@@ -6,42 +6,44 @@ fr:
     attributes:
 
       akin_content_tag_kind:
-        limited_relation: Relation limitée
-        followable_relation: Relation à suivre
         computed: Calculée
         excludes: Exclut
+        followable_relation: Relation à suivre
+        limited_relation: Relation limitée
         suggests: Suggère
 
       book_kind:
+        animals: Animaux
+        home_well_being: Bien-être du foyer
         cooking: Cuisine
-        body_home_care: Soins du corps et de la maison
         fabric_art: Art textile
         gardening: Jardinage
-        woodworking: Travail du bois
-        animals: Animaux
+        crafts: Artisanat
 
       content_tag_family_kind:
-        ingredient: Ingrédient
-        season: Saison
-        occasion: Occasion
+        author: Auteur
         category: Catégorie
         geographic_area: Zone géographique
+        ingredient: Ingrédient
+        occasion: Occasion
         restriction: Restriction
+        season: Saison
         source: Source
-        author: Auteur
         thematic: Thématique
 
       content_kind:
         article: Article
-        tutorial: Tutoriel
+        glossary: Glossaire
         ingredient: Ingrédient
-        recipe: Recette
         menu: Menu
         pattern: Patron
+        recipe: Recette
+        tool: Ustensile, outil
+        tutorial: Tutoriel
 
       user_role:
+        admin: Admin
+        contributor: Contributeur
         noob: Noob
         reader: Lecteur
-        contributor: Contributeur
-        admin: Admin
         super_admin: Super-admin

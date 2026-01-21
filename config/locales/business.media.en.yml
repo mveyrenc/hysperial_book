@@ -11,7 +11,7 @@ en:
         title: "Media search results"
       new:
         title: "New media"
-    logics:
+    interactors:
       create:
         save_record:
           success: "The media was created successfully"

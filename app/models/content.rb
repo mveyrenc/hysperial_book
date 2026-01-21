@@ -42,6 +42,8 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class Content < ApplicationRecord
+  self.implicit_order_column = 'created_at'
+
   # Searchkick
   searchkick highlight: %i[name alternate_names description]
 
@@ -84,6 +86,8 @@ class Content < ApplicationRecord
   ## Relations
   belongs_to :book
 
+  delegate :name, to: :book, prefix: true
+
   belongs_to :thumbnail, class_name: 'Picture', dependent: :destroy, optional: true
   # accepts_nested_attributes_for :thumbnail, reject_if: :reject_thumbnail
 
@@ -98,4 +102,5 @@ class Content < ApplicationRecord
   ## Validation
   validates :name, presence: true
   validates :kind, presence: true
+  validates :slug, presence: true, uniqueness: true
 end
