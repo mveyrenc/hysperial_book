@@ -11,7 +11,7 @@
 #  kind(The kind or type of the item)                 :string           not null
 #  metadata(A hash to store some data about the item) :jsonb            not null
 #  name(The name of the item)                         :string           not null
-#  position(The position of the item)                 :integer
+#  position(The position of the item)                 :integer          not null
 #  settings(A hash to configure the item)             :jsonb            not null
 #  slug(Human readable item identifier)               :string           not null
 #  created_at                                         :datetime         not null
@@ -41,9 +41,6 @@ class Book < ApplicationRecord
 
   friendly_id :name, use: :slugged
 
-  ## Position
-  positioned
-
   ## Enumerable
   validates :kind, inclusion: BookKind::KINDS
 
@@ -52,6 +49,9 @@ class Book < ApplicationRecord
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
+
+  ## Position
+  positioned
 
   ## Validations
   validates :name, presence: true, uniqueness: { case_sensitive: false }

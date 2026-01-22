@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2023_08_06_142408) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -22,7 +22,8 @@ ActiveRecord::Schema[8.1].define(version: 2023_08_06_142408) do
     t.uuid "record_id", null: false
     t.string "record_type", null: false
     t.datetime "updated_at", null: false
-    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+    t.index ["record_id", "record_type", "name"], name: "idx_on_record_id_record_type_name_3c9e691389", unique: true
+    t.index ["record_id", "record_type"], name: "index_action_text_rich_texts_on_record_id_and_record_type"
   end
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -32,7 +33,8 @@ ActiveRecord::Schema[8.1].define(version: 2023_08_06_142408) do
     t.uuid "record_id", null: false
     t.string "record_type", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index ["record_id", "record_type"], name: "index_active_storage_attachments_on_record_id_and_record_type"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "idx_on_record_type_record_id_name_blob_id_0be5805727", unique: true
   end
 
   create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -50,10 +52,10 @@ ActiveRecord::Schema[8.1].define(version: 2023_08_06_142408) do
   create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index ["blob_id", "variation_digest"], name: "idx_on_blob_id_variation_digest_f36bede0d9", unique: true
   end
 
-  create_table "akin_content_tags", id: false, force: :cascade do |t|
+  create_table "akin_content_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "kind", null: false
     t.jsonb "metadata", default: {}, null: false
@@ -62,6 +64,7 @@ ActiveRecord::Schema[8.1].define(version: 2023_08_06_142408) do
     t.datetime "updated_at", null: false
     t.index ["kind"], name: "index_akin_content_tags_on_kind"
     t.index ["related_id"], name: "index_akin_content_tags_on_related_id"
+    t.index ["relater_id", "related_id"], name: "index_akin_content_tags_on_relater_id_and_related_id", unique: true
     t.index ["relater_id"], name: "index_akin_content_tags_on_relater_id"
   end
 
@@ -74,7 +77,7 @@ ActiveRecord::Schema[8.1].define(version: 2023_08_06_142408) do
     t.string "kind", null: false, comment: "The kind or type of the item"
     t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
-    t.integer "position", comment: "The position of the item"
+    t.integer "position", null: false, comment: "The position of the item"
     t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
     t.string "slug", null: false, comment: "Human readable item identifier"
     t.datetime "updated_at", null: false
@@ -91,14 +94,17 @@ ActiveRecord::Schema[8.1].define(version: 2023_08_06_142408) do
     t.uuid "created_by_id", null: false
     t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
     t.text "description", comment: "A description of the item"
+    t.text "html_text", comment: "The html text of the item"
     t.string "kind", null: false, comment: "The kind or type of the item"
+    t.text "markdown_text", comment: "The markdown text of the item"
     t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
     t.text "plain_text", comment: "The plain text of the item"
-    t.integer "position", comment: "The position of the item"
+    t.integer "position", null: false, comment: "The position of the item"
     t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
     t.datetime "updated_at", null: false
     t.uuid "updated_by_id", null: false
+    t.index ["content_id", "position"], name: "index_content_attributes_on_content_id_and_position", unique: true
     t.index ["content_id"], name: "index_content_attributes_on_content_id"
     t.index ["created_by_id"], name: "index_content_attributes_on_created_by_id"
     t.index ["updated_by_id"], name: "index_content_attributes_on_updated_by_id"
@@ -114,24 +120,26 @@ ActiveRecord::Schema[8.1].define(version: 2023_08_06_142408) do
     t.string "kind", null: false
     t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
-    t.integer "position", comment: "The position of the item"
+    t.integer "position", null: false, comment: "The position of the item"
     t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
     t.string "slug", null: false
     t.datetime "updated_at", null: false
     t.uuid "updated_by_id", null: false
+    t.index ["book_id", "position"], name: "index_content_tag_families_on_book_id_and_position", unique: true
     t.index ["book_id"], name: "index_content_tag_families_on_book_id"
     t.index ["created_by_id"], name: "index_content_tag_families_on_created_by_id"
-    t.index ["kind", "name", "book_id"], name: "index_content_tag_families_on_kind_and_name_and_book_id", unique: true
+    t.index ["name", "book_id", "kind"], name: "index_content_tag_families_on_name_and_book_id_and_kind", unique: true
     t.index ["slug"], name: "index_content_tag_families_on_slug", unique: true
     t.index ["updated_by_id"], name: "index_content_tag_families_on_updated_by_id"
   end
 
-  create_table "content_taggings", id: false, force: :cascade do |t|
+  create_table "content_taggings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "content_id", null: false
     t.uuid "content_tag_id", null: false
     t.datetime "created_at", null: false
     t.jsonb "metadata", default: {}, null: false
     t.datetime "updated_at", null: false
+    t.index ["content_id", "content_tag_id"], name: "index_content_taggings_on_content_id_and_content_tag_id", unique: true
     t.index ["content_id"], name: "index_content_taggings_on_content_id"
     t.index ["content_tag_id"], name: "index_content_taggings_on_content_tag_id"
   end
@@ -202,8 +210,20 @@ ActiveRecord::Schema[8.1].define(version: 2023_08_06_142408) do
     t.datetime "updated_at", null: false
     t.uuid "updated_by_id", null: false
     t.index ["created_by_id"], name: "index_media_on_created_by_id"
+    t.index ["id", "type"], name: "index_media_on_id_and_type"
     t.index ["type"], name: "index_media_on_type"
     t.index ["updated_by_id"], name: "index_media_on_updated_by_id"
+  end
+
+  create_table "pghero_query_stats", force: :cascade do |t|
+    t.bigint "calls"
+    t.datetime "captured_at", precision: nil
+    t.text "database"
+    t.text "query"
+    t.bigint "query_hash"
+    t.float "total_time"
+    t.text "user"
+    t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -214,7 +234,7 @@ ActiveRecord::Schema[8.1].define(version: 2023_08_06_142408) do
     t.string "encrypted_password", null: false
     t.datetime "last_sign_in_at"
     t.string "last_sign_in_ip"
-    t.jsonb "metadata", default: {}, null: false
+    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.string "name", null: false
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"

@@ -33,7 +33,7 @@ class CreateBooks < ActiveRecord::Migration[8.0]
       t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'
       t.jsonb :settings, null: false, default: {}, comment: 'A hash to configure the item'
 
-      t.integer :position, comment: 'The position of the item'
+      t.integer :position, null: false, comment: 'The position of the item'
 
       t.references :created_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid

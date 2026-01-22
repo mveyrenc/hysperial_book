@@ -55,7 +55,10 @@ docker-recreate-web: # Remove and recreate web container
 	docker compose rm web
 	docker compose up -d
 
-logs-web: ## Display `web` container logs
+docker-restart-web: # Restart web container
+	docker compose restart web
+
+docker-logs-web: ## Display `web` container logs
 	docker compose logs web
 
 ###Dependency-Commands: ## .
@@ -78,9 +81,10 @@ install: ruby-install yarn-install ## Updates all our dependencies
 ###Rails-Commands: ## .
 db-recreate: ## Recreate nd seed database and storage folder
 	find storage -mindepth 1 -maxdepth 1 -type d  -print0 | xargs -0 /bin/rm -rf
-	docker compose exec web rails db:reset
+	docker compose exec web rails db:drop
 	rm -f db/schema.rb
-	docker compose exec web rails db:prepare
+	docker compose exec web rails db:create
+	docker compose exec web rails db:migrate
 	docker compose exec web rails db:seed
 	docker compose exec web rails searchkick:reindex:all
 

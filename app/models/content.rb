@@ -44,7 +44,7 @@
 class Content < ApplicationRecord
   self.implicit_order_column = 'created_at'
 
-  # Searchkick
+  ## Searchkick
   searchkick highlight: %i[name alternate_names description]
 
   def search_data
@@ -78,10 +78,8 @@ class Content < ApplicationRecord
 
   friendly_id :name, use: :slugged
 
-  ## Enumerables
-  def kind_name
-    ContentKind.human_attribute_name(kind)
-  end
+  ## Enumerable
+  validates :kind, inclusion: ContentKind::KINDS
 
   ## Relations
   belongs_to :book
@@ -91,16 +89,25 @@ class Content < ApplicationRecord
   belongs_to :thumbnail, class_name: 'Picture', dependent: :destroy, optional: true
   # accepts_nested_attributes_for :thumbnail, reject_if: :reject_thumbnail
 
-  belongs_to :created_by, class_name: 'User'
-  belongs_to :updated_by, class_name: 'User'
-
   has_many :content_taggings, dependent: :destroy
   has_many :content_tags, through: :content_taggings
 
   has_many :content_attributes, -> { order(position: :asc) }, inverse_of: :content, dependent: :restrict_with_exception
 
-  ## Validation
+  belongs_to :created_by, class_name: 'User'
+  belongs_to :updated_by, class_name: 'User'
+
+  ## Position
+  # no position
+
+  ## Validations
   validates :name, presence: true
   validates :kind, presence: true
   validates :slug, presence: true, uniqueness: true
+
+  ## Callbacks
+  # no callback
+
+  ## Conversion Methods
+  # no conversion method
 end

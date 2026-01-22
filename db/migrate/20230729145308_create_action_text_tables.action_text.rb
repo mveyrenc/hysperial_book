@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 # This migration comes from action_text (originally 20180528164100)
-class CreateActionTextTables < ActiveRecord::Migration[6.0]
+class CreateActionTextTables < ActiveRecord::Migration[8.0]
   def change
     # Use Active Record's configured type for primary and foreign keys
     primary_key_type, foreign_key_type = primary_and_foreign_key_types
 
     create_table :action_text_rich_texts, id: primary_key_type do |t|
       t.string :name, null: false
-      t.text :body, size: :long
+      t.text :body
       t.references :record, null: false, polymorphic: true, index: false, type: foreign_key_type
 
       t.timestamps

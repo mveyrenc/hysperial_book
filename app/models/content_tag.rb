@@ -35,7 +35,7 @@
 class ContentTag < ApplicationRecord
   self.implicit_order_column = 'created_at'
 
-  # Searchkick
+  ## Searchkick
   searchkick highlight: %i[name content_tag_family_name book_name]
 
   def search_data
@@ -58,9 +58,6 @@ class ContentTag < ApplicationRecord
 
   scope :search_import, -> { includes(:content_tag_family, :book) }
 
-  ## delegate
-  delegate :name, to: :content_tag_family, prefix: true
-
   ## FriendlyId
   extend FriendlyId
 
@@ -70,9 +67,8 @@ class ContentTag < ApplicationRecord
     [%i[content_tag_family_name name]]
   end
 
-  def kind_name
-    ContentTagFamily.human_attribute_name(kind)
-  end
+  ## Enumerable
+  # no enumerable
 
   ## Relations
   belongs_to :content_tag_family
@@ -111,6 +107,10 @@ class ContentTag < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: %i[content_tag_family_id], case_sensitive: false }
   validates :slug, presence: true, uniqueness: true
 
+  ## Callbacks
+  # no callback
+
+  ## Conversion Methods
   def to_s
     name
   end

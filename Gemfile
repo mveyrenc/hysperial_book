@@ -22,6 +22,10 @@ gem 'pg', '~> 1.1'
 # A performance dashboard for Postgres
 gem 'pghero', '~> 3.7'
 
+# https://github.com/pganalyze/pg_query
+# This Ruby extension uses the actual PostgreSQL server source to parse SQL queries and return the internal PostgreSQL parsetree.
+gem 'pg_query', '~> 6.2'
+
 # https://github.com/pawurb/rails-pg-extras
 # Get useful insights on your database health
 gem 'rails-pg-extras', '~> 5.6'
@@ -83,7 +87,7 @@ gem 'draper', '~> 4.0'
 
 # https://github.com/ankane/strong_migrations
 # Catch unsafe migrations in development
-gem 'strong_migrations', '~> 2.5'
+# gem 'strong_migrations', '~> 2.5'
 
 # ################
 # Assets, CSS & JS

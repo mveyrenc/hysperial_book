@@ -100,7 +100,8 @@ class ContentAttributeKind
   end
 
   def self.kinds
-    AVAILABLE_KINDS.keys.index_by(&:to_sym).to_h
+    AVAILABLE_KINDS.keys.map(&:to_s)
+                   # .index_by(&:to_sym).to_h
   end
 
   def self.data_type(kind)

@@ -4,22 +4,22 @@
 #
 # Table name: users
 #
-#  id                     :uuid             not null, primary key
-#  current_sign_in_at     :datetime
-#  current_sign_in_ip     :string
-#  email                  :string           not null
-#  encrypted_password     :string           not null
-#  last_sign_in_at        :datetime
-#  last_sign_in_ip        :string
-#  metadata               :jsonb            not null
-#  name                   :string           not null
-#  remember_created_at    :datetime
-#  reset_password_sent_at :datetime
-#  reset_password_token   :string
-#  role                   :string           default("noob"), not null
-#  sign_in_count          :integer          default(0), not null
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id                                                 :uuid             not null, primary key
+#  current_sign_in_at                                 :datetime
+#  current_sign_in_ip                                 :string
+#  email                                              :string           not null
+#  encrypted_password                                 :string           not null
+#  last_sign_in_at                                    :datetime
+#  last_sign_in_ip                                    :string
+#  metadata(A hash to store some data about the item) :jsonb            not null
+#  name                                               :string           not null
+#  remember_created_at                                :datetime
+#  reset_password_sent_at                             :datetime
+#  reset_password_token                               :string
+#  role                                               :string           default("noob"), not null
+#  sign_in_count                                      :integer          default(0), not null
+#  created_at                                         :datetime         not null
+#  updated_at                                         :datetime         not null
 #
 # Indexes
 #
@@ -33,10 +33,11 @@ class User < ApplicationRecord
   ## Searchkick
   searchkick highlight: %i[email name]
 
+  ## FriendlyId
+  # no friendly id
+
   ## Enumerable
-  def role_name
-    UserRole.human_attribute_name(role)
-  end
+    validates :role, inclusion: UserRole::ROLES
 
   def noob_role?
     role == 'noob'
@@ -58,7 +59,13 @@ class User < ApplicationRecord
     role == 'super_admin'
   end
 
-  ## Validate
+  ## Relations
+  # no relation
+
+  ## Position
+  # no position
+
+  ## Validations
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
   validates :encrypted_password, presence: true

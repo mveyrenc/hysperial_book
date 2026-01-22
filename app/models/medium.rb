@@ -15,6 +15,7 @@
 # Indexes
 #
 #  index_media_on_created_by_id  (created_by_id)
+#  index_media_on_id_and_type    (id,type)
 #  index_media_on_type           (type)
 #  index_media_on_updated_by_id  (updated_by_id)
 #
@@ -29,12 +30,25 @@ class Medium < ApplicationRecord
   ## Searchkick
   searchkick
 
-  ## Relations
+  ## FriendlyId
+  # no friendly id
 
+  ## Enumerable
+  # no enumerable
+
+  ## Relations
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
-  ## Validations
+  ## Position
+  # no position
 
+  ## Validations
   validates :type, presence: true
+
+  ## Callbacks
+  # no callback
+
+  ## Conversion Methods
+  # no conversion method
 end

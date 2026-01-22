@@ -40,9 +40,11 @@ class CreateContentAttributes < ActiveRecord::Migration[8.0]
       t.references :content, null: false, foreign_key: true, type: :uuid,
                              comment: 'The content to which the attribute belongs'
 
-      t.integer :position, comment: 'The position of the item'
+      t.integer :position, null: false,comment: 'The position of the item'
 
       t.text :plain_text, null: true, comment: 'The plain text of the item'
+      t.text :markdown_text, null: true, comment: 'The markdown text of the item'
+      t.text :html_text, null: true, comment: 'The html text of the item'
       t.jsonb :data, null: false, default: {}, comment: 'A hash to store the data of the item'
       t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'
       t.jsonb :settings, null: false, default: {}, comment: 'A hash to configure the item'
@@ -51,6 +53,8 @@ class CreateContentAttributes < ActiveRecord::Migration[8.0]
       t.references :updated_by, null: false, foreign_key: { to_table: :users, on_delete: :restrict }, type: :uuid
 
       t.timestamps
+
+      t.index [:content_id, :position], unique: true
     end
   end
 end

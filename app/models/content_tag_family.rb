@@ -11,7 +11,7 @@
 #  kind                                               :string           not null
 #  metadata(A hash to store some data about the item) :jsonb            not null
 #  name(The name of the item)                         :string           not null
-#  position(The position of the item)                 :integer
+#  position(The position of the item)                 :integer          not null
 #  settings(A hash to configure the item)             :jsonb            not null
 #  slug                                               :string           not null
 #  created_at                                         :datetime         not null
@@ -23,8 +23,9 @@
 # Indexes
 #
 #  index_content_tag_families_on_book_id                    (book_id)
+#  index_content_tag_families_on_book_id_and_position       (book_id,position) UNIQUE
 #  index_content_tag_families_on_created_by_id              (created_by_id)
-#  index_content_tag_families_on_kind_and_name_and_book_id  (kind,name,book_id) UNIQUE
+#  index_content_tag_families_on_name_and_book_id_and_kind  (name,book_id,kind) UNIQUE
 #  index_content_tag_families_on_slug                       (slug) UNIQUE
 #  index_content_tag_families_on_updated_by_id              (updated_by_id)
 #
@@ -71,9 +72,6 @@ class ContentTagFamily < ApplicationRecord
     [%i[kind name]]
   end
 
-  ## Position
-  positioned on: :book
-
   ## Enumerable
   validates :kind, inclusion: ContentTagFamilyKind::KINDS
 
@@ -84,6 +82,9 @@ class ContentTagFamily < ApplicationRecord
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
+
+  ## Position
+  positioned on: :book
 
   ## Validations
   validates :name, presence: true, uniqueness: { scope: %i[kind book_id], case_sensitive: false }

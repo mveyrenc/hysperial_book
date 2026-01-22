@@ -45,7 +45,7 @@ services:
     command: [ 'bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0' ]
     env_file: "docker/docker.env"
     volumes:
-      - .:/usr/src/app
+      - .:/usr/src/app:rw
       - hysperial_book_yarn_cache:/root/.yarn-cache
     ports:
       - "3000:3000"

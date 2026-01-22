@@ -72,7 +72,8 @@ class CreateContentTags < ActiveRecord::Migration[8.0]
       t.index %i[name content_tag_family_id], unique: true
     end
     # rubocop:enable Metrics/MethodLength
-    create_table :akin_content_tags, id: false do |t|
+    #
+    create_table :akin_content_tags, id: :uuid do |t|
       t.references :relater, null: false, foreign_key: { to_table: :content_tags, on_delete: :cascade }, type: :uuid
       t.references :related, null: false, foreign_key: { to_table: :content_tags, on_delete: :cascade }, type: :uuid
 
@@ -81,15 +82,19 @@ class CreateContentTags < ActiveRecord::Migration[8.0]
       t.jsonb :metadata, null: false, default: {}
 
       t.timestamps
+
+      t.index %i[relater_id related_id], unique: true
     end
 
-    create_table :content_taggings, id: false do |t|
+    create_table :content_taggings, id: :uuid do |t|
       t.references :content, null: false, foreign_key: { to_table: :contents, on_delete: :cascade }, type: :uuid
       t.references :content_tag, null: false, foreign_key: { to_table: :content_tags, on_delete: :cascade }, type: :uuid
 
       t.jsonb :metadata, null: false, default: {}
 
       t.timestamps
+
+      t.index %i[content_id content_tag_id], unique: true
     end
   end
 end
