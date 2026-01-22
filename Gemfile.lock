@@ -160,8 +160,6 @@ GEM
     database_cleaner-core (2.0.1)
     database_consistency (2.1.1)
       activerecord (>= 3.2)
-    database_validations (1.1.1)
-      activerecord (>= 4.2.0)
     date (3.5.1)
     debug (1.11.1)
       irb (~> 1.10)
@@ -591,7 +589,6 @@ DEPENDENCIES
   dartsass-rails (~> 0.5)
   database_cleaner-active_record
   database_consistency
-  database_validations
   debug
   devise (~> 4.9)
   draper (~> 4.0)

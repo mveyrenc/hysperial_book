@@ -234,10 +234,6 @@ group :development do
   # $ annotaterb routes
   gem 'annotaterb'
 
-  # https://github.com/toptal/database_validations
-  # DatabaseValidations helps you to keep the database consistency with better performance. iuo_o
-  gem 'database_validations'
-
   # https://github.com/djezzzl/database_consistency
   # The main goal of the project is to help you avoid various issues due to inconsistencies and inefficiencies between
   # a database schema and application models.

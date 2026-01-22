@@ -90,6 +90,7 @@ class ContentTagFamily < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: %i[kind book_id], case_sensitive: false }
   validates :kind, presence: true
   validates :slug, presence: true, uniqueness: true
+  validates :position, presence: true
 
   ## Callbacks
   after_commit :reindex_content_tag_families

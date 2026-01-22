@@ -62,6 +62,7 @@ class ContentAttribute < ApplicationRecord
   validates :name, presence: true
   validates :kind, presence: true
   validates :content, presence: true
+  validates :position, presence: true
 
   ## Position
   positioned on: :content

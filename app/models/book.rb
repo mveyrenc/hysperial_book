@@ -57,6 +57,7 @@ class Book < ApplicationRecord
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :kind, presence: true
   validates :slug, presence: true, uniqueness: true
+  validates :position, presence: true
 
   ## Callbacks
   after_commit :reindex_books
