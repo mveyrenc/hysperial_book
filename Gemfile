@@ -60,9 +60,9 @@ gem 'positioning', '~> 0.4'
 # FriendlyId is the "Swiss Army bulldozer" of slugging and permalink plugins for Active Record
 gem 'friendly_id', '~> 5.5'
 
-# https://github.com/palkan/store_attribute
-# Active Record extension which adds type casting support to store accessors.
-gem 'store_attribute', '~> 2.1'
+# https://github.com/basecamp/trix
+# A Rich Text Editor for Everyday Writing
+# gem 'action_text-trix'
 
 # ##############
 # Business logic

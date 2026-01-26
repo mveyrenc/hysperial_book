@@ -5,7 +5,6 @@ import TurboPower from "turbo_power";
 
 import "./controllers"
 import "trix"
-import "@rails/actiontext"
 import "./config"
 import "./channels"
 
