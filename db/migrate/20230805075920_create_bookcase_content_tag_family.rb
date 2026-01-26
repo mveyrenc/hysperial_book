@@ -24,8 +24,7 @@ class CreateBookcaseContentTagFamily < ActiveRecord::Migration[8.0]
       t.timestamps
 
       t.index %i[name book_id kind], unique: true
-      t.index [:book_id, :position], unique: true
-
+      t.index %i[book_id position], unique: true
     end
   end
 end

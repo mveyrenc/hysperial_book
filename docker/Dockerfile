@@ -55,12 +55,12 @@ RUN ln -s /opt/yarn-v${YARN_VERSION}/bin/yarn /usr/local/bin/yarn \
 WORKDIR ${APP_DIR}
 COPY . ${APP_DIR}
 
-# install gemfile and package
-RUN bundle install ${BUNDLE_WITHOUT}
-RUN yarn install
-
-# Build the js and css
-RUN yarn build
-RUN rails dartsass:build
+## install gemfile and package
+#RUN bundle install ${BUNDLE_WITHOUT}
+#RUN yarn install
+#
+## Build the js and css
+#RUN yarn build
+#RUN rails dartsass:build
 
 EXPOSE 3000

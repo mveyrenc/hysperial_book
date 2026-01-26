@@ -4,7 +4,6 @@ module Bookcase
   module Contents
     module Decorators
       class RecordDecorator < ApplicationDecorator
-
         delegate :kind
 
         decorates_association :book, with: Books::Decorators::RecordDecorator

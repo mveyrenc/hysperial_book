@@ -6,6 +6,7 @@ module Bookcase
     # Books controller
     class BooksController < ApplicationController
       include IndexSearchActionsConcern
+      include ShowActionConcern
       include NewCreateActionsConcern
       include EditUpdateActionsConcern
       include DestroyActionConcern
@@ -17,11 +18,11 @@ module Bookcase
       end
 
       def redirect_to_after_create
-        bookcase_books_path
+        bookcase_book_path(@record)
       end
 
       def redirect_to_after_update
-        bookcase_books_path
+        bookcase_book_path(@record)
       end
 
       def redirect_to_after_destroy

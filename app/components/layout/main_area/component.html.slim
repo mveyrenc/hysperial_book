@@ -1,24 +1,28 @@
-- if hero_body?
-  section.hero.is-small
-    .hero-body
-      = hero_body
-- elsif title?
-  section.hero.is-small
-    .hero-body
-      h1.title
-        = title
+section.section
+  - if hero_body? or title? or actions?
+    .level
+      - if hero_body?
+        .level-left
+          .level-item
+            = hero_body
+      - elsif title?
+        .level-left
+          .level-item
+            p.title.is-1
+              = title
 
-- if actions?
-  .block
-    = actions
-
-= helpers.turbo_frame_tag turbo_frame_tag_id, refresh: :replace
-  .columns
-    - if left_aside?
-      .column.is-narrow
-        = left_aside
-    .column
-      = main_section
-    - if right_aside?
-      .column.is-narrow
-        = right_aside
+      - if actions?
+        .level-right
+          = actions
+  - if upper_section?
+    = upper_section
+  = helpers.turbo_frame_tag turbo_frame_tag_id, refresh: :replace
+    .columns
+      - if left_aside?
+        .column.is-narrow
+          = left_aside
+      .column
+        = main_section
+      - if right_aside?
+        .column.is-narrow
+          = right_aside

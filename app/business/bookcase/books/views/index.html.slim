@@ -2,17 +2,17 @@
   - component.with_title do
     = t('.title')
   - component.with_actions do
-    - if policy(Bookcase::Book).create?
-      = turbo_frame_tag Bookcase::Book.new do
-        = render Bookcase::Books::Components::NewButton::Component.new
+    = render Bookcase::Books::Components::ActionButtons::Component.new(actions: %i[new])
   - component.with_left_aside do
     = render Bookcase::Books::Components::SearchForm::Component.new(params: params, aggs: @records.aggs)
+  - component.with_upper_section do
+    = turbo_frame_tag Bookcase::Book.new
   - component.with_main_section do
     .container
       - if @records.records.any?
         - @records.records.each do |record|
           = turbo_frame_tag record.object do
-            = render Bookcase::Books::Components::Card::Component.new(record: record)
+            = render Bookcase::Books::Components::Card::Component.new( record)
         = paginate @records.records
       - else
         = render NoRecord::Component.new

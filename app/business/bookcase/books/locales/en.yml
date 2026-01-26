@@ -53,5 +53,6 @@ en:
         alternate_names: Alternate names
         description: Description
         kind: Kind
+        content_tag_families: Tag families
         created_at: Created at
         updated_at: Updated at

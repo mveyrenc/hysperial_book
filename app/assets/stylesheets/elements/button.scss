@@ -2,16 +2,23 @@
 @use "bulma/sass/elements/button";
 
 .#{iv.$class-prefix}button {
+  &.is-show-action {
+    @extend .is-link;
+    @extend .is-small;
+  }
   &.is-new-action {
     @extend .is-primary;
+    @extend .is-small;
     @extend .is-outlined;
   }
   &.is-edit-action {
     @extend .is-primary;
     @extend .is-small;
+    @extend .is-outlined;
   }
   &.is-delete-action {
     @extend .is-danger;
     @extend .is-small;
+    @extend .is-outlined;
   }
 }

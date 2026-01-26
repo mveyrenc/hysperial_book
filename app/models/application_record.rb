@@ -33,5 +33,4 @@ class ApplicationRecord < ActiveRecord::Base
 
   ## Default values
   # no default value
-
 end

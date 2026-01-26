@@ -40,7 +40,7 @@ class CreateBookcaseContentAttributes < ActiveRecord::Migration[8.0]
       t.references :content, null: false, foreign_key: true, type: :uuid,
                              comment: 'The content to which the attribute belongs'
 
-      t.integer :position, null: false,comment: 'The position of the item'
+      t.integer :position, null: false, comment: 'The position of the item'
 
       t.text :plain_text, null: true, comment: 'The plain text of the item'
       t.text :markdown_text, null: true, comment: 'The markdown text of the item'
@@ -54,7 +54,7 @@ class CreateBookcaseContentAttributes < ActiveRecord::Migration[8.0]
 
       t.timestamps
 
-      t.index [:content_id, :position], unique: true
+      t.index %i[content_id position], unique: true
     end
   end
 end

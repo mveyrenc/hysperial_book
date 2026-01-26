@@ -9,7 +9,7 @@ module Bookcase
           attr_reader :record
 
           # @param record Books::Decorators::RecordDecorator
-          def initialize(record:)
+          def initialize(record)
             @record = record
           end
         end

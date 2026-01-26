@@ -53,5 +53,6 @@ fr:
         alternate_names: Autres noms
         description: Description
         kind: Type
+        content_tag_families: Familles d'étiquettes 
         created_at: Créé le
         updated_at: Modifié le

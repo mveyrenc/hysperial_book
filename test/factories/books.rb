@@ -31,7 +31,7 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 FactoryBot.define do
-  factory :book, class: Bookcase::Book do
+  factory :book, class: 'Bookcase::Book' do
     sequence(:name) { |n| "#{Faker::Name.title} #{n}" }
     kind { Bookcase::BookKind::KINDS.sample }
     created_by factory: :user

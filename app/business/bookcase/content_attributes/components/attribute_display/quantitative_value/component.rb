@@ -14,7 +14,7 @@ module Bookcase
             # - unit_text	      Text	  A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for unitCode.
             # - value	          Number  The value of a QuantitativeValue (including Observation) or property value node.
             def render?
-              record.data.present? && (record.data.key?('value') || (record.data.key?('min_value') && record.data.key?('max_value'))) || super
+              (record.data.present? && (record.data.key?('value') || (record.data.key?('min_value') && record.data.key?('max_value')))) || super
             end
           end
         end

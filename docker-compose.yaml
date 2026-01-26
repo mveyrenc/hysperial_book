@@ -42,7 +42,8 @@ services:
         APP_DIR: '/usr/src/app'
     working_dir: '/usr/src/app'
     entrypoint: docker/entrypoints/rails.sh
-    command: [ 'bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0' ]
+#    command: [ 'bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0' ]
+    command: ['bin/dev']
     env_file: "docker/docker.env"
     volumes:
       - .:/usr/src/app:rw

@@ -8,6 +8,7 @@ module Layout
       renders_one :hero_body
       renders_one :title
       renders_one :actions
+      renders_one :upper_section
       renders_one :left_aside
       renders_one :right_aside
       renders_one :main_section

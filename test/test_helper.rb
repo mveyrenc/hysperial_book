@@ -30,7 +30,7 @@ end
 # https://github.com/alindeman/zonebie
 Zonebie.set_random_timezone
 
-require "minitest/reporters"
+require 'minitest/reporters'
 # Minitest::Reporters.use!
 Minitest::Reporters::RubyMineReporter.new
 

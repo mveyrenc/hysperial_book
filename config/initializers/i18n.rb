@@ -7,4 +7,4 @@ I18n.available_locales = %i[en fr]
 I18n.default_locale = :fr
 
 # Where the I18n library should search for translation files
-I18n.load_path += Dir[Rails.root.join("app", "business", "**", "locales", "*.{rb,yml}")]
+I18n.load_path += Rails.root.glob('app/business/**/locales/*.{rb,yml}')

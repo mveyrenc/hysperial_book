@@ -45,8 +45,7 @@ module Bookcase
     # no position
 
     ## Validations
-    validates :relater, presence: true
-    validates :related, presence: true, uniqueness: { scope: :relater }, comparison: { other_than: :relater }
+    validates :related, uniqueness: { scope: :relater }, comparison: { other_than: :relater }
     validates :kind, presence: true
 
     ## Callbacks

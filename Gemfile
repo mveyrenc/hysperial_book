@@ -88,8 +88,9 @@ gem 'draper', '~> 4.0'
 # Assets, CSS & JS
 # ################
 
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem 'sprockets-rails', '~> 3.5'
+# https://github.com/rails/propshaft
+# Propshaft is an asset pipeline library for Rails
+gem 'propshaft', '~> 1.3'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem 'jsbundling-rails', '~> 1.3'

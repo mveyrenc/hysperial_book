@@ -47,7 +47,7 @@ module Bookcase
     end
 
     ## Enumerable
-    validates :kind, inclusion: { in: -> { ContentAttributeKind::kinds } }
+    validates :kind, inclusion: { in: -> { ContentAttributeKind.kinds } }
 
     def data_type
       ContentAttributeKind.data_type(kind)
@@ -62,7 +62,6 @@ module Bookcase
     ## Validations
     validates :name, presence: true
     validates :kind, presence: true
-    validates :content, presence: true
 
     ## Position
     positioned on: :content

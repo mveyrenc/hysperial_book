@@ -33,7 +33,7 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 FactoryBot.define do
-  factory :content_tag, class: Bookcase::ContentTag do
+  factory :content_tag, class: 'Bookcase::ContentTag' do
     sequence(:name) { |n| "#{Faker::Name.title} #{n}" }
     content_tag_family  factory: :content_tag_family
     created_by factory: :user

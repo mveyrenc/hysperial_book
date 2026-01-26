@@ -46,8 +46,7 @@ module Bookcase
     # no position
 
     ## Validations
-    validates :content, presence: true
-    validates :content_tag, presence: true, uniqueness: { scope: :content }
+    validates :content_tag, uniqueness: { scope: :content }
 
     ## Callbacks
     # no callback

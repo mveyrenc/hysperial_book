@@ -12,6 +12,11 @@
       = render FieldDisplay::Component.new(label: Bookcase::Book.human_attribute_name(:description), value: record.description)
     .cell.is-align-self-center
       .field.is-grouped.is-grouped-centered
+        - if policy(record.object).show?
+          .control
+            = link_to t('application.read'),
+              bookcase_book_path(record.object),
+              class: 'button is-show-action'
         - if policy(record.object).update?
           .control
             = link_to t('application.edit'),
