@@ -1,0 +1,7 @@
+- if record.data.present? and record.data.key?("value")
+  = record.data["value"]
+- elsif record.html_text.present?
+  .content
+    = record.html_text.html_safe
+- elsif record.plain_text.present?
+  = record.plain_text

@@ -30,6 +30,10 @@ end
 # https://github.com/alindeman/zonebie
 Zonebie.set_random_timezone
 
+require "minitest/reporters"
+# Minitest::Reporters.use!
+Minitest::Reporters::RubyMineReporter.new
+
 module ActionDispatch
   class IntegrationTest
     setup do

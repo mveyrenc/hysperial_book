@@ -84,6 +84,7 @@ GEM
     annotaterb (4.20.0)
       activerecord (>= 6.0.0)
       activesupport (>= 6.0.0)
+    ansi (1.5.0)
     arrayfields (4.9.2)
     ast (2.4.3)
     attractor (2.6.0)
@@ -306,6 +307,11 @@ GEM
     minitest-rails (8.1.0)
       minitest (~> 5.20)
       railties (>= 8.1.0, < 8.2.0)
+    minitest-reporters (1.7.1)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
     msgpack (1.8.0)
     multi_json (1.19.1)
     mustermann (3.0.4)
@@ -482,9 +488,6 @@ GEM
     ruby_parser (3.22.0)
       racc (~> 1.5)
       sexp_processor (~> 4.16)
-    sanitize (7.0.0)
-      crass (~> 1.0.2)
-      nokogiri (>= 1.16.8)
     sass-embedded (1.97.2-x86_64-linux-gnu)
       google-protobuf (~> 4.31)
     searchkick (6.0.3)
@@ -604,6 +607,7 @@ DEPENDENCIES
   lol_dba
   meta_request
   minitest-rails
+  minitest-reporters
   next_rails
   opensearch-ruby (~> 3.4)
   pg (~> 1.1)
@@ -620,7 +624,6 @@ DEPENDENCIES
   rubocop-capybara
   rubocop-factory_bot
   rubocop-rails
-  sanitize (~> 7.0)
   searchkick (~> 6.0)
   simplecov
   slim-rails (~> 4.0)

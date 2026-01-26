@@ -1,0 +1,12 @@
+.card-box
+  = form_with(url: search_bookcase_content_tag_families_path, builder: AppFormBuilder::FormBuilder, method: :get, data: { turbo: 'false' }) do |f|
+    = f.text_field :q, value: params_q, hide_label: true, placeholder: t('application.search_q_placeholder')
+    - aggs.each do |k, agg|
+      = f.select k, options_for_select(agg[:buckets], params[k]),
+        label: agg[:name],
+        include_blank: true, fullwidth: true,
+        multiple: agg[:multiple]
+    .field
+      .buttons
+        = f.submit t('application.search'), class: 'button is-primary'
+        = link_to t('application.reset_search'), bookcase_content_tag_families_path, class: 'button'

@@ -14,46 +14,46 @@ nav.main-nav.navbar.is-fixed-top.is-primary[role="navigation" aria-label="main n
     - if user_signed_in?
       .navbar-menu id="navbar-menu"
         .navbar-start
-          - if policy(Content).index?
+          - if policy(Bookcase::Content).index?
             .navbar-item.has-dropdown.is-hoverable
               a.navbar-link
-                = Content.model_name.human(count: 2)
+                = Bookcase::Content.model_name.human(count: 2)
               .navbar-dropdown
-                = link_to contents_path, class: "navbar-item#{" is-active" if controller_name == 'contents'}", target: "_top" do
+                = link_to bookcase_contents_path, class: "navbar-item#{" is-active" if controller_name == 'contents'}", target: "_top" do
                   span
                     = t('application.all_contents')
-                - Book.all.each do |book|
-                  = link_to search_book_contents_path(book), class: "navbar-item", target: "_top" do
+                - Bookcase::Book.all.each do |book|
+                  = link_to search_bookcase_book_contents_path(book), class: "navbar-item", target: "_top" do
                     span
                       = book.name
           .navbar-item.has-dropdown.is-hoverable
             a.navbar-link
               = t('application.more')
             .navbar-dropdown
-              - if policy(Book).index?
-                = link_to books_path, class: "navbar-item#{" is-active" if controller_name == 'books'}", target: "_top" do
+              - if policy(Bookcase::Book).index?
+                = link_to bookcase_books_path, class: "navbar-item#{" is-active" if controller_name == 'books'}", target: "_top" do
                   span
-                    = Book.model_name.human(count: 2)
-              - if policy(ContentTagFamily).index?
-                = link_to content_tag_families_path, class: "navbar-item#{" is-active" if controller_name == 'content_tag_families'}", target: "_top" do
+                    = Bookcase::Book.model_name.human(count: 2)
+              - if policy(Bookcase::ContentTagFamily).index?
+                = link_to bookcase_content_tag_families_path, class: "navbar-item#{" is-active" if controller_name == 'content_tag_families'}", target: "_top" do
                   span
-                    = ContentTagFamily.model_name.human(count: 2)
-              - if policy(ContentTag).index?
-                = link_to content_tags_path, class: "navbar-item#{" is-active" if controller_name == 'content_tags'}", target: "_top" do
+                    = Bookcase::ContentTagFamily.model_name.human(count: 2)
+              - if policy(Bookcase::ContentTag).index?
+                = link_to bookcase_content_tags_path, class: "navbar-item#{" is-active" if controller_name == 'content_tags'}", target: "_top" do
                   span
-                    = ContentTag.model_name.human(count: 2)
-              - if policy(Document).index?
-                = link_to media_documents_path, class: "navbar-item#{" is-active" if controller_name == 'documents'}", target: "_top" do
+                    = Bookcase::ContentTag.model_name.human(count: 2)
+              - if policy(Bookcase::Document).index?
+                = link_to bookcase_media_documents_path, class: "navbar-item#{" is-active" if controller_name == 'documents'}", target: "_top" do
                   span
-                    = Document.model_name.human(count: 2)
-              - if policy(Picture).index?
-                = link_to media_pictures_path, class: "navbar-item#{" is-active" if controller_name == 'pictures'}", target: "_top" do
+                    = Bookcase::Document.model_name.human(count: 2)
+              - if policy(Bookcase::Picture).index?
+                = link_to bookcase_media_pictures_path, class: "navbar-item#{" is-active" if controller_name == 'pictures'}", target: "_top" do
                   span
-                    = Picture.model_name.human(count: 2)
-              - if policy(Scan).index?
-                = link_to media_scans_path, class: "navbar-item#{" is-active" if controller_name == 'scans'}", target: "_top" do
+                    = Bookcase::Picture.model_name.human(count: 2)
+              - if policy(Bookcase::Scan).index?
+                = link_to bookcase_media_scans_path, class: "navbar-item#{" is-active" if controller_name == 'scans'}", target: "_top" do
                   span
-                    = Scan.model_name.human(count: 2)
+                    = Bookcase::Scan.model_name.human(count: 2)
               - if policy(User).index?
                 = link_to users_path, class: "navbar-item#{" is-active" if controller_name == 'users'}", target: "_top" do
                   span

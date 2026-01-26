@@ -1,0 +1,65 @@
+en:
+  bookcase:
+    content_tag_families:
+      views:
+        edit:
+          title: "Edit the tag family"
+        index:
+          title: "Tag Families"
+        search:
+          title: "Tag Family search results"
+        new:
+          title: "New tag family"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "The tag family was created successfully"
+        update_interactor:
+          save_record:
+            success: "The tag family has been successfully modified"
+        create_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No tag family found in the settings"
+        hydrate_record:
+          no_record: "No tag family found in the settings"
+        update_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No tag family found in the settings"
+          successfully_updated: "The tag family has been successfully modified"
+        save_record:
+          no_record: "No tag family found in the settings"
+          failure: "An error occurred while saving the tag family"
+        destroy_interactor:
+          successfully_destroyed: "The tag family was successfully destroyed"
+      components:
+        form:
+          component:
+            name:
+              help: "Add on value by line to create several content tags in one go"
+  activemodel:
+    attributes:
+      bookcase/content_tag_family_kind:
+        author: Author
+        category: Category
+        geographic_area: Geographic area
+        ingredient: Ingredient
+        occasion: Occasion
+        restriction: Restriction
+        season: Season
+        source: Source
+        thematic: Thematic
+  activerecord:
+    models:
+      bookcase/content_tag_family:
+        one: Tag family
+        other: Tag families
+    attributes:
+      bookcase/content_tag_family:
+        name: Name
+        alternate_names: Alternate names
+        description: Description
+        book: Book
+        book_kind: Kind of book
+        kind: Kind
+        created_at: Created at
+        updated_at: Updated at

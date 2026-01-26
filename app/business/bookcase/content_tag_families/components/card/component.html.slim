@@ -1,0 +1,24 @@
+.card-box
+  .grid.is-gap-2
+    .cell
+      = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:book), value: record.book_name)
+    .cell
+      = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:book_kind), value: record.book_kind_name)
+    .cell
+      = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:name), value: record.name)
+    .cell
+      = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:kind), value: record.kind_name)
+    .cell.is-align-self-center
+      .field.is-grouped.is-grouped-centered
+        - if policy(record.object).update?
+          .control
+            = link_to t('application.edit'),
+              edit_bookcase_content_tag_family_path(record.object),
+              class: 'button is-edit-action'
+        - if policy(record.object).destroy?
+          .control
+            = button_to t('application.delete'),
+              bookcase_content_tag_family_path(record.object),
+              method: :delete,
+              data: { 'turbo-method': :delete, 'turbo-confirm': t('application.are_you_sure') },
+              class: 'button is-delete-action'

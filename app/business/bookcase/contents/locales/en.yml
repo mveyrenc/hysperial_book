@@ -1,0 +1,61 @@
+en:
+  bookcase:
+    contents:
+      views:
+        edit:
+          title: "Edit content"
+        index:
+          title: "Contents"
+        search:
+          title: "Contents search results"
+        new:
+          title: "New content"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "The content was created successfully"
+        update_interactor:
+          save_record:
+            success: "The content has been successfully modified"
+        create_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No content found in the settings"
+        hydrate_record:
+          no_record: "No content found in the settings"
+        update_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No content found in the settings"
+          successfully_updated: "The content has been successfully modified"
+        save_record:
+          no_record: "No content found in the settings"
+          failure: "An error occurred while saving the content"
+        destroy_interactor:
+          successfully_destroyed: "The content was successfully destroyed"
+  activemodel:
+    attributes:
+      bookcase/content_kind:
+        article: Article
+        glossary: Glossary
+        ingredient: Ingredient
+        menu: Menu
+        pattern: Pattern
+        recipe: Recipe
+        tool: Tool
+        tutorial: Tutorial
+  activerecord:
+    models:
+      bookcase/content:
+        one: Content
+        other: Contents
+    attributes:
+      bookcase/content:
+        name: Name
+        alternate_names: Alternate names
+        description: Description
+        kind: Kind
+        book: Book
+        book_kind: Kind of book
+        content_tag_family: Tag family
+        content_tag_family_kind: Kind of tg family
+        created_at: Created at
+        updated_at: Updated at

@@ -1,0 +1,28 @@
+.card-box
+  .level
+    .level-left
+      .level-item
+        - if record.thumbnail.present?
+          figure.image.is-128x128
+            = image_tag record.thumbnail.variant(resize_to_fill: [258, 258])
+        - else
+          = render Bookcase::Contents::Components::NoThumbnail::Component.new(record: record)
+      .level-item.has-text-left
+        div
+          p.title
+            = record.name
+        div
+          span.tag
+            = record.kind_name
+        - unless record.alternate_names.blank?
+          div
+            p.subtitle
+              = record.alternate_names
+    .level-right
+      .level-item.is-align-self-center
+        .field.is-grouped.is-grouped-centered
+        - if policy(record.object).show?
+          = link_to t('application.read'),
+            bookcase_content_path(record.object),
+            class: 'button is-edit-action',
+            target: '_top'

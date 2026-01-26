@@ -1,0 +1,63 @@
+fr:
+  bookcase:
+    contents:
+      views:
+        edit:
+          title: "Modifier le contenu"
+        index:
+          title: "Contenus"
+        search:
+          title: "Résultats de recherche de contenus"
+        new:
+          title: "Nouveau contenu"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "Le contenu a été créé avec succès"
+        update_interactor:
+          save_record:
+            success: "Le contenu a été modifié avec succès"
+        create_record:
+          no_current_user: "Aucun utilisateur trouvé en paramètre"
+          no_record: "Aucun contenu trouvé en paramètre"
+        hydrate_record:
+          no_record: "Aucun contenu trouvé en paramètre"
+        update_record:
+          no_current_user: "Aucun utilisateur trouvé en paramètre"
+          no_record: "Aucun contenu trouvé en paramètre"
+          successfully_updated: "Le contenu a été modifié avec succès"
+        save_record:
+          no_record: "Aucun contenu trouvé en paramètre"
+          failure: "Une erreur s'est produite lors de l'enregistrement du contenu"
+        destroy_interactor:
+          no_record: "Aucun contenu trouvé en paramètre"
+          success: "Le contenu a été supprimé avec succès"
+          failure: "Une erreur s'est produite lors de la suppression du contenu"
+  activemodel:
+    attributes:
+      bookcase/content_kind:
+        article: Article
+        glossary: Glossaire
+        ingredient: Ingrédient
+        menu: Menu
+        pattern: Patron
+        recipe: Recette
+        tool: Ustensile, outil
+        tutorial: Tutoriel
+  activerecord:
+    models:
+      bookcase/content:
+        one: Contenu
+        other: Contenus
+    attributes:
+      bookcase/content:
+        name: Nom
+        alternate_names: Autres noms
+        description: Description
+        kind: Type
+        book: Livre
+        book_kind: Type de livre
+        content_tag_family: Famille d'étiquettes
+        content_tag_family_kind: Type de famille d'étiquettes
+        created_at: Créé le
+        updated_at: Modifié le

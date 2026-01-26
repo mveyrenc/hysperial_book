@@ -1,0 +1,65 @@
+fr:
+  bookcase:
+    content_tags:
+      views:
+        edit:
+          title: "Modifier l'étiquette"
+        index:
+          title: "Étiquettes"
+        search:
+          title: "Résultats de recherche d'étiquettes"
+        new:
+          title: "Nouvelle étiquette"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "L'étiquette a été créée avec succès"
+        update_interactor:
+          save_record:
+            success: "L'étiquette a été modifiée avec succès"
+        create_record:
+          no_current_user: "Aucun utilisateur trouvé en paramètre"
+          no_record: "Aucune étiquette trouvée en paramètre"
+        hydrate_record:
+          no_record: "Aucune étiquette trouvée en paramètre"
+        update_record:
+          no_current_user: "Aucun utilisateur trouvé en paramètre"
+          no_record: "Aucune étiquette trouvée en paramètre"
+          successfully_updated: "L'étiquette a été modifiée avec succès"
+        save_record:
+          no_record: "Aucune étiquette trouvée en paramètre"
+          failure: "Une erreur s'est produite lors de l'enregistrement de l'étiquette"
+        destroy_interactor:
+          no_record: "Aucune étiquette trouvée en paramètre"
+          success: "L'étiquette a été supprimée avec succès"
+          failure: "Une erreur s'est produite lors de la suppression de l'étiquette"
+      components:
+        form:
+          component:
+            name:
+              help: "Ajoutez de la valeur par ligne pour créer plusieurs balises de contenu en une seule fois"
+  activemodel:
+    attributes:
+      bookcase/akin_content_tag_kind:
+        computed: Computed
+        excludes: Excludes
+        followable_relation: Relation to follow
+        limited_relation: Limited relation
+        suggests: Suggests
+  activerecord:
+    models:
+      bookcase/content_tag:
+        one: Étiquette
+        other: Étiquettes
+    attributes:
+      bookcase/content_tag:
+        name: Nom
+        alternate_names: Autres noms
+        description: Description
+        kind: Type
+        book: Livre
+        book_kind: Type de livre
+        content_tag_family: Famille d'étiquettes
+        content_tag_family_kind: Type de famille d'étiquettes
+        created_at: Créé le
+        updated_at: Modifié le

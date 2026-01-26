@@ -1,75 +1,10 @@
----
-
 en:
   activerecord:
-
-    models:
-      book:
-        one: Book
-        other: Books
-      content_tag_family:
-        one: Tag family
-        other: Tag families
-      content_tag:
-        one: Tag
-        other: Tags
-      content:
-        one: Content
-        other: Contents
-
-    attributes:
-
-      book:
-        name: Name
-        alternate_names: Alternate names
-        description: Description
-        kind: Kind
-        created_at: Created at
-        updated_at: Updated at
-
-      content_tag_family:
-        name: Name
-        alternate_names: Alternate names
-        description: Description
-        book: Book
-        book_kind: Kind of book
-        kind: Kind
-        created_at: Created at
-        updated_at: Updated at
-
-      content_tag:
-        name: Name
-        alternate_names: Alternate names
-        description: Description
-        kind: Kind
-        book: Book
-        book_kind: Kind of book
-        content_tag_family: Tag family
-        content_tag_family_kind: Kind of tg family
-        created_at: Created at
-        updated_at: Updated at
-
-      content:
-        name: Name
-        alternate_names: Alternate names
-        description: Description
-        kind: Kind
-        book: Book
-        book_kind: Kind of book
-        content_tag_family: Tag family
-        content_tag_family_kind: Kind of tg family
-        created_at: Created at
-        updated_at: Updated at
-
-      user:
-        name: Name
-        role: Rôle
-
     errors:
       template:
         header:
-          one:    "1 error prohibited this %{model} from being saved"
-          other:  "%{count} errors prohibited this %{model} from being saved"
+          one: "1 error prohibited this %{model} from being saved"
+          other: "%{count} errors prohibited this %{model} from being saved"
         body: "Please check the following fields:"
       messages:
         required: "is required"
@@ -107,5 +42,4 @@ en:
         domain_not_allowed: "contains a domain not allowed (%{domain})"
         too_simple: "is too simple"
         record invalid: "record is invalid"
-
   actionview_instancetag_blank_option: Please select

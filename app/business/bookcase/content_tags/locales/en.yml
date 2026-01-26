@@ -1,0 +1,63 @@
+en:
+  bookcase:
+    content_tags:
+      views:
+        edit:
+          title: "Edit tag"
+        index:
+          title: "Tags"
+        search:
+          title: "Tag search results"
+        new:
+          title: "New tag"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "The tag was created successfully"
+        update_interactor:
+          save_record:
+            success: "The tag has been successfully modified"
+        create_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No tag found in the settings"
+        hydrate_record:
+          no_record: "No tag found in the settings"
+        update_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No tag found in the settings"
+          successfully_updated: "The tag has been successfully modified"
+        save_record:
+          no_record: "No tag found in the settings"
+          failure: "An error occurred while saving the tag"
+        destroy_interactor:
+          successfully_destroyed: "The tag was successfully destroyed"
+      components:
+        form:
+          component:
+            name:
+              help: "Add on value by line to create several content tags in one go"
+  activemodel:
+    attributes:
+      bookcase/akin_content_tag_kind:
+        computed: Computed
+        excludes: Excludes
+        followable_relation: Relation to follow
+        limited_relation: Limited relation
+        suggests: Suggests
+  activerecord:
+    models:
+      bookcase/content_tag:
+        one: Tag
+        other: Tags
+    attributes:
+      bookcase/content_tag:
+        name: Name
+        alternate_names: Alternate names
+        description: Description
+        kind: Kind
+        book: Book
+        book_kind: Kind of book
+        content_tag_family: Tag family
+        content_tag_family_kind: Kind of tg family
+        created_at: Created at
+        updated_at: Updated at

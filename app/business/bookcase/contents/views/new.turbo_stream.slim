@@ -1,0 +1,4 @@
+= turbo_stream.replace(:flash)
+  = render Layout::Flash::Component.new
+= turbo_stream.update @record do
+  = render Bookcase::Contents::Components::Form::Component.new(record: @record)

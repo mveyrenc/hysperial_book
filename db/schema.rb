@@ -58,7 +58,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
   create_table "akin_content_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "kind", null: false
-    t.jsonb "metadata", default: {}, null: false
+    t.jsonb "metadata"
     t.uuid "related_id", null: false
     t.uuid "relater_id", null: false
     t.datetime "updated_at", null: false
@@ -72,13 +72,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
     t.text "alternate_names", comment: "Aliases for the item"
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
-    t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
+    t.jsonb "data", comment: "A hash to store the data of the item"
     t.text "description", comment: "A description of the item"
     t.string "kind", null: false, comment: "The kind or type of the item"
-    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
+    t.jsonb "metadata", comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
     t.integer "position", null: false, comment: "The position of the item"
-    t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
+    t.jsonb "settings", comment: "A hash to configure the item"
     t.string "slug", null: false, comment: "Human readable item identifier"
     t.datetime "updated_at", null: false
     t.uuid "updated_by_id", null: false
@@ -92,16 +92,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
     t.uuid "content_id", null: false, comment: "The content to which the attribute belongs"
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
-    t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
+    t.jsonb "data", comment: "A hash to store the data of the item"
     t.text "description", comment: "A description of the item"
     t.text "html_text", comment: "The html text of the item"
     t.string "kind", null: false, comment: "The kind or type of the item"
     t.text "markdown_text", comment: "The markdown text of the item"
-    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
+    t.jsonb "metadata", comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
     t.text "plain_text", comment: "The plain text of the item"
     t.integer "position", null: false, comment: "The position of the item"
-    t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
+    t.jsonb "settings", comment: "A hash to configure the item"
     t.datetime "updated_at", null: false
     t.uuid "updated_by_id", null: false
     t.index ["content_id", "position"], name: "index_content_attributes_on_content_id_and_position", unique: true
@@ -115,13 +115,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
     t.uuid "book_id", null: false
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
-    t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
+    t.jsonb "data", comment: "A hash to store the data of the item"
     t.text "description", comment: "A description of the item"
     t.string "kind", null: false
-    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
+    t.jsonb "metadata", comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
     t.integer "position", null: false, comment: "The position of the item"
-    t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
+    t.jsonb "settings", comment: "A hash to configure the item"
     t.string "slug", null: false
     t.datetime "updated_at", null: false
     t.uuid "updated_by_id", null: false
@@ -137,7 +137,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
     t.uuid "content_id", null: false
     t.uuid "content_tag_id", null: false
     t.datetime "created_at", null: false
-    t.jsonb "metadata", default: {}, null: false
+    t.jsonb "metadata"
     t.datetime "updated_at", null: false
     t.index ["content_id", "content_tag_id"], name: "index_content_taggings_on_content_id_and_content_tag_id", unique: true
     t.index ["content_id"], name: "index_content_taggings_on_content_id"
@@ -149,11 +149,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
     t.uuid "content_tag_family_id", null: false, comment: "The family to which the tag belongs"
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
-    t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
+    t.jsonb "data", comment: "A hash to store the data of the item"
     t.text "description", comment: "A description of the item"
-    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
+    t.jsonb "metadata", comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
-    t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
+    t.jsonb "settings", comment: "A hash to configure the item"
     t.string "slug", null: false, comment: "Human readable item identifier"
     t.datetime "updated_at", null: false
     t.uuid "updated_by_id", null: false
@@ -169,14 +169,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
     t.uuid "book_id", null: false, comment: "The book in which the item is located"
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
-    t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
+    t.jsonb "data", comment: "A hash to store the data of the item"
     t.text "description", comment: "A description of the item"
     t.uuid "is_based_on_id", comment: "A content from which this work is derived or from which it is a modification or adaptation"
     t.string "is_based_on_url", comment: "The URL from which the item was imported"
     t.string "kind", null: false, comment: "The kind or type of the item"
-    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
+    t.jsonb "metadata", comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
-    t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
+    t.jsonb "settings", comment: "A hash to configure the item"
     t.text "short_description", comment: "A short description of the item"
     t.string "slug", null: false, comment: "Human readable item identifier"
     t.uuid "thumbnail_id", comment: "A very small image for the item"
@@ -205,7 +205,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
   create_table "media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
-    t.jsonb "metadata", default: {}, null: false
+    t.jsonb "metadata"
     t.string "type", null: false
     t.datetime "updated_at", null: false
     t.uuid "updated_by_id", null: false
@@ -234,7 +234,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
     t.string "encrypted_password", null: false
     t.datetime "last_sign_in_at"
     t.string "last_sign_in_ip"
-    t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
+    t.jsonb "metadata", comment: "A hash to store some data about the item"
     t.string "name", null: false
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"

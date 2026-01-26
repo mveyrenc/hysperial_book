@@ -1,0 +1,57 @@
+en:
+  bookcase:
+    books:
+      views:
+        edit:
+          title: "Edit the book"
+        index:
+          title: "Books"
+        search:
+          title: "Book search results"
+        new:
+          title: "New book"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "The book was created successfully"
+        update_interactor:
+          save_record:
+            success: "The book has been successfully modified"
+        create_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No book found in the settings"
+        hydrate_record:
+          no_record: "No book found in the settings"
+        update_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No book found in the settings"
+          successfully_updated: "The book has been successfully modified"
+        save_record:
+          no_record: "No book found in the settings"
+          failure: "An error occurred while saving the book"
+        destroy_interactor:
+          no_record: "No book found in the settings"
+          success: "The book was successfully deleted"
+          failure: "An error occurred while deleting the book"
+  activemodel:
+    attributes:
+      bookcase/book_kind:
+        animals: Animals
+        home_well_being: Home well-being
+        cooking: Cooking
+        fabric_art: Fabric art
+        gardening: Gardening
+        crafts: Crafts
+  activerecord:
+    models:
+      bookcase/book:
+        one: Book
+        other: Books
+    attributes:
+      bookcase/book:
+        name: Name
+        alternate_names: Alternate names
+        description: Description
+        kind: Kind
+        created_at: Created at
+        updated_at: Updated at

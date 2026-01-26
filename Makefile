@@ -95,7 +95,6 @@ db-migrate: ## Run database migrations
 	docker compose exec web rails db:migrate
 
 db-seed: ## Seed database
-	touch tmp/restart.txt
 	docker compose exec web rails db:seed --trace
 	docker compose exec web rails searchkick:reindex:all
 
@@ -120,18 +119,20 @@ optimize-db: ## Optimize database
 
 ###Tests: ## .
 clean-test-db: ## Clear and recreate test database
-	docker compose exec web rails db:drop RAILS_ENV=test
-	docker compose exec web rails db:create RAILS_ENV=test
-	docker compose exec web rails db:migrate RAILS_ENV=test
+	docker compose exec web rails RAILS_ENV=test db:drop
+	docker compose exec web rails RAILS_ENV=test db:create
+	docker compose exec web rails RAILS_ENV=test db:migrate
 
 run-test: ## Runs the provided test(s)
-	docker compose exec web rails test $(run-ARGS)
+	docker compose exec web rails RAILS_ENV=test db:create
+	docker compose exec web rails RAILS_ENV=test db:migrate
+	docker compose exec web rails RAILS_ENV=test test $(run-ARGS)
 
 run-system-test: ## Runs the provided system test(s)
-	docker compose exec web rails test:system $(run-ARGS)
+	docker compose exec web rails RAILS_ENV=test test:system $(run-ARGS)
 
 run-controllers-test: ## Runs the provided controller test(s)
-	docker compose exec web rails test:controllers $(run-ARGS)
+	docker compose exec web rails RAILS_ENV=test test:controllers $(run-ARGS)
 
 ###Linting-Commands: ## .
 lint-ruby: ## Run ruby syntax clean up

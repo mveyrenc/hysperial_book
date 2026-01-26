@@ -1,0 +1,18 @@
+= render Layout::MainArea::Component.new(turbo_frame_tag_id: 'bookcase_contents') do |component|
+  - component.with_title do
+    = t('.title')
+  - component.with_actions do
+    - if policy(Bookcase::Content).create?
+      = turbo_frame_tag Bookcase::Content.new do
+        = render Bookcase::Contents::Components::NewButton::Component.new
+  - component.with_left_aside do
+    = render Bookcase::Contents::Components::SearchForm::Component.new(params: params, aggs: @records.aggs, book: @records.book)
+  - component.with_main_section do
+    .container
+      - if @records.records.any?
+        - @records.records.each do |record|
+          = turbo_frame_tag record.object do
+            = render Bookcase::Contents::Components::Card::Component.new(record: record)
+        = paginate @records.records
+      - else
+        = render NoRecord::Component.new

@@ -1,0 +1,33 @@
+en:
+  bookcase:
+    media:
+      views:
+        edit:
+          title: "Edit media"
+        index:
+          title: "Media"
+        search:
+          title: "Media search results"
+        new:
+          title: "New media"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "The media was created successfully"
+        update_interactor:
+          save_record:
+            success: "The media has been successfully modified"
+        create_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No media found in the settings"
+        hydrate_record:
+          no_record: "No media found in the settings"
+        update_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No media found in the settings"
+          successfully_updated: "The media has been successfully modified"
+        save_record:
+          no_record: "No media found in the settings"
+          failure: "An error occurred while saving the media"
+        destroy_interactor:
+          successfully_destroyed: "The media was successfully destroyed"

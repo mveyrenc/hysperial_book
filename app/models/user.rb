@@ -11,7 +11,7 @@
 #  encrypted_password                                 :string           not null
 #  last_sign_in_at                                    :datetime
 #  last_sign_in_ip                                    :string
-#  metadata(A hash to store some data about the item) :jsonb            not null
+#  metadata(A hash to store some data about the item) :jsonb
 #  name                                               :string           not null
 #  remember_created_at                                :datetime
 #  reset_password_sent_at                             :datetime
@@ -37,7 +37,7 @@ class User < ApplicationRecord
   # no friendly id
 
   ## Enumerable
-    validates :role, inclusion: UserRole::ROLES
+  validates :role, inclusion: UserRole::ROLES
 
   def noob_role?
     role == 'noob'

@@ -6,13 +6,13 @@
 #
 #  id                                                 :uuid             not null, primary key
 #  alternate_names(Aliases for the item)              :text
-#  data(A hash to store the data of the item)         :jsonb            not null
+#  data(A hash to store the data of the item)         :jsonb
 #  description(A description of the item)             :text
 #  kind                                               :string           not null
-#  metadata(A hash to store some data about the item) :jsonb            not null
+#  metadata(A hash to store some data about the item) :jsonb
 #  name(The name of the item)                         :string           not null
 #  position(The position of the item)                 :integer          not null
-#  settings(A hash to configure the item)             :jsonb            not null
+#  settings(A hash to configure the item)             :jsonb
 #  slug                                               :string           not null
 #  created_at                                         :datetime         not null
 #  updated_at                                         :datetime         not null
@@ -36,9 +36,9 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 FactoryBot.define do
-  factory :content_tag_family do
+  factory :content_tag_family, class: Bookcase::ContentTagFamily do
     sequence(:name) { |n| "#{Faker::Name.title} #{n}" }
-    kind { ContentTagFamilyKind::KINDS.sample }
+    kind { Bookcase::ContentTagFamilyKind::KINDS.sample }
     book factory: :book
     created_by factory: :user
     updated_by factory: :user

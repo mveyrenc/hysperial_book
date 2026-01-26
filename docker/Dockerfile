@@ -25,6 +25,7 @@ RUN apt-get update && \
     build-essential \
     autoconf bison \
     libxml2-dev libxslt-dev libyaml-dev libssl-dev libreadline-dev \
+    ruby-vips \
     postgresql-client libpq-dev \
     ca-certificates \
     git sudo less fontconfig \
@@ -52,7 +53,7 @@ RUN ln -s /opt/yarn-v${YARN_VERSION}/bin/yarn /usr/local/bin/yarn \
 
 # get our gem house in order
 WORKDIR ${APP_DIR}
-COPY .. ${APP_DIR}
+COPY . ${APP_DIR}
 
 # install gemfile and package
 RUN bundle install ${BUNDLE_WITHOUT}

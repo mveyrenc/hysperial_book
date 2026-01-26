@@ -16,16 +16,18 @@ data:
   # Locale files or `Dir.glob` patterns where translations are read from:
   read:
     ## Default:
-    # - config/locales/%{locale}.yml
+     - config/locales/%{locale}.yml
     ## More files:
-    # - config/locales/**/*.%{locale}.yml
+     - config/locales/*.%{locale}.yml
+     - app/business/**/locales/%{locale}.yml
+     - app/business/**/locales/*.%{locale}.yml
 
   # Locale files to write new keys to, based on a list of key pattern => file rules. Matched from top to bottom:
   # `i18n-tasks normalize -p` will force move the keys according to these rules
   write:
     ## For example, write devise and simple form keys to their respective files:
      - ['{activemodel, activerecord, devise, application}.*', 'config/locales/\1.%{locale}.yml']
-     - ['{books, content_tag_families, content_tags, contents, content_attributes}.*', 'config/locales/business.\1.%{locale}.yml']
+     - ['{bookcase}.{books, content_tag_families, content_tags, contents, content_attributes}.*', 'app/business/\1/\2/locales/%{locale}.yml']
     ## Catch-all default:
      - config/locales/%{locale}.yml
 

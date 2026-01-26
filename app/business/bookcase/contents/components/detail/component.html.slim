@@ -1,0 +1,58 @@
+section.section
+  .media
+    figure.media-left
+      .image.is-128x128
+        - if record.thumbnail.present?
+          = image_tag record.thumbnail.variant(resize_to_fill: [258, 258])
+        - else
+          = render Bookcase::Contents::Components::NoThumbnail::Component.new(record: record)
+    .media-content
+      h1.title
+        = record.name
+      - if record.alternate_names.present?
+        p.subtitle
+          = record.alternate_names
+      - if record.description.present?
+        .content
+          = record.description.html_safe
+    .media-right
+      .tags
+        span.tag
+          = record.kind_name
+        span.tag
+          = record.book_name
+
+.block
+  .level
+    .level-left
+    .level-right
+      - if policy(record.object).update?
+        .level-item
+          = link_to t('application.edit'),
+            edit_bookcase_content_path(record.object),
+            class: 'button is-edit-action',
+            target: '_top'
+      - if policy(record.object).destroy?
+        .level-item
+          = button_to t('application.delete'),
+            bookcase_content_path(record.object),
+            method: :delete,
+            data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure") },
+            class: "button is-delete-action"
+
+- if record.content_tags.any?
+  .card-box
+    - record.content_tags.group_by { |ct| ct.content_tag_family.name }.each do |f, cts|
+      .field.is-horizontal
+        .field-label
+          .label
+            = f
+        .field-body
+          .control
+            - cts.each do |ct|
+              span.tag.is-primary.is-light
+                = ct.name
+
+.card-box
+  - record.content_attributes.each do |a|
+    = render Bookcase::ContentAttributes::Components::AttributeDisplay::Component.new(record: a)

@@ -70,9 +70,9 @@ en:
         one: "almost 1 year"
         other: "almost %{count} years"
     prompts:
-      year:   "Year"
-      month:  "Month"
-      day:    "Day"
-      hour:   "Hour"
+      year: "Year"
+      month: "Month"
+      day: "Day"
+      hour: "Hour"
       minute: "Minute"
       second: "Seconde"

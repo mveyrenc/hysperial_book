@@ -6,13 +6,13 @@
 #
 #  id                                                                                                         :uuid             not null, primary key
 #  alternate_names(Aliases for the item)                                                                      :text
-#  data(A hash to store the data of the item)                                                                 :jsonb            not null
+#  data(A hash to store the data of the item)                                                                 :jsonb
 #  description(A description of the item)                                                                     :text
 #  is_based_on_url(The URL from which the item was imported)                                                  :string
 #  kind(The kind or type of the item)                                                                         :string           not null
-#  metadata(A hash to store some data about the item)                                                         :jsonb            not null
+#  metadata(A hash to store some data about the item)                                                         :jsonb
 #  name(The name of the item)                                                                                 :string           not null
-#  settings(A hash to configure the item)                                                                     :jsonb            not null
+#  settings(A hash to configure the item)                                                                     :jsonb
 #  short_description(A short description of the item)                                                         :text
 #  slug(Human readable item identifier)                                                                       :string           not null
 #  version(The version of the item)                                                                           :string
@@ -42,10 +42,10 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 FactoryBot.define do
-  factory :content do
+  factory :content, class: Bookcase::Content do
     sequence(:name) { |n| "#{Faker::Name.title} #{n}" }
     book factory: :book
-    kind { ContentKind::KINDS.sample }
+    kind { Bookcase::ContentKind::KINDS.sample }
     created_by factory: :user
     updated_by factory: :user
 

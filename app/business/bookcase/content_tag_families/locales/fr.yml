@@ -1,0 +1,67 @@
+fr:
+  bookcase:
+    content_tag_families:
+      views:
+        edit:
+          title: "Modifier la famille d'étiquettes"
+        index:
+          title: "Familles d'étiquettes"
+        search:
+          title: "Résultats de recherche de familles d'étiquettes"
+        new:
+          title: "Nouvelle famille d'étiquettes"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "La famille d'étiquettes a été créée avec succès"
+        update_interactor:
+          save_record:
+            success: "La famille d'étiquettes a été modifiée avec succès"
+        create_record:
+          no_current_user: "Aucun utilisateur trouvé en paramètre"
+          no_record: "Aucune famille d'étiquettes trouvée en paramètre"
+        hydrate_record:
+          no_record: "Aucune famille d'étiquettes trouvée en paramètre"
+        update_record:
+          no_current_user: "Aucun utilisateur trouvé en paramètre"
+          no_record: "Aucune famille d'étiquettes trouvée en paramètre"
+          successfully_updated: "La famille d'étiquettes a été modifiée avec succès"
+        save_record:
+          no_record: "Aucune famille d'étiquettes trouvée en paramètre"
+          failure: "Une erreur s'est produite lors de l'enregistrement de la famille d'étiquettes"
+        destroy_interactor:
+          no_record: "Aucune famille d'étiquettes trouvée en paramètre"
+          success: "La famille d'étiquettes a été supprimée avec succès"
+          failure: "Une erreur s'est produite lors de la suppression de la famille d'étiquettes"
+      components:
+        form:
+          component:
+            name:
+              help: "Ajoutez de la valeur par ligne pour créer plusieurs balises de contenu en une seule fois"
+  activemodel:
+    attributes:
+      bookcase/content_tag_family_kind:
+        author: Auteur
+        category: Catégorie
+        geographic_area: Zone géographique
+        ingredient: Ingrédient
+        occasion: Occasion
+        restriction: Restriction
+        season: Saison
+        source: Source
+        thematic: Thématique
+  activerecord:
+    models:
+      bookcase/content_tag_family:
+        one: Famille d'étiquettes
+        other: Familles d'étiquettes
+    attributes:
+      bookcase/content_tag_family:
+        name: Nom
+        alternate_names: Autres noms
+        description: Description
+        book: Livre
+        book_kind: Type de livre
+        kind: Type
+        created_at: Créé le
+        updated_at: Modifié le

@@ -152,32 +152,34 @@ Rails.application.routes.draw do
                sign_up: 'sign-up'
              }
 
-  resources :contents, controller: 'contents/contents' do
-    collection { get :search }
+  namespace :bookcase do
+    resources :contents, controller: 'contents/contents' do
+      collection { get :search }
+    end
+
+    resources :books, except: %i[show], controller: 'books/books' do
+      collection { get :search }
+      resources :contents, controller: 'contents/books', only: :index do
+        collection { get :search }
+      end
+    end
+
+    resources :content_tag_families, except: %i[show], controller: 'content_tag_families/content_tag_families' do
+      collection { get :search }
+    end
+    resources :content_tags, except: %i[show], controller: 'content_tags/content_tags' do
+      collection { get :search }
+    end
+
+    namespace :media do
+      resources :pictures, except: %i[show new create], controller: 'pictures'
+      resources :scans, except: %i[show new create], controller: 'scans'
+      resources :documents, except: %i[show new create], controller: 'documents'
+    end
   end
 
   resources :users, except: %i[show new create], controller: 'users/users' do
     collection { get :search }
-  end
-
-  resources :books, except: %i[show], controller: 'books/books' do
-    collection { get :search }
-    resources :contents, controller: 'contents/books', only: :index do
-      collection { get :search }
-    end
-  end
-
-  resources :content_tag_families, except: %i[show], controller: 'content_tag_families/content_tag_families' do
-    collection { get :search }
-  end
-  resources :content_tags, except: %i[show], controller: 'content_tags/content_tags' do
-    collection { get :search }
-  end
-
-  namespace :media do
-    resources :pictures, except: %i[show new create], controller: 'pictures'
-    resources :scans, except: %i[show new create], controller: 'scans'
-    resources :documents, except: %i[show new create], controller: 'documents'
   end
 
   authenticate :admin do

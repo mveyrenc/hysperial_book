@@ -1,70 +1,5 @@
----
-
 fr:
   activerecord:
-
-    models:
-      book:
-        one: Livre
-        other: Livres
-      content_tag_family:
-        one: Famille d'étiquettes
-        other: Familles d'étiquettes
-      content_tag:
-        one: Étiquette
-        other: Étiquettes
-      content:
-        one: Contenu
-        other: Contenus
-
-    attributes:
-
-      book:
-        name: Nom
-        alternate_names: Autres noms
-        description: Description
-        kind: Type
-        created_at: Créé le
-        updated_at: Modifié le
-
-      content_tag_family:
-        name: Nom
-        alternate_names: Autres noms
-        description: Description
-        book: Livre
-        book_kind: Type de livre
-        kind: Type
-        created_at: Créé le
-        updated_at: Modifié le
-
-      content_tag:
-        name: Nom
-        alternate_names: Autres noms
-        description: Description
-        kind: Type
-        book: Livre
-        book_kind: Type de livre
-        content_tag_family: Famille d'étiquettes
-        content_tag_family_kind: Type de famille d'étiquettes
-        created_at: Créé le
-        updated_at: Modifié le
-
-      content:
-        name: Nom
-        alternate_names: Autres noms
-        description: Description
-        kind: Type
-        book: Livre
-        book_kind: Type de livre
-        content_tag_family: Famille d'étiquettes
-        content_tag_family_kind: Type de famille d'étiquettes
-        created_at: Créé le
-        updated_at: Modifié le
-
-      user:
-        name: Nom
-        role: Rôle
-
     errors:
       template:
         header:
@@ -107,5 +42,4 @@ fr:
         domain_not_allowed: "contient un domaine non autorisé (%{domain})"
         too_simple: "est trop simple"
         record_invalid: "enregistrement n'est pas valide"
-
   actionview_instancetag_blank_option: Choisir

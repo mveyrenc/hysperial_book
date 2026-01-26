@@ -11,13 +11,13 @@
       .field.is-grouped.is-grouped-centered
         - if policy(record.object).update?
           .control
-            = link_to t("application.edit"),
-                    edit_user_path(record.object),
-                    class: "button is-edit-action"
+            = link_to t('application.edit'),
+              edit_user_path(record.object),
+              class: 'button is-edit-action'
         - if policy(record.object).destroy?
           .control
-            = button_to t("application.delete"),
-                    user_path(record.object),
-                    method: :delete,
-                    data: { "turbo-method": :delete, "turbo-confirm": t("application.are_you_sure")  },
-                    class: "button is-delete-action"
+            = button_to t('application.delete'),
+              user_path(record.object),
+              method: :delete,
+              data: { 'turbo-method': :delete, 'turbo-confirm': t('application.are_you_sure') },
+              class: 'button is-delete-action'

@@ -1,0 +1,12 @@
+= render Layout::MainArea::Component.new(turbo_frame_tag_id: 'bookcase_media') do |component|
+  - component.with_title do
+    = t('.title')
+  - component.with_main_section do
+    .container
+      - if @records.records.any?
+        - @records.records.each do |record|
+          = turbo_frame_tag record do
+            = render Bookcase::Media::Components::Card::Component.new(record: record)
+        = paginate @records.records
+      - else
+        = render NoRecord::Component.new

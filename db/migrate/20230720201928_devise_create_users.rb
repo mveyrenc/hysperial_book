@@ -36,7 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'
+      t.jsonb :metadata, comment: 'A hash to store some data about the item'
       t.timestamps null: false
     end
 

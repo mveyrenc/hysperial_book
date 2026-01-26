@@ -44,11 +44,6 @@ gem 'rails-pg-extras', '~> 5.6'
 # whitespace before validation. If the attribute is blank, it strips the value to nil by default.
 gem 'strip_attributes', '~> 2.0'
 
-# https://github.com/rgrove/sanitize
-# Sanitize is an allowlist-based HTML and CSS sanitizer. It removes all HTML and/or CSS from a string except the
-# elements, attributes, and properties you choose to allow.
-gem 'sanitize', '~> 7.0'
-
 # #######################
 # ActiveRecord extensions
 # #######################
@@ -324,6 +319,10 @@ group :test do
   # https://github.com/rubocop/rubocop-factory_bot
   # factory_bot-specific analysis for your projects, as an extension to RuboCop.
   gem 'rubocop-factory_bot', require: false
+
+  # https://github.com/minitest-reporters
+  # Death to haphazard monkey-patching! Extend Minitest through simple hooks.
+  gem 'minitest-reporters', require: false
 
   # #################
   # Integration tests
