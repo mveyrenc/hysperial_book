@@ -1,4 +1,4 @@
-= turbo_stream.update(:flash)
+= turbo_stream.replace(:flash) do
   = render Layout::Flash::Component.new
 = turbo_stream.turbo_frame_set_src 'bookcase_content_tag_families', bookcase_content_tag_families_path
 = turbo_stream.turbo_frame_reload 'bookcase_content_tag_families'

@@ -6,7 +6,7 @@
           figure.image.is-128x128
             = image_tag record.thumbnail.variant(resize_to_fill: [258, 258])
         - else
-          = render Bookcase::Contents::Components::NoThumbnail::Component.new(record: record)
+          = render Bookcase::Contents::Components::NoThumbnail::Component.new(record)
       .level-item.has-text-left
         div
           p.title

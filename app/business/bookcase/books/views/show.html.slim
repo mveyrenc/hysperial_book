@@ -5,4 +5,4 @@
     = render Bookcase::Books::Components::ActionButtons::Component.new(actions: %i[update delete], record: @record.object)
   - component.with_main_section do
     = turbo_frame_tag @record do
-      = render Bookcase::Books::Components::Detail::Component.new( @record)
+      = render Bookcase::Books::Components::Detail::Component.new(@record)

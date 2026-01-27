@@ -1,6 +1,5 @@
-.card-box
-  .grid.is-gap-2
-    .cell
-      = render FieldDisplay::Component.new(label: Medium.human_attribute_name(:type), value: record_type)
-    .cell
-      = render_document
+.card-box.media
+  .media-left
+    = render_document
+  .media-content
+    = render FieldDisplay::Component.new(label: Bookcase::Medium.human_attribute_name(:type), value: record_type)

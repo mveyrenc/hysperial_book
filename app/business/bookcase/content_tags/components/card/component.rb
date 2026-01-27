@@ -4,12 +4,12 @@ module Bookcase
   module ContentTags
     module Components
       module Card
-        # ContentTags card component
         class Component < ApplicationComponent
-          attr_reader :record
+          attr_reader :record, :context
 
-          def initialize(record:)
+          def initialize(record, context: :search_result)
             @record = record
+            @context = context
           end
         end
       end

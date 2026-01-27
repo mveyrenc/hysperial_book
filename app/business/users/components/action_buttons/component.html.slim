@@ -1,0 +1,22 @@
+.buttons
+  - if actions.include?(:new) and policy(User).new?
+    = link_to t('application.new'),
+      new_userpath,
+      class: 'button is-new-action',
+      'data-turbo-frame': helpers.dom_id(User.new)
+  - if actions.include?(:show) and record.present? and policy(record).show?
+    = link_to t('application.read'),
+      user_path(record),
+      class: 'button is-show-action',
+      target: '_top'
+  - if actions.include?(:update) and record.present? and policy(record).update?
+    = link_to t('application.edit'),
+      edit_user_path(record),
+      class: 'button is-edit-action',
+      'data-turbo-frame': helpers.dom_id(record)
+  - if actions.include?(:delete) and record.present? and policy(record).destroy?
+    = button_to t('application.delete'),
+      user_path(record),
+      method: :delete,
+      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure") },
+      class: "button is-delete-action"

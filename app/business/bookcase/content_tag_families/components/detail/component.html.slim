@@ -1,0 +1,12 @@
+.card-box
+  = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:position), value: record.position)
+  = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:alternate_names), value: record.alternate_names)
+  = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:kind), value: record.kind_name)
+  = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:description), value: record.description)
+  = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:book), value: record.book_name)
+
+- if record.content_tags.any?
+  p.title.is-4
+    = Bookcase::ContentTagFamily.human_attribute_name(:content_tags)
+  - record.content_tags.each do |ct|
+    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_family_show)

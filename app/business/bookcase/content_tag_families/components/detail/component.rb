@@ -3,9 +3,14 @@
 module Bookcase
   module ContentTagFamilies
     module Components
-      module NewButton
+      module Detail
+        # Contents card component
         class Component < ApplicationComponent
-          delegate :to_partial_path, to: :helpers
+          attr_reader :record
+
+          def initialize(record)
+            @record = record
+          end
         end
       end
     end

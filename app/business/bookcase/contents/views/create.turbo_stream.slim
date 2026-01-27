@@ -1,6 +1,5 @@
-= turbo_stream.replace(:flash)
+= turbo_stream.replace(:flash) do
   = render Layout::Flash::Component.new
-= turbo_stream.update Bookcase::Content.new do
-  = render(Bookcase::Contents::Components::NewButton::Component.new)
+= turbo_stream.update(Bookcase::Content.new, '')
 = turbo_stream.turbo_frame_set_src 'bookcase_contents', bookcase_contents_path
 = turbo_stream.turbo_frame_reload 'bookcase_contents'

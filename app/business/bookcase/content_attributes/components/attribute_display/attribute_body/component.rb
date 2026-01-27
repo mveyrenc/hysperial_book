@@ -13,9 +13,9 @@ module Bookcase
               component = "Bookcase::ContentAttributes::Components::AttributeDisplay::#{classify(record.data_type)}::Component"
 
               if Object.const_defined?(component)
-                render Kernel.const_get(component).new(record: record)
+                render Kernel.const_get(component).new(record)
               else
-                render Bookcase::ContentAttributes::Components::AttributeDisplay::Default::Component.new(record: record)
+                render Bookcase::ContentAttributes::Components::AttributeDisplay::Default::Component.new(record)
               end
             end
           end

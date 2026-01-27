@@ -61,5 +61,9 @@ fr:
         book_kind: Type de livre
         content_tag_family: Famille d'étiquettes
         content_tag_family_kind: Type de famille d'étiquettes
+        excluded_related_content_tags: Tags associés exclus
+        followable_relation_related_content_tags: Tags associés avec un relation suivable
+        limited_relation_related_content_tags: Tags associés à relation non suivable
+        suggests_related_content_tags: Tag suggéré
         created_at: Créé le
         updated_at: Modifié le

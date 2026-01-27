@@ -4,13 +4,12 @@ module Bookcase
   module Books
     module Components
       module Card
-        # Books card component
         class Component < ApplicationComponent
-          attr_reader :record
+          attr_reader :record, :context
 
-          # @param record Books::Decorators::RecordDecorator
-          def initialize(record)
+          def initialize(record, context: :search_result)
             @record = record
+            @context = context
           end
         end
       end

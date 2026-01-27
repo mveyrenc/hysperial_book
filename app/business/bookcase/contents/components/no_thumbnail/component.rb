@@ -8,7 +8,7 @@ module Bookcase
         class Component < ApplicationComponent
           attr_reader :record
 
-          def initialize(record:)
+          def initialize(record)
             @record = record
           end
         end

@@ -22,7 +22,7 @@ nav.main-nav.navbar.is-fixed-top.is-primary[role="navigation" aria-label="main n
                 = link_to bookcase_contents_path, class: "navbar-item#{" is-active" if controller_name == 'contents'}", target: "_top" do
                   span
                     = t('application.all_contents')
-                - Bookcase::Book.all.each do |book|
+                - all_books.each do |book|
                   = link_to search_bookcase_book_contents_path(book), class: "navbar-item", target: "_top" do
                     span
                       = book.name

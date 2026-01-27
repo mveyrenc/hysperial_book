@@ -4,7 +4,7 @@
   - component.with_actions do
     - if policy(User).create?
       = turbo_frame_tag User.new do
-        = render Users::Components::NewButton::Component.new
+        = render Users::Components::ActionButtons::Component.new(actions: %i[new])
   - component.with_left_aside do
     = render Users::Components::SearchForm::Component.new(params: params, aggs: @records.aggs)
   - component.with_main_section do
@@ -12,7 +12,7 @@
       - if @records.records.any?
         - @records.records.each do |record|
           = turbo_frame_tag record do
-            = render Users::Components::Card::Component.new(record: record)
+            = render Users::Components::Card::Component.new(record)
         = paginate @records.records
       - else
         = render NoRecord::Component.new

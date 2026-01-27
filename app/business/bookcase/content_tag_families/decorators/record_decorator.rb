@@ -4,7 +4,9 @@ module Bookcase
   module ContentTagFamilies
     module Decorators
       class RecordDecorator < ApplicationDecorator
-        decorates_association :book, with: Books::Decorators::RecordDecorator
+        delegate :position
+        decorates_association :book, with: Bookcase::Books::Decorators::RecordDecorator
+        decorates_association :content_tags, with: Bookcase::ContentTags::Decorators::RecordDecorator
 
         def name(highlights = true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:name)

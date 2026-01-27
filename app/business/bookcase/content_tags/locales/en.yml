@@ -59,5 +59,9 @@ en:
         book_kind: Kind of book
         content_tag_family: Tag family
         content_tag_family_kind: Kind of tg family
+        excluded_related_content_tags: Excluded related tags
+        followable_relation_related_content_tags: Followable relation related tag
+        limited_relation_related_content_tags: Limited relation related tag
+        suggests_related_content_tags: Suggested related tag
         created_at: Created at
         updated_at: Updated at

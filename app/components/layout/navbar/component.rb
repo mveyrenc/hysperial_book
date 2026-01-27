@@ -6,6 +6,10 @@ module Layout
       def render?
         user_signed_in?
       end
+
+      def all_books
+        Bookcase::Book.order(position: :asc)
+      end
     end
   end
 end

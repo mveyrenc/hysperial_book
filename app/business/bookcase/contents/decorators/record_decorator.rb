@@ -7,8 +7,8 @@ module Bookcase
         delegate :kind
 
         decorates_association :book, with: Books::Decorators::RecordDecorator
-        decorates_associations :content_tags, with: ContentTags::Decorators::RecordDecorator
-        decorates_associations :content_attributes, with: ContentAttributes::Decorators::RecordDecorator
+        decorates_associations :content_tags, with: Bookcase::ContentTags::Decorators::RecordDecorator
+        decorates_associations :content_attributes, with: Bookcase::ContentAttributes::Decorators::RecordDecorator
 
         def name(highlights = true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:name)

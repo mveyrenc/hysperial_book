@@ -17,19 +17,19 @@ module Bookcase
       end
 
       def search_interactor
-        'Media::Interactors::SearchInteractor'
+        'Bookcase::Media::Interactors::SearchInteractor'
       end
 
       def create_interactor
-        'Media::Interactors::CreateInteractor'
+        'Bookcase::Media::Interactors::CreateInteractor'
       end
 
       def update_interactor
-        'Media::Interactors::UpdateInteractor'
+        'Bookcase::Media::Interactors::UpdateInteractor'
       end
 
       def template_path(action = nil)
-        "media/views/#{action || action_name}"
+        "bookcase/media/views/#{action || action_name}"
       end
 
       def strong_params

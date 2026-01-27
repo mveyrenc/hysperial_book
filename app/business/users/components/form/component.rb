@@ -9,7 +9,7 @@ module Users
 
         delegate :role, to: :record, prefix: true
 
-        def initialize(record:)
+        def initialize(record)
           @record = record
         end
       end

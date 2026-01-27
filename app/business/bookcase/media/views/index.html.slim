@@ -6,7 +6,7 @@
       - if @records.records.any?
         - @records.records.each do |record|
           = turbo_frame_tag record do
-            = render Bookcase::Media::Components::Card::Component.new(record: record)
+            = render Bookcase::Media::Components::Card::Component.new(record)
         = paginate @records.records
       - else
         = render NoRecord::Component.new

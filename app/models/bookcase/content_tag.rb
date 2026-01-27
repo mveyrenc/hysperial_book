@@ -85,8 +85,8 @@ module Bookcase
 
     has_many :relater_akin_content_tags,
              class_name: 'AkinContentTag',
-             foreign_key: :relater_id,
-             inverse_of: :relater,
+             foreign_key: :related_id,
+             inverse_of: :related,
              dependent: :destroy
     has_many :relater_content_tags,
              through: :relater_akin_content_tags,
@@ -94,12 +94,28 @@ module Bookcase
              dependent: :destroy
     has_many :related_akin_content_tags,
              class_name: 'AkinContentTag',
-             foreign_key: :related_id,
-             inverse_of: :related,
+             foreign_key: :relater_id,
+             inverse_of: :relater,
              dependent: :destroy
     has_many :related_content_tags,
              through: :related_akin_content_tags,
              source: :related
+
+    def excluded_related_content_tags
+      related_akin_content_tags.where(akin_content_tags: { kind: :excluded })
+    end
+
+    def followable_relation_related_content_tags
+      related_content_tags.where(akin_content_tags: { kind: :followable_relation })
+    end
+
+    def limited_relation_related_content_tags
+      related_content_tags.where(akin_content_tags: { kind: :limited_relation })
+    end
+
+    def suggests_related_content_tags
+      related_content_tags.where(akin_content_tags: { kind: :suggests })
+    end
 
     has_many :content_taggings, dependent: :destroy
     has_many :contents, through: :content_taggings, dependent: :nullify

@@ -63,5 +63,6 @@ fr:
         book: Livre
         book_kind: Type de livre
         kind: Type
+        content_tags: Tags
         created_at: Créé le
         updated_at: Modifié le

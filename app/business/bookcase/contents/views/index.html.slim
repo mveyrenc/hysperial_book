@@ -4,7 +4,7 @@
   - component.with_actions do
     - if policy(Bookcase::Content).create?
       = turbo_frame_tag Bookcase::Content.new do
-        = render Bookcase::Contents::Components::NewButton::Component.new
+        = render Bookcase::Contents::Components::ActionButtons::Component.new(actions: %i[new])
   - component.with_left_aside do
     = render Bookcase::Contents::Components::SearchForm::Component.new(params: params, aggs: @records.aggs, book: @records.book)
   - component.with_main_section do
@@ -12,7 +12,7 @@
       - if @records.records.any?
         - @records.records.each do |record|
           = turbo_frame_tag record.object do
-            = render Bookcase::Contents::Components::Card::Component.new(record: record)
+            = render Bookcase::Contents::Components::Card::Component.new(record)
         = paginate @records.records
       - else
         = render NoRecord::Component.new

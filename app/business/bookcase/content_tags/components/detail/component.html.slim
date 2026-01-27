@@ -1,0 +1,26 @@
+.card-box
+  = render FieldDisplay::Component.new(label: Bookcase::ContentTag.human_attribute_name(:alternate_names), value: record.alternate_names)
+  = render FieldDisplay::Component.new(label: Bookcase::ContentTag.human_attribute_name(:description), value: record.description)
+  = render FieldDisplay::Component.new(label: Bookcase::ContentTag.human_attribute_name(:book), value: record.book_name)
+  = render FieldDisplay::Component.new(label: Bookcase::ContentTag.human_attribute_name(:content_tag_family), value: record.content_tag_family_name)
+
+- if record.excluded_related_content_tags.any?
+  p.title.is-4
+    = Bookcase::ContentTagFamily.human_attribute_name(:excluded_related_content_tags)
+  - record.excluded_related_content_tags.each do |ct|
+    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_show)
+- if record.followable_relation_related_content_tags.any?
+  p.title.is-4
+    = Bookcase::ContentTagFamily.human_attribute_name(:followable_relation_related_content_tags)
+  - record.followable_relation_related_content_tags.each do |ct|
+    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_show)
+- if record.limited_relation_related_content_tags.any?
+  p.title.is-4
+    = Bookcase::ContentTagFamily.human_attribute_name(:limited_relation_related_content_tags)
+  - record.limited_relation_related_content_tags.each do |ct|
+    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_show)
+- if record.suggests_related_content_tags.any?
+  p.title.is-4
+    = Bookcase::ContentTagFamily.human_attribute_name(:suggests_related_content_tags)
+  - record.suggests_related_content_tags.each do |ct|
+    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_show)

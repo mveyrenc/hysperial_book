@@ -10,7 +10,7 @@ module Bookcase
 
           delegate :type, :file, to: :record, prefix: true
 
-          def initialize(record:)
+          def initialize(record)
             @record = record
           end
 
@@ -21,7 +21,7 @@ module Bookcase
               link_to record_file
             else
               content_tag :figure, class: 'image is-128x128 m-auto' do
-                image_tag record_file.variant(resize_to_limit: [128, 128])
+                image_tag record_file.variant(resize_to_fill: [128, 128])
               end
             end
           end
@@ -42,11 +42,11 @@ module Bookcase
           def medium_path(record)
             case record_type
             when 'Document'
-              media_document_path(record)
+              bookcase_media_document_path(record)
             when 'Picture'
-              media_picture_path(record)
+              bookcase_media_picture_path(record)
             when 'Scan'
-              media_scan_path(record)
+              bookcase_media_scan_path(record)
             else
               raise "Unknown medium type #{record_type}"
             end

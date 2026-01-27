@@ -6,6 +6,7 @@ module Bookcase
     # ContentTagFamiliesController controller
     class ContentTagFamiliesController < ApplicationController
       include IndexSearchActionsConcern
+      include ShowActionConcern
       include NewCreateActionsConcern
       include EditUpdateActionsConcern
       include DestroyActionConcern
