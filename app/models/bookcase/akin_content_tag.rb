@@ -6,7 +6,7 @@
 #
 #  id         :uuid             not null, primary key
 #  kind       :string           not null
-#  metadata   :jsonb
+#  metadata   :jsonb            not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  related_id :uuid             not null

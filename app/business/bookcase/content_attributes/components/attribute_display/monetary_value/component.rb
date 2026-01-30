@@ -7,6 +7,9 @@ module Bookcase
         module MonetaryValue
           # ContentAttributes display monetary value kind component
           class Component < ContentAttributes::Components::AttributeDisplay::BaseComponent
+            def render?
+              record.data.any?
+            end
           end
         end
       end

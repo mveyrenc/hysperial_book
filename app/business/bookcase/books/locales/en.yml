@@ -29,7 +29,7 @@ en:
         save_record:
           no_record: "No book found in the settings"
           failure: "An error occurred while saving the book"
-        destroy_interactor:
+        destroy_record:
           no_record: "No book found in the settings"
           success: "The book was successfully deleted"
           failure: "An error occurred while deleting the book"

@@ -4,23 +4,23 @@
   = render FieldDisplay::Component.new(label: Bookcase::ContentTag.human_attribute_name(:book), value: record.book_name)
   = render FieldDisplay::Component.new(label: Bookcase::ContentTag.human_attribute_name(:content_tag_family), value: record.content_tag_family_name)
 
-- if record.excluded_related_content_tags.any?
+.level
+  .level-left
+    .level-item
+      p.title.is-4
+        = Bookcase::ContentTag.human_attribute_name(:related_akin_content_tags)
+  .level-right
+    .level-item
+      = render Bookcase::AkinContentTags::Components::ActionButtons::Component.new(actions: %i[new], record: record.object)
+= helpers.turbo_frame_tag Bookcase::AkinContentTag.new
+- if record.related_akin_content_tags.any?
+  - record.related_akin_content_tags.each do |akin|
+    = render Bookcase::AkinContentTags::Components::Card::Component.new(akin, context: :related)
+- else
+  = render NoRecord::Component.new
+
+- if record.relater_akin_content_tags.any?
   p.title.is-4
-    = Bookcase::ContentTagFamily.human_attribute_name(:excluded_related_content_tags)
-  - record.excluded_related_content_tags.each do |ct|
-    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_show)
-- if record.followable_relation_related_content_tags.any?
-  p.title.is-4
-    = Bookcase::ContentTagFamily.human_attribute_name(:followable_relation_related_content_tags)
-  - record.followable_relation_related_content_tags.each do |ct|
-    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_show)
-- if record.limited_relation_related_content_tags.any?
-  p.title.is-4
-    = Bookcase::ContentTagFamily.human_attribute_name(:limited_relation_related_content_tags)
-  - record.limited_relation_related_content_tags.each do |ct|
-    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_show)
-- if record.suggests_related_content_tags.any?
-  p.title.is-4
-    = Bookcase::ContentTagFamily.human_attribute_name(:suggests_related_content_tags)
-  - record.suggests_related_content_tags.each do |ct|
-    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_show)
+    = Bookcase::ContentTag.human_attribute_name(:relater_akin_content_tags)
+    - record.relater_akin_content_tags.each do |akin|
+      = render Bookcase::AkinContentTags::Components::Card::Component.new(akin, context: :relater)

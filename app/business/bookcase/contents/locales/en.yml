@@ -29,7 +29,7 @@ en:
         save_record:
           no_record: "No content found in the settings"
           failure: "An error occurred while saving the content"
-        destroy_interactor:
+        destroy_record:
           successfully_destroyed: "The content was successfully destroyed"
   activemodel:
     attributes:

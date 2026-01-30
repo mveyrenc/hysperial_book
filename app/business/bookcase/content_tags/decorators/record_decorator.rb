@@ -6,10 +6,8 @@ module Bookcase
       class RecordDecorator < ApplicationDecorator
         delegate :book, to: :content_tag_family
         decorates_association :content_tag_family, with: Bookcase::ContentTagFamilies::Decorators::RecordDecorator
-        decorates_association :excluded_related_content_tags, with: Bookcase::ContentTags::Decorators::RecordDecorator
-        decorates_association :followable_relation_related_content_tags, with: Bookcase::ContentTags::Decorators::RecordDecorator
-        decorates_association :limited_relation_related_content_tags, with: Bookcase::ContentTags::Decorators::RecordDecorator
-        decorates_association :suggests_related_content_tags, with: Bookcase::ContentTags::Decorators::RecordDecorator
+        decorates_association :related_akin_content_tags, with: Bookcase::AkinContentTags::Decorators::RecordDecorator
+        decorates_association :relater_akin_content_tags, with: Bookcase::AkinContentTags::Decorators::RecordDecorator
 
         def name(highlights = true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:name)

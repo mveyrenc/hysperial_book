@@ -29,7 +29,7 @@ en:
         save_record:
           no_record: "No tag family found in the settings"
           failure: "An error occurred while saving the tag family"
-        destroy_interactor:
+        destroy_record:
           successfully_destroyed: "The tag family was successfully destroyed"
       components:
         form:

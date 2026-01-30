@@ -1,0 +1,56 @@
+fr:
+  bookcase:
+    akin_content_tags:
+      views:
+        edit:
+          title: "Modifier la relation entre étiquettes"
+        new:
+          title: "Nouvelle relation entre étiquettes"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "La relation a été créée avec succès"
+        update_interactor:
+          save_record:
+            success: "La relation entre étiquettes a été modifiée avec succès"
+        create_record:
+          no_current_user: "Aucun utilisateur trouvé en paramètre"
+          no_record: "Aucune relation entre étiquettes trouvée en paramètre"
+        hydrate_record:
+          no_record: "Aucune relation entre étiquettes trouvée en paramètre"
+        update_record:
+          no_current_user: "Aucun utilisateur trouvé en paramètre"
+          no_record: "Aucune relation entre étiquettes trouvée en paramètre"
+          successfully_updated: "La relation entre étiquettes a été modifiée avec succès"
+        save_record:
+          no_record: "Aucune relation entre étiquettes trouvée en paramètre"
+          failure: "Une erreur s'est produite lors de l'enregistrement de la relation entre étiquettes"
+        destroy_record:
+          no_record: "Aucune relation entre étiquettes trouvée en paramètre"
+          success: "La relation entre étiquettes a été supprimée avec succès"
+          failure: "Une erreur s'est produite lors de la suppression de la relation entre étiquettes"
+      components:
+        form:
+          component:
+            related_id:
+              help: "Sélectionner plusieurs valeurs pour créer plusieurs association en une seule fois"
+  activemodel:
+    attributes:
+      bookcase/akin_content_tag_kind:
+        computed: Relation calculée
+        excludes: Exclus
+        followable_relation: Relation à suivre
+        limited_relation: Relation limitée
+        suggests: Relation suggérée
+  activerecord:
+    models:
+      bookcase/akin_content_tag:
+        one: Relation d'étiquette
+        other: Relations d'étiquettes
+    attributes:
+      bookcase/akin_content_tag:
+        relater: Étiquette
+        related: Étiquette associée
+        kind: Type
+        created_at: Créé le
+        updated_at: Modifié le

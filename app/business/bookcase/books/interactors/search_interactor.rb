@@ -31,20 +31,22 @@ module Bookcase
         end
 
         def rearrange_aggs
-          context.aggs = if context.aggs.include?('kind') && context.aggs['kind'].include?('buckets')
-                           [
-                             {
-                               key: :kind,
-                               name: Book.human_attribute_name(:kind),
-                               multiple: false,
-                               buckets: context.aggs['kind']['buckets'].map do |bkt|
-                                 ["#{BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
-                               end
-                             }
-                           ]
-                         else
-                           []
-                         end
+          aggs = {}
+          context.aggs.each do |k, agg|
+            next unless agg.include?('buckets') && agg['buckets'].any?
+
+            if k.eql?('kind')
+              aggs[k] = {
+                name: Bookcase::ContentTagFamily.human_attribute_name(:kind),
+                multiple: false,
+                position: 1,
+                buckets: context.aggs['kind']['buckets'].map do |bkt|
+                  ["#{Bookcase::Book.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
+                end
+              }
+            end
+          end
+          context.aggs = aggs.sort_by { |_k, v| v[:position] }
         end
       end
     end

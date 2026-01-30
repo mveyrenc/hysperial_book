@@ -29,7 +29,7 @@ fr:
         save_record:
           no_record: "Aucune étiquette trouvée en paramètre"
           failure: "Une erreur s'est produite lors de l'enregistrement de l'étiquette"
-        destroy_interactor:
+        destroy_record:
           no_record: "Aucune étiquette trouvée en paramètre"
           success: "L'étiquette a été supprimée avec succès"
           failure: "Une erreur s'est produite lors de la suppression de l'étiquette"
@@ -38,14 +38,6 @@ fr:
           component:
             name:
               help: "Ajoutez de la valeur par ligne pour créer plusieurs balises de contenu en une seule fois"
-  activemodel:
-    attributes:
-      bookcase/akin_content_tag_kind:
-        computed: Computed
-        excludes: Excludes
-        followable_relation: Relation to follow
-        limited_relation: Limited relation
-        suggests: Suggests
   activerecord:
     models:
       bookcase/content_tag:
@@ -61,9 +53,7 @@ fr:
         book_kind: Type de livre
         content_tag_family: Famille d'étiquettes
         content_tag_family_kind: Type de famille d'étiquettes
-        excluded_related_content_tags: Tags associés exclus
-        followable_relation_related_content_tags: Tags associés avec un relation suivable
-        limited_relation_related_content_tags: Tags associés à relation non suivable
-        suggests_related_content_tags: Tag suggéré
+        related_akin_content_tags: Étiquettes associées
+        relater_akin_content_tags: Étiquettes associées par
         created_at: Créé le
         updated_at: Modifié le

@@ -15,6 +15,11 @@ module Bookcase
         data_type: :text,
         available_for: %i[article tutorial ingredient recipe menu pattern]
       },
+      note: {
+        description: '',
+        data_type: :text,
+        available_for: %i[article tutorial ingredient recipe menu pattern]
+      },
       total_time: {
         description: 'The total time required to perform instructions or a direction (including time to prepare the supplies)',
         data_type: :duration,

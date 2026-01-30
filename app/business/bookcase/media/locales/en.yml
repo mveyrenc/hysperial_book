@@ -29,5 +29,5 @@ en:
         save_record:
           no_record: "No media found in the settings"
           failure: "An error occurred while saving the media"
-        destroy_interactor:
+        destroy_record:
           successfully_destroyed: "The media was successfully destroyed"

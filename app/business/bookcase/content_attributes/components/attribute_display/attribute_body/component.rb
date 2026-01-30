@@ -10,13 +10,31 @@ module Bookcase
             include ActiveSupport::Inflector
 
             def call
-              component = "Bookcase::ContentAttributes::Components::AttributeDisplay::#{classify(record.data_type)}::Component"
-
-              if Object.const_defined?(component)
-                render Kernel.const_get(component).new(record)
-              else
-                render Bookcase::ContentAttributes::Components::AttributeDisplay::Default::Component.new(record)
+              component_name = "Bookcase::ContentAttributes::Components::AttributeDisplay::#{classify(record.data_type)}::Component"
+              if Object.const_defined?(component_name)
+                component = Kernel.const_get(component_name).new(record)
+                if component.render?
+                  return render component
+                end
               end
+
+              component = Bookcase::ContentAttributes::Components::AttributeDisplay::HtmlText::Component.new(record)
+              if component.render?
+                return render component
+              end
+
+              component = Bookcase::ContentAttributes::Components::AttributeDisplay::MarkdownText::Component.new(record)
+              if component.render?
+                return render component
+              end
+
+              component = Bookcase::ContentAttributes::Components::AttributeDisplay::PlainText::Component.new(record)
+              if component.render?
+                return render component
+
+              end
+
+              render Bookcase::ContentAttributes::Components::AttributeDisplay::Default::Component.new(record)
             end
           end
         end

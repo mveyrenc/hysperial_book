@@ -7,4 +7,4 @@
           | &nbsp;(#{record.kind_name})
     .level-right
       .level-item
-        = render Bookcase::Books::Components::ActionButtons::Component.new(actions: %i[show update delete], record: record.object)
+        = render Bookcase::Books::Components::ActionButtons::Component.new(actions: %i[show edit delete], record: record.object)

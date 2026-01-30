@@ -64,6 +64,9 @@ gem 'friendly_id', '~> 5.5'
 # A Rich Text Editor for Everyday Writing
 # gem 'action_text-trix'
 
+# https://github.com/vmg/redcarpet
+gem 'redcarpet'
+
 # ##############
 # Business logic
 # ##############

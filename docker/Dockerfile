@@ -30,11 +30,7 @@ RUN apt-get update && \
     ca-certificates \
     git sudo less fontconfig \
     chromium chromium-driver && \
-    apt autoremove -y && \
-    gem install bundler --no-document
-
-# Automatically run `bundle install` when gems are missing
-ENV BUNDLE_AUTO_INSTALL 1
+    apt autoremove -y
 
 #// Source - https://stackoverflow.com/a
 #// Posted by andreasm
@@ -51,16 +47,28 @@ COPY --from=node:current /opt/yarn-v${YARN_VERSION} /opt/yarn-v${YARN_VERSION}
 RUN ln -s /opt/yarn-v${YARN_VERSION}/bin/yarn /usr/local/bin/yarn \
       && ln -s /opt/yarn-v${YARN_VERSION}/bin/yarnpkg /usr/local/bin/yarnpkg
 
+USER docker
+
+RUN gem install bundler --no-document
+# Automatically run `bundle install` when gems are missing
+ENV BUNDLE_AUTO_INSTALL 1
+
 # get our gem house in order
 WORKDIR ${APP_DIR}
-COPY . ${APP_DIR}
+
+COPY --chown=docker:docker ../Gemfile .
+COPY --chown=docker:docker ../Gemfile.lock .
+COPY --chown=docker:docker ../package.json .
+COPY --chown=docker:docker ../yarn.lock .
 
 ## install gemfile and package
-#RUN bundle install ${BUNDLE_WITHOUT}
-#RUN yarn install
-#
+RUN bundle install ${BUNDLE_WITHOUT}
+RUN yarn install
+
 ## Build the js and css
 #RUN yarn build
 #RUN rails dartsass:build
+
+VOLUME ${APP_DIR}
 
 EXPOSE 3000

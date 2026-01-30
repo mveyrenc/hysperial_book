@@ -8,7 +8,7 @@ module Bookcase
           # ContentAttributes display rate kind component
           class Component < ContentAttributes::Components::AttributeDisplay::BaseComponent
             def render?
-              (record.data.present? && record.data.key?('value')) || super
+              (record.data.any? && record.data.key?('value')) || super
             end
           end
         end

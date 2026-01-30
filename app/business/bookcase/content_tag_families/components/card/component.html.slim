@@ -11,6 +11,6 @@
     .level-right
       .level-item
         - if context == :search_result
-          = render Bookcase::ContentTagFamilies::Components::ActionButtons::Component.new(actions: %i[show update delete], record: record.object)
+          = render Bookcase::ContentTagFamilies::Components::ActionButtons::Component.new(actions: %i[show edit delete], record: record.object)
         - else
           = render Bookcase::ContentTagFamilies::Components::ActionButtons::Component.new(actions: %i[show], record: record.object)

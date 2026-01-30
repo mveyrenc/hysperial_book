@@ -17,7 +17,7 @@ module AppFormBuilder
           content_tag(:div, class: wrapper_class) do
             checkbox = content_tag(:label, class: 'checkbox') do
               html = check_box_without_bulma(name, check_box_options, checked_value, unchecked_value)
-              html.concat(check_box_label(name)) unless options[:skip_label]
+              html.concat(check_box_label(name, options)) unless options[:skip_label]
               html
             end
             checkbox.concat(field_help(name, options))
@@ -30,7 +30,8 @@ module AppFormBuilder
 
       private
 
-      def check_box_label(name)
+      def check_box_label(name, options)
+        return content_tag(:span, options[:label], class: 'control-label') if options[:label]
         content_tag(:span, object.class.human_attribute_name(name), class: 'control-label')
       end
     end

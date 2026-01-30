@@ -170,6 +170,7 @@ Rails.application.routes.draw do
     resources :content_tags, controller: 'content_tags/content_tags' do
       collection { get :search }
     end
+    resources :akin_content_tags, except: %i[index show], controller: 'akin_content_tags/akin_content_tags'
 
     namespace :media do
       resources :pictures, except: %i[new create], controller: 'pictures'

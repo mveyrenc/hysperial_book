@@ -8,7 +8,7 @@
 # Table name: content_taggings
 #
 #  id             :uuid             not null, primary key
-#  metadata       :jsonb
+#  metadata       :jsonb            not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  content_id     :uuid             not null

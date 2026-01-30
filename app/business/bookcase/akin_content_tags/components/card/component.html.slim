@@ -1,0 +1,16 @@
+.card-box
+  .level
+    .level-left
+      .level-item
+        - if context == :related
+          = record.related.name
+        - elsif context == :relater
+          = record.relater.name
+        span.has-text-grey-light
+          | &nbsp;#{record.kind_name}
+    .level-right
+      .level-item
+        - if context == :related
+          = render Bookcase::AkinContentTags::Components::ActionButtons::Component.new(actions: %i[show_related edit delete], record: record.object)
+        - elsif context == :relater
+          = render Bookcase::AkinContentTags::Components::ActionButtons::Component.new(actions: %i[show_relater], record: record.object)

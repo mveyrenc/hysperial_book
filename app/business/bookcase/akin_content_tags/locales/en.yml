@@ -1,0 +1,56 @@
+en:
+  bookcase:
+    content_tags:
+      views:
+        edit:
+          title: "Edit tag relation"
+        new:
+          title: "New tag relation"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "The tag relation was created successfully"
+        update_interactor:
+          save_record:
+            success: "The tag relation has been successfully modified"
+        create_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No tag relation found in the settings"
+        hydrate_record:
+          no_record: "No tag found in the settings"
+        update_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No tag relation found in the settings"
+          successfully_updated: "The tag relation has been successfully modified"
+        save_record:
+          no_record: "No tag relation found in the settings"
+          failure: "An error occurred while saving the tag relation"
+        destroy_record:
+          successfully_destroyed: "The tag relation was successfully destroyed"
+          no_record: "No tag relation found in the settings"
+          failure: "An error occurred while saving the tag relation"
+      components:
+        form:
+          component:
+            related_id:
+              help: "Select multiple values to create multiple associations at once"
+  activemodel:
+    attributes:
+      bookcase/akin_content_tag_kind:
+        computed: Computed
+        excludes: Excludes
+        followable_relation: Relation to follow
+        limited_relation: Limited relation
+        suggests: Suggests
+  activerecord:
+    models:
+      bookcase/akin_content_tag:
+        one: Akin tag
+        other: Akin tags
+    attributes:
+      bookcase/akin_content_tag:
+        relater: Tag
+        related: Akin tag
+        kind: Kind
+        created_at: Created at
+        updated_at: Updated at

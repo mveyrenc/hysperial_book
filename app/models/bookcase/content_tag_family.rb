@@ -6,13 +6,13 @@
 #
 #  id                                                 :uuid             not null, primary key
 #  alternate_names(Aliases for the item)              :text
-#  data(A hash to store the data of the item)         :jsonb
+#  data(A hash to store the data of the item)         :jsonb            not null
 #  description(A description of the item)             :text
 #  kind                                               :string           not null
-#  metadata(A hash to store some data about the item) :jsonb
+#  metadata(A hash to store some data about the item) :jsonb            not null
 #  name(The name of the item)                         :string           not null
 #  position(The position of the item)                 :integer          not null
-#  settings(A hash to configure the item)             :jsonb
+#  settings(A hash to configure the item)             :jsonb            not null
 #  slug                                               :string           not null
 #  created_at                                         :datetime         not null
 #  updated_at                                         :datetime         not null

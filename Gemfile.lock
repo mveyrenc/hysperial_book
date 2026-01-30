@@ -438,6 +438,7 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
+    redcarpet (3.6.1)
     redis (5.4.1)
       redis-client (>= 0.22.0)
     redis-client (0.26.3)
@@ -614,6 +615,7 @@ DEPENDENCIES
   rails (~> 8.0)
   rails-pg-extras (~> 5.6)
   rails_best_practices
+  redcarpet
   redis (~> 5.0)
   redis-session-store (~> 0.11.5)
   rubocop-capybara

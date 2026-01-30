@@ -29,5 +29,5 @@ en:
         save_record:
           no_record: "No attribute found in the settings"
           failure: "An error occurred while saving the attribute"
-        destroy_interactor:
+        destroy_record:
           successfully_destroyed: "The attribute was successfully destroyed"

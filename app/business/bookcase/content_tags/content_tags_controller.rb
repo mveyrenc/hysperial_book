@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-# ContentTags controller
 module Bookcase
   module ContentTags
-    # ContentTags controller
     class ContentTagsController < ApplicationController
       include IndexSearchActionsConcern
       include ShowActionConcern
@@ -40,9 +38,7 @@ module Bookcase
 
       def set_show_record
         @record = model.friendly
-                       .includes([:content_tag_family])
-                       # .includes(content_tag_family: [:book])
-                       # .includes(related_akin_content_tags: {related: {content_tag_family: :book}})
+                       .includes(:content_tag_family)
                        .find(params[:id])
       end
     end

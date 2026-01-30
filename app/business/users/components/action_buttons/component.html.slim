@@ -1,5 +1,5 @@
 .buttons
-  - if actions.include?(:new) and policy(User).new?
+  - if actions.include?(:new) and policy(User).create?
     = link_to t('application.new'),
       new_userpath,
       class: 'button is-new-action',
@@ -9,7 +9,7 @@
       user_path(record),
       class: 'button is-show-action',
       target: '_top'
-  - if actions.include?(:update) and record.present? and policy(record).update?
+  - if actions.include?(:edit) and record.present? and policy(record).update?
     = link_to t('application.edit'),
       edit_user_path(record),
       class: 'button is-edit-action',

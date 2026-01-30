@@ -29,21 +29,13 @@ en:
         save_record:
           no_record: "No tag found in the settings"
           failure: "An error occurred while saving the tag"
-        destroy_interactor:
+        destroy_record:
           successfully_destroyed: "The tag was successfully destroyed"
       components:
         form:
           component:
             name:
               help: "Add on value by line to create several content tags in one go"
-  activemodel:
-    attributes:
-      bookcase/akin_content_tag_kind:
-        computed: Computed
-        excludes: Excludes
-        followable_relation: Relation to follow
-        limited_relation: Limited relation
-        suggests: Suggests
   activerecord:
     models:
       bookcase/content_tag:
@@ -58,10 +50,7 @@ en:
         book: Book
         book_kind: Kind of book
         content_tag_family: Tag family
-        content_tag_family_kind: Kind of tg family
-        excluded_related_content_tags: Excluded related tags
-        followable_relation_related_content_tags: Followable relation related tag
-        limited_relation_related_content_tags: Limited relation related tag
-        suggests_related_content_tags: Suggested related tag
+        content_tag_family_kind: Kind of tag family
+        akin_content_tags: Akin tags
         created_at: Created at
         updated_at: Updated at

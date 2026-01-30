@@ -29,7 +29,7 @@ fr:
         save_record:
           no_record: "Aucun attribut trouvé en paramètre"
           failure: "Une erreur s'est produite lors de l'enregistrement de l'attribut"
-        destroy_interactor:
+        destroy_record:
           no_record: "Aucun attribut trouvé en paramètre"
           success: "L'attribut a été supprimé avec succès"
           failure: "Une erreur s'est produite lors de la suppression de l'attribut"

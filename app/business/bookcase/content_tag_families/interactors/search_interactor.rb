@@ -42,29 +42,31 @@ module Bookcase
           context.aggs.each do |k, agg|
             next unless agg.include?('buckets') && agg['buckets'].any?
 
-            case k
-            when 'kind'
+            if k.eql?('kind')
               aggs[k] = {
-                name: ContentTagFamily.human_attribute_name(:kind),
+                name: Bookcase::ContentTagFamily.human_attribute_name(:kind),
                 multiple: false,
+                position: 1,
                 buckets: context.aggs['kind']['buckets'].map do |bkt|
-                  ["#{ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
+                  ["#{Bookcase::ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
                 end
               }
-            when 'book_kind'
+              elsif k.eql?('book_kind')
               aggs[k] = {
-                name: ContentTagFamily.human_attribute_name(:book_kind),
+                name: Bookcase::ContentTagFamily.human_attribute_name(:book_kind),
                 multiple: false,
+                position: 2,
                 buckets: context.aggs['book_kind']['buckets'].map do |bkt|
-                  ["#{BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
+                  ["#{Bookcase::BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
                 end
               }
-            when 'book_id'
+            elsif k.eql?('book_id')
               # get all books in the bucket in one request
               bkt_books = Bookcase::Book.find(agg['buckets'].map { |bkt| bkt['key'] }).index_by(&:id)
               aggs[k] = {
-                name: ContentTagFamily.human_attribute_name(:book),
+                name: Bookcase::ContentTagFamily.human_attribute_name(:book),
                 multiple: false,
+                position: 3,
                 buckets: agg['buckets'].map do |bkt|
                   # replace book id by there name
                   b = bkt_books[bkt['key']]
@@ -73,12 +75,7 @@ module Bookcase
               }
             end
           end
-          context.aggs = aggs
-        end
-
-        def decorate
-          context.records = Decorators::SearchResultsDecorator.decorate(context.records,
-                                                                        { with: Decorators::RecordDecorator })
+          context.aggs = aggs.sort_by { |_k, v| v[:position] }
         end
       end
     end

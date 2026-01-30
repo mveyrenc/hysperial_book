@@ -29,7 +29,7 @@ fr:
         save_record:
           no_record: "Aucun média trouvé en paramètre"
           failure: "Une erreur s'est produite lors de l'enregistrement du média"
-        destroy_interactor:
+        destroy_record:
           no_record: "Aucun média trouvé en paramètre"
           success: "Le média a été supprimé avec succès"
           failure: "Une erreur s'est produite lors de la suppression du média"

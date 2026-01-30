@@ -29,7 +29,7 @@ fr:
         save_record:
           no_record: "Aucun livre trouvé en paramètre"
           failure: "Une erreur s'est produite lors de l'enregistrement du livre"
-        destroy_interactor:
+        destroy_record:
           no_record: "Aucun livre trouvé en paramètre"
           success: "Le livre a été supprimé avec succès"
           failure: "Une erreur s'est produite lors de la suppression du livre"

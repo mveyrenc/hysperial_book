@@ -4,7 +4,7 @@ module Bookcase
   module ContentAttributes
     module Decorators
       class RecordDecorator < ApplicationDecorator
-        delegate :name, :html_text, :plain_text, :data, :data_type, :metadata
+        delegate :name, :html_text, :markdown_text, :plain_text, :data, :data_type, :metadata
       end
     end
   end

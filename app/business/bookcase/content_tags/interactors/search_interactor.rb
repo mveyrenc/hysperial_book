@@ -45,19 +45,18 @@ module Bookcase
           context.aggs.each do |k, agg|
             next unless agg.include?('buckets') && agg['buckets'].any?
 
-            case k
-            when 'book_kind'
+            if k.eql?('book_kind')
               aggs[k] = {
-                name: ContentTagFamily.human_attribute_name(:book_kind),
+                name: Bookcase::ContentTagFamily.human_attribute_name(:book_kind),
                 multiple: false,
                 position: 1,
                 buckets: agg['buckets'].map do |bkt|
-                  ["#{BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
+                  ["#{Bookcase::BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
                 end
               }
-            when 'book_id'
+            elsif k.eql?('book_id')
               aggs[k] = {
-                name: ContentTagFamily.human_attribute_name(:book),
+                name: Bookcase::ContentTagFamily.human_attribute_name(:book),
                 multiple: false,
                 position: 2,
                 buckets: agg['buckets'].map do |bkt|
@@ -65,18 +64,18 @@ module Bookcase
                   ["#{b.name} (#{bkt['doc_count']})", b.slug] if b.present?
                 end
               }
-            when 'content_tag_family_kind'
+            elsif k.eql?('content_tag_family_kind')
               aggs[k] = {
-                name: ContentTag.human_attribute_name(:content_tag_family_kind),
+                name: Bookcase::ContentTag.human_attribute_name(:content_tag_family_kind),
                 multiple: false,
                 position: 3,
                 buckets: agg['buckets'].map do |bkt|
-                  ["#{ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
+                  ["#{Bookcase::ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
                 end
               }
-            when 'content_tag_family_id'
+            elsif k.eql?('content_tag_family_id')
               aggs[k] = {
-                name: ContentTag.human_attribute_name(:content_tag_family),
+                name: Bookcase::ContentTag.human_attribute_name(:content_tag_family),
                 multiple: false,
                 position: 4,
                 buckets: agg['buckets'].map do |bkt|
@@ -85,8 +84,8 @@ module Bookcase
                 end
               }
             end
-            context.aggs = aggs.sort_by { |_, v| v[:position] }
           end
+          context.aggs = aggs.sort_by { |_k, v| v[:position] }
         end
       end
     end

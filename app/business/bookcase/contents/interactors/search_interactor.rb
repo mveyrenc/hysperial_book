@@ -53,32 +53,32 @@ module Bookcase
             if k.eql?('kind')
               aggs[k] = {
                 key: :kind,
-                name: Content.human_attribute_name(:kind),
+                name: Bookcase::Content.human_attribute_name(:kind),
                 multiple: false,
                 position: 1,
-                buckets: agg['buckets'].map do |a|
-                  ["#{ContentKind.human_attribute_name(a['key'])} (#{a['doc_count']})", a['key']]
+                buckets: agg['buckets'].map do |bkt|
+                  ["#{Bookcase::ContentKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
                 end
               }
             elsif k.eql?('book_kind')
               aggs[k] = {
                 key: :book_kind,
-                name: Content.human_attribute_name(:book_kind),
+                name: Bookcase::Content.human_attribute_name(:book_kind),
                 multiple: false,
                 position: 2,
-                buckets: agg['buckets'].map do |a|
-                  ["#{BookKind.human_attribute_name(a['key'])} (#{a['doc_count']})", a['key']]
+                buckets: agg['buckets'].map do |bkt|
+                  ["#{Bookcase::BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
                 end
               }
             elsif k.eql?('book_id')
               aggs[k] = {
                 key: :book_id,
-                name: Content.human_attribute_name(:book_id),
+                name: Bookcase::Content.human_attribute_name(:book_id),
                 multiple: false,
                 position: 3,
-                buckets: agg['buckets'].map do |a|
-                  b = Bookcase::Book.find_by(id: a['key'])
-                  ["#{b.name} (#{a['doc_count']})", b.slug]
+                buckets: agg['buckets'].map do |bkt|
+                  b = Bookcase::Book.find_by(id: bkt['key'])
+                  ["#{b.name} (#{bkt['doc_count']})", b.slug]
                 end
               }
             elsif k.start_with?('content_tags_id')
@@ -89,9 +89,9 @@ module Bookcase
                 name: f.name,
                 multiple: true,
                 position: 4,
-                buckets: agg['buckets'].map do |a|
-                  t = Bookcase::ContentTag.find(a['key'])
-                  ["#{t.name} (#{a['doc_count']})", t.slug]
+                buckets: agg['buckets'].map do |bkt|
+                  t = Bookcase::ContentTag.find(bkt['key'])
+                  ["#{t.name} (#{bkt['doc_count']})", t.slug]
                 end
               }
             end
