@@ -35,7 +35,7 @@ module Bookcase
 
         def set_order
           context.search_query = context.search_query
-                                        .includes(:book, :content_tag_family)
+                                        .includes(:content_tag_family)
                                         .order(:book_position)
                                         .order(:name)
         end

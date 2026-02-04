@@ -7,13 +7,16 @@ module AppFormBuilder
       include Base
 
       included do
-        def collection_check_boxes_with_bulma(method, collection, value_method, text_method, options = {}, html_options = {}) # rubocop:disable Metrics/ParameterLists
+        def collection_check_boxes_with_bulma(method, collection, value_method, text_method, options = {}, html_options = {})
+          # rubocop:disable Metrics/ParameterLists
           html = form_field_builder(method, options, html_options) do
-            collection_check_boxes_without_bulma(method, collection, value_method, text_method, options,
-                                                 html_options) do |b|
-              content_tag(:label, class: 'checkbox') do
-                concat b.check_box
-                concat content_tag(:span, class: 'control-label mx-1') { b.text }
+            content_tag(:div, class: 'checkboxes') do
+              collection_check_boxes_without_bulma(method, collection, value_method, text_method, options,
+                                                   html_options) do |b|
+                content_tag(:label, class: 'checkbox') do
+                  concat b.check_box
+                  concat content_tag(:span, class: 'control-label mx-1') { b.text }
+                end
               end
             end
           end

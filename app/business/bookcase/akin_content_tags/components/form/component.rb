@@ -18,11 +18,11 @@ module Bookcase
 
           def content_tag_families_collection
             # All the tag families in the same book
-            Bookcase::ContentTagFamily.where(book_id: record.relater.content_tag_family.object_id)
+            Bookcase::ContentTagFamily.where(book_id: record.relater.content_tag_family.book_id)
           end
 
           def kind_select_values
-            Bookcase::AkinContentTagKind.KINDS
+            Bookcase::AkinContentTagKind::KINDS
                                         .reject { |k| k == :computed }
                                         .map { |k| [Bookcase::AkinContentTagKind.human_attribute_name(k), k] }
           end

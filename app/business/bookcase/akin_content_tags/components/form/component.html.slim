@@ -1,22 +1,11 @@
 .card-box
   = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
-      = f.collection_select :relater_id, [record.relater], :id, :name, {}, { disabled: true }
-      = f.hidden :relater_id
-    - if record.persisted?
-      = f.collection_select :related_id, [record.related], :id, :name, {}, { disabled: record.persisted? }
-    - else
-      - content_tag_families_collection.each do |ctf|
-        fieldset
-          legend
-            = ctf.name
-          .checkboxes
-            - ctf.content_tags.each do |ct|
-              = f.label ct.name, class: 'checkbox' do
-                = f.check_box :related_id, {}, ct.object_id
-                | &nbsp;
-                / = resource.class.human_attribute_name(:remember_me)
-    = f.select :kind, options_for_select(kind_select_values, record.kind), {}, { disabled: record.persisted? }
+    = f.collection_select :relater_id, [record.relater], :id, :name, {}, { disabled: true }
+    = f.hidden_field :relater_id
+    = f.select :kind, options_for_select(kind_select_values, record.kind)
+    - content_tag_families_collection.each do |ctf|
+      = f.collection_radio_buttons :related_id, ctf.content_tags, :id, :name, label: ctf.name
 
     .field
       .buttons

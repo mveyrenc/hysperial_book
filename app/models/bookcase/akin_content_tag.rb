@@ -58,5 +58,44 @@ module Bookcase
     def set_defaults
       self.kind ||= :limited_relation
     end
+
+    def self.all_related_tags(relater)
+      self.all_akin_tags(relater, :relater, :related)
+    end
+
+    def self.all_relater_tags(related)
+      self.all_akin_tags(related, :related, :relater)
+    end
+
+    def self.all_akin_tags(content_tag, from, to)
+      excludes = AkinContentTag.includes([to]).where("#{from}": content_tag, kind: :excludes).to_a
+      all_relations = excludes
+      tags_to_parse = [content_tag]
+      loop do
+        tag = tags_to_parse.shift
+        break if tag.nil?
+        relations = AkinContentTag.includes([to]).where("#{from}": tag)
+        relations.each do |relation|
+          next unless all_relations.index { |e| e.send(to) == relation.send(to) }.nil?
+          if relation.kind == "followable_relation"
+            tags_to_parse << relation.send(to)
+          end
+          if tag != content_tag
+            case relation.kind
+            when "suggests"
+              relation.kind = "computed_suggestion"
+            when "excludes"
+              relation.kind = "computed_exclusion"
+            else
+              relation.kind = "computed"
+            end
+
+          end
+          all_relations << relation
+        end
+      end
+      all_relations
+
+    end
   end
 end

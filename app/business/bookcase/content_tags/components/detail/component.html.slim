@@ -13,14 +13,14 @@
     .level-item
       = render Bookcase::AkinContentTags::Components::ActionButtons::Component.new(actions: %i[new], record: record.object)
 = helpers.turbo_frame_tag Bookcase::AkinContentTag.new
-- if record.related_akin_content_tags.any?
-  - record.related_akin_content_tags.each do |akin|
+- if all_related_tags.any?
+  - all_related_tags.each do |akin|
     = render Bookcase::AkinContentTags::Components::Card::Component.new(akin, context: :related)
 - else
   = render NoRecord::Component.new
 
-- if record.relater_akin_content_tags.any?
+- if all_relater_tags.any?
   p.title.is-4
     = Bookcase::ContentTag.human_attribute_name(:relater_akin_content_tags)
-    - record.relater_akin_content_tags.each do |akin|
+    - all_relater_tags.each do |akin|
       = render Bookcase::AkinContentTags::Components::Card::Component.new(akin, context: :relater)

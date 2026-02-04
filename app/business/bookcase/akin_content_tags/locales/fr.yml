@@ -38,6 +38,8 @@ fr:
     attributes:
       bookcase/akin_content_tag_kind:
         computed: Relation calculée
+        computed_suggestion: Suggestion calculée
+        computed_exclusion: Exclusion calculée
         excludes: Exclus
         followable_relation: Relation à suivre
         limited_relation: Relation limitée
