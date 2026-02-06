@@ -2,7 +2,10 @@
   - component.with_title do
     = @record.name
   - component.with_actions do
-    = render Bookcase::Contents::Components::ActionButtons::Component.new(actions: %i[edit delete], record: @record.object)
+    - if  session.fetch(:content_edit_mode, false)
+      = render Bookcase::Contents::Components::ActionButtons::Component.new(actions: %i[deactivate_edit_mode], record: @record.object)
+    - else
+      = render Bookcase::Contents::Components::ActionButtons::Component.new(actions: %i[activate_edit_mode], record: @record.object)
   - component.with_main_section do
     = turbo_frame_tag @record do
       = render Bookcase::Contents::Components::Detail::Component.new(@record)

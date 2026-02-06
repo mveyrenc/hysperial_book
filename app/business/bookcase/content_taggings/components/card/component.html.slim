@@ -2,7 +2,7 @@
   .level
     .level-left
       .level-item
-        = record.content_tag.name
+        = record.content_tag_name
     .level-right
       .level-item
-        = render Bookcase::ContentTaggings::Components::ActionButtons::Component.new(actions: %i[show_related edit delete], record: record.object)
+        = render Bookcase::ContentTaggings::Components::ActionButtons::Component.new(actions: %i[delete], record: record.object)

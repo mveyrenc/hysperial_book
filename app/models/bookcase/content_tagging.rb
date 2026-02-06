@@ -72,7 +72,6 @@ module Bookcase
           if relation.kind == "followable_relation"
             tags_to_parse << relation.related
           end
-          logger.debug "Add #{relation.related}"
           all_content_taggings << ContentTagging.new(content: content, content_tag: relation.related)
         end
       end

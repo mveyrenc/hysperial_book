@@ -14,6 +14,8 @@ en:
     search: Search
     search_q_placeholder: Search...
     submit: Submit
+    activate_edit_mode: Activate edition mode
+    deactivate_edit_mode: Deactivate edition mode
     file_field:
       choose_file: Choose a file...
   errors:

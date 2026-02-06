@@ -9,7 +9,6 @@ module EditUpdateActionsConcern
 
     # GET /<resource>/:id/edit
     def edit
-      logger.debug(request.inspect)
       respond_to do |format|
         format.html { render template: template_path }
       end

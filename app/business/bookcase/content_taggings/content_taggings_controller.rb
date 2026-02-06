@@ -4,7 +4,6 @@ module Bookcase
   module ContentTaggings
     class ContentTaggingsController < ApplicationController
       include NewCreateActionsConcern
-      include EditUpdateActionsConcern
       include DestroyActionConcern
 
       private
@@ -14,38 +13,33 @@ module Bookcase
       end
 
       def redirect_to_after_create
-        bookcase_content_path(@relater_record)
-      end
-
-      def redirect_to_after_update
-        bookcase_content_path(@relater_record)
+        bookcase_content_path(@record.content)
       end
 
       def redirect_to_after_destroy
-        bookcase_content_path(@relater_record)
+        bookcase_content_path(@record.content)
       end
 
       def strong_params
         params
           .require(:bookcase_content_tagging)
           .permit(
+            :content_id,
             :content_tag_id
           )
       end
 
       def set_create_record
-        @relater_record = Bookcase::Content.friendly.find(params[:content_id])
-        @record = model.new(content: @relater_record)
-      end
-
-      def set_update_record
-        @record = Bookcase::ContentTagging.find(params[:id])
-        @relater_record = @record.content
+        if params.key?(:content_id)
+          content = Bookcase::Content.friendly.find(params.fetch(:content_id))
+          @record = model.new(content: content)
+        else
+          @record = model.new
+        end
       end
 
       def set_destroy_record
         @record = Bookcase::ContentTagging.find(params[:id])
-        @relater_record = @record.content
       end
     end
   end

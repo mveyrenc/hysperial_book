@@ -154,22 +154,35 @@ Rails.application.routes.draw do
 
   namespace :bookcase do
     resources :contents, controller: 'contents/contents' do
-      collection { get :search }
+      collection do
+        get :search
+      end
+      member do
+        post :edit_mode
+      end
     end
-    resources :content_taggings, except: %i[index show], controller: 'content_taggings/content_taggings'
+    resources :content_taggings, only: %i[new create destroy], controller: 'content_taggings/content_taggings'
 
     resources :books, controller: 'books/books' do
-      collection { get :search }
+      collection do
+        get :search
+      end
       resources :contents, controller: 'contents/books', only: :index do
-        collection { get :search }
+        collection do
+          get :search
+        end
       end
     end
 
     resources :content_tag_families, controller: 'content_tag_families/content_tag_families' do
-      collection { get :search }
+      collection do
+        get :search
+      end
     end
     resources :content_tags, controller: 'content_tags/content_tags' do
-      collection { get :search }
+      collection do
+        get :search
+      end
     end
     resources :akin_content_tags, except: %i[index show], controller: 'akin_content_tags/akin_content_tags'
 

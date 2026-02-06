@@ -4,7 +4,7 @@
     = f.collection_select :content_id, [record.content], :id, :name, {}, { disabled: true }
     = f.hidden_field :content_id
     - content_tag_families_collection.each do |ctf|
-      = f.collection_radio_buttons :content_id, ctf.content_tags, :id, :name, label: ctf.name
+      = f.collection_radio_buttons :content_tag_id, ctf.content_tags, :id, :name, label: ctf.name, include_hidden: false
 
     .field
       .buttons

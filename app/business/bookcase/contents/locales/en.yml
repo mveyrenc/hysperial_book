@@ -57,5 +57,7 @@ en:
         book_kind: Kind of book
         content_tag_family: Tag family
         content_tag_family_kind: Kind of tg family
+        content_tags: Tags
+        content_attributes: Attributes
         created_at: Created at
         updated_at: Updated at

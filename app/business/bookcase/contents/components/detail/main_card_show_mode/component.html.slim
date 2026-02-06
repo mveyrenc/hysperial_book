@@ -1,0 +1,20 @@
+.media
+  figure.media-left
+    .image.is-128x128
+      - if record.thumbnail.present?
+        = image_tag record.thumbnail.variant(resize_to_fill: [258, 258])
+      - else
+        = render Bookcase::Contents::Components::NoThumbnail::Component.new(record)
+  .media-content
+    - if record.alternate_names.present?
+      p.subtitle
+        = record.alternate_names
+    - if record.description.present?
+      .content
+        = record.description.html_safe
+  .media-right
+    .tags
+      span.tag
+        = record.kind_name
+      span.tag
+        = record.book_name

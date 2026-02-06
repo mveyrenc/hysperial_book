@@ -6,7 +6,6 @@
     = helpers.description_field(f)
     = f.select :kind, options_for_select(Bookcase::BookKind.kind_select_values, record.kind), {}, { disabled: record.persisted? }
     = helpers.position_field(f)
-
     .field
       .buttons
         = f.submit t('application.submit'), class: 'button is-primary'

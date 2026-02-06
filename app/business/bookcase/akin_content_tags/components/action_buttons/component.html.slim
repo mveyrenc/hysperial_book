@@ -1,4 +1,4 @@
-.buttons
+.buttons.is-right
   - if actions.include?(:new) and policy(Bookcase::AkinContentTag).create?
     = link_to t('application.new'),
       new_bookcase_akin_content_tag_path(relater_id: record.id),

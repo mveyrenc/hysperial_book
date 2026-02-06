@@ -1,4 +1,4 @@
-.buttons
+.buttons.is-right
   - if actions.include?(:new) and policy(Bookcase::Content).create?
     = link_to t('application.new'),
       new_bookcase_content_path,
@@ -20,3 +20,15 @@
       method: :delete,
       data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure") },
       class: "button is-delete-action"
+  - if actions.include?(:deactivate_edit_mode) and record.present? and policy(record).show?
+    = button_to t('application.deactivate_edit_mode'),
+      edit_mode_bookcase_content_path(record),
+      method: :post,
+      data: { 'turbo-method': :post },
+      class: "button is-edit-action"
+  - if actions.include?(:activate_edit_mode) and record.present? and policy(record).update?
+    = button_to t('application.activate_edit_mode'),
+      edit_mode_bookcase_content_path(record),
+      method: :post,
+      data: { 'turbo-method': :post },
+      class: "button is-edit-action"

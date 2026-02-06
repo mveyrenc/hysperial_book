@@ -18,7 +18,8 @@ module Bookcase
 
           def content_tag_families_collection
             # All the tag families in the same book
-            Bookcase::ContentTagFamily.where(book_id: record.content.book_id)
+            Bookcase::ContentTagFamily.includes([:content_tags])
+                                      .where(book_id: record.content.book_id)
           end
         end
       end

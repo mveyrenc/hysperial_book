@@ -1,0 +1,18 @@
+.level
+  .level-left
+    .level-item
+      p.title.is-4
+        = Bookcase::Content.human_attribute_name(:content_tags)
+  .level-right
+    .level-item
+      = render Bookcase::ContentTaggings::Components::ActionButtons::Component.new(actions: %i[new], record: record.object)
+= helpers.turbo_frame_tag Bookcase::ContentTagging.new
+- if record.all_content_taggings.any?
+  - record.all_content_taggings.group_by { |ct| ct.content_tag_family_name }.each do |f, cts|
+    p.title.is-6
+      = f
+    - cts.each do |ct|
+      = render Bookcase::ContentTaggings::Components::Card::Component.new(ct)
+- else
+  = render NoRecord::Component.new
+

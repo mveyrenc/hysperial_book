@@ -4,12 +4,15 @@ module Bookcase
   module Contents
     module Components
       module Detail
-        # Contents card component
         class Component < ApplicationComponent
           attr_reader :record
 
           def initialize(record)
             @record = record
+          end
+
+          def content_edit_mode?
+            session.fetch(:content_edit_mode, false)
           end
         end
       end

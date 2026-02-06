@@ -59,5 +59,7 @@ fr:
         book_kind: Type de livre
         content_tag_family: Famille d'étiquettes
         content_tag_family_kind: Type de famille d'étiquettes
+        content_tags: Étiquettes
+        content_attributes: Attributs
         created_at: Créé le
         updated_at: Modifié le

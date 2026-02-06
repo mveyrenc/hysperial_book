@@ -4,7 +4,6 @@ module Bookcase
   module Contents
     module Components
       module Card
-        # Contents card component
         class Component < ApplicationComponent
           attr_reader :record
 

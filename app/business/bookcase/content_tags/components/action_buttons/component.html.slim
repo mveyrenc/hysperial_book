@@ -1,4 +1,4 @@
-.buttons
+.buttons.is-right
   - if actions.include?(:new) and policy(Bookcase::ContentTag).create?
     = link_to t('application.new'),
       new_bookcase_content_tag_path,

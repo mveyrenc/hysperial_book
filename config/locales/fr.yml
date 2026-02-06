@@ -14,6 +14,8 @@ fr:
     search: Rechercher
     search_q_placeholder: Recherche...
     submit: Valider
+    activate_edit_mode: Passer en mode édition
+    deactivate_edit_mode: Sortir du mode édition
     file_field:
       choose_file: Choisis un fichier...
   errors:

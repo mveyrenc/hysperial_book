@@ -1,40 +1,14 @@
-.media
-  figure.media-left
-    .image.is-128x128
-      - if record.thumbnail.present?
-        = image_tag record.thumbnail.variant(resize_to_fill: [258, 258])
-      - else
-        = render Bookcase::Contents::Components::NoThumbnail::Component.new(record)
-  .media-content
-    - if record.alternate_names.present?
-      p.subtitle
-        = record.alternate_names
-    - if record.description.present?
-      .content
-        = record.description.html_safe
-  .media-right
-    .tags
-      span.tag
-        = record.kind_name
-      span.tag
-        = record.book_name
+- if content_edit_mode?
+  = render Bookcase::Contents::Components::Detail::MainCardEditMode::Component.new(@record)
+- else
+  = render Bookcase::Contents::Components::Detail::MainCardShowMode::Component.new(@record)
 
-- if record.all_content_taggings.any?
-  .card-box
-    - record.all_content_taggings.group_by { |ct| ct.content_tag_family_name }.each do |f, cts|
-      .field.is-horizontal
-        .field-label
-          .label
-            = f
-        .field-body
-          .tags
-            - cts.each do |ct|
-              - if ct.computed?
-                span.tag.is-primary.is-light
-                  = ct.content_tag_name
-              - else
-                span.tag.is-primary
-                  = ct.content_tag_name
+- if content_edit_mode?
+  = render Bookcase::Contents::Components::Detail::TaggingCardEditMode::Component.new(@record)
+- else
+  = render Bookcase::Contents::Components::Detail::TaggingCardShowMode::Component.new(@record)
+
+
 
 .card-box
   - record.content_attributes.each do |a|

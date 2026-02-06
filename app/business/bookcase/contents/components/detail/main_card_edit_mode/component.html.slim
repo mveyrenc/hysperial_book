@@ -1,0 +1,3 @@
+.card-box
+  = render Bookcase::Contents::Components::Detail::MainCardShowMode::Component.new(@record)
+  = render Bookcase::Contents::Components::ActionButtons::Component.new(actions: %i[edit delete], record: @record.object)
