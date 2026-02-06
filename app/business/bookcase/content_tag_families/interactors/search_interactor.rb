@@ -38,12 +38,13 @@ module Bookcase
         end
 
         def rearrange_aggs
-          aggs = {}
+          aggs = []
           context.aggs.each do |k, agg|
             next unless agg.include?('buckets') && agg['buckets'].any?
 
             if k.eql?('kind')
-              aggs[k] = {
+              aggs << {
+                key: k,
                 name: Bookcase::ContentTagFamily.human_attribute_name(:kind),
                 multiple: false,
                 position: 1,
@@ -51,8 +52,9 @@ module Bookcase
                   ["#{Bookcase::ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
                 end
               }
-              elsif k.eql?('book_kind')
-              aggs[k] = {
+            elsif k.eql?('book_kind')
+              aggs << {
+                key: k,
                 name: Bookcase::ContentTagFamily.human_attribute_name(:book_kind),
                 multiple: false,
                 position: 2,
@@ -63,7 +65,8 @@ module Bookcase
             elsif k.eql?('book_id')
               # get all books in the bucket in one request
               bkt_books = Bookcase::Book.find(agg['buckets'].map { |bkt| bkt['key'] }).index_by(&:id)
-              aggs[k] = {
+              aggs << {
+                key: k,
                 name: Bookcase::ContentTagFamily.human_attribute_name(:book),
                 multiple: false,
                 position: 3,
@@ -75,7 +78,7 @@ module Bookcase
               }
             end
           end
-          context.aggs = aggs.sort_by { |_k, v| v[:position] }
+          context.aggs = aggs.sort_by { |e| e[:position] }
         end
       end
     end

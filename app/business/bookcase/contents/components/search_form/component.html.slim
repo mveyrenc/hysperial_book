@@ -1,7 +1,7 @@
 .card-box
   = form_with(url: book.present? ? search_bookcase_book_contents_path(book) : search_bookcase_contents_path, builder: AppFormBuilder::FormBuilder, method: :get, data: { turbo: "false" }) do |f|
     = f.text_field :q, value: params_q, hide_label: true, placeholder: t('application.search_q_placeholder')
-    - aggs.each do |id, agg|
+    - aggs.each do |agg|
       = f.select agg[:key], options_for_select(agg[:buckets], params[agg[:key]]),
         label: agg[:name],
         include_blank: true, fullwidth: true,

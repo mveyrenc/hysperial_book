@@ -14,12 +14,12 @@
       bookcase_content_tag_path(record.relater),
       class: 'button is-show-action',
       target: '_top'
-  - if actions.include?(:edit) and record.present? and policy(record).update?
+  - if actions.include?(:edit) and record.present? and Bookcase::AkinContentTagKind::KINDS.include?(record.kind) and policy(record).update?
     = link_to t('application.edit'),
       edit_bookcase_akin_content_tag_path(record),
       class: 'button is-edit-action',
       'data-turbo-frame': helpers.dom_id(record)
-  - if actions.include?(:delete) and record.present? and policy(record).destroy?
+  - if actions.include?(:delete) and record.present? and Bookcase::AkinContentTagKind::KINDS.include?(record.kind) and policy(record).destroy?
     = button_to t('application.delete'),
       bookcase_akin_content_tags_path(record),
       method: :delete,

@@ -41,12 +41,13 @@ module Bookcase
         end
 
         def rearrange_aggs
-          aggs = {}
+          aggs = []
           context.aggs.each do |k, agg|
             next unless agg.include?('buckets') && agg['buckets'].any?
 
             if k.eql?('book_kind')
-              aggs[k] = {
+              aggs << {
+                key: k,
                 name: Bookcase::ContentTagFamily.human_attribute_name(:book_kind),
                 multiple: false,
                 position: 1,
@@ -55,7 +56,8 @@ module Bookcase
                 end
               }
             elsif k.eql?('book_id')
-              aggs[k] = {
+              aggs << {
+                key: k,
                 name: Bookcase::ContentTagFamily.human_attribute_name(:book),
                 multiple: false,
                 position: 2,
@@ -65,7 +67,8 @@ module Bookcase
                 end
               }
             elsif k.eql?('content_tag_family_kind')
-              aggs[k] = {
+              aggs << {
+                key: k,
                 name: Bookcase::ContentTag.human_attribute_name(:content_tag_family_kind),
                 multiple: false,
                 position: 3,
@@ -74,7 +77,8 @@ module Bookcase
                 end
               }
             elsif k.eql?('content_tag_family_id')
-              aggs[k] = {
+              aggs << {
+                key: k,
                 name: Bookcase::ContentTag.human_attribute_name(:content_tag_family),
                 multiple: false,
                 position: 4,
@@ -85,7 +89,7 @@ module Bookcase
               }
             end
           end
-          context.aggs = aggs.sort_by { |_k, v| v[:position] }
+          context.aggs = aggs.sort_by { |e| e[:position] }
         end
       end
     end

@@ -15,9 +15,6 @@ module AppFormBuilder
         concat field_help(name, options)
       end
     end
-
-    private
-
     def field_control(&)
       content_tag(:div, class: 'control', &)
     end
@@ -32,6 +29,7 @@ module AppFormBuilder
     end
 
     def field_label(name, options)
+      return if options[:label] == false
       classes = %w[label]
       classes << 'required' if options[:required]
       label(name.to_s.delete_suffix('_id').to_sym, options[:label], class: classes)

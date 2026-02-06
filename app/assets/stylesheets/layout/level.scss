@@ -1,1 +1,26 @@
+@use "bulma/sass/utilities/initial-variables" as iv;
+
 @use "bulma/sass/layout/level";
+
+.#{iv.$class-prefix}level {
+  .#{iv.$class-prefix}level-left {
+    min-width: 0;
+    word-break: break-word;
+    flex-basis: 50%;
+
+    .#{iv.$class-prefix}level-item {
+      flex-shrink: 1;
+    }
+  }
+
+  .#{iv.$class-prefix}level-right {
+    min-width: 0;
+    word-break: break-word;
+    flex-basis: 50%;
+
+    .#{iv.$class-prefix}level-item {
+      flex-shrink: 1;
+      text-align: right;
+    }
+  }
+}

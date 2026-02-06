@@ -1,0 +1,47 @@
+en:
+  bookcase:
+    content_taggings:
+      views:
+        edit:
+          title: "Edit content tagging"
+        new:
+          title: "New content tagging"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "The content tagging was created successfully"
+        update_interactor:
+          save_record:
+            success: "The content tagging has been successfully modified"
+        create_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No content tagging found in the settings"
+        hydrate_record:
+          no_record: "No tag found in the settings"
+        update_record:
+          no_current_user: "No user found in the settings"
+          no_record: "No content tagging found in the settings"
+          successfully_updated: "The content tagging has been successfully modified"
+        save_record:
+          no_record: "No content tagging found in the settings"
+          failure: "An error occurred while saving the content tagging"
+        destroy_record:
+          successfully_destroyed: "The content tagging was successfully destroyed"
+          no_record: "No content tagging found in the settings"
+          failure: "An error occurred while saving the content tagging"
+      components:
+        form:
+          component:
+            related_id:
+              help: "Select multiple values to create multiple associations at once"
+  activerecord:
+    models:
+      bookcase/content_taggings:
+        one: Content tagging
+        other: Content taggings
+    attributes:
+      bookcase/content_taggings:
+        content: Content
+        content_tag: Tag
+        created_at: Created at
+        updated_at: Updated at

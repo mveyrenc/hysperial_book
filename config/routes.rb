@@ -156,6 +156,7 @@ Rails.application.routes.draw do
     resources :contents, controller: 'contents/contents' do
       collection { get :search }
     end
+    resources :content_taggings, except: %i[index show], controller: 'content_taggings/content_taggings'
 
     resources :books, controller: 'books/books' do
       collection { get :search }

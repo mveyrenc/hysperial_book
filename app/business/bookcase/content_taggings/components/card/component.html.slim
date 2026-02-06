@@ -1,0 +1,8 @@
+.card-box
+  .level
+    .level-left
+      .level-item
+        = record.content_tag.name
+    .level-right
+      .level-item
+        = render Bookcase::ContentTaggings::Components::ActionButtons::Component.new(actions: %i[show_related edit delete], record: record.object)

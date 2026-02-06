@@ -43,16 +43,19 @@ module Bookcase
         def set_order
           context.search_query = context.search_query
                                         .includes(:thumbnail, :book)
+                                        .order(
+                                          [created_at: { order: :desc }]
+                                        )
         end
 
         def rearrange_aggs
-          aggs = {}
+          aggs = []
           context.aggs.each do |k, agg|
             next unless agg.include?('buckets') && agg['buckets'].any?
 
             if k.eql?('kind')
-              aggs[k] = {
-                key: :kind,
+              aggs << {
+                key: :content_tags_ids,
                 name: Bookcase::Content.human_attribute_name(:kind),
                 multiple: false,
                 position: 1,
@@ -61,8 +64,8 @@ module Bookcase
                 end
               }
             elsif k.eql?('book_kind')
-              aggs[k] = {
-                key: :book_kind,
+              aggs << {
+                key: :content_tags_ids,
                 name: Bookcase::Content.human_attribute_name(:book_kind),
                 multiple: false,
                 position: 2,
@@ -71,8 +74,8 @@ module Bookcase
                 end
               }
             elsif k.eql?('book_id')
-              aggs[k] = {
-                key: :book_id,
+              aggs << {
+                key: :content_tags_ids,
                 name: Bookcase::Content.human_attribute_name(:book_id),
                 multiple: false,
                 position: 3,
@@ -84,10 +87,10 @@ module Bookcase
             elsif k.start_with?('content_tags_id')
               f_id = k[16, 36]
               f = Bookcase::ContentTagFamily.find(f_id)
-              aggs[k] = {
+              aggs << {
                 key: :content_tags_ids,
                 name: f.name,
-                multiple: true,
+                multiple: false,
                 position: 4,
                 buckets: agg['buckets'].map do |bkt|
                   t = Bookcase::ContentTag.find(bkt['key'])
@@ -96,7 +99,7 @@ module Bookcase
               }
             end
           end
-          context.aggs = aggs.sort_by { |_k, v| v[:position] }
+          context.aggs = aggs.sort_by { |e| e[:position] }
         end
       end
     end

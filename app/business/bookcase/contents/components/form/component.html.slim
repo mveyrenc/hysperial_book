@@ -1,17 +1,29 @@
 .card-box
   = form_for(record, builder: AppFormBuilder::FormBuilder, multipart: true, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
-    - if record.new_record?
-      = f.select :book_id, options_for_select(Book.all.map { |book| [book, book.id] }, record_book)
-      = f.select :kind, options_for_select(ContentKind.kinds.map { |key, value| [ContentKind.human_attribute_name(key), value] }, record_kind)
-    = f.text_field :name, autofocus: true
-    = f.text_field :alternate_names
+    = helpers.name_field(f)
+    = helpers.book_collection_select(f)
+    = f.select :kind, options_for_select(Bookcase::ContentKind.kind_select_values, record_kind), {}, { disabled: record.persisted? }
+    = helpers.alternate_names_field(f)
     = f.text_field :version
-    = f.text_field :source_url
+    = f.text_field :is_based_on_url
     = f.fields_for :thumbnail do |f_thumbnail|
-      / = f_thumbnail.hidden_field :file, value: record.thumbnail.file.signed_id if record.thumbnail and record.thumbnail.file.attached?
-      / = f_thumbnail.image_field :file, direct_upload: true, label: Bookcase::Content.human_attribute_name(:thumbnail)
-      = f_thumbnail.image_field :file, label: Bookcase::Content.human_attribute_name(:thumbnail)
+      = f_thumbnail.form_field({ hide_label: true }) do
+        = f_thumbnail.field_label :file, label: Bookcase::Content.human_attribute_name(:thumbnail)
+        = f_thumbnail.field_control do
+          .media
+            figure.media-left
+              .image.is-128x128
+                - if record.thumbnail.present? or record.thumbnail.file.present?
+                  = image_tag record.thumbnail.file.variant(resize_to_fill: [258, 258])
+                - else
+                  = render Bookcase::Contents::Components::NoThumbnail::Component.new(record)
+            .media-content
+              / = f_thumbnail.hidden_field :file, value: record.thumbnail.file.signed_id if record.thumbnail and record.thumbnail.file.attached?
+              / = f_thumbnail.image_field :file, direct_upload: true, label: Bookcase::Content.human_attribute_name(:thumbnail)
+              = f_thumbnail.image_field :file, { label: false }
+              label.checkbox
+                = f_thumbnail.check_box :_destroy, { label: Bookcase::Medium.human_attribute_name(:remove_file) }
 
     .field
       .buttons

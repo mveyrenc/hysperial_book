@@ -56,5 +56,27 @@ module Bookcase
 
     ## Default values
     # no default value
+
+    def self.all_content_taggings(content)
+      all_content_taggings = content.content_taggings.to_a
+      excludes = []
+      tags_to_parse = content.content_tags.to_a
+      loop do
+        tag = tags_to_parse.shift
+        break if tag.nil?
+        relations = AkinContentTag.includes([:related]).includes(related: [:content_tag_family]).where(relater: tag).to_a
+        excludes += relations.select { |e| e.kind == 'excludes' }
+        relations.reject { |e| e.kind == 'excludes' }.each do |relation|
+          next unless all_content_taggings.index { |e| e.content_tag == relation.related }.nil? &&
+                      excludes.index { |e| e.content_tag == relation.related }.nil?
+          if relation.kind == "followable_relation"
+            tags_to_parse << relation.related
+          end
+          logger.debug "Add #{relation.related}"
+          all_content_taggings << ContentTagging.new(content: content, content_tag: relation.related)
+        end
+      end
+      all_content_taggings
+    end
   end
 end

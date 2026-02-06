@@ -21,11 +21,6 @@ module Bookcase
             Bookcase::ContentTagFamily.where(book_id: record.relater.content_tag_family.book_id)
           end
 
-          def kind_select_values
-            Bookcase::AkinContentTagKind::KINDS
-                                        .reject { |k| k == :computed }
-                                        .map { |k| [Bookcase::AkinContentTagKind.human_attribute_name(k), k] }
-          end
         end
       end
     end

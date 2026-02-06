@@ -37,11 +37,13 @@ en:
     attributes:
       bookcase/book_kind:
         animals: Animals
-        home_well_being: Home well-being
         cooking: Cooking
-        fabric_art: Fabric art
-        gardening: Gardening
         crafts: Crafts
+        fabric_art: Fabric art
+        garden: Garden
+        home_well_being: Home well-being
+        knowledge: Knowledge
+        plant_life: Plant life
   activerecord:
     models:
       bookcase/book:

@@ -8,7 +8,7 @@
         = render Bookcase::Contents::Components::NoThumbnail::Component.new(record)
     .media-content
       p.title
-        = link_to record.object
+        = link_to record.name, record.object, data: { turbo_frame: :_top }
       - unless record.alternate_names.blank?
         p.subtitle
           = record.alternate_names

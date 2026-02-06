@@ -1,0 +1,48 @@
+fr:
+  bookcase:
+    content_taggings:
+      views:
+        edit:
+          title: "Modifier le tagging de contenu"
+        new:
+          title: "Nouveau tagging de contenu"
+      interactors:
+        create_interactor:
+          save_record:
+            success: "Le tagging a été créée avec succès"
+        update_interactor:
+          save_record:
+            success: "Le tagging de contenu a été modifiée avec succès"
+        create_record:
+          no_current_user: "Aucun utilisateur trouvé en paramètre"
+          no_record: "Aucune relation entre étiquettes trouvée en paramètre"
+        hydrate_record:
+          no_record: "Aucune relation entre étiquettes trouvée en paramètre"
+        update_record:
+          no_current_user: "Aucun utilisateur trouvé en paramètre"
+          no_record: "Aucune relation entre étiquettes trouvée en paramètre"
+          successfully_updated: "Le tagging de contenu a été modifiée avec succès"
+        save_record:
+          no_record: "Aucune relation entre étiquettes trouvée en paramètre"
+          failure: "Une erreur s'est produite lors de l'enregistrement de le tagging de contenu"
+        destroy_record:
+          no_record: "Aucune relation entre étiquettes trouvée en paramètre"
+          success: "Le tagging de contenu a été supprimée avec succès"
+          failure: "Une erreur s'est produite lors de la suppression de le tagging de contenu"
+      components:
+        form:
+          component:
+            related_id:
+              help: "Sélectionner plusieurs valeurs pour créer plusieurs association en une seule fois"
+  activerecord:
+    models:
+      bookcase/content_taggings:
+        one: Tagging
+        other: Taggings
+    attributes:
+      bookcase/content_taggings:
+        content: Contenu
+        content_tag: Étiquette
+        kind: Type
+        created_at: Créé le
+        updated_at: Modifié le

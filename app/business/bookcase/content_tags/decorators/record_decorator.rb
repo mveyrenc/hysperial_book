@@ -56,6 +56,14 @@ module Bookcase
             content_tag_family.kind_name(false)
           end
         end
+
+        def all_related_tags
+          @all_related_tags ||= Bookcase::AkinContentTags::Decorators::RecordDecorator.decorate_collection(Bookcase::AkinContentTag.all_related_tags(object))
+        end
+
+        def all_relater_tags
+          @all_relater_tags ||= Bookcase::AkinContentTags::Decorators::RecordDecorator.decorate_collection(Bookcase::AkinContentTag.all_relater_tags(object))
+        end
       end
     end
   end

@@ -19,18 +19,22 @@
       span.tag
         = record.book_name
 
-- if record.content_tags.any?
+- if record.all_content_taggings.any?
   .card-box
-    - record.content_tags.group_by { |ct| ct.content_tag_family.name }.each do |f, cts|
+    - record.all_content_taggings.group_by { |ct| ct.content_tag_family_name }.each do |f, cts|
       .field.is-horizontal
         .field-label
           .label
             = f
         .field-body
-          .control
+          .tags
             - cts.each do |ct|
-              span.tag.is-primary.is-light
-                = ct.name
+              - if ct.computed?
+                span.tag.is-primary.is-light
+                  = ct.content_tag_name
+              - else
+                span.tag.is-primary
+                  = ct.content_tag_name
 
 .card-box
   - record.content_attributes.each do |a|

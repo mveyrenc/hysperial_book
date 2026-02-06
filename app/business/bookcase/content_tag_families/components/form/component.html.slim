@@ -1,15 +1,12 @@
 .card-box
   = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
-    - if record.new_record?
-      = f.text_area :name, autofocus: true, help: t('.name.help')
-    - else
-      = f.text_field :name, autofocus: true
-    = f.select :kind, options_for_select(kind_select_values, record.kind), {}, { disabled: record.persisted? }
-    = f.collection_select :book_id, book_collection, :id, :name, {}, { disabled: record.persisted? }
-    = f.text_area :alternate_names
-    = f.text_area :description
-    = f.text_field :position
+    = helpers.name_field(f, true)
+    = f.select :kind, options_for_select(Bookcase::ContentTagFamily.kind_select_values, record.kind), {}, { disabled: record.persisted? }
+    = helpers.book_collection_select(f)
+    = helpers.alternate_names_field(f)
+    = helpers.description_field(f)
+    = helpers.position_field(f)
 
     .field
       .buttons

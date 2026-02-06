@@ -105,9 +105,11 @@ module Bookcase
       @kind = kind
     end
 
-    def self.kinds
-      AVAILABLE_KINDS.keys.map(&:to_s)
-      # .index_by(&:to_sym).to_h
+    def self.kind_select_values
+      AVAILABLE_KINDS
+        .keys
+        .map { |k| [human_attribute_name(k), k] }
+        .sort
     end
 
     def self.data_type(kind)

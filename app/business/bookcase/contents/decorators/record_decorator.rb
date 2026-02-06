@@ -9,6 +9,7 @@ module Bookcase
         decorates_association :book, with: Books::Decorators::RecordDecorator
         decorates_associations :content_tags, with: Bookcase::ContentTags::Decorators::RecordDecorator
         decorates_associations :content_attributes, with: Bookcase::ContentAttributes::Decorators::RecordDecorator
+        decorates_associations :all_content_taggings, with: Bookcase::ContentTaggings::Decorators::RecordDecorator
 
         def name(highlights = true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:name)

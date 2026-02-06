@@ -1,4 +1,4 @@
-= render Layout::MainArea::Component.new(turbo_frame_tag_id: @record) do |component|
+= render Layout::MainArea::Component.new(turbo_frame_tag_id: @record.object.id) do |component|
   - component.with_title do
     = @record.name
   - component.with_actions do

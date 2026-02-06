@@ -3,7 +3,7 @@
     = render FormErrors::Component.new(errors: record.errors)
     = f.collection_select :relater_id, [record.relater], :id, :name, {}, { disabled: true }
     = f.hidden_field :relater_id
-    = f.select :kind, options_for_select(kind_select_values, record.kind)
+    = f.select :kind, options_for_select(Bookcase::AkinContentTagKind::kind_select_values, record.kind)
     - content_tag_families_collection.each do |ctf|
       = f.collection_radio_buttons :related_id, ctf.content_tags, :id, :name, label: ctf.name
 

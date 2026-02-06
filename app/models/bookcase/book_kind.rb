@@ -10,8 +10,11 @@ module Bookcase
       @kind = kind
     end
 
-    def self.kinds
-      KINDS.index_by(&:to_sym).to_h
+
+    def self.kind_select_values
+      KINDS
+        .map { |k| [human_attribute_name(k), k] }
+        .sort
     end
   end
 end

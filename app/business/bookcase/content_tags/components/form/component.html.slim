@@ -2,10 +2,7 @@
   = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
     = f.grouped_collection_select :content_tag_family_id, book_collection, :content_tag_families, :name, :id, :name, {}, { disabled: record.persisted? }
-    - if record.new_record?
-      = f.text_area :name, help: t('.name.help')
-    - else
-      = f.text_field :name
+    = helpers.name_field(f, true)
 
 
     .field

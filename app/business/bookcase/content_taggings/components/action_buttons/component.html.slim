@@ -1,0 +1,27 @@
+.buttons
+  - if actions.include?(:new) and policy(Bookcase::ContentTagging).create?
+    = link_to t('application.new'),
+      new_bookcase_content_tagging_path(content_id: record.id),
+      class: 'button is-new-action',
+      'data-turbo-frame': helpers.dom_id(Bookcase::ContentTagging.new)
+  - if actions.include?(:show_related) and record.present? and policy(record.related).show?
+    = link_to t('application.read'),
+      bookcase_content_tagging_path(record.related),
+      class: 'button is-show-action',
+      target: '_top'
+  - if actions.include?(:show_relater) and record.present? and policy(record.relater).show?
+    = link_to t('application.read'),
+      bookcase_content_tagging_path(record.relater),
+      class: 'button is-show-action',
+      target: '_top'
+  - if actions.include?(:edit) and record.present? and policy(record).update?
+    = link_to t('application.edit'),
+      edit_bookcase_content_tagging_path(record),
+      class: 'button is-edit-action',
+      'data-turbo-frame': helpers.dom_id(record)
+  - if actions.include?(:delete) and record.present? and policy(record).destroy?
+    = button_to t('application.delete'),
+      bookcase_content_tagging_path(record),
+      method: :delete,
+      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure") },
+      class: "button is-delete-action"

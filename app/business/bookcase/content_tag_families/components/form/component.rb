@@ -12,15 +12,6 @@ module Bookcase
             @record = record
           end
 
-          protected
-
-          def kind_select_values
-            ContentTagFamilyKind.kinds.map { |key, value| [ContentTagFamilyKind.human_attribute_name(key), value] }
-          end
-
-          def book_collection
-            Book.order(:position)
-          end
         end
       end
     end

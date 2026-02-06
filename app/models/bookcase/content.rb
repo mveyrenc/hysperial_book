@@ -115,5 +115,9 @@ module Bookcase
     def to_s
       name
     end
+
+    def all_content_taggings
+      @all_content_taggings ||= ContentTagging.all_content_taggings(self)
+    end
   end
 end
