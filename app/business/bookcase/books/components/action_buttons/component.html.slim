@@ -1,4 +1,9 @@
 .buttons.is-right
+  - if actions.include?(:list) and policy(Bookcase::Book).index?
+    = link_to t('application.back_to_list'),
+      bookcase_books_path,
+      data: { 'turbo-frame': helpers.model_dom_id(record), 'turbo-action': 'advance' },
+      class: 'button is-back-action'
   - if actions.include?(:new) and policy(Bookcase::Book).create?
     = link_to t('application.new'),
       new_bookcase_book_path,
@@ -8,7 +13,7 @@
     = link_to t('application.read'),
       bookcase_book_path(record),
       class: 'button is-show-action',
-      target: '_top'
+      data: { turbo: "false" }
   - if actions.include?(:edit) and record.present? and policy(record).update?
     = link_to t('application.edit'),
       edit_bookcase_book_path(record),
@@ -18,5 +23,5 @@
     = button_to t('application.delete'),
       bookcase_book_path(record),
       method: :delete,
-      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure") },
+      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure"), 'turbo-action': 'advance' },
       class: "button is-delete-action"

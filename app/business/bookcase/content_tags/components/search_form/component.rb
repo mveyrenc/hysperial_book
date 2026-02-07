@@ -4,7 +4,6 @@ module Bookcase
   module ContentTags
     module Components
       module SearchForm
-        # Tags search form component
         class Component < ApplicationComponent
           attr_reader :params, :aggs
 

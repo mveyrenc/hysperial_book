@@ -80,15 +80,11 @@ module Bookcase
           if relation.kind == "followable_relation"
             tags_to_parse << relation.send(to)
           end
-          k = "computed"
           if tag != content_tag
-            if relation.kind == "suggests"
-              k = "computed_suggestion"
-            elsif relation.kind == "excludes"
-              k = "computed_exclusion"
-            end
+            all_relations << AkinContentTag.new("#{from}": content_tag, "#{to}": relation.send(to), kind: "computed_#{relation.kind}")
+          else
+            all_relations << relation
           end
-          all_relations << AkinContentTag.new("#{from}": content_tag, "#{to}": relation.send(to), kind: k)
         end
       end
       all_relations

@@ -4,10 +4,7 @@ module Bookcase
   module AkinContentTags
     module Components
       module Form
-        # ContentTags card component
         class Component < ApplicationComponent
-          delegate :content_tag_family, :name, to: :record, prefix: true
-
           attr_reader :record
 
           def initialize(record)

@@ -1,11 +1,12 @@
 .card-box
-  = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
+  = form_for(record,
+          builder: AppFormBuilder::FormBuilder,
+          data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
     = f.collection_select :content_id, [record.content], :id, :name, {}, { disabled: true }
     = f.hidden_field :content_id
     - content_tag_families_collection.each do |ctf|
       = f.collection_radio_buttons :content_tag_id, ctf.content_tags, :id, :name, label: ctf.name, include_hidden: false
-
     .field
       .buttons
         = f.submit t('application.submit'), class: 'button is-primary'

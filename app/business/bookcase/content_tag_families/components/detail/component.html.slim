@@ -5,8 +5,18 @@
   = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:description), value: record.description)
   = render FieldDisplay::Component.new(label: Bookcase::ContentTagFamily.human_attribute_name(:book), value: record.book_name)
 
+.level
+  .level-left
+    .level-item
+      p.title.is-4
+        = Bookcase::ContentTagFamily.human_attribute_name(:content_tags)
+  .level-right
+    .level-item
+      = render Bookcase::ContentTags::Components::ActionButtons::Component.new(actions: %i[new_from_content_tag_family], record: record.object)
+= helpers.turbo_frame_tag Bookcase::ContentTag.new
 - if record.content_tags.any?
-  p.title.is-4
-    = Bookcase::ContentTagFamily.human_attribute_name(:content_tags)
   - record.content_tags.each do |ct|
-    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_family_show)
+    = helpers.turbo_frame_tag helpers.dom_id(ct.object)
+      = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_family_show)
+- else
+  = render NoRecord::Component.new

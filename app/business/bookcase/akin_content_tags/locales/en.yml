@@ -37,7 +37,7 @@ en:
   activemodel:
     attributes:
       bookcase/akin_content_tag_kind:
-        computed: Computed
+        computed_followable_relation: Computed
         computed_suggestion: Computed suggestion
         computed_exclusion: Computed exclusion
         excludes: Excludes

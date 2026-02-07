@@ -1,4 +1,4 @@
-= render Layout::MainArea::Component.new(turbo_frame_tag_id: @record) do |component|
+= render Layout::MainArea::Component.new(@record) do |component|
   - component.with_title do
     = t('.title')
   - component.with_main_section do

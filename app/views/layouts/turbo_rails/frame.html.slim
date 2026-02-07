@@ -1,0 +1,8 @@
+html
+  head
+    = csrf_meta_tags
+    == yield :head
+  body
+    = turbo_stream.replace "flash"
+      = render Layout::Flash::Component.new
+    == yield

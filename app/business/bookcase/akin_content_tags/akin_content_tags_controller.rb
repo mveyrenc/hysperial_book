@@ -14,15 +14,15 @@ module Bookcase
       end
 
       def redirect_to_after_create
-        bookcase_content_tag_path(@relater_record)
+        @relater_record
       end
 
       def redirect_to_after_update
-        bookcase_content_tag_path(@relater_record)
+        @relater_record
       end
 
       def redirect_to_after_destroy
-        bookcase_content_tag_path(@relater_record)
+        @relater_record
       end
 
       def strong_params
@@ -35,17 +35,17 @@ module Bookcase
       end
 
       def set_create_record
-        @relater_record = Bookcase::ContentTag.friendly.find(params[:relater_id])
-        @record = model.new(relater: @relater_record)
+        relater = Bookcase::ContentTag.friendly.find(params.fetch(:relater_id))
+        @record = model.new(relater: relater)
       end
 
       def set_update_record
-        @record = Bookcase::AkinContentTag.find(params[:id])
+        @record = Bookcase::AkinContentTag.find(params.fetch(:id))
         @relater_record = @record.relater
       end
 
       def set_destroy_record
-        @record = Bookcase::AkinContentTag.find(params[:id])
+        @record = Bookcase::AkinContentTag.find(params.fetch(:id))
         @relater_record = @record.relater
       end
     end

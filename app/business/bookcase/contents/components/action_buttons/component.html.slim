@@ -1,34 +1,50 @@
 .buttons.is-right
+  / List
+  - if actions.include?(:list) and policy(Bookcase::Content).index?
+    = link_to t('application.back_to_list'),
+            bookcase_contents_path,
+            data: { 'turbo-frame': helpers.model_dom_id(record), 'turbo-action': 'advance' },
+            class: 'button is-back-action'
+
+  / New
   - if actions.include?(:new) and policy(Bookcase::Content).create?
     = link_to t('application.new'),
       new_bookcase_content_path,
       class: 'button is-new-action',
       'data-turbo-frame': helpers.dom_id(Bookcase::Content.new)
+
+  / Show
   - if actions.include?(:show) and record.present? and policy(record).show?
     = link_to t('application.read'),
       bookcase_content_path(record),
       class: 'button is-show-action',
-      target: '_top'
+      data: { turbo: "false" }
+
+  / Edit
   - if actions.include?(:edit) and record.present? and policy(record).update?
     = link_to t('application.edit'),
       edit_bookcase_content_path(record),
       class: 'button is-edit-action',
       'data-turbo-frame': helpers.dom_id(record)
+
+  / Delete
   - if actions.include?(:delete) and record.present? and policy(record).destroy?
     = button_to t('application.delete'),
       bookcase_content_path(record),
       method: :delete,
-      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure") },
+      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure"), 'turbo-action': 'advance' },
       class: "button is-delete-action"
+
+  / Edition mode
   - if actions.include?(:deactivate_edit_mode) and record.present? and policy(record).show?
     = button_to t('application.deactivate_edit_mode'),
       edit_mode_bookcase_content_path(record),
       method: :post,
-      data: { 'turbo-method': :post },
+      data: { 'turbo-method': :post, 'turbo-action': 'replace' },
       class: "button is-edit-action"
   - if actions.include?(:activate_edit_mode) and record.present? and policy(record).update?
     = button_to t('application.activate_edit_mode'),
       edit_mode_bookcase_content_path(record),
       method: :post,
-      data: { 'turbo-method': :post },
+      data: { 'turbo-method': :post, 'turbo-action': 'replace' },
       class: "button is-edit-action"

@@ -7,22 +7,12 @@ module DestroyActionConcern
     before_action :set_destroy_record, only: %i[destroy]
     before_action :authorize_destroy_record, only: %i[destroy]
 
-    # GET /<resource>/new
-    def new
-      respond_to do |format|
-        format.html { render template: template_path }
-      end
-    end
-
     # DELETE /<resource>/:id
     def destroy
       result = call_destroy_interactor
 
-      flash.now.notice = result.message
-      respond_to do |format|
-        format.html { redirect_to redirect_to_after_destroy }
-        format.turbo_stream { render template: template_path }
-      end
+      flash['notice'] = result.message
+      redirect_to redirect_to_after_destroy, status: :see_other
     end
 
     protected
@@ -51,7 +41,7 @@ module DestroyActionConcern
     end
 
     def set_destroy_record
-      @record = model.respond_to?(:friendly) ? model.friendly.find(params[:id]) : model.find(params[:id])
+      @record = model.respond_to?(:friendly) ? model.friendly.find(params.expect(:id)) : model.find(params.expect(:id))
     end
 
     def authorize_destroy_record

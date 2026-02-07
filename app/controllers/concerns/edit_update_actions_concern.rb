@@ -9,24 +9,18 @@ module EditUpdateActionsConcern
 
     # GET /<resource>/:id/edit
     def edit
-      respond_to do |format|
-        format.html { render template: template_path }
-      end
+      render template: template_path
     end
 
     # PATCH/PUT /<resource>/:id
     def update
       result = call_update_interactor
-      respond_to do |format|
-        if result.success?
-          flash.now.notice = result.message
-          format.html { redirect_to redirect_to_after_update }
-          format.turbo_stream { render template: template_path }
-        else
-          flash.now.alert = result.message
-          format.html { render template: template_path(:new), status: :unprocessable_content }
-          format.turbo_stream { render template: template_path(:new) }
-        end
+      if result.success?
+        flash[:notice] = result.message
+        redirect_to redirect_to_after_update, status: :see_other
+      else
+        flash.now[:alert] = result.message
+        render template: template_path(:new), status: :unprocessable_content
       end
     end
 
@@ -48,7 +42,9 @@ module EditUpdateActionsConcern
       interactor = update_interactor
       raise NotImplementedError, "#{interactor} not implemented" unless Object.const_defined?(interactor)
 
-      Kernel.const_get(interactor).call(patch_context)
+      result = Kernel.const_get(interactor).call(patch_context)
+      @record = result.record
+      result
     end
 
     def patch_context
@@ -56,7 +52,7 @@ module EditUpdateActionsConcern
     end
 
     def set_update_record
-      @record = model.respond_to?(:friendly) ? model.friendly.find(params[:id]) : model.find(params[:id])
+      @record = model.respond_to?(:friendly) ? model.friendly.find(params.expect(:id)) : model.find(params.expect(:id))
     end
 
     def authorize_update_record

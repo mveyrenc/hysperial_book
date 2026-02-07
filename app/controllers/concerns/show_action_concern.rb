@@ -10,9 +10,7 @@ module ShowActionConcern
 
     # GET /<resource>/:id
     def show
-      respond_to do |format|
-        format.html { render template: template_path }
-      end
+      render template: template_path
     end
 
     protected
@@ -22,7 +20,7 @@ module ShowActionConcern
     end
 
     def set_show_record
-      @record = model.respond_to?(:friendly) ? model.friendly.find(params[:id]) : model.find(params[:id])
+      @record = model.respond_to?(:friendly) ? model.friendly.find(params.expect(:id)) : model.find(params.expect(:id))
     end
 
     def authorize_show_record

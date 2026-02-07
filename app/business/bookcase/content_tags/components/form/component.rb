@@ -4,10 +4,7 @@ module Bookcase
   module ContentTags
     module Components
       module Form
-        # ContentTags card component
         class Component < ApplicationComponent
-          delegate :content_tag_family, :name, to: :record, prefix: true
-
           attr_reader :record
 
           def initialize(record)
@@ -15,6 +12,10 @@ module Bookcase
           end
 
           protected
+
+          def from_content_tag_family?
+            params.key?(:from) && params.fetch(:from) == "content_tag_family"
+          end
 
           def book_collection
             Book.includes([:content_tag_families]).order(:position)

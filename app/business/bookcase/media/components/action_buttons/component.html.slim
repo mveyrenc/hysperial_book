@@ -8,7 +8,7 @@
     = link_to t('application.read'),
       bookcase_media_path(record),
       class: 'button is-show-action',
-      target: '_top'
+      data: { turbo: "false" }
   - if actions.include?(:edit) and record.present? and policy(record).update?
     = link_to t('application.edit'),
       edit_bookcase_media_path(record),

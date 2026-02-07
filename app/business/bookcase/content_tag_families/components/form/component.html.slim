@@ -1,13 +1,21 @@
 .card-box
-  = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
+  = form_for(record,
+    builder: AppFormBuilder::FormBuilder,
+    data: { turbo: request.headers.key?('Turbo-Frame'),
+      'turbo-frame': helpers.model_dom_id(from_book? ? record.book : record),
+      'turbo-action': from_book? ? 'replace' : 'advance' }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
+    - if from_book? or record.persisted?
+      = helpers.hidden_field_tag(:from, params.fetch(:from))
+      = f.collection_select :book_id, [record.book], :id, :name, {}, { disabled: true }
+      = f.hidden_field :book_id
+    - else
+      = helpers.book_collection_select(f)
     = helpers.name_field(f, true)
-    = f.select :kind, options_for_select(Bookcase::ContentTagFamily.kind_select_values, record.kind), {}, { disabled: record.persisted? }
-    = helpers.book_collection_select(f)
+    = f.select :kind, options_for_select(Bookcase::ContentTagFamilyKind.kind_select_values, record.kind), {}, { disabled: record.persisted? }
     = helpers.alternate_names_field(f)
     = helpers.description_field(f)
     = helpers.position_field(f)
-
     .field
       .buttons
         = f.submit t('application.submit'), class: 'button is-primary'

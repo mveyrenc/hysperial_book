@@ -1,4 +1,4 @@
-= render Layout::MainArea::Component.new(turbo_frame_tag_id: 'bookcase_media') do |component|
+= render Layout::MainArea::Component.new(Bookcase::Medium) do |component|
   - component.with_title do
     = t('.title')
   - component.with_main_section do

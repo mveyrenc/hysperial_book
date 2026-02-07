@@ -4,7 +4,6 @@ module Bookcase
   module ContentTagFamilies
     module Components
       module Form
-        # ContentTags card component
         class Component < ApplicationComponent
           attr_reader :record
 
@@ -12,6 +11,9 @@ module Bookcase
             @record = record
           end
 
+          def from_book?
+            params.key?(:from) && params.fetch(:from) == "book"
+          end
         end
       end
     end

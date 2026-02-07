@@ -1,27 +1,34 @@
 .buttons.is-right
+  / New
   - if actions.include?(:new) and policy(Bookcase::AkinContentTag).create?
     = link_to t('application.new'),
       new_bookcase_akin_content_tag_path(relater_id: record.id),
       class: 'button is-new-action',
       'data-turbo-frame': helpers.dom_id(Bookcase::AkinContentTag.new)
+
+  / Show
   - if actions.include?(:show_related) and record.present? and policy(record.related).show?
     = link_to t('application.read'),
       bookcase_content_tag_path(record.related),
       class: 'button is-show-action',
-      target: '_top'
+      data: { turbo: "false" }
   - if actions.include?(:show_relater) and record.present? and policy(record.relater).show?
     = link_to t('application.read'),
       bookcase_content_tag_path(record.relater),
       class: 'button is-show-action',
-      target: '_top'
+      data: { turbo: "false" }
+
+  / Edit
   - if actions.include?(:edit) and record.present? and Bookcase::AkinContentTagKind::KINDS.include?(record.kind) and policy(record).update?
     = link_to t('application.edit'),
       edit_bookcase_akin_content_tag_path(record),
       class: 'button is-edit-action',
       'data-turbo-frame': helpers.dom_id(record)
+
+  / Delete
   - if actions.include?(:delete) and record.present? and Bookcase::AkinContentTagKind::KINDS.include?(record.kind) and policy(record).destroy?
     = button_to t('application.delete'),
       bookcase_akin_content_tags_path(record),
       method: :delete,
-      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure") },
+      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure"), 'turbo-action': 'advance'  },
       class: "button is-delete-action"

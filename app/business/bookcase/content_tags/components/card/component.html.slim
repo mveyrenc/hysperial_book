@@ -13,4 +13,4 @@
         - if context == :search_result
           = render Bookcase::ContentTags::Components::ActionButtons::Component.new(actions: %i[show edit delete], record: record.object)
         - else
-          = render Bookcase::ContentTags::Components::ActionButtons::Component.new(actions: %i[show], record: record.object)
+          = render Bookcase::ContentTags::Components::ActionButtons::Component.new(actions: %i[show edit_from_content_tag_family delete_from_content_tag_family], record: record.object)

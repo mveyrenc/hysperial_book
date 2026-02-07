@@ -1,5 +1,6 @@
 .card-box
-  = form_for(record, builder: AppFormBuilder::FormBuilder, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
+  = form_for(record, builder: AppFormBuilder::FormBuilder,
+    data: { turbo: request.headers.key?('Turbo-Frame'), 'turbo-frame': helpers.model_dom_id(record), 'turbo-action': 'advance' }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
     = helpers.name_field(f)
     = helpers.alternate_names_field(f)

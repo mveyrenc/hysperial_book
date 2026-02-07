@@ -106,6 +106,7 @@ module Bookcase
 
     ## Validations
     validates :name, presence: true, uniqueness: { scope: %i[content_tag_family_id], case_sensitive: false }
+    validates :content_tag_family, presence: true
     validates :slug, presence: true, uniqueness: true
 
     ## Callbacks

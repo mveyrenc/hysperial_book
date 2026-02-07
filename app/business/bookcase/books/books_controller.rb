@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-# Books controller
 module Bookcase
   module Books
-    # Books controller
     class BooksController < ApplicationController
       include IndexSearchActionsConcern
       include ShowActionConcern

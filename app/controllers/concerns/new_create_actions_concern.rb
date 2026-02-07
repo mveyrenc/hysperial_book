@@ -9,24 +9,18 @@ module NewCreateActionsConcern
 
     # GET /<resource>/new
     def new
-      respond_to do |format|
-        format.html { render template: template_path }
-      end
+      render template: template_path
     end
 
     # POST /<resource>
     def create
       result = call_create_interactor
-      respond_to do |format|
-        if result.success?
-          flash.now.notice = result.message
-          format.html { redirect_to redirect_to_after_create }
-          format.turbo_stream { render template: template_path }
-        else
-          flash.now.alert = result.message
-          format.html { render template: template_path(:new), status: :unprocessable_content }
-          format.turbo_stream { render template: template_path(:new) }
-        end
+      if result.success?
+        flash[:notice] = result.message
+        redirect_to redirect_to_after_create, status: :see_other
+      else
+        flash.now[:alert] = result.message
+        render template: template_path(:new), status: :unprocessable_content
       end
     end
 
@@ -48,7 +42,9 @@ module NewCreateActionsConcern
       interactor = create_interactor
       raise NotImplementedError, "#{interactor} not implemented" unless Object.const_defined?(interactor)
 
-      Kernel.const_get(interactor).call(post_context)
+      result = Kernel.const_get(interactor).call(post_context)
+      @record = result.record
+      result
     end
 
     def post_context

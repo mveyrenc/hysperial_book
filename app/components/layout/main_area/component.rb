@@ -3,7 +3,7 @@
 module Layout
   module MainArea
     class Component < ApplicationComponent
-      attr_reader :turbo_frame_tag_id
+      attr_reader :turbo_frame_subject
 
       renders_one :hero_body
       renders_one :title
@@ -13,8 +13,20 @@ module Layout
       renders_one :right_aside
       renders_one :main_section
 
-      def initialize(turbo_frame_tag_id:)
-        @turbo_frame_tag_id = turbo_frame_tag_id
+      def initialize(turbo_frame_subject)
+        @turbo_frame_subject = turbo_frame_subject
+      end
+
+      def turbo_model_frame_tag(&block)
+        helpers.turbo_frame_tag helpers.model_dom_id(turbo_frame_subject), &block
+      end
+
+      def turbo_object_frame_tag(&block)
+        if turbo_frame_subject.respond_to?(:to_model)
+          helpers.turbo_frame_tag helpers.dom_id(turbo_frame_subject), &block
+        else
+          content_tag :div, &block
+        end
       end
     end
   end

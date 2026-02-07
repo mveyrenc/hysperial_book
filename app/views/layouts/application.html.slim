@@ -12,19 +12,22 @@ html.has-aside-left.has-aside-mobile-transition.has-navbar-fixed-top.has-aside-e
     link[href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"]
     = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
     meta[name="turbo-cache-control" content="no-cache"]
-    = yield :head
+    meta[name="turbo-refresh-method" content="morph"]
+    meta[name="turbo-refresh-scroll" content="preserve"]
+    meta[name="turbo-visit-control" content="reload"]
+    == yield :head
   body
     #app
       = render Layout::Navbar::Component.new
       section.container.is-fluid
-        = turbo_frame_tag "flash"
-          = render Layout::Flash::Component.new
         - if user_signed_in?
           = yield
         - else
+          = turbo_frame_tag "flash", refresh: :replace, 'data-turbo-temporary': true
+            = render Layout::Flash::Component.new
           .columns
             .column.is-half.is-offset-one-quarter
               section.section
-                = yield
+                == yield
 
       = render Layout::Footer::Component.new

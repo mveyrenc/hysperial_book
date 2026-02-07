@@ -9,7 +9,7 @@ ruby '3.4.8'
 gem 'rails', '~> 8.0'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 7.0'
+gem 'puma', '~> 7.2'
 
 # ########
 # Database
@@ -124,7 +124,7 @@ gem 'image_processing', '~> 1.2'
 
 # https://github.com/heartcombo/devise
 # Devise is a flexible authentication solution for Rails based on Warden
-gem 'devise', '~> 4.9'
+gem 'devise', '~> 5.0'
 
 # https://github.com/varvet/pundit
 # Pundit provides a set of helpers which guide you in leveraging regular Ruby classes and object oriented design
@@ -186,7 +186,7 @@ gem 'redis', '~> 5.0'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '~> 1.21'
+gem 'bootsnap', '~> 1.22'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -198,7 +198,7 @@ group :development, :test do
 
   # https://github.com/faker-ruby/faker
   # Generate (almost) realistic fake data for testing, demos, and populating your database during development.
-  gem 'faker'
+  gem 'faker', '~> 3.6'
 
   # https://github.com/flyerhzm/bullet
   # It will watch your queries while you develop your application and notify you when you should add eager loading
@@ -231,7 +231,7 @@ group :development do
   # A Ruby Gem that adds annotations to your Rails models and route files.
   # $ annotaterb models
   # $ annotaterb routes
-  gem 'annotaterb'
+  gem 'annotaterb', '~> 4.21'
 
   # https://github.com/djezzzl/database_consistency
   # The main goal of the project is to help you avoid various issues due to inconsistencies and inefficiencies between
@@ -276,7 +276,7 @@ group :development do
   # https://github.com/presidentbeef/brakeman
   # Brakeman is a static analysis tool which checks Ruby on Rails applications for security vulnerabilities.
   # run: $ brakeman -I
-  gem 'brakeman'
+  gem 'brakeman', '~> 8.0'
 
   # https://github.com/danger/danger
   # Danger runs during your CI process, and gives teams the chance to automate common code review chores.
