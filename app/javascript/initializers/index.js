@@ -1,0 +1,2 @@
+import "./activestorage"
+import "./turbo"
