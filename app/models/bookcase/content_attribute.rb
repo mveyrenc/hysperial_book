@@ -47,7 +47,7 @@ module Bookcase
     end
 
     ## Enumerable
-    validates :kind, inclusion: { in: -> { ContentAttributeKind.kinds } }
+    validates :kind, inclusion: ContentAttributeKind::AVAILABLE_KINDS.keys.map(&:to_s)
 
     def data_type
       ContentAttributeKind.data_type(kind)

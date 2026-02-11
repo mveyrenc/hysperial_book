@@ -1,0 +1,27 @@
+= render Bookcase::ContentAttributes::Components::Form::PlainText::Component.new(record, f)
+= f.fields_for :data do |fd|
+  .title.is-5
+    = Bookcase::Content.human_attribute_name(:quantitative_value)
+  .field
+    .control
+      .field.is-grouped
+        = fd.number_field :value
+        .divider.is-vertical
+          = t('application.or')
+        = fd.number_field :max_value
+        = fd.number_field :min_value
+        .divider.is-vertical
+        = fd.text_field :unit_code
+        = fd.text_field :unit_text
+      = fd.fields_for :value_reference do |fvr|
+        .title.is-5
+          = Bookcase::Content.human_attribute_name(:value_reference)
+        .field.is-grouped
+          = fvr.number_field :value
+          .divider.is-vertical
+            = t('application.or')
+          = fvr.number_field :max_value
+          = fvr.number_field :min_value
+          .divider.is-vertical
+          = fvr.text_field :unit_code
+          = fvr.text_field :unit_text

@@ -11,8 +11,8 @@ module Bookcase
       include EditUpdateActionsConcern
       include DestroyActionConcern
 
-      before_action :set_update_record, only: %i[edit_mode]
-      before_action :authorize_update_record, only: %i[edit_mode]
+      before_action :set_update_record, only: %i[edit_mode edit update]
+      before_action :authorize_update_record, only: %i[edit_mode edit update]
 
       # POST /<resource>/:id/edit_mode
       def edit_mode
@@ -35,11 +35,11 @@ module Bookcase
       end
 
       def redirect_to_after_create
-        bookcase_contents_path
+        @record
       end
 
       def redirect_to_after_update
-        bookcase_contents_path
+        @record
       end
 
       def redirect_to_after_destroy
@@ -50,12 +50,15 @@ module Bookcase
         params
           .require(:bookcase_content)
           .permit(
-            :book_id,
-            :name,
             :alternate_names,
+            :body,
+            :book_id,
+            :description,
             :kind,
-            :version,
+            :name,
+            :short_description,
             :source_url,
+            :version,
             thumbnail_attributes: %i[id file]
           )
       end

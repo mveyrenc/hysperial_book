@@ -1,0 +1,4 @@
+- if record.content_attributes.any?
+  .card-box
+    - record.content_attributes.each do |a|
+      = render Bookcase::ContentAttributes::Components::AttributeDisplay::Component.new(a)

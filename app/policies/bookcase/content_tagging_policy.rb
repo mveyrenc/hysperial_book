@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Content policy
 module Bookcase
   class ContentTaggingPolicy < ApplicationPolicy
     def index?

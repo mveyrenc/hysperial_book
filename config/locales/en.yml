@@ -1,5 +1,7 @@
 en:
   application:
+    or: or
+    and: and
     all_contents: All contents
     are_you_sure: Are you sure?
     cancel: Cancel

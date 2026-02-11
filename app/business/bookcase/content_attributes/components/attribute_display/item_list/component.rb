@@ -5,7 +5,6 @@ module Bookcase
     module Components
       module AttributeDisplay
         module ItemList
-          # ContentAttributes display item list kind component
           class Component < ContentAttributes::Components::AttributeDisplay::BaseComponent
             def render?
               record.data.any?

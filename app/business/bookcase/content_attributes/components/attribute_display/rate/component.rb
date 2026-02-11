@@ -5,7 +5,6 @@ module Bookcase
     module Components
       module AttributeDisplay
         module Rate
-          # ContentAttributes display rate kind component
           class Component < ContentAttributes::Components::AttributeDisplay::BaseComponent
             def render?
               (record.data.any? && record.data.key?('value')) || super

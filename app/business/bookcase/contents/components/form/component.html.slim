@@ -1,14 +1,21 @@
 .card-box
-  = form_for(record, builder: AppFormBuilder::FormBuilder, multipart: true, data: { turbo: request.headers.key?('Turbo-Frame') }) do |f|
+  = form_for(record,
+          builder: AppFormBuilder::FormBuilder,
+          multipart: true,
+          data: { turbo: request.headers.key?('Turbo-Frame'),
+                  'turbo-frame': helpers.model_dom_id(record),
+                  'turbo-action': 'advance' }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
     = helpers.name_field(f)
     = helpers.book_collection_select(f)
     = f.select :kind, options_for_select(Bookcase::ContentKind.kind_select_values, record_kind), {}, { disabled: record.persisted? }
     = helpers.alternate_names_field(f)
+    = helpers.short_description_field(f)
+    = helpers.description_field(f)
     = f.text_field :version
     = f.text_field :is_based_on_url
     = f.fields_for :thumbnail do |f_thumbnail|
-      = f_thumbnail.form_field({ hide_label: true }) do
+      = f_thumbnail.form_field(:thumbnail, hide_label: true) do
         = f_thumbnail.field_label :file, label: Bookcase::Content.human_attribute_name(:thumbnail)
         = f_thumbnail.field_control do
           .media

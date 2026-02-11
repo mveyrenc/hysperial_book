@@ -17,6 +17,10 @@ module Layout
         @turbo_frame_subject = turbo_frame_subject
       end
 
+      def render?
+        !turbo_frame_subject.nil?
+      end
+
       def turbo_model_frame_tag(&block)
         helpers.turbo_frame_tag helpers.model_dom_id(turbo_frame_subject), &block
       end

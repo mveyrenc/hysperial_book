@@ -1,0 +1,8 @@
+.card-box
+  - if attribute_body_renderer.render?
+    .title.is-4
+      - if attribute_label_renderer.render?
+        .label
+          = render attribute_label_renderer
+    = render attribute_body_renderer
+  = render Bookcase::ContentAttributes::Components::ActionButtons::Component.new(actions: %i[edit delete], record: @record.object)

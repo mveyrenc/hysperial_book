@@ -12,7 +12,8 @@
     p.title.is-6
       = f
     - cts.each do |ct|
-      = render Bookcase::ContentTaggings::Components::Card::Component.new(ct)
+      = helpers.turbo_frame_tag helpers.dom_id(ct.object)
+        = render Bookcase::ContentTaggings::Components::Card::Component.new(ct)
 - else
   = render NoRecord::Component.new
 

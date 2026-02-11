@@ -1,0 +1,22 @@
+.buttons.is-right
+  / New
+  - if actions.include?(:new) and policy(Bookcase::ContentAttribute).create?
+    = link_to t('application.new'),
+            new_bookcase_content_attribute_path(content_id: record.id),
+            class: 'button is-new-action',
+            'data-turbo-frame': helpers.dom_id(Bookcase::ContentAttribute.new)
+
+  / Edit
+  - if actions.include?(:edit) and record.present? and policy(record).update?
+    = link_to t('application.edit'),
+            edit_bookcase_content_attribute_path(record),
+            class: 'button is-edit-action',
+            'data-turbo-frame': helpers.dom_id(record)
+
+  / Delete
+  - if actions.include?(:delete) and record.present? and policy(record).destroy?
+    = button_to t('application.delete'),
+            bookcase_content_attributes_path(record),
+            method: :delete,
+            data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure"), 'turbo-action': 'advance' },
+            class: "button is-delete-action"

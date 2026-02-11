@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Medium policy
 module Bookcase
   class MediumPolicy < ApplicationPolicy
     def index?

@@ -37,10 +37,6 @@ module Bookcase
           @record = model.new
         end
       end
-
-      def set_destroy_record
-        @record = Bookcase::ContentTagging.find(params.fetch(:id))
-      end
     end
   end
 end

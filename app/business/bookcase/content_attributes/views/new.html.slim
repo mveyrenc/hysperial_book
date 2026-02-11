@@ -1,0 +1,5 @@
+= render Layout::MainArea::Component.new(@record) do |component|
+  - component.with_title do
+    = t('.title', relater: @record)
+  - component.with_main_section do
+    = render Bookcase::ContentAttributes::Components::Form::Component.new(@record)

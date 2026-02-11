@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Tag family policy
 module Bookcase
   class ContentTagFamilyPolicy < ApplicationPolicy
     def index?

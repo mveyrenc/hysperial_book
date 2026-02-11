@@ -5,7 +5,6 @@ module Bookcase
     module Components
       module AttributeDisplay
         module QuantitativeValue
-          # ContentAttributes display quantitative value kind component
           class Component < ContentAttributes::Components::AttributeDisplay::BaseComponent
             # data :
             # - max_value	      Number	The upper value of some characteristic or property.

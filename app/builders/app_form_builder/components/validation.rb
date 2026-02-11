@@ -8,12 +8,12 @@ module AppFormBuilder
 
       private
 
-      def error?(name)
-        object.respond_to?(:errors) && !(name.nil? || object.errors[name].empty?)
+      def error?(method)
+        object.respond_to?(:errors) && !(method.nil? || object.errors[method].empty?)
       end
 
-      def error_messages_for(name)
-        object.errors.full_messages_for(name).join("\n")
+      def error_messages_for(method)
+        object.errors.full_messages_for(method).join("\n")
       end
     end
   end

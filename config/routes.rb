@@ -162,6 +162,7 @@ Rails.application.routes.draw do
       end
     end
     resources :content_taggings, only: %i[new create destroy], controller: 'content_taggings/content_taggings'
+    resources :content_attributes, only: %i[new create edit update destroy], controller: 'content_attributes/content_attributes'
 
     resources :books, controller: 'books/books' do
       collection do

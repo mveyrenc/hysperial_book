@@ -1,0 +1,15 @@
+.level
+  .level-left
+    .level-item
+      p.title.is-4
+        = Bookcase::Content.human_attribute_name(:content_attributes)
+  .level-right
+    .level-item
+      = render Bookcase::ContentAttributes::Components::ActionButtons::Component.new(actions: %i[new], record: record.object)
+= helpers.turbo_frame_tag Bookcase::ContentAttribute.new
+- if record.content_attributes.any?
+  - record.content_attributes.each do |ca|
+    = helpers.turbo_frame_tag helpers.dom_id(ca.object)
+      = render Bookcase::ContentAttributes::Components::AttributeEdition::Component.new(ca)
+- else
+  = render NoRecord::Component.new

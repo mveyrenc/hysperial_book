@@ -5,7 +5,6 @@ module Bookcase
     module Components
       module AttributeDisplay
         module AttributeBody
-          # ContentAttributes display attribute body component
           class Component < ContentAttributes::Components::AttributeDisplay::BaseComponent
             include ActiveSupport::Inflector
 

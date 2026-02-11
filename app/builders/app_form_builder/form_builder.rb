@@ -5,32 +5,34 @@ module AppFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
     attr_reader :layout
 
-    include AppFormBuilder::FormFieldBuilder
-    include AppFormBuilder::FormField
     include AppFormBuilder::Components
 
-    include AppFormBuilder::Helpers
-
-    include AppFormBuilder::Inputs::Base
-    include AppFormBuilder::Inputs::EmailField
-    include AppFormBuilder::Inputs::UrlField
-    include AppFormBuilder::Inputs::DateField
-    include AppFormBuilder::Inputs::TimeField
-    include AppFormBuilder::Inputs::MonthField
-    include AppFormBuilder::Inputs::NumberField
-    include AppFormBuilder::Inputs::PasswordField
-    include AppFormBuilder::Inputs::Select
-    include AppFormBuilder::Inputs::TextField
-    include AppFormBuilder::Inputs::TextArea
-    include AppFormBuilder::Inputs::FileField
-    include AppFormBuilder::Inputs::ImageField
-    include AppFormBuilder::Inputs::CheckBox
-    include AppFormBuilder::Inputs::CollectionCheckBoxes
-    include AppFormBuilder::Inputs::CollectionRadioButtons
-    include AppFormBuilder::Inputs::CollectionSelect
-    include AppFormBuilder::Inputs::GroupedCollectionSelect
-
-    delegate :content_tag, :capture, :concat, :tag, to: :@template
+    include AppFormBuilder::FormHelpers::FormFieldBuilder
+    include AppFormBuilder::FormHelpers::FormField
+    include AppFormBuilder::FormHelpers::Helpers
+    include AppFormBuilder::FormHelpers::Base
+    include AppFormBuilder::FormHelpers::Button
+    include AppFormBuilder::FormHelpers::CheckBox
+    include AppFormBuilder::FormHelpers::CollectionCheckBoxes
+    include AppFormBuilder::FormHelpers::CollectionRadioButtons
+    include AppFormBuilder::FormHelpers::CollectionSelect
+    include AppFormBuilder::FormHelpers::DateField
+    include AppFormBuilder::FormHelpers::EmailField
+    include AppFormBuilder::FormHelpers::FileField
+    include AppFormBuilder::FormHelpers::GroupedCollectionSelect
+    include AppFormBuilder::FormHelpers::ImageField
+    include AppFormBuilder::FormHelpers::Label
+    include AppFormBuilder::FormHelpers::RichTextArea
+    include AppFormBuilder::FormHelpers::MonthField
+    include AppFormBuilder::FormHelpers::NumberField
+    include AppFormBuilder::FormHelpers::PasswordField
+    include AppFormBuilder::FormHelpers::RadioButton
+    include AppFormBuilder::FormHelpers::Select
+    include AppFormBuilder::FormHelpers::Submit
+    include AppFormBuilder::FormHelpers::TextArea
+    include AppFormBuilder::FormHelpers::TextField
+    include AppFormBuilder::FormHelpers::TimeField
+    include AppFormBuilder::FormHelpers::UrlField
 
     def initialize(object_name, object, template, options)
       @layout = options[:layout]

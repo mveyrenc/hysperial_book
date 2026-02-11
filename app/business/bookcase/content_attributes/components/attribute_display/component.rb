@@ -4,7 +4,6 @@ module Bookcase
   module ContentAttributes
     module Components
       module AttributeDisplay
-        # ContentAttributes display component
         class Component < ApplicationComponent
           attr_reader :record
 

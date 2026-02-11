@@ -8,8 +8,11 @@
 - else
   = render Bookcase::Contents::Components::Detail::TaggingCardShowMode::Component.new(@record)
 
+- if content_edit_mode?
+  = render Bookcase::Contents::Components::Detail::AttributesCardEditMode::Component.new(@record)
+- else
+  = render Bookcase::Contents::Components::Detail::AttributesCardShowMode::Component.new(@record)
 
 
-.card-box
-  - record.content_attributes.each do |a|
-    = render Bookcase::ContentAttributes::Components::AttributeDisplay::Component.new(a)
+
+

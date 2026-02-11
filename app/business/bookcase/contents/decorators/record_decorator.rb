@@ -27,11 +27,19 @@ module Bookcase
           end
         end
 
-        def description(highlights = true)
+        def short_description(highlights = true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:description)
             context[:highlights][:description].html_safe
           else
             object.description
+          end
+        end
+
+        def description(highlights = true)
+          if highlights && context[:highlights].present? && context[:highlights].key?(:short_description)
+            context[:highlights][:short_description].html_safe
+          else
+            object.short_description
           end
         end
 

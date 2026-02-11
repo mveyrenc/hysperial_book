@@ -1,0 +1,15 @@
+.card-box
+  = form_for(record,
+          builder: AppFormBuilder::FormBuilder,
+          data: { turbo: request.headers.key?('Turbo-Frame'),
+                  'turbo-frame': helpers.model_dom_id(record),
+                  'turbo-action': 'advance' }) do |f|
+    = render FormErrors::Component.new(errors: record.errors)
+    = f.hidden_field :content_id
+    = f.text_field :name
+    = render Bookcase::ContentAttributes::Components::Form::AttributeBody::Component.new(record, f)
+    = helpers.position_field(f)
+    .field
+      .buttons
+        = f.submit t('application.submit'), class: 'button is-primary'
+        = link_to t('application.cancel'), :back, class: 'button'

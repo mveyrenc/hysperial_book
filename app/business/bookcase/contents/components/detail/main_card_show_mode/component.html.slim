@@ -9,6 +9,9 @@
     - if record.alternate_names.present?
       p.subtitle
         = record.alternate_names
+    - if record.short_description.present?
+      .content
+        = record.short_description.html_safe
     - if record.description.present?
       .content
         = record.description.html_safe

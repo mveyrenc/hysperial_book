@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Tag policy
 module Bookcase
   class AkinContentTagPolicy < ApplicationPolicy
     def index?

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Book policy
 module Bookcase
   class BookPolicy < ApplicationPolicy
     def index?
