@@ -155,6 +155,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
 
   create_table "contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "alternate_names", comment: "Aliases for the item"
+    t.text "body", comment: "The html text of the item"
     t.uuid "book_id", null: false, comment: "The book in which the item is located"
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false

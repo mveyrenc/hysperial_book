@@ -20,8 +20,12 @@ module ApplicationHelper
     f.text_area :alternate_names
   end
 
+  def short_description_field(f)
+    f.rich_text_area :short_description
+  end
+
   def description_field(f)
-    f.text_area :description
+    f.rich_text_area :description
   end
 
   def position_field(f)

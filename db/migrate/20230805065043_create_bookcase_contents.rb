@@ -42,6 +42,7 @@ class CreateBookcaseContents < ActiveRecord::Migration[8.0]
       t.text :alternate_names, null: true, comment: 'Aliases for the item'
       t.text :short_description, null: true, comment: 'A short description of the item'
       t.text :description, null: true, comment: 'A description of the item'
+      t.json :body, null: true, comment: 'The json text of the item'
 
       t.string :slug, null: false, index: { unique: true }, comment: 'Human readable item identifier'
       t.string :kind, null: false, comment: 'The kind or type of the item'

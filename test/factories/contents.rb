@@ -6,6 +6,7 @@
 #
 #  id                                                                                                         :uuid             not null, primary key
 #  alternate_names(Aliases for the item)                                                                      :text
+#  body(The html text of the item)                                                                            :text
 #  data(A hash to store the data of the item)                                                                 :jsonb            not null
 #  description(A description of the item)                                                                     :text
 #  is_based_on_url(The URL from which the item was imported)                                                  :string
