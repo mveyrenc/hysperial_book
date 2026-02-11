@@ -6,15 +6,15 @@
 #
 #  id                                                                                                         :uuid             not null, primary key
 #  alternate_names(Aliases for the item)                                                                      :text
-#  body(The html text of the item)                                                                            :text
+#  body(The json text of the item)                                                                            :json
 #  data(A hash to store the data of the item)                                                                 :jsonb            not null
-#  description(A description of the item)                                                                     :text
+#  description(A description of the item)                                                                     :json
 #  is_based_on_url(The URL from which the item was imported)                                                  :string
 #  kind(The kind or type of the item)                                                                         :string           not null
 #  metadata(A hash to store some data about the item)                                                         :jsonb            not null
 #  name(The name of the item)                                                                                 :string           not null
 #  settings(A hash to configure the item)                                                                     :jsonb            not null
-#  short_description(A short description of the item)                                                         :text
+#  short_description(A short description of the item)                                                         :json
 #  slug(Human readable item identifier)                                                                       :string           not null
 #  version(The version of the item)                                                                           :string
 #  created_at                                                                                                 :datetime         not null
@@ -116,6 +116,19 @@ module Bookcase
     def to_s
       name
     end
+
+    ## Rich text
+    # serialize :short_description, coder: ActionText::Content
+    # serialize :description, coder: ActionText::Content
+    # serialize :body, coder: ActionText::Content
+    # has_many_attached :embeds
+    # before_validation do
+    #   e = []
+    #   e += short_description.attachables.grep(ActiveStorage::Blob) if short_description.present?
+    #   e += description.attachables.grep(ActiveStorage::Blob) if description.present?
+    #   e += body.attachables.grep(ActiveStorage::Blob) if body.present?
+    #   self.embeds = e.uniq if e.any?
+    # end
 
     def all_content_taggings
       @all_content_taggings ||= ContentTagging.all_content_taggings(self)

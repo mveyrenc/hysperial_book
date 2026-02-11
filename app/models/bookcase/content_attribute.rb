@@ -9,6 +9,7 @@
 #  data(A hash to store the data of the item)             :jsonb            not null
 #  description(A description of the item)                 :text
 #  html_text(The html text of the item)                   :text
+#  json_text(The json text of the item)                   :json
 #  kind(The kind or type of the item)                     :string           not null
 #  markdown_text(The markdown text of the item)           :text
 #  metadata(A hash to store some data about the item)     :jsonb            not null

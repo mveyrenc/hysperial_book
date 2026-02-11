@@ -45,6 +45,7 @@ class CreateBookcaseContentAttributes < ActiveRecord::Migration[8.0]
       t.text :plain_text, null: true, comment: 'The plain text of the item'
       t.text :markdown_text, null: true, comment: 'The markdown text of the item'
       t.text :html_text, null: true, comment: 'The html text of the item'
+      t.json :json_text, null: true, comment: 'The json text of the item'
       t.jsonb :data, null: false, default: {}, comment: 'A hash to store the data of the item'
       t.jsonb :metadata, null: false, default: {}, comment: 'A hash to store some data about the item'
       t.jsonb :settings, null: false, default: {}, comment: 'A hash to configure the item'
