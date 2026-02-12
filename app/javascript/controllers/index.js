@@ -3,3 +3,6 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
+
+import "./light_editor_controller";
+import "./standard_editor_controller";
