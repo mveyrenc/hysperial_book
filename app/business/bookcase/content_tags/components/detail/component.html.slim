@@ -16,7 +16,7 @@
 - if record.all_related_tags.any?
   - record.all_related_tags.each do |akin|
     = helpers.turbo_frame_tag helpers.dom_id(akin.object)
-      = render Bookcase::AkinContentTags::Components::Card::Component.new(akin, context: :related)
+    = render Bookcase::AkinContentTags::Components::Card::Component.new(akin, context: :related)
 - else
   = render NoRecord::Component.new
 

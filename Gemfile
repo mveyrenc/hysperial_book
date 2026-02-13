@@ -60,12 +60,9 @@ gem 'positioning', '~> 0.4'
 # FriendlyId is the "Swiss Army bulldozer" of slugging and permalink plugins for Active Record
 gem 'friendly_id', '~> 5.5'
 
-# https://github.com/basecamp/trix
-# A Rich Text Editor for Everyday Writing
-# gem 'action_text-trix'
-
-# https://github.com/vmg/redcarpet
-gem 'redcarpet'
+# https://github.com/CompanyCam/tiptap-ruby
+# A gem for parsing, generating, and rendering TipTap Documents and Nodes using Ruby.
+gem 'tiptap-ruby'
 
 # ##############
 # Business logic

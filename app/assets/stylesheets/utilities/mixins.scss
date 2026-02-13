@@ -2,7 +2,7 @@
   transition: $t 250ms ease-in-out 50ms;
 }
 
-@mixin icon-with-update-mark ($icon-base-width) {
+@mixin icon-with-update-mark($icon-base-width) {
   .icon {
     width: $icon-base-width;
 

@@ -21,10 +21,12 @@ class ApplicationInteractor
 
     ActiveSupport::HtmlSafeTranslation.translate(key, **options)
   end
+
   alias t translate
 
   def localize(object, **)
     I18n.l(object, **)
   end
+
   alias l localize
 end

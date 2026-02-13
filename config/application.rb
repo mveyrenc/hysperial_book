@@ -33,6 +33,7 @@ module HysperialBook
     end
 
     config.autoload_paths += Dir["#{config.root}/app/business"]
+    config.autoload_paths += Dir["#{config.root}/app/coders"]
     config.autoload_paths += Dir["#{config.root}/app/decorators"]
     config.autoload_paths += Dir["#{config.root}/app/interactors"]
 

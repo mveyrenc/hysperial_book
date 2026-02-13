@@ -1,1 +1,131 @@
+@use "sass:list";
+
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/mixins" as mx;
+@use "bulma/sass/utilities/controls";
+
+@use "bulma/sass/form/shared";
 @use "bulma/sass/form/input-textarea";
+
+$rich-text-editor-colors: shared.$form-colors !default;
+
+.#{iv.$class-prefix}rich-text-editor {
+  background-color: hsl(
+                  #{cv.getVar("input-h")},
+                  #{cv.getVar("input-s")},
+                  calc(#{cv.getVar("input-background-l")} + #{cv.getVar("input-background-l-delta")}
+                  )
+  );
+  border-color: cv.getVar("input-border-color");
+  border-radius: cv.getVar("input-radius");
+  border-style: solid;
+  border-width: cv.getVar("control-border-width");
+  color: hsl(
+                  #{cv.getVar("input-h")},
+                  #{cv.getVar("input-s")},
+                  #{cv.getVar("input-color-l")}
+  );
+  padding: 5px;
+
+  @include mx.placeholder {
+    color: cv.getVar("input-placeholder-color");
+  }
+
+  &:hover,
+  &.#{iv.$class-prefix}is-hovered {
+    @include cv.register-vars(
+                    (
+                            "input-border-l-delta": #{cv.getVar("input-hover-border-l-delta")},
+                    )
+    );
+  }
+
+  &:active,
+  &.#{iv.$class-prefix}is-active {
+    @include cv.register-vars(
+                    (
+                            "input-border-l-delta": #{cv.getVar("input-active-border-l-delta")},
+                    )
+    );
+  }
+
+  &:focus,
+  &:focus-within,
+  &.#{iv.$class-prefix}is-focused {
+    border-color: hsl(
+                    cv.getVar("input-focus-h"),
+                    cv.getVar("input-focus-s"),
+                    cv.getVar("input-focus-l")
+    );
+  }
+
+  &[disabled],
+  fieldset[disabled] & {
+    background-color: cv.getVar("input-disabled-background-color");
+    border-color: cv.getVar("input-disabled-border-color");
+    box-shadow: none;
+    color: cv.getVar("input-disabled-color");
+
+    @include mx.placeholder {
+      color: cv.getVar("input-disabled-placeholder-color");
+    }
+  }
+
+  // Colors
+  @each $name, $pair in $rich-text-editor-colors {
+    $color: list.nth($pair, 1);
+
+    &.#{iv.$class-prefix}is-#{$name} {
+      @include cv.register-vars(
+                      (
+                              "input-h": #{cv.getVar($name, "", "-h")},
+                              "input-s": #{cv.getVar($name, "", "-s")},
+                              "input-l": #{cv.getVar($name, "", "-l")},
+                              "input-focus-h": #{cv.getVar($name, "", "-h")},
+                              "input-focus-s": #{cv.getVar($name, "", "-s")},
+                              "input-focus-l": #{cv.getVar($name, "", "-l")},
+                              "input-border-l": #{cv.getVar($name, "", "-l")},
+                      )
+      );
+    }
+  }
+
+  // Sizes
+  &.#{iv.$class-prefix}is-small {
+    @include controls.control-small;
+  }
+
+  &.#{iv.$class-prefix}is-medium {
+    @include controls.control-medium;
+  }
+
+  &.#{iv.$class-prefix}is-large {
+    @include controls.control-large;
+  }
+
+  // Modifiers
+  &.#{iv.$class-prefix}is-fullwidth {
+    display: block;
+    width: 100%;
+  }
+
+  &.#{iv.$class-prefix}is-inline {
+    display: inline;
+    width: auto;
+  }
+
+  &.#{iv.$class-prefix}is-rounded {
+    border-radius: cv.getVar("radius-rounded");
+    padding-left: calc(#{controls.$control-padding-horizontal} + 0.375em);
+    padding-right: calc(#{controls.$control-padding-horizontal} + 0.375em);
+  }
+
+  &.#{iv.$class-prefix}is-static {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

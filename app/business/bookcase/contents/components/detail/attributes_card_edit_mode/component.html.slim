@@ -10,6 +10,6 @@
 - if record.content_attributes.any?
   - record.content_attributes.each do |ca|
     = helpers.turbo_frame_tag helpers.dom_id(ca.object)
-      = render Bookcase::ContentAttributes::Components::AttributeEdition::Component.new(ca)
+    = render Bookcase::ContentAttributes::Components::AttributeEdition::Component.new(ca)
 - else
   = render NoRecord::Component.new

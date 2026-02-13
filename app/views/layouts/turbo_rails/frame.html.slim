@@ -4,5 +4,5 @@ html
     == yield :head
   body
     = turbo_stream.replace "flash"
-      = render Layout::Flash::Component.new
+    = render Layout::Flash::Component.new
     == yield

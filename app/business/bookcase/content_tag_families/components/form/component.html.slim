@@ -1,9 +1,9 @@
 .card-box
   = form_for(record,
-    builder: AppFormBuilder::FormBuilder,
-    data: { turbo: request.headers.key?('Turbo-Frame'),
-      'turbo-frame': helpers.model_dom_id(from_book? ? record.book : record),
-      'turbo-action': from_book? ? 'replace' : 'advance' }) do |f|
+          builder: AppFormBuilder::FormBuilder,
+          data: { turbo: request.headers.key?('Turbo-Frame'),
+                  'turbo-frame': helpers.model_dom_id(from_book? ? record.book : record),
+                  'turbo-action': from_book? ? 'replace' : 'advance' }) do |f|
     = render FormErrors::Component.new(errors: record.errors)
     - if from_book? or record.persisted?
       = helpers.hidden_field_tag(:from, params.fetch(:from))

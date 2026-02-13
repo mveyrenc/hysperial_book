@@ -6,11 +6,13 @@
 
 #{iv.$variables-host} {
   @include cv.register-vars(
-      (
-        "gap": 32px
-      )
+                  (
+                          "gap": 32px
+                  )
   )
-};
+}
+
+;
 
 $user-avatar-max-width: calc(cv.getVar("text") * 7);
 $icon-update-mark-size: calc(cv.getVar("small-font-size") * 0.5);

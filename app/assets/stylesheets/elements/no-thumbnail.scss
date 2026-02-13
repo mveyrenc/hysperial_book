@@ -9,12 +9,12 @@ $no-thumbnail-size: 128px;
 
 .#{iv.$class-prefix}no-thumbnail {
   @include cv.register-vars(
-      (
-        "no-thumbnail-background-h": #{$no-thumbnail-background-h},
-        "no-thumbnail-background-s": #{$no-thumbnail-background-s},
-        "no-thumbnail-background-l": #{$no-thumbnail-background-l},
-        "no-thumbnail-size": #{$no-thumbnail-size},
-      )
+                  (
+                          "no-thumbnail-background-h": #{$no-thumbnail-background-h},
+                          "no-thumbnail-background-s": #{$no-thumbnail-background-s},
+                          "no-thumbnail-background-l": #{$no-thumbnail-background-l},
+                          "no-thumbnail-size": #{$no-thumbnail-size},
+                  )
   );
 
   margin: 0;
@@ -23,8 +23,8 @@ $no-thumbnail-size: 128px;
   width: cv.getVar("no-thumbnail-size");
 
   background-color: hsl(
-      cv.getVar("no-thumbnail-background-h"),
-      cv.getVar("no-thumbnail-background-s"),
-      cv.getVar("no-thumbnail-background-l")
+                  cv.getVar("no-thumbnail-background-h"),
+                  cv.getVar("no-thumbnail-background-s"),
+                  cv.getVar("no-thumbnail-background-l")
   );
 }

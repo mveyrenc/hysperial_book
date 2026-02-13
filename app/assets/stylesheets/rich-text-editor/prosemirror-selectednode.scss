@@ -1,0 +1,40 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
+.ProseMirror-selectednode {
+  .ProseMirror[contenteditable="true"] & {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: -4px;
+      right: -4px;
+      top: -4px;
+      bottom: -4px;
+      border-radius: var(--tiptap-radius);
+      pointer-events: none;
+      background-color: var(--tiptap-selected);
+    }
+
+    &.ProseMirror-selectedcard {
+      border: 1px solid var(--tiptap-ring);
+      box-shadow: 0 0 0 1px var(--tiptap-ring);
+
+      &::after {
+        content: none !important;
+      }
+    }
+
+    li {
+      &::after {
+        left: -24px;
+      }
+    }
+
+    ul[data-type="taskList"] li {
+      &::after {
+        left: -4px;
+      }
+    }
+  }
+}

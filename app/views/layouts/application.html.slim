@@ -24,7 +24,7 @@ html.has-aside-left.has-aside-mobile-transition.has-navbar-fixed-top.has-aside-e
           = yield
         - else
           = turbo_frame_tag "flash", refresh: :replace, 'data-turbo-temporary': true
-            = render Layout::Flash::Component.new
+          = render Layout::Flash::Component.new
           .columns
             .column.is-half.is-offset-one-quarter
               section.section

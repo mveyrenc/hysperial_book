@@ -17,6 +17,6 @@
 - if record.content_tags.any?
   - record.content_tags.each do |ct|
     = helpers.turbo_frame_tag helpers.dom_id(ct.object)
-      = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_family_show)
+    = render Bookcase::ContentTags::Components::Card::Component.new(ct, context: :content_tag_family_show)
 - else
   = render NoRecord::Component.new

@@ -1,0 +1,39 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
+.ProseMirror-cm {
+  display: flex;
+  gap: 0.25rem;
+
+  &-plus,
+  &-drag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0.25rem 0;
+    transition-duration: 0.15s;
+    transition-property: color, background-color, box-shadow;
+    border-radius: var(--tiptap-radius);
+
+    &:hover,
+    &:focus,
+    &[data-active] {
+      background-color: var(--tiptap-accent-background);
+    }
+  }
+
+  &-plus {
+    cursor: pointer;
+  }
+
+  &-drag {
+    cursor: grab;
+
+    &:focus,
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}

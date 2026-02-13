@@ -21,7 +21,7 @@ module AppFormBuilder
           end
           Rails.logger.debug(options)
           form_field_builder(method, options, html_options) do
-            @template.content_tag(:div, '', class: 'tiptap-editos', 'data-controller': 'standard-editor') do
+            @template.content_tag(:div, '', class: 'rich-text-editor', 'data-controller': 'standard-editor') do
               @template.concat(self.hidden_field(method, 'data-standard-editor-target': 'input'))
               @template.concat(@template.content_tag(:div, '', options))
             end

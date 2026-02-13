@@ -438,7 +438,6 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
-    redcarpet (3.6.1)
     redis (5.4.1)
       redis-client (>= 0.22.0)
     redis-client (0.26.4)
@@ -530,6 +529,9 @@ GEM
     thor (1.5.0)
     tilt (2.7.0)
     timeout (0.6.0)
+    tiptap-ruby (0.10.1)
+      actionview (>= 7.0)
+      activesupport (>= 6.0)
     tsort (0.2.0)
     turbo-rails (2.0.23)
       actionpack (>= 7.1.0)
@@ -615,7 +617,6 @@ DEPENDENCIES
   rails (~> 8.0)
   rails-pg-extras (~> 5.6)
   rails_best_practices
-  redcarpet
   redis (~> 5.0)
   redis-session-store (~> 0.11.5)
   rubocop-capybara
@@ -626,6 +627,7 @@ DEPENDENCIES
   slim-rails (~> 4.0)
   stimulus-rails (~> 1.3)
   strip_attributes (~> 2.0)
+  tiptap-ruby
   turbo-rails (~> 2.0)
   turbo_power (~> 0.7)
   tzinfo-data

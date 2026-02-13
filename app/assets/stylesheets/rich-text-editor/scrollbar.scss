@@ -1,0 +1,25 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
+::-webkit-scrollbar {
+  .ProseMirror-bm {
+    width: 5px;
+  }
+}
+
+::-webkit-scrollbar-track {
+  .ProseMirror-bm {
+    background: transparent;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  .ProseMirror-bm {
+    background: var(--tiptap-border);
+    border-radius: 5px;
+  }
+}
+
+.ProseMirror-bm * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--tiptap-border) transparent;
+}

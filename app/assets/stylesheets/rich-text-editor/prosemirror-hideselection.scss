@@ -1,0 +1,7 @@
+.ProseMirror-hideselection {
+  caret-color: transparent;
+
+  *::selection {
+    background-color: transparent;
+  }
+}

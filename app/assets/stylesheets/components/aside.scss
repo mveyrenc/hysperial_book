@@ -29,33 +29,33 @@ $aside-colors: dv.$colors !default;
 .#{iv.$class-prefix}aside {
 
   @include cv.register-vars(
-      (
-        "aside-h": #{$aside-h},
-        "aside-s": #{$aside-s},
-        "aside-background-l": #{$aside-background-l},
-        "aside-background-l-delta": #{$aside-background-l-delta},
-        "aside-hover-background-l-delta": #{$aside-hover-background-l-delta},
-        "aside-active-background-l-delta": #{$aside-active-background-l-delta},
-        "aside-color-l": #{$aside-color-l},
-        "aside-width": #{$aside-width},
-        "aside-mobile-width": #{$aside-mobile-width},
-        "aside-icon-width": #{$aside-icon-width},
-        "aside-submenu-font-size": #{$aside-submenu-font-size},
-        "aside-box-shadow": #{$aside-box-shadow},
-        "aside-tools-background-l-delta": #{$aside-tools-background-l-delta},
-        "aside-tools-color": #{$aside-tools-color}
-      )
+                  (
+                          "aside-h": #{$aside-h},
+                          "aside-s": #{$aside-s},
+                          "aside-background-l": #{$aside-background-l},
+                          "aside-background-l-delta": #{$aside-background-l-delta},
+                          "aside-hover-background-l-delta": #{$aside-hover-background-l-delta},
+                          "aside-active-background-l-delta": #{$aside-active-background-l-delta},
+                          "aside-color-l": #{$aside-color-l},
+                          "aside-width": #{$aside-width},
+                          "aside-mobile-width": #{$aside-mobile-width},
+                          "aside-icon-width": #{$aside-icon-width},
+                          "aside-submenu-font-size": #{$aside-submenu-font-size},
+                          "aside-box-shadow": #{$aside-box-shadow},
+                          "aside-tools-background-l-delta": #{$aside-tools-background-l-delta},
+                          "aside-tools-color": #{$aside-tools-color}
+                  )
   );
 
   display: none;
   height: 100vh;
   box-shadow: $aside-box-shadow;
   background-color: hsl(
-      cv.getVar("aside-h"),
-      cv.getVar("aside-s"),
-      calc(
-        #{cv.getVar("aside-background-l")} + #{cv.getVar("aside-background-l-delta")}
-      )
+                  cv.getVar("aside-h"),
+                  cv.getVar("aside-s"),
+                  calc(
+                          #{cv.getVar("aside-background-l")} + #{cv.getVar("aside-background-l-delta")}
+                  )
   );
   color: hsl(cv.getVar("aside-h"), cv.getVar("aside-s"), cv.getVar("aside-color-l"));
 
@@ -111,20 +111,20 @@ $aside-colors: dv.$colors !default;
   @each $name, $pair in $aside-colors {
     &.#{iv.$class-prefix}is-#{$name} {
       @include cv.register-vars(
-          (
-            "aside-h": #{cv.getVar($name, "", "-h")},
-            "aside-s": #{cv.getVar($name, "", "-s")},
-            "aside-background-l": #{cv.getVar($name, "", "-l")},
-            "aside-color-l": #{cv.getVar($name, "", "-invert-l")}
-          )
+                      (
+                              "aside-h": #{cv.getVar($name, "", "-h")},
+                              "aside-s": #{cv.getVar($name, "", "-s")},
+                              "aside-background-l": #{cv.getVar($name, "", "-l")},
+                              "aside-color-l": #{cv.getVar($name, "", "-invert-l")}
+                      )
       );
 
       &.#{iv.$class-prefix}is-light {
         @include cv.register-vars(
-            (
-              "aside-background-l": #{cv.getVar("light-l")},
-              "aside-color-l": #{cv.getVar($name, "", "-light-invert-l")}
-            )
+                        (
+                                "aside-background-l": #{cv.getVar("light-l")},
+                                "aside-color-l": #{cv.getVar($name, "", "-light-invert-l")}
+                        )
         );
       }
     }

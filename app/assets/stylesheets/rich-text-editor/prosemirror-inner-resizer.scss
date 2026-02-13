@@ -1,0 +1,74 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
+.ProseMirror-inner-resizer {
+  position: relative;
+  border-radius: var(--tiptap-radius);
+
+  .ProseMirror-lresizer,
+  .ProseMirror-rresizer,
+  .ProseMirror-bresizer {
+    position: absolute;
+    border-radius: 5px;
+    border: 1px solid var(--tiptap-muted-background);
+    background-color: var(--tiptap-muted-foreground);
+    opacity: 0;
+    transition: opacity 0.15s;
+
+    > div {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    &.ProseMirror-lresizer {
+      right: 0.25rem;
+      width: 5px;
+      height: 40px;
+      cursor: col-resize;
+
+      > div {
+        cursor: col-resize;
+      }
+    }
+
+    &.ProseMirror-rresizer {
+      left: 0.25rem;
+      width: 5px;
+      height: 40px;
+      cursor: col-resize;
+
+      > div {
+        cursor: col-resize;
+      }
+    }
+
+    &.ProseMirror-bresizer {
+      bottom: 0.25rem;
+      width: 40px;
+      height: 5px;
+      cursor: row-resize;
+
+      > div {
+        cursor: row-resize;
+      }
+    }
+  }
+
+  &:hover {
+    .ProseMirror-lresizer,
+    .ProseMirror-rresizer,
+    .ProseMirror-bresizer {
+      opacity: 1;
+    }
+  }
+
+  .ProseMirror[contenteditable="false"] & {
+    .ProseMirror-lresizer,
+    .ProseMirror-rresizer,
+    .ProseMirror-bresizer {
+      display: none !important;
+    }
+  }
+}

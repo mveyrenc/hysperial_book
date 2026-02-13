@@ -13,7 +13,7 @@
       = f
     - cts.each do |ct|
       = helpers.turbo_frame_tag helpers.dom_id(ct.object)
-        = render Bookcase::ContentTaggings::Components::Card::Component.new(ct)
+      = render Bookcase::ContentTaggings::Components::Card::Component.new(ct)
 - else
   = render NoRecord::Component.new
 

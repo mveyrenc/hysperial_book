@@ -15,7 +15,6 @@ module Bookcase
 
           protected
 
-
         end
       end
     end

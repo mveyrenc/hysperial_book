@@ -1,0 +1,50 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
+.ProseMirror-inner-editor {
+  position: relative;
+  border-radius: var(--tiptap-radius);
+
+  .ProseMirror {
+    white-space: pre !important;
+    line-height: 1.5 !important;
+    font-family: var(--tiptap-font-family-mono) !important;
+    font-weight: normal !important;
+    font-size: 0.875em !important;
+    background: none !important;
+    overflow: auto !important;
+    border: 0 !important;
+    padding: 0.125rem !important;
+  }
+
+  &-editor {
+    padding: 0.75em 1em;
+    background-color: var(--tiptap-card-background);
+    border-top-left-radius: var(--tiptap-radius);
+    border-top-right-radius: var(--tiptap-radius);
+    border-bottom: 1px solid var(--tiptap-border);
+  }
+
+  &-preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    padding: 0.75em 1em;
+    border-bottom-left-radius: var(--tiptap-radius);
+    border-bottom-right-radius: var(--tiptap-radius);
+
+    [id^="mermaid"] {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .ProseMirror[contenteditable="false"] & {
+    &-editor {
+      display: none !important;
+    }
+  }
+}

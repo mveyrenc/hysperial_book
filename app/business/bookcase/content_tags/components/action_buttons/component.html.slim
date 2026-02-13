@@ -2,51 +2,51 @@
   / List
   - if actions.include?(:list) and policy(Bookcase::ContentTag).index?
     = link_to t('application.back_to_list'),
-      bookcase_content_tags_path,
-      data: { 'turbo-frame': helpers.model_dom_id(record), 'turbo-action': 'advance' },
-      class: 'button is-back-action'
+            bookcase_content_tags_path,
+            data: { 'turbo-frame': helpers.model_dom_id(record), 'turbo-action': 'advance' },
+            class: 'button is-back-action'
 
   / New
   - if actions.include?(:new) and policy(Bookcase::ContentTag).create?
     = link_to t('application.new'),
-      new_bookcase_content_tag_path(from: 'test', targer_id: nil),
-      class: 'button is-new-action',
-      'data-turbo-frame': helpers.dom_id(Bookcase::ContentTag.new)
+            new_bookcase_content_tag_path(from: 'test', targer_id: nil),
+            class: 'button is-new-action',
+            'data-turbo-frame': helpers.dom_id(Bookcase::ContentTag.new)
   - if actions.include?(:new_from_content_tag_family) and record.present? and policy(Bookcase::ContentTag).create?
     = link_to t('application.new'),
-      new_bookcase_content_tag_path(from: 'content_tag_family', content_tag_family_id: record),
-      class: 'button is-new-action',
-      'data-turbo-frame': helpers.dom_id(Bookcase::ContentTag.new)
+            new_bookcase_content_tag_path(from: 'content_tag_family', content_tag_family_id: record),
+            class: 'button is-new-action',
+            'data-turbo-frame': helpers.dom_id(Bookcase::ContentTag.new)
 
   / Show
   - if actions.include?(:show) and record.present? and policy(record).show?
     = link_to t('application.read'),
-      bookcase_content_tag_path(record),
-      class: 'button is-show-action',
-      data: { turbo: "false" }
+            bookcase_content_tag_path(record),
+            class: 'button is-show-action',
+            data: { turbo: "false" }
 
   / Edit
   - if actions.include?(:edit) and record.present? and policy(record).update?
     = link_to t('application.edit'),
-      edit_bookcase_content_tag_path(record),
-      class: 'button is-edit-action',
-      'data-turbo-frame': helpers.dom_id(record)
+            edit_bookcase_content_tag_path(record),
+            class: 'button is-edit-action',
+            'data-turbo-frame': helpers.dom_id(record)
   - if actions.include?(:edit_from_content_tag_family) and record.present? and policy(record).update?
     = link_to t('application.edit'),
-      edit_bookcase_content_tag_path(record, from: 'content_tag_family'),
-      class: 'button is-edit-action',
-      'data-turbo-frame': helpers.dom_id(record)
+            edit_bookcase_content_tag_path(record, from: 'content_tag_family'),
+            class: 'button is-edit-action',
+            'data-turbo-frame': helpers.dom_id(record)
 
   / Delete
   - if actions.include?(:delete) and record.present? and policy(record).destroy?
     = button_to t('application.delete'),
-      bookcase_content_tag_path(record),
-      method: :delete,
-      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure"), 'turbo-action': 'advance' },
-      class: "button is-delete-action"
+            bookcase_content_tag_path(record),
+            method: :delete,
+            data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure"), 'turbo-action': 'advance' },
+            class: "button is-delete-action"
   - if actions.include?(:delete_from_content_tag_family) and record.present? and policy(record).destroy?
     = button_to t('application.delete'),
-      bookcase_content_tag_path(record, from: 'content_tag_family'),
-      method: :delete,
-      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure"), 'turbo-action': 'advance' },
-      class: "button is-delete-action"
+            bookcase_content_tag_path(record, from: 'content_tag_family'),
+            method: :delete,
+            data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure"), 'turbo-action': 'advance' },
+            class: "button is-delete-action"

@@ -9,6 +9,10 @@ module Bookcase
             include ActiveSupport::Inflector
 
             def call
+              if record.respond_to?(:to_html)
+                return record.send(to_html)
+              end
+
               component_name = "Bookcase::ContentAttributes::Components::AttributeDisplay::#{classify(record.data_type)}::Component"
               if Object.const_defined?(component_name)
                 component = Kernel.const_get(component_name).new(record)
@@ -18,11 +22,6 @@ module Bookcase
               end
 
               component = Bookcase::ContentAttributes::Components::AttributeDisplay::HtmlText::Component.new(record)
-              if component.render?
-                return render component
-              end
-
-              component = Bookcase::ContentAttributes::Components::AttributeDisplay::MarkdownText::Component.new(record)
               if component.render?
                 return render component
               end

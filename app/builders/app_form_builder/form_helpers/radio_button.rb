@@ -11,7 +11,7 @@ module AppFormBuilder
         def radio_button_with_bulma(method, tag_value, options = {})
           options = options.symbolize_keys!
           radio_button_options = options.except(:class, :label, :label_class, :error_message, :help, :inline, :custom,
-                                             :hide_label, :skip_label, :wrapper_class)
+                                                :hide_label, :skip_label, :wrapper_class)
           wrapper_class = ['field', options[:wrapper_class]].compact
 
           @template.content_tag(:div, class: wrapper_class) do

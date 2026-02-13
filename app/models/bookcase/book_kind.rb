@@ -10,7 +10,6 @@ module Bookcase
       @kind = kind
     end
 
-
     def self.kind_select_values
       KINDS
         .map { |k| [human_attribute_name(k), k] }

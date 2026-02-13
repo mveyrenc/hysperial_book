@@ -1,6 +1,6 @@
 = turbo_model_frame_tag do
   = helpers.turbo_frame_tag "flash", refresh: :replace, 'data-turbo-temporary': true
-    = render Layout::Flash::Component.new
+  = render Layout::Flash::Component.new
   section.section
     - if hero_body? or title? or actions?
       .level

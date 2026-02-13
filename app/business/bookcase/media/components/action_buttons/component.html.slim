@@ -1,22 +1,22 @@
 .buttons.is-right
   - if actions.include?(:new) and policy(Bookcase::Media).create?
     = link_to t('application.new'),
-      new_bookcase_media_path,
-      class: 'button is-new-action',
-      'data-turbo-frame': helpers.dom_id(Bookcase::Media.new)
+            new_bookcase_media_path,
+            class: 'button is-new-action',
+            'data-turbo-frame': helpers.dom_id(Bookcase::Media.new)
   - if actions.include?(:show) and record.present? and policy(record).show?
     = link_to t('application.read'),
-      bookcase_media_path(record),
-      class: 'button is-show-action',
-      data: { turbo: "false" }
+            bookcase_media_path(record),
+            class: 'button is-show-action',
+            data: { turbo: "false" }
   - if actions.include?(:edit) and record.present? and policy(record).update?
     = link_to t('application.edit'),
-      edit_bookcase_media_path(record),
-      class: 'button is-edit-action',
-      'data-turbo-frame': helpers.dom_id(record)
+            edit_bookcase_media_path(record),
+            class: 'button is-edit-action',
+            'data-turbo-frame': helpers.dom_id(record)
   - if actions.include?(:delete) and record.present? and policy(record).destroy?
     = button_to t('application.delete'),
-      bookcase_media_path(record),
-      method: :delete,
-      data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure") },
-      class: "button is-delete-action"
+            bookcase_media_path(record),
+            method: :delete,
+            data: { 'turbo-method': :delete, "turbo-confirm": t("application.are_you_sure") },
+            class: "button is-delete-action"

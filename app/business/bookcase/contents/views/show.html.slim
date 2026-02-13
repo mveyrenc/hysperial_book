@@ -2,7 +2,7 @@
   - component.with_title do
     = @record.name
   - component.with_actions do
-    - if  session.fetch(:content_edit_mode, false)
+    - if session.fetch(:content_edit_mode, false)
       = render Bookcase::Contents::Components::ActionButtons::Component.new(actions: %i[deactivate_edit_mode], record: @record.object)
     - else
       = render Bookcase::Contents::Components::ActionButtons::Component.new(actions: %i[activate_edit_mode], record: @record.object)

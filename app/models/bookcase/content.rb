@@ -118,9 +118,9 @@ module Bookcase
     end
 
     ## Rich text
-    # serialize :short_description, coder: ActionText::Content
-    # serialize :description, coder: ActionText::Content
-    # serialize :body, coder: ActionText::Content
+    # serialize :short_description, coder: JSON
+    # serialize :description, coder: JSON
+    # serialize :body, coder: JSON
     # has_many_attached :embeds
     # before_validation do
     #   e = []
