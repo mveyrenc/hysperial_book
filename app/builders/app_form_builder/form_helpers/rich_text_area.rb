@@ -19,10 +19,10 @@ module AppFormBuilder
           elsif @template.respond_to?(:main_app) && @template.main_app.respond_to?(:rails_service_blob_url)
             options["data-blob-url-template"] = @template.main_app.rails_service_blob_url(":signed_id", ":filename")
           end
-          Rails.logger.debug(options)
+          hidden_input_value = @object.try(method).try(:to_json)
           form_field_builder(method, options, html_options) do
             @template.content_tag(:div, '', class: 'rich-text-editor', 'data-controller': 'standard-editor') do
-              @template.concat(self.hidden_field(method, 'data-standard-editor-target': 'input'))
+              @template.concat(self.hidden_field(method, 'data-standard-editor-target': 'input', value: hidden_input_value))
               @template.concat(@template.content_tag(:div, '', options))
             end
           end

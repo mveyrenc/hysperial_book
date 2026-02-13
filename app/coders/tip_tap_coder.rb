@@ -5,22 +5,40 @@ require "tip_tap"
 class TipTapCoder
   # include Rendering, Serialization, ContentHelper
   #
-  # attr_reader :document
-  #
-  # delegate :to_h, :to_html, :to_markdown, :to_plain_text, to: :document
-  # delegate :blank?, :empty?, :html_safe, :present?, to: :document
-  #
-  # class << self
-  #   def fragment_by_canonicalizing_content(content)
-  #     fragment = ActionText::Attachment.fragment_by_canonicalizing_attachments(content)
-  #     fragment = ActionText::AttachmentGallery.fragment_by_canonicalizing_attachment_galleries(fragment)
-  #     fragment
-  #   end
-  # end
-  #
-  # def initialize(content = nil, options = {})
-  #   @document = TipTap::Document.from_json(content)
-  # end
+  attr_reader :document
+
+  delegate :to_h, :to_html, :to_markdown, :to_plain_text, to: :document
+  delegate :blank?, :empty?, :html_safe, :present?, to: :document
+
+  def initialize(document = nil, options = {})
+    if document.nil?
+      @document = TipTap::Document.new
+    elsif document.is_a?(Hash) || document.is_a?(Array)
+      @document = TipTap::document.from_json(content)
+    else
+      @document = TipTap::document.from_json(JSON.parse(document))
+    end
+  end
+
+  # Serializes an attribute value to a string that will be stored in the database.
+  def self.dump(document)
+    case document
+    when nil
+      nil
+    when self
+      document.to_html
+    when TipTap::Document
+      document.to_html
+    else
+      new(document).to_html
+    end
+  end
+
+  # Deserializes a string from the database to an attribute value.
+  def self.load(document)
+    new(document) if document
+  end
+
   #
   # # Extracts links from the HTML fragment:
   # #
@@ -109,17 +127,18 @@ class TipTapCoder
   #   @document
   # end
   #
-  # def inspect
-  #   "#<#{self.class.name} #{to_html.truncate(25).inspect}>"
-  # end
-  #
-  # def ==(other)
-  #   if self.class == other.class
-  #     to_html == other.to_html
-  #   elsif other.is_a?(self.class)
-  #     to_s == other.to_s
-  #   end
-  # end
+  def inspect
+    "#<#{self.class.name} #{to_html.truncate(25).inspect}>"
+  end
+
+  def ==(other)
+    if self.class == other.class
+      to_html == other.to_html
+    elsif other.is_a?(self.class)
+      to_s == other.to_s
+    end
+  end
+
   #
   # private
   #

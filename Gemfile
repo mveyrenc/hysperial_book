@@ -62,7 +62,6 @@ gem 'friendly_id', '~> 5.5'
 
 # https://github.com/CompanyCam/tiptap-ruby
 # A gem for parsing, generating, and rendering TipTap Documents and Nodes using Ruby.
-gem 'tiptap-ruby'
 
 # ##############
 # Business logic

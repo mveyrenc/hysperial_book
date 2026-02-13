@@ -16,11 +16,11 @@ module Bookcase
       end
 
       def redirect_to_after_create
-        bookcase_book_path(@record)
+        @record
       end
 
       def redirect_to_after_update
-        bookcase_book_path(@record)
+        @record
       end
 
       def redirect_to_after_destroy

@@ -14,21 +14,25 @@ module Bookcase
       end
 
       def redirect_to_after_create
-        bookcase_content_path(@record.content)
+        @record.content
+      end
+
+      def redirect_to_after_update
+        @record.content
       end
 
       def redirect_to_after_destroy
-        bookcase_content_path(@record.content)
+        @record.content
       end
 
       def strong_params
         params
           .require(:bookcase_content_attribute)
           .permit(
-            :plain_text,
-            :markdown_text,
-            :html_text,
-            :data_text,
+            :name,
+            :body_html,
+            :body_json,
+            :position,
             :content_id
           )
       end

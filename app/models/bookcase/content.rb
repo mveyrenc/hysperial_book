@@ -6,15 +6,16 @@
 #
 #  id                                                                                                         :uuid             not null, primary key
 #  alternate_names(Aliases for the item)                                                                      :text
-#  body(The json text of the item)                                                                            :json
+#  body_html(The json text of the item)                                                                       :text
+#  body_json(The json text of the item)                                                                       :jsonb
 #  data(A hash to store the data of the item)                                                                 :jsonb            not null
-#  description(A description of the item)                                                                     :json
+#  description_json(A description of the item)                                                                :jsonb
 #  is_based_on_url(The URL from which the item was imported)                                                  :string
 #  kind(The kind or type of the item)                                                                         :string           not null
 #  metadata(A hash to store some data about the item)                                                         :jsonb            not null
 #  name(The name of the item)                                                                                 :string           not null
 #  settings(A hash to configure the item)                                                                     :jsonb            not null
-#  short_description(A short description of the item)                                                         :json
+#  short_description_json(A short description of the item)                                                    :jsonb
 #  slug(Human readable item identifier)                                                                       :string           not null
 #  version(The version of the item)                                                                           :string
 #  created_at                                                                                                 :datetime         not null
@@ -51,6 +52,9 @@ module Bookcase
 
     def search_data
       attributes.merge(
+        short_description: short_description.to_plain_text,
+        description: description.to_plain_text,
+        body: body.to_plain_text,
         book_id: book.id,
         book_name: book.name,
         book_kind: book.kind
@@ -115,6 +119,21 @@ module Bookcase
     ## Conversion Methods
     def to_s
       name
+    end
+
+    def short_description
+      return TipTap::Document.from_json(short_description_json) if short_description_json.present?
+      TipTap::Document.new
+    end
+
+    def description
+      return TipTap::Document.from_json(description_json) if description_json.present?
+      TipTap::Document.new
+    end
+
+    def body
+      return TipTap::Document.from_json(body_json) if body_json.present?
+      TipTap::Document.new
     end
 
     ## Rich text

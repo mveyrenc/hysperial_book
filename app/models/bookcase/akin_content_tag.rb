@@ -44,6 +44,9 @@ module Bookcase
     ## Position
     # no position
 
+    ## Attributes cleaning
+    # no attribute cleaning
+
     ## Validations
     validates :related, uniqueness: { scope: :relater }, comparison: { other_than: :relater }
     validates :kind, presence: true
@@ -58,6 +61,9 @@ module Bookcase
     def set_defaults
       self.kind ||= :limited_relation
     end
+
+    ## Rich text
+    # no rich text
 
     def self.all_related_tags(relater)
       self.all_akin_tags(relater, :relater, :related)

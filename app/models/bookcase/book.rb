@@ -7,7 +7,7 @@
 #  id                                                 :uuid             not null, primary key
 #  alternate_names(Aliases for the item)              :text
 #  data(A hash to store the data of the item)         :jsonb            not null
-#  description(A description of the item)             :json
+#  description_json(A description of the item)        :jsonb
 #  kind(The kind or type of the item)                 :string           not null
 #  metadata(A hash to store some data about the item) :jsonb            not null
 #  name(The name of the item)                         :string           not null
@@ -30,6 +30,9 @@
 #  fk_rails_...  (created_by_id => users.id) ON DELETE => restrict
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
+
+require 'tip_tap'
+
 module Bookcase
   class Book < ApplicationRecord
     self.implicit_order_column = 'created_at'
@@ -54,6 +57,9 @@ module Bookcase
     ## Position
     positioned
 
+    ## Attributes cleaning
+    # no attribute cleaning
+
     ## Validations
     validates :name, presence: true, uniqueness: { case_sensitive: false }
     validates :kind, presence: true
@@ -71,5 +77,15 @@ module Bookcase
     def to_s
       name
     end
+  end
+
+  ## Default values
+  # no default value
+
+  ## Rich text
+
+  def description
+    return TipTap::Document.from_json(description_json) if description_json.present?
+    TipTap::Document.new
   end
 end

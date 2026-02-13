@@ -6,15 +6,13 @@
 #
 #  id                                                     :uuid             not null, primary key
 #  alternate_names(Aliases for the item)                  :text
+#  body_html(The json text of the item)                   :text
+#  body_json(The json text of the item)                   :jsonb
 #  data(A hash to store the data of the item)             :jsonb            not null
-#  description(A description of the item)                 :text
-#  html_text(The html text of the item)                   :text
-#  json_text(The json text of the item)                   :json
+#  description_json(A description of the item)            :jsonb
 #  kind(The kind or type of the item)                     :string           not null
-#  markdown_text(The markdown text of the item)           :text
 #  metadata(A hash to store some data about the item)     :jsonb            not null
 #  name(The name of the item)                             :string           not null
-#  plain_text(The plain text of the item)                 :text
 #  position(The position of the item)                     :integer          not null
 #  settings(A hash to configure the item)                 :jsonb            not null
 #  created_at                                             :datetime         not null
@@ -72,5 +70,10 @@ module Bookcase
 
     ## Conversion Methods
     # no conversion method
+
+    def body
+      return TipTap::Document.from_json(body_json) if body_json.present?
+      TipTap::Document.new
+    end
   end
 end

@@ -29,8 +29,11 @@ class ApplicationRecord < ActiveRecord::Base
   # no callback
 
   ## Conversion Methods
-  # no conversion methods
+  # no conversion method
 
   ## Default values
   # no default value
+
+  ## Rich text
+  # no rich text
 end

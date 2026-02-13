@@ -7,7 +7,7 @@
 #  id                                                 :uuid             not null, primary key
 #  alternate_names(Aliases for the item)              :text
 #  data(A hash to store the data of the item)         :jsonb            not null
-#  description(A description of the item)             :json
+#  description_json(A description of the item)        :jsonb
 #  kind                                               :string           not null
 #  metadata(A hash to store some data about the item) :jsonb            not null
 #  name(The name of the item)                         :string           not null
@@ -103,6 +103,15 @@ module Bookcase
     ## Conversion Methods
     def to_s
       name
+    end
+
+
+
+    ## Rich text
+
+    def description
+      return TipTap::Document.from_json(body_json) if body_json.present?
+      TipTap::Document.new
     end
   end
 end

@@ -11,12 +11,8 @@ module Bookcase
             @record = record
           end
 
-          def attribute_label_renderer
-            @attribute_label_renderer ||= AttributeLabel::Component.new(@record)
-          end
-
-          def attribute_body_renderer
-            @attribute_body_renderer ||= AttributeBody::Component.new(@record)
+          def render?
+            record.body.present? || record.body_html.present?
           end
         end
       end

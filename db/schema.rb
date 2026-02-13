@@ -62,7 +62,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
     t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
-    t.json "description", comment: "A description of the item"
+    t.jsonb "description_json", comment: "A description of the item"
     t.string "kind", null: false, comment: "The kind or type of the item"
     t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
@@ -78,18 +78,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
 
   create_table "content_attributes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "alternate_names", comment: "Aliases for the item"
+    t.text "body_html", comment: "The json text of the item"
+    t.jsonb "body_json", comment: "The json text of the item"
     t.uuid "content_id", null: false, comment: "The content to which the attribute belongs"
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
     t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
-    t.text "description", comment: "A description of the item"
-    t.text "html_text", comment: "The html text of the item"
-    t.json "json_text", comment: "The json text of the item"
+    t.jsonb "description_json", comment: "A description of the item"
     t.string "kind", null: false, comment: "The kind or type of the item"
-    t.text "markdown_text", comment: "The markdown text of the item"
     t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
-    t.text "plain_text", comment: "The plain text of the item"
     t.integer "position", null: false, comment: "The position of the item"
     t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
     t.datetime "updated_at", null: false
@@ -106,7 +104,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
     t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
-    t.json "description", comment: "A description of the item"
+    t.jsonb "description_json", comment: "A description of the item"
     t.string "kind", null: false
     t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
@@ -140,7 +138,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
     t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
-    t.json "description", comment: "A description of the item"
+    t.jsonb "description_json", comment: "A description of the item"
     t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
     t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
@@ -156,19 +154,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_101009) do
 
   create_table "contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "alternate_names", comment: "Aliases for the item"
-    t.json "body", comment: "The json text of the item"
+    t.text "body_html", comment: "The json text of the item"
+    t.jsonb "body_json", comment: "The json text of the item"
     t.uuid "book_id", null: false, comment: "The book in which the item is located"
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
     t.jsonb "data", default: {}, null: false, comment: "A hash to store the data of the item"
-    t.json "description", comment: "A description of the item"
+    t.jsonb "description_json", comment: "A description of the item"
     t.uuid "is_based_on_id", comment: "A content from which this work is derived or from which it is a modification or adaptation"
     t.string "is_based_on_url", comment: "The URL from which the item was imported"
     t.string "kind", null: false, comment: "The kind or type of the item"
     t.jsonb "metadata", default: {}, null: false, comment: "A hash to store some data about the item"
     t.string "name", null: false, comment: "The name of the item"
     t.jsonb "settings", default: {}, null: false, comment: "A hash to configure the item"
-    t.json "short_description", comment: "A short description of the item"
+    t.jsonb "short_description_json", comment: "A short description of the item"
     t.string "slug", null: false, comment: "Human readable item identifier"
     t.uuid "thumbnail_id", comment: "A very small image for the item"
     t.datetime "updated_at", null: false

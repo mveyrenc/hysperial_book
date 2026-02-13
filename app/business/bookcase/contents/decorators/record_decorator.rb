@@ -31,7 +31,7 @@ module Bookcase
           if highlights && context[:highlights].present? && context[:highlights].key?(:description)
             context[:highlights][:description].html_safe
           else
-            tip_tap_document(object.short_description)
+            object.short_description.to_html
           end
         end
 
@@ -39,7 +39,15 @@ module Bookcase
           if highlights && context[:highlights].present? && context[:highlights].key?(:short_description)
             context[:highlights][:short_description].html_safe
           else
-            tip_tap_document(object.description)
+            object.description.to_html
+          end
+        end
+
+        def body(highlights = true)
+          if highlights && context[:highlights].present? && context[:highlights].key?(:body)
+            context[:highlights][:body].html_safe
+          else
+            object.body.to_html
           end
         end
 

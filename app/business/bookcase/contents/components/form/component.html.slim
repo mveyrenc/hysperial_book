@@ -12,6 +12,10 @@
     = helpers.alternate_names_field(f)
     = helpers.short_description_field(f)
     = helpers.description_field(f)
+    - if record.body_html.present?
+      = f.hidden_field :body_html
+      = record.body_html.html_safe
+    = f.rich_text_area :body_json
     = f.text_field :version
     = f.text_field :is_based_on_url
     = f.fields_for :thumbnail do |f_thumbnail|

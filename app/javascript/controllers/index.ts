@@ -6,3 +6,4 @@ import {application} from "./application"
 
 import "./light_editor_controller";
 import "./standard_editor_controller";
+import "./empty_html_field_controller";

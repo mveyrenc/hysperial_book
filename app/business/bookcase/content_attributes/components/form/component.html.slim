@@ -7,7 +7,17 @@
     = render FormErrors::Component.new(errors: record.errors)
     = f.hidden_field :content_id
     = f.text_field :name
-    = render Bookcase::ContentAttributes::Components::Form::AttributeBody::Component.new(record, f)
+    - if record.body_html.present?
+      div[data-controller='empty-html-field']
+        = f.hidden_field :body_html, 'data-empty-html-field-target': 'input'
+        .field[data-empty-html-field-target='renderer']
+          = f.label :body_html
+          .control
+            .content
+              = record.body_html.html_safe
+              = f.button :empty_html, type: :button, class: 'button', 'data-action': 'click->empty-html-field#click' do
+                = t('application.empty_html')
+    = f.rich_text_area :body_json
     = helpers.position_field(f)
     .field
       .buttons

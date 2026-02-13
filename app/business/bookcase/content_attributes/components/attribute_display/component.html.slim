@@ -1,8 +1,13 @@
-- if attribute_body_renderer.render?
-  .field.is-horizontal
-    - if attribute_label_renderer.render?
-      .field-label
-        .label
-          = render attribute_label_renderer
-    .field-body
-      = render attribute_body_renderer
+.field.is-horizontal
+  .field-label
+    .label
+      - if record.name.blank?
+        = Bookcase::ContentAttribute.human_attribute_name(record_kind)
+      - else
+        = record.name
+  .field-body
+    - if record.body.present?
+      = record.body.to_html
+    - if record.body_html.present?
+      .content
+        = record.body_html.html_safe
