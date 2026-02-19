@@ -8,8 +8,8 @@ module AppFormBuilder
 
       private
 
-      def form_field_builder(method, options, html_options = {}, &block)
-        form_field(method, options, html_options, &block)
+      def form_field_builder(method, options, html_options = {}, &)
+        form_field(method, options, html_options, &)
       end
     end
   end

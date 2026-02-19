@@ -8,12 +8,12 @@ module AppFormBuilder
       include Base
 
       included do
-        def submit_with_bulma(value = nil, options = {}, &block)
+        def submit_with_bulma(value = nil, options = {}, &)
           classes = [options[:class]]
           classes <<= 'button'
           options[:class] = classes.compact.join(' ')
 
-          submit_without_bulma(value, options, &block)
+          submit_without_bulma(value, options, &)
         end
 
         bulma_alias(:submit)

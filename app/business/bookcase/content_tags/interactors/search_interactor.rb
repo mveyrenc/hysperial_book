@@ -45,7 +45,8 @@ module Bookcase
           context.aggs.each do |k, agg|
             next unless agg.include?('buckets') && agg['buckets'].any?
 
-            if k.eql?('book_kind')
+            case k
+            when 'book_kind'
               aggs << {
                 key: k,
                 name: Bookcase::ContentTagFamily.human_attribute_name(:book_kind),
@@ -55,7 +56,7 @@ module Bookcase
                   ["#{Bookcase::BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
                 end
               }
-            elsif k.eql?('book_id')
+            when 'book_id'
               aggs << {
                 key: k,
                 name: Bookcase::ContentTagFamily.human_attribute_name(:book),
@@ -66,17 +67,18 @@ module Bookcase
                   ["#{b.name} (#{bkt['doc_count']})", b.slug] if b.present?
                 end
               }
-            elsif k.eql?('content_tag_family_kind')
+            when 'content_tag_family_kind'
               aggs << {
                 key: k,
                 name: Bookcase::ContentTag.human_attribute_name(:content_tag_family_kind),
                 multiple: false,
                 position: 3,
                 buckets: agg['buckets'].map do |bkt|
-                  ["#{Bookcase::ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
+                  ["#{Bookcase::ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})",
+                   bkt['key']]
                 end
               }
-            elsif k.eql?('content_tag_family_id')
+            when 'content_tag_family_id'
               aggs << {
                 key: k,
                 name: Bookcase::ContentTag.human_attribute_name(:content_tag_family),

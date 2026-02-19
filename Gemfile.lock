@@ -220,6 +220,7 @@ GEM
     highline (3.1.2)
       reline
     hirb (0.7.3)
+    htmlbeautifier (1.4.3)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     i18n-tasks (1.1.2)
@@ -592,6 +593,7 @@ DEPENDENCIES
   factory_bot_rails
   faker (~> 3.6)
   friendly_id (~> 5.5)
+  htmlbeautifier
   i18n-tasks
   image_processing (~> 1.2)
   interactor-rails (~> 2.2)
@@ -604,6 +606,7 @@ DEPENDENCIES
   minitest-reporters
   next_rails
   opensearch-ruby (~> 3.4)
+  ostruct (~> 0.6)
   pg (~> 1.1)
   pg_query (~> 6.2)
   pghero (~> 3.7)

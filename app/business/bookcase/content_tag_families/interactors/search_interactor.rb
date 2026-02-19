@@ -32,8 +32,8 @@ module Bookcase
           context.search_query = context.search_query
                                         .includes(:book)
                                         .order(
-                                          [book_position: { order: :asc, unmapped_type: :integer },
-                                           position: { order: :asc, unmapped_type: :integer }]
+                                          [{ book_position: { order: :asc, unmapped_type: :integer },
+                                             position: { order: :asc, unmapped_type: :integer } }]
                                         )
         end
 
@@ -42,17 +42,19 @@ module Bookcase
           context.aggs.each do |k, agg|
             next unless agg.include?('buckets') && agg['buckets'].any?
 
-            if k.eql?('kind')
+            case k
+            when 'kind'
               aggs << {
                 key: k,
                 name: Bookcase::ContentTagFamily.human_attribute_name(:kind),
                 multiple: false,
                 position: 1,
                 buckets: context.aggs['kind']['buckets'].map do |bkt|
-                  ["#{Bookcase::ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
+                  ["#{Bookcase::ContentTagFamilyKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})",
+                   bkt['key']]
                 end
               }
-            elsif k.eql?('book_kind')
+            when 'book_kind'
               aggs << {
                 key: k,
                 name: Bookcase::ContentTagFamily.human_attribute_name(:book_kind),
@@ -62,7 +64,7 @@ module Bookcase
                   ["#{Bookcase::BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
                 end
               }
-            elsif k.eql?('book_id')
+            when 'book_id'
               # get all books in the bucket in one request
               bkt_books = Bookcase::Book.find(agg['buckets'].map { |bkt| bkt['key'] }).index_by(&:id)
               aggs << {

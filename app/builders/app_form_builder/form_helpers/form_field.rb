@@ -6,10 +6,10 @@ module AppFormBuilder
     module FormField
       extend ActiveSupport::Concern
 
-      def form_field(method, options = {}, _html_options = {}, &block)
+      def form_field(method, options = {}, _html_options = {}, &)
         @template.content_tag(:div, class: form_field_classes(options)) do
           @template.concat field_label(method, options) unless options[:hide_label]
-          @template.concat @template.content_tag(:div, class: 'control', &block)
+          @template.concat @template.content_tag(:div, class: 'control', &)
           @template.concat field_help(method, options)
         end
       end
@@ -29,6 +29,7 @@ module AppFormBuilder
 
       def field_label(method, options)
         return if options[:label] == false
+
         classes = %w[label]
         classes << 'required' if options[:required]
         label(method.to_s.delete_suffix('_id').to_sym, options[:label], class: classes)

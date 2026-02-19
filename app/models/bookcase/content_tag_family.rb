@@ -40,10 +40,13 @@ module Bookcase
     self.implicit_order_column = 'created_at'
 
     ## Searchkick
-    searchkick highlight: %i[name book_name]
+    searchkick highlight: %i[name alternate_names description book_name]
 
     def search_data
-      attributes.merge(
+      d = attributes
+      d.delete('description_json')
+      d.merge(
+        description: description.to_plain_text,
         book_name: book.name,
         book_kind: book.kind,
         book_position: book.position
@@ -105,13 +108,12 @@ module Bookcase
       name
     end
 
-
-
     ## Rich text
 
     def description
-      return TipTap::Document.from_json(body_json) if body_json.present?
-      TipTap::Document.new
+      return Schemas::TipTap::Document.from_json(description_json) if description_json.present?
+
+      Schemas::TipTap::Document.new
     end
   end
 end

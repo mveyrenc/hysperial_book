@@ -13,6 +13,7 @@ module ApplicationHelper
   def name_field(f, multiple = false)
     multiple = false if f.object.persisted?
     return f.text_area :name, autofocus: true, help: t('.name.help') if multiple
+
     f.text_field :name, autofocus: true
   end
 

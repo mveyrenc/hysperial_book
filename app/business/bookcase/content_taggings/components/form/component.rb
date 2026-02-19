@@ -6,7 +6,6 @@ module Bookcase
       module Form
         # ContentTags card component
         class Component < ApplicationComponent
-
           attr_reader :record
 
           def initialize(record)

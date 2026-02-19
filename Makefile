@@ -119,20 +119,23 @@ optimize-db: ## Optimize database
 
 ###Tests: ## .
 clean-test-db: ## Clear and recreate test database
-	docker compose exec web rails RAILS_ENV=test db:drop
-	docker compose exec web rails RAILS_ENV=test db:create
-	docker compose exec web rails RAILS_ENV=test db:migrate
+	docker compose exec -e RAILS_ENV=test web rails  db:drop
+	docker compose exec -e RAILS_ENV=test web rails  db:create
+	docker compose exec -e RAILS_ENV=test web rails  db:migrate
 
 run-test: ## Runs the provided test(s)
-	docker compose exec web rails RAILS_ENV=test db:create
-	docker compose exec web rails RAILS_ENV=test db:migrate
-	docker compose exec web rails RAILS_ENV=test test $(run-ARGS)
+	docker compose exec -e RAILS_ENV=test web rails  db:create
+	docker compose exec -e RAILS_ENV=test web rails  db:migrate
+	docker compose exec -e RAILS_ENV=test web rails  test $(run-ARGS)
 
 run-system-test: ## Runs the provided system test(s)
-	docker compose exec web rails RAILS_ENV=test test:system $(run-ARGS)
+	docker compose exec -e RAILS_ENV=test web rails  test:system $(run-ARGS)
 
 run-controllers-test: ## Runs the provided controller test(s)
-	docker compose exec web rails RAILS_ENV=test test:controllers $(run-ARGS)
+	docker compose exec -e RAILS_ENV=test web rails  test:controllers $(run-ARGS)
+
+run-libs-test: ## Runs the provided controller test(s)
+	docker compose exec -e RAILS_ENV=test web rails  test test/lib
 
 ###Linting-Commands: ## .
 lint-ruby: ## Run ruby syntax clean up

@@ -37,10 +37,13 @@ module Bookcase
     self.implicit_order_column = 'created_at'
 
     ## Searchkick
-    searchkick highlight: %i[name content_tag_family_name book_name]
+    searchkick highlight: %i[name alternate_names description content_tag_family_name book_name]
 
     def search_data
-      attributes.merge(
+      d = attributes
+      d.delete('description_json')
+      d.merge(
+        description: description.to_plain_text,
         content_tag_family_name: content_tag_family.name,
         content_tag_family_kind: content_tag_family.kind,
         book_id: book.id,
@@ -106,7 +109,6 @@ module Bookcase
 
     ## Validations
     validates :name, presence: true, uniqueness: { scope: %i[content_tag_family_id], case_sensitive: false }
-    validates :content_tag_family, presence: true
     validates :slug, presence: true, uniqueness: true
 
     ## Callbacks
@@ -117,13 +119,12 @@ module Bookcase
       name
     end
 
-
-
     ## Rich text
 
     def description
-      return TipTap::Document.from_json(body_json) if body_json.present?
-      TipTap::Document.new
+      return Schemas::TipTap::Document.from_json(description_json) if description_json.present?
+
+      Schemas::TipTap::Document.new
     end
   end
 end

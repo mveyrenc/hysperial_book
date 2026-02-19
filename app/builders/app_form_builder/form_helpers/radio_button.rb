@@ -32,6 +32,7 @@ module AppFormBuilder
 
       def radio_button_label(method, options)
         return @template.content_tag(:span, options[:label], class: 'control-label') if options[:label]
+
         @template.content_tag(:span, object.class.human_attribute_name(method), class: 'control-label')
       end
     end

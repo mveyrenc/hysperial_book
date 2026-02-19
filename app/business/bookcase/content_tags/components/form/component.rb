@@ -14,7 +14,7 @@ module Bookcase
           protected
 
           def from_content_tag_family?
-            params.key?(:from) && params.fetch(:from) == "content_tag_family"
+            params.key?(:from) && params.fetch(:from) == 'content_tag_family'
           end
 
           def book_collection

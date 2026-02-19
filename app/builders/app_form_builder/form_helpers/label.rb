@@ -8,12 +8,12 @@ module AppFormBuilder
       include Base
 
       included do
-        def label_with_bulma(method, text = nil, options = {}, &block)
+        def label_with_bulma(method, text = nil, options = {}, &)
           classes = [options[:class]]
           classes <<= 'label'
           options[:class] = classes.compact.join(' ')
 
-          label_without_bulma(method, text, options, &block)
+          label_without_bulma(method, text, options, &)
         end
 
         bulma_alias(:label)

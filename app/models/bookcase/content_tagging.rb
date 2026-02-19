@@ -64,14 +64,14 @@ module Bookcase
       loop do
         tag = tags_to_parse.shift
         break if tag.nil?
+
         relations = AkinContentTag.includes([:related]).includes(related: [:content_tag_family]).where(relater: tag).to_a
         excludes += relations.select { |e| e.kind == 'excludes' }
         relations.reject { |e| e.kind == 'excludes' }.each do |relation|
           next unless all_content_taggings.index { |e| e.content_tag == relation.related }.nil? &&
                       excludes.index { |e| e.content_tag == relation.related }.nil?
-          if relation.kind == "followable_relation"
-            tags_to_parse << relation.related
-          end
+
+          tags_to_parse << relation.related if relation.kind == 'followable_relation'
           all_content_taggings << ContentTagging.new(content: content, content_tag: relation.related)
         end
       end

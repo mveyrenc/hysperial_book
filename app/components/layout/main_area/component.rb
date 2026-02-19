@@ -21,15 +21,15 @@ module Layout
         !turbo_frame_subject.nil?
       end
 
-      def turbo_model_frame_tag(&block)
-        helpers.turbo_frame_tag helpers.model_dom_id(turbo_frame_subject), &block
+      def turbo_model_frame_tag(&)
+        helpers.turbo_frame_tag(helpers.model_dom_id(turbo_frame_subject), &)
       end
 
-      def turbo_object_frame_tag(&block)
+      def turbo_object_frame_tag(&)
         if turbo_frame_subject.respond_to?(:to_model)
-          helpers.turbo_frame_tag helpers.dom_id(turbo_frame_subject), &block
+          helpers.turbo_frame_tag(helpers.dom_id(turbo_frame_subject), &)
         else
-          content_tag :div, &block
+          content_tag(:div, &)
         end
       end
     end

@@ -66,11 +66,11 @@ module Bookcase
     # no rich text
 
     def self.all_related_tags(relater)
-      self.all_akin_tags(relater, :relater, :related)
+      all_akin_tags(relater, :relater, :related)
     end
 
     def self.all_relater_tags(related)
-      self.all_akin_tags(related, :related, :relater)
+      all_akin_tags(related, :related, :relater)
     end
 
     def self.all_akin_tags(content_tag, from, to)
@@ -80,17 +80,18 @@ module Bookcase
       loop do
         tag = tags_to_parse.shift
         break if tag.nil?
+
         relations = AkinContentTag.includes([to]).where("#{from}": tag)
         relations.each do |relation|
           next unless all_relations.index { |e| e.send(to) == relation.send(to) }.nil?
-          if relation.kind == "followable_relation"
-            tags_to_parse << relation.send(to)
-          end
-          if tag != content_tag
-            all_relations << AkinContentTag.new("#{from}": content_tag, "#{to}": relation.send(to), kind: "computed_#{relation.kind}")
-          else
-            all_relations << relation
-          end
+
+          tags_to_parse << relation.send(to) if relation.kind == 'followable_relation'
+          all_relations << if tag == content_tag
+                             relation
+                           else
+                             AkinContentTag.new("#{from}": content_tag, "#{to}": relation.send(to),
+                                                kind: "computed_#{relation.kind}")
+                           end
         end
       end
       all_relations

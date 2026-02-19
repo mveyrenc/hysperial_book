@@ -31,14 +31,20 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 
-require 'tip_tap'
-
 module Bookcase
   class Book < ApplicationRecord
     self.implicit_order_column = 'created_at'
 
     ## Searchkick
     searchkick highlight: %i[name alternate_names description]
+
+    def search_data
+      d = attributes
+      d.delete('description_json')
+      d.merge(
+        description: description.to_plain_text
+      )
+    end
 
     ## FriendlyId
     extend FriendlyId
@@ -77,15 +83,16 @@ module Bookcase
     def to_s
       name
     end
-  end
 
-  ## Default values
-  # no default value
+    ## Default values
+    # no default value
 
-  ## Rich text
+    ## Rich text
 
-  def description
-    return TipTap::Document.from_json(description_json) if description_json.present?
-    TipTap::Document.new
+    def description
+      return Schemas::TipTap::Document.from_json(description_json) if description_json.present?
+
+      Schemas::TipTap::Document.new
+    end
   end
 end

@@ -44,7 +44,7 @@ module Bookcase
           context.search_query = context.search_query
                                         .includes(:thumbnail, :book)
                                         .order(
-                                          [created_at: { order: :desc }]
+                                          [{ created_at: { order: :desc } }]
                                         )
         end
 

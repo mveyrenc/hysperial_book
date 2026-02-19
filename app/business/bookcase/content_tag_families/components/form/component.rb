@@ -12,7 +12,7 @@ module Bookcase
           end
 
           def from_book?
-            params.key?(:from) && params.fetch(:from) == "book"
+            params.key?(:from) && params.fetch(:from) == 'book'
           end
         end
       end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationDecorator < Draper::Decorator
-
   protected
 
   def tip_tap_document(json_document)

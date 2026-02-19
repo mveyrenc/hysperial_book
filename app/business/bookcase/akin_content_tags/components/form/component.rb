@@ -17,7 +17,6 @@ module Bookcase
             # All the tag families in the same book
             Bookcase::ContentTagFamily.where(book_id: record.relater.content_tag_family.book_id)
           end
-
         end
       end
     end

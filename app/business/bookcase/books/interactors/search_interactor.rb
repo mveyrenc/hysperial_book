@@ -26,7 +26,7 @@ module Bookcase
 
         def set_order
           context.search_query = context.search_query.order(
-            [position: { order: :asc, unmapped_type: :integer }]
+            [{ position: { order: :asc, unmapped_type: :integer } }]
           )
         end
 
@@ -35,17 +35,17 @@ module Bookcase
           context.aggs.each do |k, agg|
             next unless agg.include?('buckets') && agg['buckets'].any?
 
-            if k.eql?('kind')
-              aggs << {
-                key: k,
-                name: Bookcase::Book.human_attribute_name(:kind),
-                multiple: false,
-                position: 1,
-                buckets: context.aggs['kind']['buckets'].map do |bkt|
-                  ["#{Bookcase::BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
-                end
-              }
-            end
+            next unless k.eql?('kind')
+
+            aggs << {
+              key: k,
+              name: Bookcase::Book.human_attribute_name(:kind),
+              multiple: false,
+              position: 1,
+              buckets: context.aggs['kind']['buckets'].map do |bkt|
+                ["#{Bookcase::BookKind.human_attribute_name(bkt['key'])} (#{bkt['doc_count']})", bkt['key']]
+              end
+            }
           end
           context.aggs = aggs.sort_by { |e| e[:position] }
         end

@@ -72,8 +72,9 @@ module Bookcase
     # no conversion method
 
     def body
-      return TipTap::Document.from_json(body_json) if body_json.present?
-      TipTap::Document.new
+      return Schemas::TipTap::Document.from_json(body_json) if body_json.present?
+
+      Schemas::TipTap::Document.new
     end
   end
 end

@@ -48,17 +48,23 @@ module Bookcase
     self.implicit_order_column = 'created_at'
 
     ## Searchkick
-    searchkick highlight: %i[name alternate_names description]
+    searchkick highlight: %i[name alternate_names short_description description body]
 
     def search_data
-      attributes.merge(
+      d = attributes
+      d.delete('short_description_json')
+      d.delete('description_json')
+      d.delete('body_json')
+      d.merge(
         short_description: short_description.to_plain_text,
         description: description.to_plain_text,
         body: body.to_plain_text,
         book_id: book.id,
         book_name: book.name,
         book_kind: book.kind
-      ).merge(search_data_content_tags).merge(search_data_content_attributes)
+      )
+       .merge!(search_data_content_tags)
+       .merge(search_data_content_attributes)
     end
 
     def search_data_content_tags
@@ -122,18 +128,21 @@ module Bookcase
     end
 
     def short_description
-      return TipTap::Document.from_json(short_description_json) if short_description_json.present?
-      TipTap::Document.new
+      return Schemas::TipTap::Document.from_json(short_description_json) if short_description_json.present?
+
+      Schemas::TipTap::Document.new
     end
 
     def description
-      return TipTap::Document.from_json(description_json) if description_json.present?
-      TipTap::Document.new
+      return Schemas::TipTap::Document.from_json(description_json) if description_json.present?
+
+      Schemas::TipTap::Document.new
     end
 
     def body
-      return TipTap::Document.from_json(body_json) if body_json.present?
-      TipTap::Document.new
+      return Schemas::TipTap::Document.from_json(body_json) if body_json.present?
+
+      Schemas::TipTap::Document.new
     end
 
     ## Rich text

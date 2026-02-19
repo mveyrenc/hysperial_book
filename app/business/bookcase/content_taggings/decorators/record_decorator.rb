@@ -7,13 +7,9 @@ module Bookcase
         decorates_association :content, with: Bookcase::Contents::Decorators::RecordDecorator
         decorates_association :content_tag, with: Bookcase::ContentTags::Decorators::RecordDecorator
 
-        def content_tag_name
-          content_tag.name
-        end
+        delegate :name, to: :content_tag, prefix: true
 
-        def content_tag_family_name
-          content_tag.content_tag_family_name
-        end
+        delegate :content_tag_family_name, to: :content_tag
 
         def computed?
           object.new_record?

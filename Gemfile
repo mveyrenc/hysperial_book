@@ -60,9 +60,6 @@ gem 'positioning', '~> 0.4'
 # FriendlyId is the "Swiss Army bulldozer" of slugging and permalink plugins for Active Record
 gem 'friendly_id', '~> 5.5'
 
-# https://github.com/CompanyCam/tiptap-ruby
-# A gem for parsing, generating, and rendering TipTap Documents and Nodes using Ruby.
-
 # ##############
 # Business logic
 # ##############
@@ -74,6 +71,11 @@ gem 'interactor-rails', '~> 2.2'
 # https://github.com/drapergem/draper
 # Draper adds an object-oriented layer of presentation logic to your Rails application.
 gem 'draper', '~> 4.0'
+
+# https://github.com/ruby/ostruct
+# An OpenStruct is a data structure, similar to a Hash, that allows the definition of arbitrary attributes with their
+# accompanying values. This is accomplished by using Ruby's metaprogramming to define methods on the class itself.
+gem 'ostruct', '~> 0.6'
 
 # ################################
 # Application maintenance & health
@@ -371,4 +373,8 @@ group :test do
   # https://github.com/alindeman/zonebie
   # Zonebie prevents bugs in code that deals with timezones by randomly assigning a zone on every run.
   gem 'zonebie'
+
+  # https://github.com/threedaymonk/htmlbeautifier
+  # A normaliser/beautifier for HTML that also understands embedded Ruby. Ideal for tidying up Rails templates.
+  gem 'htmlbeautifier'
 end
