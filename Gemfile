@@ -152,6 +152,18 @@ gem 'view_component', '~> 4.1'
 gem 'kaminari', '~> 1.2'
 # TODO: try https://github.com/ddnexus/pagy
 
+# https://github.com/inertiajs/inertia-rails
+# Inertia.js Rails Adapter
+gem "inertia_rails", "~> 3.17"
+
+# https://vite-ruby.netlify.app/guide/rails.html
+# Vite is to frontend tooling as Ruby to programming, pure joy!
+gem "vite_rails", "~> 3.0"
+
+# http://github.com/railsware/js-routes
+# Brings Rails named routes to javascript
+gem 'js-routes'
+
 # ######
 # Search
 # ######

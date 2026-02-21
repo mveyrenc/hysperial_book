@@ -65,9 +65,6 @@ Rails.application.configure do
   # Bubble up errors like in prod
   config.action_dispatch.show_exceptions = true
 
-  # should only use static (precompiled) assets
-  config.assets.compile = false
-
   # Enable DNS rebinding protection and other `Host` header attacks.
   # https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization
   config.hosts << 'localhost'

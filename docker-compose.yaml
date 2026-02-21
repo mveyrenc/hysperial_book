@@ -1,8 +1,36 @@
+x-rails: &rails
+  build:
+    context: .
+    dockerfile: ./docker/Dockerfile
+    args:
+      BUNDLE_WITHOUT: ''
+      RAILS_ENV: 'development'
+      APP_DIR: '/usr/src/app'
+  stdin_open: true
+  tty: true
+  entrypoint: docker/entrypoints/rails.sh
+  command: [ 'bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0' ]
+  working_dir: '/usr/src/app'
+  env_file: "docker/docker.env"
+  environment: &env
+    NODE_ENV: ${NODE_ENV:-development}
+    RAILS_ENV: ${RAILS_ENV:-development}
+    VITE_RUBY_HOST: ${VITE_HOST:-frontend}
+  volumes:
+    - .:/usr/src/app:rw
+    - yarn_cache:/root/.yarn-cache
+    - vite_dev:/usr/src/app/public/vite-dev
+    - vite_test:/usr/src/app/public/vite-test
+  links:
+    - db
+    - opensearch
+    - redis
+
 services:
   db:
     image: postgres
     volumes:
-      - hysperial_book_data:/var/lib/postgresql/data
+      - data:/var/lib/postgresql/data
     env_file: "docker/docker.env"
     ports:
       - "5432:5432"
@@ -22,7 +50,7 @@ services:
         soft: 65536  # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
         hard: 65536
     volumes:
-      - hysperial_book_opensearch_data:/usr/share/opensearch/data
+      - opensearch_data:/usr/share/opensearch/data
     ports:
       - 9200:9200
       - 9600:9600  # required for Performance Analyzer
@@ -32,30 +60,20 @@ services:
     environment:
       - REDIS_REPLICATION_MODE=master
 
-  web:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
-      args:
-        BUNDLE_WITHOUT: ''
-        RAILS_ENV: 'development'
-        APP_DIR: '/usr/src/app'
-    working_dir: '/usr/src/app'
-    entrypoint: docker/entrypoints/rails.sh
-#    command: [ 'bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0' ]
-    command: ['bin/dev']
-    env_file: "docker/docker.env"
-    volumes:
-      - .:/usr/src/app:rw
-      - hysperial_book_yarn_cache:/root/.yarn-cache
+  backend:
+    <<: *rails
     ports:
       - "3000:3000"
-    links:
-      - db
-      - opensearch
-      - redis
-    stdin_open: true
-    tty: true
+
+  frontend:
+    <<: *rails
+    command: ./bin/vite dev
+    entrypoint: docker/entrypoints/vite.sh
+    environment:
+      <<: *env
+      VITE_RUBY_HOST: 0.0.0.0
+    ports:
+      - "3036:3036"
 
 #  selenium:
 #    image: selenium/standalone-chrome
@@ -86,7 +104,9 @@ services:
       - "8025:8025"
 
 volumes:
-  hysperial_book_data: ~
-  hysperial_book_index: ~
-  hysperial_book_yarn_cache: ~
-  hysperial_book_opensearch_data:
+  data:
+  index:
+  yarn_cache:
+  opensearch_data:
+  vite_dev:
+  vite_test:

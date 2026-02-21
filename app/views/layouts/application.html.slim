@@ -6,15 +6,13 @@ html.has-aside-left.has-aside-mobile-transition.has-navbar-fixed-top.has-aside-e
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = vite_client_tag
+
+    = vite_stylesheet_tag "application.scss", "data-turbo-track": "reload"
     link[rel="dns-prefetch" href="https://fonts.gstatic.com"]
     link[href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"]
     link[href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"]
-    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
-    meta[name="turbo-cache-control" content="no-cache"]
-    meta[name="turbo-refresh-method" content="morph"]
-    meta[name="turbo-refresh-scroll" content="preserve"]
-    meta[name="turbo-visit-control" content="reload"]
+    = vite_javascript_tag "application"
     == yield :head
   body
     #app

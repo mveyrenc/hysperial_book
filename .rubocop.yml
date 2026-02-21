@@ -6,11 +6,17 @@ plugins:
 AllCops:
   NewCops: enable
   Exclude:
+    - bin/**/*
     - config/routes.rb
-    - db/seeds/**
-    - db/seeds_*
+    - coverage/**/*
     - db/schema.rb
-    - tmp
+    - db/seeds_*
+    - db/seeds/**/*
+    - log/**/*
+    - node_modules/**/*
+    - public/**/*
+    - tmp/**/*
+    - vendor/**/*
 
 Style/Documentation:
   Enabled: false

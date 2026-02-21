@@ -1,2 +1,0 @@
-js: yarn build --watch
-dartsass: bin/rails dartsass:watch

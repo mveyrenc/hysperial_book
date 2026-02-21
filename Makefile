@@ -50,92 +50,92 @@ docker-up: ## Start containers
 docker-stop: ## Stop containers
 	docker compose stop
 
-docker-recreate-web: # Remove and recreate web container
-	docker compose stop web
-	docker compose rm web
+docker-recreate-rails: # Remove and recreate rails containers
+	docker compose stop backend frontend
+	docker compose rm backend frontend
 	docker compose up -d
 
-docker-restart-web: # Restart web container
-	docker compose restart web
+docker-restart-rails: # Restart rails containers
+	docker compose restart backend frontend
 
-docker-logs-web: ## Display `web` container logs
-	docker compose logs web
+docker-logs-rails: ## Display rails containers logs
+	docker compose logs backend frontend
 
 ###Dependency-Commands: ## .
 ruby-install: ## Gets ruby dependencies up to date
 	bundle check || bundle install
-	docker compose exec web bundle install
-	docker compose exec web rails restart
+	docker compose exec backend bundle install
+	docker compose exec backend rails restart
 
 yarn-install: ## Gets js dependencies up to date
 	yarn install
-	docker compose exec web yarn install
+	docker compose exec frontend yarn install
 
 yarn-install-hard: ## Remove existing node_modules and install js dependencies anew
 	rm -rf node_modules
 	yarn install
-	docker compose exec web yarn install
+	docker compose exec frontend yarn install
 
 install: ruby-install yarn-install ## Updates all our dependencies
 
 ###Rails-Commands: ## .
 db-recreate: ## Recreate nd seed database and storage folder
 	find storage -mindepth 1 -maxdepth 1 -type d  -print0 | xargs -0 /bin/rm -rf
-	docker compose exec web rails db:drop
+	docker compose exec backend rails db:drop
 	rm -f db/schema.rb
-	docker compose exec web rails db:create
-	docker compose exec web rails db:migrate
-	docker compose exec web rails db:seed
-	docker compose exec web rails searchkick:reindex:all
+	docker compose exec backend rails db:create
+	docker compose exec backend rails db:migrate
+	docker compose exec backend rails db:seed
+	docker compose exec backend rails searchkick:reindex:all
 
 db-create: ## Create the database
-	docker compose exec web rails db:create
+	docker compose exec backend rails db:create
 
 db-migrate: ## Run database migrations
-	docker compose exec web rails db:migrate
+	docker compose exec backend rails db:migrate
 
 db-seed: ## Seed database
-	docker compose exec web rails db:seed --trace
-	docker compose exec web rails searchkick:reindex:all
+	docker compose exec backend rails db:seed --trace
+	docker compose exec backend rails searchkick:reindex:all
 
 search-reindex-all: ## Refresh all search index
-	docker compose exec web rails searchkick:reindex:all
+	docker compose exec backend rails searchkick:reindex:all
 
 search-reindex: ## Refresh a given search index
-	docker compose exec web rails searchkick:reindex CLASS=$(run-ARGS)
+	docker compose exec backend rails searchkick:reindex CLASS=$(run-ARGS)
 
 annotate: ## Annotate models and routes
-	docker compose exec web annotaterb models
-	docker compose exec web annotaterb routes
+	docker compose exec backend annotaterb models
+	docker compose exec backend annotaterb routes
 
 sass-watch: ## Watch for change in SASS and build CSS
 	rails dartsass:watch
 
 clear-cache: ## Clear Rails cache
-	docker compose exec web rails tmp:cache:clear
+	docker compose exec backend rails tmp:cache:clear
 
 optimize-db: ## Optimize database
-	docker compose exec web lol_dba db:find_indexes
+	docker compose exec backend lol_dba db:find_indexes
 
 ###Tests: ## .
 clean-test-db: ## Clear and recreate test database
-	docker compose exec -e RAILS_ENV=test web rails  db:drop
-	docker compose exec -e RAILS_ENV=test web rails  db:create
-	docker compose exec -e RAILS_ENV=test web rails  db:migrate
+	docker compose exec -e RAILS_ENV=test backend rails db:drop
+	docker compose exec -e RAILS_ENV=test backend rails db:create
+	docker compose exec -e RAILS_ENV=test backend rails db:migrate
 
 run-test: ## Runs the provided test(s)
-	docker compose exec -e RAILS_ENV=test web rails  db:create
-	docker compose exec -e RAILS_ENV=test web rails  db:migrate
-	docker compose exec -e RAILS_ENV=test web rails  test $(run-ARGS)
+	docker compose exec -e RAILS_ENV=test backend rails db:create
+	docker compose exec -e RAILS_ENV=test backend rails db:migrate
+	docker compose exec -e RAILS_ENV=test backend rails test $(run-ARGS)
 
 run-system-test: ## Runs the provided system test(s)
-	docker compose exec -e RAILS_ENV=test web rails  test:system $(run-ARGS)
+	docker compose exec -e RAILS_ENV=test backend rails test:system $(run-ARGS)
 
 run-controllers-test: ## Runs the provided controller test(s)
-	docker compose exec -e RAILS_ENV=test web rails  test:controllers $(run-ARGS)
+	docker compose exec -e RAILS_ENV=test backend rails test:controllers $(run-ARGS)
 
 run-libs-test: ## Runs the provided controller test(s)
-	docker compose exec -e RAILS_ENV=test web rails  test test/lib
+	docker compose exec -e RAILS_ENV=test backend rails test test/lib
 
 ###Linting-Commands: ## .
 lint-ruby: ## Run ruby syntax clean up

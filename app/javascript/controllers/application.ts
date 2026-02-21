@@ -80,3 +80,5 @@ Array.from(document.getElementsByClassName('hb-notification-dismiss')).forEach(e
         e.currentTarget.closest('.notification').classList.add('is-hidden')
     })
 })
+import {root_path} from '../routes';
+alert(`JsRoutes installed.\nYour root path is ${root_path()}`)

@@ -77,6 +77,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  # Compress HTTP responses
+  config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
+
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [:id]
 
@@ -85,7 +88,8 @@ Rails.application.configure do
   #   "example.com",     # Allow requests from example.com
   #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
   # ]
-  #
+  config.hosts = [ENV.fetch('APP_HOST', nil)]
+
   # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end
