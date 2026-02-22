@@ -24,20 +24,29 @@ module Schemas
         Nodes::Text.new
       end
 
-      def self.method_missing(name, *_args, **_kwargs, &)
-        if name.to_s.end_with?('_mark')
-          search_for = name.to_s.delete_suffix('_mark').camelize.downcase_first
-          return mark_for(search_for).new if has_mark? search_for
-
-          raise MethodMissingError, "Mark #{search_for} not found for #{name}"
-        end
-        search_for = name.to_s.camelize.downcase_first
-        return node_for(search_for).new if has_node? search_for
-
-        raise MethodMissingError, "Node #{search_for} not found for #{name}"
+      def self.respond_to_missing?(name, _include_private = false)
+        return includes_mark? missing_mark_name(name) if name.to_s.end_with?('_mark')
+        includes_node? missing_node_name(name)
       end
 
-      def self.has_node?(name)
+      def self.method_missing(name, *_args, **_kwargs, &)
+        return unless respond_to_missing?(name)
+
+        if name.to_s.end_with?('_mark')
+          return mark_for(missing_mark_name(name)).new
+        end
+        node_for(missing_node_name(name)).new
+      end
+
+      def self.missing_mark_name(name)
+        name.to_s.delete_suffix('_mark').camelize.downcase_first
+      end
+
+      def self.missing_node_name(name)
+        name.to_s.camelize.downcase_first
+      end
+
+      def self.includes_node?(name)
         node_registry.key?(name.to_s)
       end
 
@@ -45,7 +54,7 @@ module Schemas
         node_registry.fetch(name.to_s, Node)
       end
 
-      def self.has_mark?(name)
+      def self.includes_mark?(name)
         mark_registry.key?(name.to_s)
       end
 

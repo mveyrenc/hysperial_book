@@ -57,6 +57,7 @@ module Bookcase
     ## Default values
     # no default value
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def self.all_content_taggings(content)
       all_content_taggings = content.content_taggings.to_a
       excludes = []
@@ -77,5 +78,6 @@ module Bookcase
       end
       all_content_taggings
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

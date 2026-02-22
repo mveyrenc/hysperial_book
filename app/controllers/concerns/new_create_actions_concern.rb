@@ -4,8 +4,10 @@ module NewCreateActionsConcern
   extend ActiveSupport::Concern
 
   included do
+    # rubocop:disable Rails/LexicallyScopedActionFilter
     before_action :set_create_record, only: %i[create new]
     before_action :authorize_create_record, only: %i[create new]
+    # rubocop:enable Rails/LexicallyScopedActionFilter
 
     # GET /<resource>/new
     def new

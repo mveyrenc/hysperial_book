@@ -4,7 +4,7 @@ module AppFormBuilder
   module FormHelpers
     # Helpers
     module Helpers
-      def alert_message(options = {})
+      def alert_message(options: {})
         title = options[:title] || I18n.t('errors.messages.alert')
         css = options[:class] || 'notification is-danger'
         return unless object.respond_to?(:errors) && object.errors.full_messages.any?
@@ -16,7 +16,7 @@ module AppFormBuilder
       end
 
       def error_summary
-        return unless object.errors.any?
+        return if object.errors.none?
 
         @template.content_tag :ul, class: 'error-summary' do
           object.errors.full_messages.each do |error|

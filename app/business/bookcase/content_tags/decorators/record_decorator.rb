@@ -8,8 +8,10 @@ module Bookcase
         decorates_association :content_tag_family, with: Bookcase::ContentTagFamilies::Decorators::RecordDecorator
         decorates_association :related_akin_content_tags, with: Bookcase::AkinContentTags::Decorators::RecordDecorator
         decorates_association :relater_akin_content_tags, with: Bookcase::AkinContentTags::Decorators::RecordDecorator
+        
+        # rubocop:disable Rails/OutputSafety
 
-        def name(highlights = true)
+        def name(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:name)
             context[:highlights][:name].html_safe
           else
@@ -17,7 +19,7 @@ module Bookcase
           end
         end
 
-        def alternate_names(highlights = true)
+        def alternate_names(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:alternate_names)
             context[:highlights][:alternate_names].html_safe
           else
@@ -25,7 +27,7 @@ module Bookcase
           end
         end
 
-        def description(highlights = true)
+        def description(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:description)
             context[:highlights][:description].html_safe
           else
@@ -33,7 +35,7 @@ module Bookcase
           end
         end
 
-        def content_tag_family_name(highlights = true)
+        def content_tag_family_name(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:content_tag_family_name)
             context[:highlights][:content_tag_family_name].html_safe
           else
@@ -41,7 +43,7 @@ module Bookcase
           end
         end
 
-        def book_name(highlights = true)
+        def book_name(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:book_name)
             context[:highlights][:book_name].html_safe
           else
@@ -49,13 +51,15 @@ module Bookcase
           end
         end
 
-        def book_kind_name(highlights = true)
+        def book_kind_name(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:book_kind_name)
             context[:highlights][:book_kind_name].html_safe
           else
             content_tag_family.kind_name(false)
           end
         end
+
+        # rubocop:enable Rails/OutputSafety
 
         def all_related_tags
           @all_related_tags ||= Bookcase::AkinContentTags::Decorators::RecordDecorator.decorate_collection(Bookcase::AkinContentTag.all_related_tags(object))

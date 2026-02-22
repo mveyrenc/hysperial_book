@@ -35,7 +35,6 @@
 #  fk_rails_...  (updated_by_id => users.id) ON DELETE => restrict
 #
 class CreateBookcaseContents < ActiveRecord::Migration[8.0]
-  # rubocop:disable Metrics/MethodLength
   def change
     create_table :contents, id: :uuid do |t|
       t.string :name, null: false, comment: 'The name of the item'
@@ -68,5 +67,4 @@ class CreateBookcaseContents < ActiveRecord::Migration[8.0]
       t.timestamps
     end
   end
-  # rubocop:enable Metrics/MethodLength
-end
+  end

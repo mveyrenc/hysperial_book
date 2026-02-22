@@ -49,7 +49,7 @@ module HysperialBook
     config.autoload_paths += Dir["#{config.root}/app/decorators"]
     config.autoload_paths += Dir["#{config.root}/app/interactors"]
 
-    # To avoid conflicts between ViewComponent and other gems that also monkey patch the render method, it’s possible to
+    # To avoid conflicts between ViewComponent and other gems that also monkey patch the render method, it's possible to
     # configure ViewComponent to not include the render monkey patch:
     config.view_component.render_monkey_patch_enabled = false # defaults to true
 
@@ -66,22 +66,22 @@ module HysperialBook
     # https://guides.rubyonrails.org/configuring.html#rails-general-configuration
     # https://github.com/rails/rails/blob/6-0-stable/actionpack/lib/action_dispatch/middleware/public_exceptions.rb
     #
-    config.exceptions_app = ->(env) do
+    config.exceptions_app = ->(env) {
       Class
         .new(ActionController::Base) do # rubocop:disable Rails/ApplicationController
-        def show
-          # Get the status code from the path, which is /500 or /404 etc.
-          status = request.path_info.delete_prefix('/').to_i
+          def show
+            # Get the status code from the path, which is /500 or /404 etc.
+            status = request.path_info.delete_prefix('/').to_i
 
-          render inertia: 'Error',
-                 props: {
-                   status:,
-                 }, # Make the status code available to the Vue component
-                 status: # Return the same status code in the request header
-        end
+            render inertia: 'Error',
+                   props: {
+                     status:
+                   }, # Make the status code available to the Vue component
+                   status: # Return the same status code in the request header
+          end
       end
         .action(:show)
         .call(env)
-    end
+    }
   end
 end

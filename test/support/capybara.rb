@@ -48,7 +48,8 @@ Capybara.javascript_driver = :my_cuprite
 #   })
 #
 #   opts = Selenium::WebDriver::Chrome::Options.new
-#   chrome_args = %w(--headless --window-size=1920,1080 --no-sandbox --disable-dev-shm-usage --enable-logging --verbose --log-path=$APP_DIR/log/chrome-logging.log)
+#   chrome_args = %w(--headless --window-size=1920,1080 --no-sandbox --disable-dev-shm-usage --enable-logging
+#     --verbose --log-path=$APP_DIR/log/chrome-logging.log)
 #   chrome_args.each {|a| opts.add_argument a}
 #
 #   Capybara::Selenium::Driver.new app, browser: :chrome, options: opts, desired_capabilities: caps

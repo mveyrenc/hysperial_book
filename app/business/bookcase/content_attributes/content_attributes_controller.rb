@@ -39,7 +39,7 @@ module Bookcase
 
       def set_create_record
         if params.key?(:content_id)
-          content = Bookcase::Content.friendly.find(params.fetch(:content_id))
+          content = Bookcase::Content.friendly.find(params[:content_id])
           @record = model.new(content: content)
         else
           @record = model.new

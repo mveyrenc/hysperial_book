@@ -8,9 +8,6 @@ class ContentTagFamiliesControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user, scope: :user)
   end
 
-  teardown do
-  end
-
   test 'should get edit tag family' do
     tag_family = FactoryBot.create(:content_tag_family)
     get edit_bookcase_content_tag_family_path(tag_family)

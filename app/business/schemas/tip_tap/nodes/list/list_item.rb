@@ -11,6 +11,8 @@ module Schemas
 
           self.html_tag = 'li'
 
+          # rubocop:disable Metrics/AbcSize
+          # rubocop:disable Metrics/PerceivedComplexity
           def from_dom_node(dom_node)
             check_dom_node_parameter(dom_node)
 
@@ -19,7 +21,7 @@ module Schemas
             end
 
             if dom_node.text?
-              add_content Registry.text.set_text(dom_node.content)
+              add_content Registry.text.add_text(dom_node.content)
             else
               init_content
               dom_node.children.each do |child|
@@ -37,6 +39,9 @@ module Schemas
 
             itself
           end
+
+          # rubocop:enable Metrics/AbcSize
+          # rubocop:enable Metrics/PerceivedComplexity
         end
       end
     end

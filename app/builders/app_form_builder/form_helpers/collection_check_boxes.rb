@@ -7,8 +7,8 @@ module AppFormBuilder
       include Base
 
       included do
-        def collection_check_boxes_with_bulma(method, collection, value_method, text_method, options = {},
-                                              html_options = {})
+        # rubocop:disable Metrics/ParameterLists
+        def collection_check_boxes_with_bulma(method, collection, value_method, text_method, options = {}, html_options = {})
           html = form_field_builder(method, options, html_options) do
             @template.content_tag(:div, class: 'checkboxes') do
               collection_check_boxes_without_bulma(method, collection, value_method, text_method, options,
@@ -22,6 +22,8 @@ module AppFormBuilder
           end
           hidden_field(method, value: '', multiple: true).concat(html)
         end
+
+        # rubocop:enable Metrics/ParameterLists
 
         bulma_alias :collection_check_boxes
       end

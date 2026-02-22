@@ -18,7 +18,7 @@ module Schemas
       end
 
       def to_plain_text
-        return text if is_text?
+        return text if text?
 
         content.map(&:to_plain_text).join(self.class.plain_text_separator)
       end

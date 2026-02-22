@@ -14,7 +14,7 @@ module Bookcase
 
         def set_where
           %i[book_kind book_id content_tag_family_kind content_tag_family_id].each do |f|
-            next unless context.query.include?(f) && context.query[f].present?
+            next if context.query.exclude?(f) || context.query[f].blank?
 
             context.search_query = if f == :book_id
                                      context.search_query.where("#{f}": Book.find_by(slug: context.query[f]).try(:id))
@@ -40,10 +40,14 @@ module Bookcase
                                         .order(:name)
         end
 
+        # rubocop:disable Metrics/AbcSize
+        # rubocop:disable Metrics/CyclomaticComplexity
+        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/PerceivedComplexity
         def rearrange_aggs
           aggs = []
           context.aggs.each do |k, agg|
-            next unless agg.include?('buckets') && agg['buckets'].any?
+            next if agg.exclude?('buckets') || agg['buckets'].none?
 
             case k
             when 'book_kind'
@@ -93,6 +97,11 @@ module Bookcase
           end
           context.aggs = aggs.sort_by { |e| e[:position] }
         end
+
+        # rubocop:enable Metrics/AbcSize
+        # rubocop:enable Metrics/CyclomaticComplexity
+        # rubocop:enable Metrics/MethodLength
+        # rubocop:enable Metrics/PerceivedComplexity
       end
     end
   end

@@ -21,7 +21,7 @@ class RegistryTest < ActiveSupport::TestCase
     it 'define creator method for existing nodes' do
       document = Schemas::TipTap::Registry.document.add_content do
         Schemas::TipTap::Registry.paragraph.add_content do
-          Schemas::TipTap::Registry.text.set_text('Hello world!')
+          Schemas::TipTap::Registry.text.add_text('Hello world!')
         end
       end
       assert_equal 'Hello world!', document.to_plain_text

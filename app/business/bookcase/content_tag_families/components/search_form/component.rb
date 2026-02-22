@@ -8,6 +8,7 @@ module Bookcase
           attr_reader :params, :aggs
 
           def initialize(params:, aggs:)
+            super
             @params = params
             @aggs = aggs
           end

@@ -9,9 +9,6 @@ class ContentsControllerTest < ActionDispatch::IntegrationTest
     @book = FactoryBot.create(:book)
   end
 
-  teardown do
-  end
-
   test 'should get book search without any content' do
     Bookcase::Content.reindex
 

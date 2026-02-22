@@ -3,27 +3,27 @@
 module Bookcase
   class ContentTaggingPolicy < ApplicationPolicy
     def index?
-      grant_to_reader
+      grant_to_reader?
     end
 
     def show?
-      grant_to_reader
+      grant_to_reader?
     end
 
     def create?
-      grant_to_contributor
+      grant_to_contributor?
     end
 
     def update?
       if record.content.created_by == user
-        grant_to_contributor
+        grant_to_contributor?
       else
-        grant_to_admin
+        grant_to_admin?
       end
     end
 
     def destroy?
-      grant_to_admin
+      grant_to_admin?
     end
   end
 end

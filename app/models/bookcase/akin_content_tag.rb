@@ -83,13 +83,13 @@ module Bookcase
 
         relations = AkinContentTag.includes([to]).where("#{from}": tag)
         relations.each do |relation|
-          next unless all_relations.index { |e| e.send(to) == relation.send(to) }.nil?
+          next unless all_relations.index { |e| e.public_send(to) == relation.public_send(to) }.nil?
 
-          tags_to_parse << relation.send(to) if relation.kind == 'followable_relation'
+          tags_to_parse << relation.public_send(to) if relation.kind == 'followable_relation'
           all_relations << if tag == content_tag
                              relation
                            else
-                             AkinContentTag.new("#{from}": content_tag, "#{to}": relation.send(to),
+                             AkinContentTag.new("#{from}": content_tag, "#{to}": relation.public_send(to),
                                                 kind: "computed_#{relation.kind}")
                            end
         end

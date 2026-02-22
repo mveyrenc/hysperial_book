@@ -57,9 +57,9 @@ module Schemas
       end
 
       def to_html
-        if is_text?
+        if text?
           inner_text = text
-          marks.reverse.each do |mark|
+          marks.reverse_each do |mark|
             Rails.logger.debug pretty_inspect
 
             inner_text = content_tag(mark.html_tag, inner_text, mark.html_attributes)
@@ -68,7 +68,7 @@ module Schemas
         end
         return safe_join(content.map(&:to_html)) if html_tag.nil?
 
-        content_tag(html_tag, safe_join(content.map(&:to_html)), html_attributes) if is_block?
+        content_tag(html_tag, safe_join(content.map(&:to_html)), html_attributes) if block?
       end
 
       def html_attributes

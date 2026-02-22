@@ -8,9 +8,6 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user, scope: :user)
   end
 
-  teardown do
-  end
-
   test 'should get search without any book' do
     Bookcase::Book.reindex
 

@@ -97,7 +97,7 @@ gem 'propshaft', '~> 1.3'
 gem 'jsbundling-rails', '~> 1.3'
 
 # https://github.com/rails/dartsass-rails
-# Sass is a stylesheet language that’s compiled to CSS.
+# Sass is a stylesheet language that's compiled to CSS.
 gem 'dartsass-rails', '~> 0.5'
 
 # https://github.com/hotwired/turbo-rails
@@ -125,7 +125,7 @@ gem 'image_processing', '~> 1.2'
 gem 'devise', '~> 5.0'
 
 # https://github.com/varvet/pundit
-# Pundit provides a set of helpers which guide you in leveraging regular Ruby classes and object oriented design
+# Pundit provides a set of helpers which guide you in leveraging regular Ruby classes and object-oriented design
 # patterns to build a straightforward, robust, and scalable authorization system.
 gem 'pundit', '~> 2.3'
 
@@ -144,7 +144,7 @@ gem 'slim-rails', '~> 4.0'
 # https://viewcomponent.org/guide/getting-started.html
 # A framework for creating reusable, testable & encapsulated view components, built to integrate seamlessly with
 # Ruby on Rails.
-gem 'view_component', '~> 4.1'
+gem 'view_component', '~> 4.4'
 
 # https://github.com/kaminari/kaminari
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for modern web app frameworks
@@ -154,14 +154,14 @@ gem 'kaminari', '~> 1.2'
 
 # https://github.com/inertiajs/inertia-rails
 # Inertia.js Rails Adapter
-gem "inertia_rails", "~> 3.17"
+gem 'inertia_rails', '~> 3.17'
 
 # https://vite-ruby.netlify.app/guide/rails.html
 # Vite is to frontend tooling as Ruby to programming, pure joy!
-gem "vite_rails", "~> 3.0"
+gem 'vite_rails', '~> 3.0'
 
 # http://github.com/railsware/js-routes
-# Brings Rails named routes to javascript
+# Brings Rails named routes to JavaScript
 gem 'js-routes'
 
 # ######
@@ -170,7 +170,7 @@ gem 'js-routes'
 
 # https://github.com/ankane/searchkick
 # Intelligent search made easy
-gem 'searchkick', '~> 6.0'
+gem 'searchkick', '~> 6.1'
 
 # https://github.com/opensearch-project/opensearch-ruby
 # OpenSearch Ruby Client
@@ -196,7 +196,7 @@ gem 'redis', '~> 5.0'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '~> 1.22'
+gem 'bootsnap', '~> 1.23'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -241,25 +241,41 @@ group :development do
   # A Ruby Gem that adds annotations to your Rails models and route files.
   # $ annotaterb models
   # $ annotaterb routes
-  gem 'annotaterb', '~> 4.21'
+  gem 'annotaterb', '~> 4.22'
 
   # https://github.com/djezzzl/database_consistency
   # The main goal of the project is to help you avoid various issues due to inconsistencies and inefficiencies between
   # a database schema and application models.
   # $ database_consistency
-  gem 'database_consistency', require: false
+  gem 'database_consistency', '~> 2.1', require: false
 
   # https://github.com/palkan/isolator
   # Detect non-atomic interactions within DB transactions.
   # gem 'isolator'
 
   # https://github.com/Envek/after_commit_everywhere
-  # Allows to use ActiveRecord transactional callbacks outside of ActiveRecord models, literally everywhere in
+  # Allows to use ActiveRecord transactional callbacks outside ActiveRecord models, literally everywhere in
   # your application.
   # gem 'after_commit_everywhere'
 
+  # https://github.com/rubocop/rubocop
+  # Automatic Ruby code style checking tool.
+  gem 'rubocop', '~> 1.84', require: false
+
   # https://github.com/rubocop/rubocop-rails
   gem 'rubocop-rails', require: false
+
+  # https://github.com/rubocop/rubocop-performance
+  # Automatic performance checking tool for Ruby code.
+  gem 'rubocop-performance', require: false
+
+  # https://github.com/rubocop/rubocop-capybara
+  # Code style checking for Capybara test files
+  gem 'rubocop-capybara', require: false
+
+  # https://github.com/rubocop/rubocop-factory_bot
+  # factory_bot-specific analysis for your projects, as an extension to RuboCop.
+  gem 'rubocop-factory_bot', require: false
 
   # https://github.com/flyerhzm/rails_best_practices
   # rails_best_practices is a code metric tool to check the quality of Rails code.
@@ -272,7 +288,7 @@ group :development do
 
   # https://github.com/banister/binding_of_caller
   # The binding_of_caller gem provides the Binding#of_caller method.
-  gem 'binding_of_caller'
+  gem 'binding_of_caller', '~> 2.0'
 
   # https://github.com/qqshfox/meta_request
   # Supporting gem for Rails Panel (Google Chrome extension for Rails development).
@@ -315,7 +331,11 @@ group :development do
   # A code complexity metrics visualization and exploration tool for Ruby and JavaScript
   # $ attractor report
   gem 'attractor'
+  # https://github.com/julianrubisch/attractor-javascript
+  # Attractor plugin for the JavaScript programming language and its ecosystem
   gem 'attractor-javascript'
+  # https://github.com/julianrubisch/attractor-ruby
+  # Attractor plugin for the Ruby programming language and its ecosystem
   gem 'attractor-ruby'
 
   # https://github.com/danmayer/coverband
@@ -329,10 +349,6 @@ group :test do
   # https://github.com/thoughtbot/factory_bot_rails
   # factory_bot is a fixtures replacement with a straightforward definition syntax
   gem 'factory_bot_rails'
-
-  # https://github.com/rubocop/rubocop-factory_bot
-  # factory_bot-specific analysis for your projects, as an extension to RuboCop.
-  gem 'rubocop-factory_bot', require: false
 
   # https://github.com/minitest-reporters
   # Death to haphazard monkey-patching! Extend Minitest through simple hooks.
@@ -349,9 +365,6 @@ group :test do
   # https://github.com/mattheworiordan/capybara-screenshot
   # Capture a screenshot for every test failure automatically!
   gem 'capybara-screenshot'
-
-  # https://github.com/rubocop/rubocop-capybara
-  gem 'rubocop-capybara', require: false
 
   # https://github.com/rubycdp/cuprite
   # Cuprite is a pure Ruby driver (read as no Selenium/WebDriver/ChromeDriver dependency) for Capybara
@@ -387,6 +400,6 @@ group :test do
   gem 'zonebie'
 
   # https://github.com/threedaymonk/htmlbeautifier
-  # A normaliser/beautifier for HTML that also understands embedded Ruby. Ideal for tidying up Rails templates.
+  # A normalizer/beautifier for HTML that also understands embedded Ruby. Ideal for tidying up Rails templates.
   gem 'htmlbeautifier'
 end

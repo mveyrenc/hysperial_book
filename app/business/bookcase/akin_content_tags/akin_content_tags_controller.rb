@@ -35,17 +35,17 @@ module Bookcase
       end
 
       def set_create_record
-        relater = Bookcase::ContentTag.friendly.find(params.fetch(:relater_id))
+        relater = Bookcase::ContentTag.friendly.find(params[:relater_id])
         @record = model.new(relater: relater)
       end
 
       def set_update_record
-        @record = Bookcase::AkinContentTag.find(params.fetch(:id))
+        @record = Bookcase::AkinContentTag.find(params[:id])
         @relater_record = @record.relater
       end
 
       def set_destroy_record
-        @record = Bookcase::AkinContentTag.find(params.fetch(:id))
+        @record = Bookcase::AkinContentTag.find(params[:id])
         @relater_record = @record.relater
       end
     end

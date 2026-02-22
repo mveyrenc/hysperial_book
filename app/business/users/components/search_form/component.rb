@@ -8,8 +8,9 @@ module Users
         attr_reader :params, :aggs
 
         def initialize(params:, aggs:)
+          super
           @params = params
-          @aggs = []
+          @aggs = aggs
         end
 
         protected

@@ -36,11 +36,14 @@ module SearchConcern
       context.query.merge!({ q: '*' }) if context.query[:q].blank?
     end
 
-    def set_where; end
+    def set_where
+    end
 
-    def set_aggs; end
+    def set_aggs
+    end
 
-    def set_order; end
+    def set_order
+    end
 
     def set_highlight
       context.search_query = context.search_query.highlight(tag: '<span class="has-background-primary-light">')
@@ -55,7 +58,8 @@ module SearchConcern
       call_decorator
     end
 
-    def rearrange_aggs; end
+    def rearrange_aggs
+    end
 
     def record_decorator
       "#{context.model.name.pluralize}::Decorators::RecordDecorator"

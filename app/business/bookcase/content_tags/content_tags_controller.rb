@@ -16,15 +16,15 @@ module Bookcase
       end
 
       def redirect_to_after_create
-        if params.key?(:from) && params.fetch(:from) == 'content_tag_family'
-          Bookcase::ContentTagFamily.friendly.find(params.fetch(:bookcase_content_tag).fetch(:content_tag_family_id))
+        if params.key?(:from) && params[:from] == 'content_tag_family'
+          Bookcase::ContentTagFamily.friendly.find(params[:bookcase_content_tag][:content_tag_family_id])
         else
           bookcase_content_tags_path
         end
       end
 
       def redirect_to_after_update
-        if params.key?(:from) && params.fetch(:from) == 'content_tag_family'
+        if params.key?(:from) && params[:from] == 'content_tag_family'
           @record.content_tag_family
         else
           @record
@@ -32,7 +32,7 @@ module Bookcase
       end
 
       def redirect_to_after_destroy
-        if params.key?(:from) && params.fetch(:from) == 'content_tag_family'
+        if params.key?(:from) && params[:from] == 'content_tag_family'
           @record.content_tag_family
         else
           bookcase_content_tags_path
@@ -50,7 +50,7 @@ module Bookcase
 
       def set_create_record
         if params.key?(:content_tag_family_id)
-          ctf = Bookcase::ContentTagFamily.friendly.find(params.fetch(:content_tag_family_id))
+          ctf = Bookcase::ContentTagFamily.friendly.find(params[:content_tag_family_id])
           @record = model.new(content_tag_family: ctf)
         else
           @record = model.new
@@ -60,7 +60,7 @@ module Bookcase
       def set_show_record
         @record = model.friendly
                        .includes(:content_tag_family)
-                       .find(params.fetch(:id))
+                       .find(params[:id])
       end
     end
   end

@@ -8,9 +8,6 @@ class ContentsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user, scope: :user)
   end
 
-  teardown do
-  end
-
   test 'should get edit content' do
     tag_family = FactoryBot.create(:content)
     get edit_bookcase_content_path(tag_family)

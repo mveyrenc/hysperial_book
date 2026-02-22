@@ -14,6 +14,7 @@ module Layout
       renders_one :main_section
 
       def initialize(turbo_frame_subject)
+        super
         @turbo_frame_subject = turbo_frame_subject
       end
 

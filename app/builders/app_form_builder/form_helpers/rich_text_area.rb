@@ -7,6 +7,8 @@ module AppFormBuilder
       include Base
 
       included do
+
+        # rubocop:disable Metrics/PerceivedComplexity
         def rich_text_area_with_bulma(method, options = {}, html_options = {})
           options['data-standard-editor-target'] = 'editor'
           if @template.respond_to?(:rails_direct_uploads_url)
@@ -23,11 +25,13 @@ module AppFormBuilder
           form_field_builder(method, options, html_options) do
             @template.content_tag(:div, '', class: 'rich-text-editor', 'data-controller': 'standard-editor') do
               @template.concat(hidden_field(method, 'data-standard-editor-target': 'input',
-                                                    value: hidden_input_value))
+                                            value: hidden_input_value))
               @template.concat(@template.content_tag(:div, '', options))
             end
           end
         end
+
+        # rubocop:enable Metrics/PerceivedComplexity
 
         bulma_alias(:rich_text_area)
       end

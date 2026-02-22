@@ -7,6 +7,7 @@ module AppFormBuilder
       include Base
 
       included do
+        # rubocop:disable Metrics/ParameterLists
         def collection_select_with_bulma(method, collection, value_method, text_method, options = {}, html_options = {})
           html_options[:required] = options[:required]
 
@@ -20,6 +21,8 @@ module AppFormBuilder
             end
           end
         end
+
+        # rubocop:enable Metrics/ParameterLists
 
         bulma_alias(:collection_select)
       end

@@ -11,7 +11,8 @@ module Bookcase
         decorates_associations :content_attributes, with: Bookcase::ContentAttributes::Decorators::RecordDecorator
         decorates_associations :all_content_taggings, with: Bookcase::ContentTaggings::Decorators::RecordDecorator
 
-        def name(highlights = true)
+        # rubocop:disable Rails/OutputSafety
+        def name(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:name)
             context[:highlights][:name].html_safe
           else
@@ -19,7 +20,7 @@ module Bookcase
           end
         end
 
-        def alternate_names(highlights = true)
+        def alternate_names(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:alternate_names)
             context[:highlights][:alternate_names].html_safe
           else
@@ -27,7 +28,7 @@ module Bookcase
           end
         end
 
-        def short_description(highlights = true)
+        def short_description(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:description)
             context[:highlights][:description].html_safe
           else
@@ -35,7 +36,7 @@ module Bookcase
           end
         end
 
-        def description(highlights = true)
+        def description(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:short_description)
             context[:highlights][:short_description].html_safe
           else
@@ -43,7 +44,7 @@ module Bookcase
           end
         end
 
-        def body(highlights = true)
+        def body(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:body)
             context[:highlights][:body].html_safe
           else
@@ -51,7 +52,7 @@ module Bookcase
           end
         end
 
-        def book_name(highlights = true)
+        def book_name(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:book_name)
             context[:highlights][:book_name].html_safe
           else
@@ -59,13 +60,15 @@ module Bookcase
           end
         end
 
-        def kind_name(highlights = true)
+        def kind_name(highlights: true)
           if highlights && context[:highlights].present? && context[:highlights].key?(:kind_name)
             context[:highlights][:kind_name].html_safe
           else
             ContentKind.human_attribute_name(object.kind)
           end
         end
+
+        # rubocop:enable Rails/OutputSafety
 
         def thumbnail
           object.thumbnail.file if object.thumbnail.present? && object.thumbnail.file.attached?

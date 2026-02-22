@@ -11,6 +11,7 @@ module Bookcase
           delegate :type, :file, to: :record, prefix: true
 
           def initialize(record)
+            super
             @record = record
           end
 
@@ -35,7 +36,7 @@ module Bookcase
             when 'Scan'
               edit_bookcase_media_scan_path(record)
             else
-              raise "Unknown medium type #{record_type}"
+              raise ArgumentError, "Unknown medium type #{record_type}"
             end
           end
 
@@ -48,7 +49,7 @@ module Bookcase
             when 'Scan'
               bookcase_media_scan_path(record)
             else
-              raise "Unknown medium type #{record_type}"
+              raise ArgumentError, "Unknown medium type #{record_type}"
             end
           end
         end

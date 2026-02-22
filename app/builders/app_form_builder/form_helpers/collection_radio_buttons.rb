@@ -7,8 +7,8 @@ module AppFormBuilder
       include Base
 
       included do
-        def collection_radio_buttons_with_bulma(method, collection, value_method, text_method, options = {},
-                                                html_options = {})
+        # rubocop:disable Metrics/ParameterLists
+        def collection_radio_buttons_with_bulma(method, collection, value_method, text_method, options = {}, html_options = {})
           form_field_builder(method, options, html_options) do
             @template.content_tag(:div, class: 'radios') do
               collection_radio_buttons_without_bulma(method, collection, value_method, text_method, options,
@@ -21,6 +21,8 @@ module AppFormBuilder
             end
           end
         end
+
+        # rubocop:enable Metrics/ParameterLists
 
         bulma_alias :collection_radio_buttons
       end

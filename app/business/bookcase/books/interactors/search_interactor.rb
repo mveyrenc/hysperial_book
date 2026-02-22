@@ -33,7 +33,7 @@ module Bookcase
         def rearrange_aggs
           aggs = []
           context.aggs.each do |k, agg|
-            next unless agg.include?('buckets') && agg['buckets'].any?
+            next if agg.exclude?('buckets') || agg['buckets'].none?
 
             next unless k.eql?('kind')
 

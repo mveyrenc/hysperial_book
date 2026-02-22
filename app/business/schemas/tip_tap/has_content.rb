@@ -31,7 +31,7 @@ module Schemas
         content.each(&)
       end
 
-      def is_block?
+      def block?
         @table.key?(:content)
       end
 

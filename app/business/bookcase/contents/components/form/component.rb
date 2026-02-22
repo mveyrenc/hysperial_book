@@ -10,6 +10,7 @@ module Bookcase
           attr_reader :record
 
           def initialize(record)
+            super
             @record = record
           end
         end

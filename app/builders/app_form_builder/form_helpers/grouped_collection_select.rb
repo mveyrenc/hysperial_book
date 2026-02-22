@@ -7,9 +7,8 @@ module AppFormBuilder
       include Base
 
       included do
-        def grouped_collection_select_with_bulma(method, collection, group_method, group_label_method,
-                                                 option_key_method, option_value_method, options = {},
-                                                 html_options = {})
+        # rubocop:disable Metrics/ParameterLists
+        def grouped_collection_select_with_bulma(method, collection, group_method, group_label_method, option_key_method, option_value_method, options = {}, html_options = {})
           html_options[:required] = options[:required]
 
           div_class = ['select']
@@ -23,6 +22,8 @@ module AppFormBuilder
             end
           end
         end
+
+        # rubocop:enable Metrics/ParameterLists
 
         bulma_alias(:grouped_collection_select)
       end

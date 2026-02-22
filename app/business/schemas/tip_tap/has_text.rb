@@ -11,13 +11,14 @@ module Schemas
         @table[:text] = []
       end
 
-      def set_text(text)
+      def add_text(text)
         @table[:text] = text
         itself
       end
-      alias text= set_text
 
-      def is_text?
+      alias text= add_text
+
+      def text?
         @table.key?(:text)
       end
 

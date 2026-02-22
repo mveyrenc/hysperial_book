@@ -9,6 +9,10 @@ module Schemas
       class WrongDomNodeParameterError < StandardError
       end
 
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/PerceivedComplexity
+      # rubocop:disable Metrics/MethodLength
       def self.from_dom_node(dom_node, parent = nil)
         if dom_node.is_a? String
           dom_node = Nokogiri::HTML.fragment(dom_node.delete("\r\n"))
@@ -63,9 +67,14 @@ module Schemas
         parent
       end
 
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/PerceivedComplexity
+      # rubocop:enable Metrics/MethodLength
+
       def self.from_text_node(dom_node, text_node = nil)
         text_node = Registry.text if text_node.nil?
-        return text_node.set_text(dom_node.content) if dom_node.text?
+        return text_node.add_text(dom_node.content) if dom_node.text?
 
         text_node.add_mark mark_from_dom_node(dom_node)
         dom_node.children.each do |child|
@@ -74,6 +83,7 @@ module Schemas
         text_node
       end
 
+      # rubocop:disable Metrics/CyclomaticComplexity
       def self.mark_from_dom_node(dom_node)
         case dom_node.name
         when 'strong'
@@ -98,6 +108,8 @@ module Schemas
           raise WrongDomNodeParameterError, "'#{dom_node.to_html}' given, expecting text node mark"
         end
       end
+
+      # rubocop:enable Metrics/CyclomaticComplexity
 
       def self.check_dom_node_parameter(dom_node)
         return if dom_node.is_a? Nokogiri::XML::Node

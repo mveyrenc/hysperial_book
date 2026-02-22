@@ -4,8 +4,10 @@ module DestroyActionConcern
   extend ActiveSupport::Concern
 
   included do
+    # rubocop:disable Rails/LexicallyScopedActionFilter
     before_action :set_destroy_record, only: %i[destroy]
     before_action :authorize_destroy_record, only: %i[destroy]
+    # rubocop:enable Rails/LexicallyScopedActionFilter
 
     # DELETE /<resource>/:id
     def destroy

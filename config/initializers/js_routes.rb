@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 JsRoutes.setup do |c|
   # Setup your JS module system:
   # ESM, CJS, AMD, UMD or nil.
-  c.module_type = "ESM"
+  c.module_type = 'ESM'
 
   # Legacy setup for no modules system.
   # Sets up a global variable `Routes`
@@ -18,7 +20,7 @@ JsRoutes.setup do |c|
   # c.exclude = /^api_/
   config.exclude = [
     # Default Rails routes not required from Inertia.js
-    /rails_/,
+    /rails_/
   ]
   # c.include = /^admin_/
 

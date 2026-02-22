@@ -28,7 +28,7 @@ module Schemas
         end
 
         def src
-          attrs.fetch(:src)
+          attrs[:src]
         end
       end
     end

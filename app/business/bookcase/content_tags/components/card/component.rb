@@ -8,6 +8,7 @@ module Bookcase
           attr_reader :record, :context
 
           def initialize(record, context: :search_result)
+            super
             @record = record
             @context = context
           end

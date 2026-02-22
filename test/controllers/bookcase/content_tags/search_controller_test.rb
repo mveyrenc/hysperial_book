@@ -8,9 +8,6 @@ class ContentTagsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user, scope: :user)
   end
 
-  teardown do
-  end
-
   test 'should get search without any tag' do
     Bookcase::ContentTag.reindex
 

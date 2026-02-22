@@ -8,11 +8,12 @@ module Bookcase
           attr_reader :record
 
           def initialize(record)
+            super
             @record = record
           end
 
           def from_book?
-            params.key?(:from) && params.fetch(:from) == 'book'
+            params.key?(:from) && params[:from] == 'book'
           end
         end
       end

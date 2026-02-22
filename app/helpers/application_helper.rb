@@ -10,26 +10,26 @@ module ApplicationHelper
     (record_or_model.respond_to?(:to_model) ? record_or_model.to_model : record_or_model).model_name.plural
   end
 
-  def name_field(f, multiple = false)
-    multiple = false if f.object.persisted?
-    return f.text_area :name, autofocus: true, help: t('.name.help') if multiple
+  def name_field(form, multiple: false)
+    multiple = false if form.object.persisted?
+    return form.text_area :name, autofocus: true, help: t('.name.help') if multiple
 
-    f.text_field :name, autofocus: true
+    form.text_field :name, autofocus: true
   end
 
-  def alternate_names_field(f)
-    f.text_area :alternate_names
+  def alternate_names_field(form)
+    form.text_area :alternate_names
   end
 
-  def short_description_field(f)
-    f.rich_text_area :short_description
+  def short_description_field(form)
+    form.rich_text_area :short_description
   end
 
-  def description_field(f)
-    f.rich_text_area :description
+  def description_field(form)
+    form.rich_text_area :description
   end
 
-  def position_field(f)
-    f.text_field :position
+  def position_field(form)
+    form.text_field :position
   end
 end

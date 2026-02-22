@@ -3,6 +3,8 @@
 class ApplicationInteractor
   include Interactor
 
+
+  # rubocop:disable Metrics/CyclomaticComplexity
   def translate(key, **options)
     if key&.start_with?('.')
       mdl = self.class.name.deconstantize.underscore.tr('/', '.')
@@ -21,6 +23,7 @@ class ApplicationInteractor
 
     ActiveSupport::HtmlSafeTranslation.translate(key, **options)
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   alias t translate
 

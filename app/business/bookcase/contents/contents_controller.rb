@@ -64,7 +64,7 @@ module Bookcase
       end
 
       def set_show_record
-        @record = model.friendly.includes(content_tags: [:content_tag_family]).includes(:book).find(params.fetch(:id))
+        @record = model.friendly.includes(content_tags: [:content_tag_family]).includes(:book).find(params[:id])
       end
     end
   end

@@ -8,9 +8,6 @@ class ContentsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user, scope: :user)
   end
 
-  teardown do
-  end
-
   test 'should get index without any content' do
     Bookcase::Content.reindex
 

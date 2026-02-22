@@ -4,9 +4,11 @@ module ShowActionConcern
   extend ActiveSupport::Concern
 
   included do
+    # rubocop:disable Rails/LexicallyScopedActionFilter
     before_action :set_show_record, only: %i[show]
     before_action :authorize_show_record, only: %i[show]
     before_action :decorate_show_record, only: %i[show]
+    # rubocop:enable Rails/LexicallyScopedActionFilter
 
     # GET /<resource>/:id
     def show

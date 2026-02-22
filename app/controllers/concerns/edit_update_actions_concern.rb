@@ -4,8 +4,10 @@ module EditUpdateActionsConcern
   extend ActiveSupport::Concern
 
   included do
+    # rubocop:disable Rails/LexicallyScopedActionFilter
     before_action :set_update_record, only: %i[edit update]
     before_action :authorize_update_record, only: %i[edit update]
+    # rubocop:enable Rails/LexicallyScopedActionFilter
 
     # GET /<resource>/:id/edit
     def edit

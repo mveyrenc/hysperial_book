@@ -16,7 +16,7 @@ module AppFormBuilder
               # classes <<= 'is-danger' if error?(method) TODO undefined method `error?'
               options[:class] = classes.compact.join(' ')
 
-              send(:"#{object_method}_without_bulma", method, options)
+              public_send(:"#{object_method}_without_bulma", method, options)
             end
           end
 

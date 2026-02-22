@@ -8,9 +8,6 @@ class ContentTagFamiliesControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user, scope: :user)
   end
 
-  teardown do
-  end
-
   test 'should get index without any tag family' do
     Bookcase::ContentTagFamily.reindex
 

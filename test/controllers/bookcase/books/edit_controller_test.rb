@@ -8,9 +8,6 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user, scope: :user)
   end
 
-  teardown do
-  end
-
   test 'should get edit book' do
     book = FactoryBot.create(:book)
     get edit_bookcase_book_path(book)

@@ -8,6 +8,7 @@ module Users
         attr_reader :record, :actions
 
         def initialize(actions:, record: nil)
+          super
           @actions = actions
           @record = record
         end

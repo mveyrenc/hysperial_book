@@ -19,7 +19,7 @@ class ApplicationSearchResultsDecorator
 
   # @return [Hash] extra data to be used in user-defined methods, and passed
   #   to each item's decorator.
-  attr_accessor :context
+  attr_reader :context
   private :context
 
   # array_methods = Array.instance_methods - Object.instance_methods
@@ -33,7 +33,7 @@ class ApplicationSearchResultsDecorator
   # @option options [Hash] :context ({})
   #   extra data to be stored in the collection decorator and used in
   #   user-defined methods, and passed to each item's decorator.
-  def initialize(object, options = {})
+  def initialize(object, options: {})
     options.assert_valid_keys(:with, :context)
     @object = object
     @decorator_class = options[:with]
