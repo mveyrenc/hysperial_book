@@ -212,8 +212,6 @@ Rails.application.routes.draw do
     mount PgHero::Engine, at: '/admins/postgres'
   end
 
-  mount ActionCable.server => '/cable'
-
   # Defines the root path route ("/")
   root to: 'home#index'
 end

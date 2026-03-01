@@ -93,20 +93,9 @@ gem 'ostruct', '~> 0.6'
 # Propshaft is an asset pipeline library for Rails
 gem 'propshaft', '~> 1.3'
 
-# Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem 'jsbundling-rails', '~> 1.3'
-
-# https://github.com/rails/dartsass-rails
-# Sass is a stylesheet language that's compiled to CSS.
-gem 'dartsass-rails', '~> 0.5'
-
 # https://github.com/hotwired/turbo-rails
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails', '~> 2.0'
-
-# https://github.com/marcoroth/turbo_power-rails
-# TurboPower Rails is a power-pack for Turbo Streams
-gem 'turbo_power', '~> 0.7'
 
 # https://github.com/hotwired/stimulus-rails
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
