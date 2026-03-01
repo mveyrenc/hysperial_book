@@ -29,6 +29,6 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Bookcase::Book.count', +1) do
       post bookcase_books_url, params: { bookcase_book: { name: Faker::Book.title, kind: :cooking } }
     end
-    assert_redirected_to bookcase_books_path
+    assert_redirected_to bookcase_book_path(Bookcase::Book.last)
   end
 end

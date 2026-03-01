@@ -18,7 +18,7 @@ JsRoutes.setup do |c|
 
   # Generate only helpers that match specific pattern.
   # c.exclude = /^api_/
-  config.exclude = [
+  c.exclude = [
     # Default Rails routes not required from Inertia.js
     /rails_/
   ]
@@ -28,7 +28,7 @@ JsRoutes.setup do |c|
   # for apps that work on multiple domains.
   # c.url_links = true
 
-  config.compact = true
+  c.compact = true
 
   # More options:
   # @see https://github.com/railsware/js-routes#available-options

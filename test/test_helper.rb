@@ -31,8 +31,7 @@ end
 Zonebie.set_random_timezone
 
 require 'minitest/reporters'
-# Minitest::Reporters.use!
-Minitest::Reporters::RubyMineReporter.new
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(color: true), Minitest::Reporters::HtmlReporter.new]
 
 module ActionDispatch
   class IntegrationTest

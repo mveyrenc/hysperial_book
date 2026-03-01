@@ -34,6 +34,8 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 
+/test/html_reports/
+
 /node_modules
 /vendor/*
 !/vendor/.keep
@@ -62,3 +64,5 @@ node_modules
 !.yarn/sdks
 !.yarn/versions
 .eslintcache
+
+

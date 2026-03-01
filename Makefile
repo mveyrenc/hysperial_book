@@ -122,19 +122,22 @@ clean-test-db: ## Clear and recreate test database
 	docker compose exec -e RAILS_ENV=test backend rails db:drop
 	docker compose exec -e RAILS_ENV=test backend rails db:create
 	docker compose exec -e RAILS_ENV=test backend rails db:migrate
+	docker compose exec -e RAILS_ENV=test backend rails searchkick:reindex:all
 
 run-test: ## Runs the provided test(s)
-	docker compose exec -e RAILS_ENV=test backend rails db:create
-	docker compose exec -e RAILS_ENV=test backend rails db:migrate
+	rm log/test.log
 	docker compose exec -e RAILS_ENV=test backend rails test $(run-ARGS)
 
 run-system-test: ## Runs the provided system test(s)
+	rm log/test.log
 	docker compose exec -e RAILS_ENV=test backend rails test:system $(run-ARGS)
 
 run-controllers-test: ## Runs the provided controller test(s)
+	rm log/test.log
 	docker compose exec -e RAILS_ENV=test backend rails test:controllers $(run-ARGS)
 
 run-libs-test: ## Runs the provided controller test(s)
+	rm log/test.log
 	docker compose exec -e RAILS_ENV=test backend rails test test/lib
 
 ###Linting-Commands: ## .

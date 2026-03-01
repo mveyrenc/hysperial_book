@@ -4,20 +4,23 @@ require 'test_helper'
 
 class ContentTagsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    Searchkick.enable_callbacks
     @user = FactoryBot.create(:user, :super_admin)
     sign_in(@user, scope: :user)
   end
 
-  test 'should get index without any tag' do
-    Bookcase::ContentTag.reindex
+  teardown do
+    Searchkick.disable_callbacks
+  end
 
+  test 'should get index without any tag' do
     get bookcase_content_tags_url
     assert_response :success
   end
 
   test 'should get index with some tags' do
-    Bookcase::ContentTag.reindex
     create_list(:content_tag, 3)
+    Bookcase::ContentTagFamily.search_index.refresh
 
     get bookcase_content_tags_url
     assert_response :success
