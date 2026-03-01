@@ -9,7 +9,7 @@ module Bookcase
           attr_reader :record, :actions
 
           def initialize(actions:, record: nil)
-            super
+            super()
             @actions = actions
             @record = record
           end

@@ -6,7 +6,7 @@ module FormErrors
     attr_reader :errors
 
     def initialize(errors:)
-      super
+      super()
       @errors = errors
     end
 

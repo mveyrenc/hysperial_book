@@ -33,7 +33,7 @@ class ApplicationSearchResultsDecorator
   # @option options [Hash] :context ({})
   #   extra data to be stored in the collection decorator and used in
   #   user-defined methods, and passed to each item's decorator.
-  def initialize(object, options: {})
+  def initialize(object, options = {})
     options.assert_valid_keys(:with, :context)
     @object = object
     @decorator_class = options[:with]

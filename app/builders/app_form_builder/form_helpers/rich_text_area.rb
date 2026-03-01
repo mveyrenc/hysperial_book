@@ -9,7 +9,7 @@ module AppFormBuilder
       included do
 
         # rubocop:disable Metrics/PerceivedComplexity
-        def rich_text_area_with_bulma(method, options = {}, html_options = {})
+        def rich_text_area(method, options = {}, html_options = {})
           options['data-standard-editor-target'] = 'editor'
           if @template.respond_to?(:rails_direct_uploads_url)
             options['data-direct-upload-url'] = @template.rails_direct_uploads_url
@@ -32,8 +32,6 @@ module AppFormBuilder
         end
 
         # rubocop:enable Metrics/PerceivedComplexity
-
-        bulma_alias(:rich_text_area)
       end
     end
   end

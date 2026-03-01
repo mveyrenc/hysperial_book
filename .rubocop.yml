@@ -150,6 +150,12 @@ Style/MultilineIfModifier:
 Style/OpenStructUse:
   Enabled: false
 
+Style/OptionHash:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: false
+
 ### Layout
 
 Layout:

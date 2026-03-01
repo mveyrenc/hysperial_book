@@ -21,7 +21,7 @@ module AppFormBuilder
               @template.content_tag(:label, class: 'file-label') do
                 file_field_without_bulma(method, options) + @template.content_tag(:span, class: 'file-cta') do
                   @template.content_tag(:span, class: 'file-icon') do
-                    @template.content_tag(:span, 'upload', class: 'material-symbols-outlined')
+                    @template.content_tag(:span, 'upload', class: 'material-symbols-rounded')
                   end + @template.content_tag(:span, class: 'file-label') do
                     I18n.t('application.file_field.choose_file')
                   end

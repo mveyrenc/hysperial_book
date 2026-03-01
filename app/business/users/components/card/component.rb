@@ -8,7 +8,7 @@ module Users
         attr_reader :record
 
         def initialize(record)
-          super
+          super()
           @record = record
         end
       end

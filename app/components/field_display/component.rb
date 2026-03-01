@@ -6,7 +6,7 @@ module FieldDisplay
     attr_reader :label, :value
 
     def initialize(label:, value:)
-      super
+      super()
       @label = label
       @value = value
     end

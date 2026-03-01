@@ -4,12 +4,11 @@ module Bookcase
   module ContentAttributes
     module Components
       module Form
-        # ContentTags card component
         class Component < ApplicationComponent
           attr_reader :record
 
           def initialize(record)
-            super
+            super()
             @record = record
           end
         end

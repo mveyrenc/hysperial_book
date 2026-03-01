@@ -11,7 +11,7 @@ module Bookcase
           delegate :type, :file, to: :record, prefix: true
 
           def initialize(record)
-            super
+            super()
             @record = record
           end
 

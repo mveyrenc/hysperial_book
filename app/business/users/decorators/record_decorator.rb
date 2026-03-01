@@ -5,7 +5,7 @@ module Users
     class RecordDecorator < ApplicationDecorator
 
       # rubocop:disable Rails/OutputSafety
-      def name(highlights: true)
+      def name(highlights = true)
         if highlights && context[:highlights].present? && context[:highlights].key?(:name)
           context[:highlights][:name].html_safe
         else
@@ -13,7 +13,7 @@ module Users
         end
       end
 
-      def email(highlights: true)
+      def email(highlights = true)
         if highlights && context[:highlights].present? && context[:highlights].key?(:email)
           context[:highlights][:email].html_safe
         else
@@ -21,7 +21,7 @@ module Users
         end
       end
 
-      def role_name(highlights: true)
+      def role_name(highlights = true)
         if highlights && context[:highlights].present? && context[:highlights].key?(:role_name)
           context[:highlights][:role_name].html_safe
         else
