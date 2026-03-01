@@ -1,1 +1,32 @@
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/css-variables" as cv;
+
 @use "bulma/sass/elements/icon";
+
+.#{iv.$class-prefix}icons-stack {
+  display: inline-grid;
+  height: 2em;
+  width: 2.5em;
+  line-height: 2em;
+  place-items: anchor-center;
+}
+
+.#{iv.$class-prefix}icon {
+  &.is-stack-1,
+  &.is-stack-2 {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    z-index: auto;
+  }
+
+  &.is-stack-1 {
+    line-height: inherit;
+  }
+
+  &.is-stack-2 {
+    font-size: 2em;
+  }
+}

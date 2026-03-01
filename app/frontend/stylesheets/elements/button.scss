@@ -2,6 +2,12 @@
 @use "bulma/sass/elements/button";
 
 .#{iv.$class-prefix}button {
+  &.is-back-action {
+    @extend .is-link;
+    @extend .is-small;
+    @extend .is-outlined;
+  }
+
   &.is-show-action {
     @extend .is-link;
     @extend .is-small;

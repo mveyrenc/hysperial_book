@@ -8,7 +8,8 @@
 
 Rails.application.configure do
   config.content_security_policy do |policy|
-    policy.font_src :self
+    policy.font_src :self,
+                    'fonts.gstatic.com'
     policy.img_src(*%i[self data].compact)
     policy.object_src :none
     policy.form_action :self
@@ -16,8 +17,10 @@ Rails.application.configure do
     policy.default_src :none
 
     if Rails.env.development?
+      ViteRuby.config.load_ruby_config
       policy.connect_src :self,
                          # Allow @vite/client to hot reload changes
+                         "ws://localhost:#{ViteRuby.config.port}",
                          "ws://#{ViteRuby.config.host_with_port}"
 
       policy.script_src :self,
@@ -27,12 +30,14 @@ Rails.application.configure do
                         :unsafe_inline
 
       policy.style_src :self,
+                       'fonts.googleapis.com',
                        # Allow @vite/client to hot reload CSS changes
                        :unsafe_inline
     else
       policy.connect_src(*[:self, ENV.fetch('PLAUSIBLE_URL', nil)].compact)
       policy.script_src(*[:self].compact)
       policy.style_src :self,
+                       'fonts.googleapis.com',
                        # Allow @inertiajs/progress to display progress bar
                        "'sha256-YfWBLaAD17kgcjrajLlty6AH2yMikIiscRhC6OENK74='"
     end

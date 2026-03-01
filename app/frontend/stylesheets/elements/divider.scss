@@ -1,3 +1,5 @@
+@use "sass:list";
+
 @use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/utilities/derived-variables" as dv;
 
@@ -73,7 +75,7 @@ $divider-margin-size: 25px !default;
   }
 
   @each $name, $pair in dv.$colors {
-    $color: nth($pair, 1);
+    $color: list.nth($pair, 1);
     &.is-#{$name} {
       &::after,
       &::before {
