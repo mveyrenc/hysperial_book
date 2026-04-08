@@ -1,5 +1,5 @@
-import { createInertiaApp } from '@inertiajs/vue3'
-import { createApp, DefineComponent, h } from 'vue'
+import {createInertiaApp} from '@inertiajs/vue3'
+import {createApp, DefineComponent, h} from 'vue'
 
 createInertiaApp({
   // Set default page title
@@ -30,8 +30,8 @@ createInertiaApp({
     return page
   },
 
-  setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+  setup({el, App, props, plugin}) {
+    createApp({render: () => h(App, props)})
       .use(plugin)
       .mount(el)
   },
@@ -39,12 +39,6 @@ createInertiaApp({
   defaults: {
     form: {
       forceIndicesArrayFormatInFormData: false,
-    },
-    future: {
-      useScriptElementForInitialPage: true,
-      useDataInertiaHeadAttribute: true,
-      useDialogForErrorModal: true,
-      preserveEqualProps: true,
     },
   },
 }).catch((error) => {
