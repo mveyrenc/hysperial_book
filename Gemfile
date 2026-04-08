@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.4.8'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 8.0'
+gem 'rails', '~> 8.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 7.2'
@@ -133,7 +133,7 @@ gem 'slim-rails', '~> 4.0'
 # https://viewcomponent.org/guide/getting-started.html
 # A framework for creating reusable, testable & encapsulated view components, built to integrate seamlessly with
 # Ruby on Rails.
-gem 'view_component', '~> 4.4'
+gem 'view_component', '~> 4.6'
 
 # https://github.com/kaminari/kaminari
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for modern web app frameworks
@@ -143,11 +143,11 @@ gem 'kaminari', '~> 1.2'
 
 # https://github.com/inertiajs/inertia-rails
 # Inertia.js Rails Adapter
-gem 'inertia_rails', '~> 3.17'
+gem 'inertia_rails', '~> 3.20'
 
 # https://vite-ruby.netlify.app/guide/rails.html
 # Vite is to frontend tooling as Ruby to programming, pure joy!
-gem 'vite_rails', '~> 3.0'
+gem 'vite_rails', '~> 3.10'
 
 # http://github.com/railsware/js-routes
 # Brings Rails named routes to JavaScript
@@ -208,17 +208,17 @@ group :development, :test do
   # lol_dba is a small package of rake tasks that scan your application models and displays a list of columns that
   # probably should be indexed. Also, it can generate .sql migration scripts.
   # $ lol_dba db:find_indexes
-  gem 'lol_dba'
+  gem 'lol_dba', '~> 3.0', require: false
 
   # https://github.com/jhawthorn/vernier
   # Next-generation Ruby 3.2.1+ sampling profiler. Tracks multiple threads, GVL activity, GC pauses, idle time,
   # and more.
-  gem 'vernier', require: false
+  gem 'vernier', '~> 1.10', require: false
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem 'web-console'
+  gem 'web-console', '~> 4.3'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -236,7 +236,7 @@ group :development do
   # The main goal of the project is to help you avoid various issues due to inconsistencies and inefficiencies between
   # a database schema and application models.
   # $ database_consistency
-  gem 'database_consistency', '~> 2.1', require: false
+  gem 'database_consistency', '~> 3.0', require: false
 
   # https://github.com/palkan/isolator
   # Detect non-atomic interactions within DB transactions.
@@ -249,7 +249,7 @@ group :development do
 
   # https://github.com/rubocop/rubocop
   # Automatic Ruby code style checking tool.
-  gem 'rubocop', '~> 1.84', require: false
+  gem 'rubocop', '~> 1.86', require: false
 
   # https://github.com/rubocop/rubocop-rails
   gem 'rubocop-rails', require: false
@@ -314,7 +314,7 @@ group :development do
   # This is a toolkit to upgrade your next Rails application
   # $ bundle_report outdated
   # $ bundle_report --help
-  gem 'next_rails'
+  gem 'next_rails', '~> 1.5', require: false
 
   # https://github.com/julianrubisch/attractor
   # A code complexity metrics visualization and exploration tool for Ruby and JavaScript
@@ -341,7 +341,7 @@ group :test do
 
   # https://github.com/minitest-reporters
   # Death to haphazard monkey-patching! Extend Minitest through simple hooks.
-  gem 'minitest-reporters', require: false
+  gem 'minitest-reporters', '~> 1.8', require: false
 
   # #################
   # Integration tests
@@ -353,7 +353,7 @@ group :test do
 
   # https://github.com/mattheworiordan/capybara-screenshot
   # Capture a screenshot for every test failure automatically!
-  gem 'capybara-screenshot'
+  gem 'capybara-screenshot', '~> 1.0'
 
   # https://github.com/rubycdp/cuprite
   # Cuprite is a pure Ruby driver (read as no Selenium/WebDriver/ChromeDriver dependency) for Capybara
