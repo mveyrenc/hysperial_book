@@ -11,7 +11,11 @@ module EditUpdateActionsConcern
 
     # GET /<resource>/:id/edit
     def edit
-      render template: template_path
+      if render_inertia?
+        render inertia: { record: }
+      else
+        render template: template_path
+      end
     end
 
     # PATCH/PUT /<resource>/:id
@@ -22,7 +26,11 @@ module EditUpdateActionsConcern
         redirect_to redirect_to_after_update, status: :see_other
       else
         flash.now[:alert] = result.message
-        render template: template_path(:new), status: :unprocessable_content
+        if render_inertia?
+          redirect_to action: :edit, inertia: { errors: @record.errors }
+        else
+          render template: template_path(:edit), status: :unprocessable_content
+        end
       end
     end
 

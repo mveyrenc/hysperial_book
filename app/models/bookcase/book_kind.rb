@@ -4,7 +4,7 @@ module Bookcase
   class BookKind
     extend ActiveModel::Translation
 
-    KINDS = %w[animals cooking crafts fabric_art garden home_well_being knowledge plant_life].freeze
+    KINDS = %w[cooking crafts fabric_art fauna_flora home_well_being knowledge].freeze
 
     def initialize(kind)
       @kind = kind

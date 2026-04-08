@@ -36,14 +36,12 @@ fr:
   activemodel:
     attributes:
       bookcase/book_kind:
-        animals: Animaux
         cooking: Cuisine
         crafts: Artisanat
         fabric_art: Art textile
-        garden: Jardin
+        fauna_flora: Faune et flore
         home_well_being: Bien-être du foyer
         knowledge: Connaissance
-        plant_life: Vie végétale
   activerecord:
     models:
       bookcase/book:

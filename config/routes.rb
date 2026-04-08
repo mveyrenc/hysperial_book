@@ -145,8 +145,6 @@ Rails.application.routes.draw do
     get "(*path)", to: redirect { |params, req| "\#{req.protocol}localhost:\#{req.port}/\#{params[:path]}" }
   end
 
-  get 'inertia-example', to: 'inertia_example#index'
-
   devise_for :users,
              controllers: {
                registrations: 'registrations'

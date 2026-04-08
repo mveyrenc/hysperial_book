@@ -16,6 +16,15 @@ class ApplicationController < ActionController::Base
   # https://localhost:3000?clear_cache=true
   before_action :clear_cache_if_requested if Rails.env.development?
 
+  inertia_config(
+    component_path_resolver: ->(path:, action:) do
+      File.join('frontend', 'pages', path.delete_suffix("/#{controller_name}").camelize, action.camelize)
+    end,
+    prop_transformer: ->(props:) do
+      props.deep_transform_keys { |key| key.to_s.camelize(:lower) }
+    end
+  )
+
   protected
 
   def clear_cache_if_requested
@@ -31,7 +40,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 
+  def render_inertia?(action = nil)
+    Rails.root.join('app', 'frontend', 'pages', 'pages', controller_path.delete_suffix("/#{controller_name}").camelize, (action || action_name).camelize, '.vue').exist?
+  end
+
   def template_path(action = nil)
-    "#{controller_path.delete_suffix("/#{controller_name}")}/views/#{action || action_name}"
+    File.join(controller_path.delete_suffix("/#{controller_name}").to_s, 'views', action || action_name)
   end
 end
