@@ -149,10 +149,6 @@ gem 'inertia_rails', '~> 3.20'
 # Vite is to frontend tooling as Ruby to programming, pure joy!
 gem 'vite_rails', '~> 3.10'
 
-# http://github.com/railsware/js-routes
-# Brings Rails named routes to JavaScript
-gem 'js-routes'
-
 # ######
 # Search
 # ######
@@ -214,6 +210,10 @@ group :development, :test do
   # Next-generation Ruby 3.2.1+ sampling profiler. Tracks multiple threads, GVL activity, GC pauses, idle time,
   # and more.
   gem 'vernier', '~> 1.10', require: false
+
+  # https://js-from-routes.netlify.app
+  # JS From Routes is a library to generate JS from routes defined in your Rails application.
+  gem 'js_from_routes'
 end
 
 group :development do

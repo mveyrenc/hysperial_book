@@ -160,7 +160,7 @@ Rails.application.routes.draw do
                sign_up: 'sign-up'
              }
 
-  namespace :bookcase do
+  namespace :bookcase, export: true do
     resources :contents, controller: 'contents/contents' do
       collection do
         get :search

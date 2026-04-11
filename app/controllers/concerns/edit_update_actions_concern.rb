@@ -12,7 +12,7 @@ module EditUpdateActionsConcern
     # GET /<resource>/:id/edit
     def edit
       if render_inertia?
-        render inertia: { record: }
+        render inertia: inertia_component_path, props: { record: @record }
       else
         render template: template_path
       end

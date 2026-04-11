@@ -17,9 +17,6 @@ class ApplicationController < ActionController::Base
   before_action :clear_cache_if_requested if Rails.env.development?
 
   inertia_config(
-    component_path_resolver: ->(path:, action:) do
-      File.join('frontend', 'pages', path.delete_suffix("/#{controller_name}").camelize, action.camelize)
-    end,
     prop_transformer: ->(props:) do
       props.deep_transform_keys { |key| key.to_s.camelize(:lower) }
     end
@@ -41,10 +38,14 @@ class ApplicationController < ActionController::Base
   end
 
   def render_inertia?(action = nil)
-    Rails.root.join('app', 'frontend', 'pages', 'pages', controller_path.delete_suffix("/#{controller_name}").camelize, (action || action_name).camelize, '.vue').exist?
+    Rails.root.join('app', 'frontend', inertia_component_path(action)).exist?
+  end
+
+  def inertia_component_path(action = nil)
+    File.join('business', controller_path.delete_suffix("/#{controller_name}").underscore, 'pages', "#{(action || action_name).camelize}.vue")
   end
 
   def template_path(action = nil)
-    File.join(controller_path.delete_suffix("/#{controller_name}").to_s, 'views', action || action_name)
+    File.join(controller_path.delete_suffix("/#{controller_name}").underscore, 'views', action || action_name)
   end
 end

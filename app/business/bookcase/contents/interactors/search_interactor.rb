@@ -42,7 +42,8 @@ module Bookcase
 
         def set_order
           context.search_query = context.search_query
-                                        .includes(:thumbnail, :book)
+                                        .includes(:thumbnail)
+                                        .includes(thumbnail: [:file_attachment])
                                         .order(
                                           [{ created_at: { order: :desc } }]
                                         )

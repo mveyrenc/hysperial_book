@@ -38,14 +38,16 @@ RUN apt-get update && \
 
 # Get NodeJS
 COPY --from=node:current /usr/local/bin /usr/local/bin
-RUN rm /usr/local/bin/yarn /usr/local/bin/yarnpkg
+RUN rm /usr/local/bin/yarn /usr/local/bin/yarnpkg && \
+    node -v
 # Get npm
 COPY --from=node:current /usr/local/lib/node_modules /usr/local/lib/node_modules
 # Get yarn
 ENV YARN_VERSION="1.22.22"
 COPY --from=node:current /opt/yarn-v${YARN_VERSION} /opt/yarn-v${YARN_VERSION}
 RUN ln -s /opt/yarn-v${YARN_VERSION}/bin/yarn /usr/local/bin/yarn \
-      && ln -s /opt/yarn-v${YARN_VERSION}/bin/yarnpkg /usr/local/bin/yarnpkg
+      && ln -s /opt/yarn-v${YARN_VERSION}/bin/yarnpkg /usr/local/bin/yarnpkg && \
+      node -v
 
 USER docker
 

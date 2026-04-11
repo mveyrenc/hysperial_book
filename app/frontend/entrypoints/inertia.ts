@@ -1,11 +1,12 @@
 import {createInertiaApp} from '@inertiajs/vue3'
 import {createApp, DefineComponent, h} from 'vue'
+import Buefy from 'buefy'
 
 createInertiaApp({
   // Set default page title
   // see https://inertia-rails.dev/guide/title-and-meta
   //
-  // title: title => title ? `${title} - App` : 'App',
+  title: title => title ? `${title} - Hysperial Book` : 'HysperialBook',
 
   // Disable progress bar
   //
@@ -13,13 +14,6 @@ createInertiaApp({
   // progress: false,
 
   resolve: (name) => {
-    const pages = import.meta.glob<DefineComponent>('../pages/**/*.vue', {
-      eager: true,
-    })
-    const page = pages[`../pages/${name}.vue`]
-    if (!page) {
-      console.error(`Missing Inertia page component: '${name}.vue'`)
-    }
 
     // To use a default layout, import the Layout component
     // and use the following lines.
@@ -27,12 +21,35 @@ createInertiaApp({
     //
     // page.default.layout = page.default.layout || Layout
 
-    return page
+    const businessPages = import.meta.glob<DefineComponent>('../business/**/pages/*.vue', {
+      eager: true,
+    })
+    const businessPage = businessPages[`../${name}`]
+    if (!businessPage) {
+      console.info(`Missing Inertia business page component: '${name}'`)
+    } else {
+      console.debug(`Inertia business page component found: '${name}'`)
+
+      return businessPage
+    }
+
+    const appPages = import.meta.glob<DefineComponent>('../components/pages/**/*.vue', {
+      eager: true,
+    })
+    const appPage = appPages[`../${name}`]
+    if (!appPage) {
+      console.info(`Missing Inertia page component: '${name}'`)
+    } else {
+      console.debug(`Inertia page component found: '${name}'`)
+
+    }
+    return appPage
   },
 
   setup({el, App, props, plugin}) {
     createApp({render: () => h(App, props)})
       .use(plugin)
+      .use(Buefy)
       .mount(el)
   },
 
